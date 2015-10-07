@@ -6,7 +6,8 @@ title: My Blog
 <div class="container-fluid" id="index-container">
 	<div class="row">
 		<div id="index-header">
-			<h1><img src="resource/web-design.png" alt="Computer"/>Welcome To JiHao's Blog</h1>
+			<h1><img src="resource/logo.png" alt=""/>Welcome to Jihao's blog</h1>
+			<h4 id="motto">" Never let it go. "</h4>
 		</div>
 	</div>
 	<div class="row" id="index-nav">
@@ -91,16 +92,39 @@ title: My Blog
 	</div>
 
 	<div class="row" id="index-main-content">
-		<div class="page-header">
-			<h2>Recently Posted:</h2>
+		<div class="col-sm-5 content-column">
+			<div class="page-header">
+				<h3>Technical Notes</h3>
+			</div>
+			<ul>
+				{% for post in site.posts %}
+				<li>
+					<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+					<span>{{ post.date | date_to_string }}</span>
+				</li>
+				{% endfor %}
+				{% for post in site.posts %}
+				<li>
+					<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+					<span>{{ post.date | date_to_string }}</span>
+				</li>
+				{% endfor %}
+			</ul>
 		</div>
-		<ul>
-			{% for post in site.posts %}
-			<li>{{ post.date | date_to_string }}
-				<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-			</li>
-			{% endfor %}
-		</ul>
+
+		<div class="col-sm-5 content-column">
+			<div class="page-header">
+				<h3>Casual Essay Notes</h3>
+			</div>
+			<ul>
+				{% for post in site.posts %}
+				<li>
+					<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+					<span>{{ post.date | date_to_string }}</span>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
 	</div>
 
 	<div class="row" id="index-footer">
