@@ -1,13 +1,112 @@
 ---
-layout: default
+layout: index_layout
 title: My Blog
 ---
-<h2>{{ page.title }}</h2>
-<p>Recent Posts</p>
-<ul>
-	{% for post in site.posts %}
-		<li>{{ post.date | date_to_string }}
-			<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-		</li>
-	{% endfor %}
-</ul>
+
+<div class="container-fluid" id="index-container">
+	<div class="row">
+		<div id="index-header">
+			<h1><img src="resource/web-design.png" alt="Computer"/>Welcome To JiHao's Blog</h1>
+		</div>
+	</div>
+	<div class="row" id="index-nav">
+		<ul>
+			<li>
+				<a>
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+					&nbsp;&nbsp;Home
+				</a>
+			</li>
+			<li>
+				<a>
+					<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+					&nbsp;&nbsp;Essay
+				</a>
+			</li>
+			<li>
+				<a>
+					<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+					&nbsp;&nbsp;Tech
+				</a>
+			</li>
+			<li>
+				<a>
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					&nbsp;&nbsp;About
+				</a>
+			</li>
+		</ul>
+		<span id="nav-indicator"></span>
+	</div>
+
+	<div class="row" id="img-carousel">
+		<div class="carousel slide" id="myCarousel">
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+				<li data-target="#myCarousel" data-slide-to="3"></li>
+			</ol>
+
+			<div class="carousel-inner">
+				<div class="item active">
+					<img class="img-thumbnail img-responsive center-block" src="resource/show1.jpg" alt="First slide">
+					<div class="carousel-caption">
+						<h4>Image copyright &copy; Tsinghua University</h4>
+						<p></p>
+					</div>
+				</div>
+				<div class="item">
+					<img class="img-thumbnail img-responsive center-block" src="resource/show2.jpg" alt="Second slide">
+					<div class="carousel-caption">
+						<h4>Image copyright &copy; Tsinghua University</h4>
+						<p></p>
+					</div>
+				</div>
+				<div class="item">
+					<img class="img-thumbnail img-responsive center-block" src="resource/show3.jpg" alt="Third slide">
+					<div class="carousel-caption">
+						<h4>Image copyright &copy; Tsinghua University</h4>
+						<p></p>
+					</div>
+				</div>
+				<div class="item">
+					<img class="img-thumbnail img-responsive center-block" src="resource/show4.jpg" alt="Fourth slide">
+					<div class="carousel-caption">
+						<h4>Image copyright &copy; Tsinghua University</h4>
+						<p></p>
+					</div>
+				</div>
+			</div>
+
+			<a class="carousel-control left" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control right" href="#myCarousel" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="row" id="index-main-content">
+		<div class="page-header">
+			<h2>Recently Posted:</h2>
+		</div>
+		<ul>
+			{% for post in site.posts %}
+			<li>{{ post.date | date_to_string }}
+				<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div class="row" id="index-footer">
+		<div class="page-header">
+			<h2>Hello Everyone!</h2>
+		</div>
+	</div>
+</div>
+
