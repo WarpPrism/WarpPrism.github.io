@@ -2,11 +2,11 @@
 <html lang="en">
 {% include head.html %}
 <body>
-	{% include header.html %}
-
-	{{ content }}
-
-	{% include footer.html %}
-	{% include script.html %}
+	<div class="container-fluid" id="default-container">
+		{% include header.html %}
+		{{ content }}
+		{% include footer.html %}
+		{% include script.html %}
+	</div>
 </body>
 </html>
