@@ -2,6 +2,7 @@
 layout: post
 title: JavaScript Closure
 tags: closure javascript script
+categories: tech-notes
 ---
 
 在JS中，当内部的方法被其他对象引用，如果内部的方法使用了外部方法的变量，将造成外部方法无法释放，变量将被保持，此时将形成闭包。

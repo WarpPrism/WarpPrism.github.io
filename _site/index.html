@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="/css/index.css"/>
     
 
-    <title>Home</title>
+    <title>Ji Hao's Blog</title>
 </head>
 <body>
 	<div class="container-fluid" id="default-container">
@@ -26,13 +26,13 @@
 <!--Blog Header-->
 <div class="container-fluid">
     <div class="row">
-        <div class="alert alert-info" role="alert" style="border-radius: 0; justify-content: center; align-items: center; display: -webkit-flex; text-decoration: underline; margin: 0; border: solid 2px gray;">
+        <div class="alert alert-danger" role="alert" style="border-radius: 0; justify-content: center; align-items: center; display: -webkit-flex; text-decoration: underline; margin: 0; border: solid 2px gray;">
             <h4>Blog Is Under Developing</h4>
         </div>
     </div>
     <div class="row">
         <div id="index-header">
-            <h1><img src="/resource/logo.png" alt=""/>:-)</h1>
+            <h1><img src="/imgs/logo.png" alt=""/>Ji Hao's Blog</h1>
             <h4 id="motto">
                 <p>“为社会福，为邦家光，勖哉诸君，努力自强。”</p>
                 <!--<p>"Never let it go."</p>-->
@@ -56,7 +56,7 @@
             <li>
                 <a>
                     <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Tech
+                    &nbsp;&nbsp;Tech Notes
                 </a>
             </li>
             <li>
@@ -82,28 +82,28 @@
 
 			<div class="carousel-inner">
 				<div class="item active">
-					<img class="img-thumbnail img-responsive center-block" src="resource/show1.jpg" alt="First slide">
+					<img class="img-thumbnail img-responsive center-block" src="imgs/show1.jpg" alt="First slide">
 					<div class="carousel-caption">
 						<h4>Image copyright &copy; Tsinghua University</h4>
 						<p></p>
 					</div>
 				</div>
 				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="resource/show2.jpg" alt="Second slide">
+					<img class="img-thumbnail img-responsive center-block" src="imgs/show2.jpg" alt="Second slide">
 					<div class="carousel-caption">
 						<h4>Image copyright &copy; Tsinghua University</h4>
 						<p></p>
 					</div>
 				</div>
 				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="resource/show3.jpg" alt="Third slide">
+					<img class="img-thumbnail img-responsive center-block" src="imgs/show3.jpg" alt="Third slide">
 					<div class="carousel-caption">
 						<h4>Image copyright &copy; Tsinghua University</h4>
 						<p></p>
 					</div>
 				</div>
 				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="resource/show4.jpg" alt="Fourth slide">
+					<img class="img-thumbnail img-responsive center-block" src="imgs/show4.jpg" alt="Fourth slide">
 					<div class="carousel-caption">
 						<h4>Image copyright &copy; Tsinghua University</h4>
 						<p></p>
@@ -129,10 +129,16 @@
 			</div>
 			<ul>
 				
+				
 				<li>
-					<a href="/2015/10/08/JS-closure.html">JavaScript Closure</a>
+					<a href="/tech-notes/2015/10/08/JS-closure.html">JavaScript Closure</a>
+					<p>在JS中，当内部的方法被其他对象引用，如果内部的方法使用了外部方法的变量，将造成外部方法无法释放，变量将被保持，此时将形成闭包。</p>
+
 					<span>08 Oct 2015</span>
 				</li>
+				
+				
+				
 				
 			</ul>
 		</div>
@@ -143,10 +149,17 @@
 			</div>
 			<ul>
 				
+				
+				
+				
 				<li>
-					<a href="/2015/10/08/JS-closure.html">JavaScript Closure</a>
-					<span>08 Oct 2015</span>
+					<a href="/essay/2015/05/18/%E9%82%A3%E4%BC%B4%E6%88%91%E7%9A%84%E7%BC%96%E7%A8%8B.html">那伴我的编程</a>
+					<p>今天在图书馆偶然把心中关于编程的问题想通彻了，所以写此文章记录下自己当时的灵感，同时和自己谈谈心，
+回顾一下这一年多来自己的编程历程，当然也要展望下未来，看清自己的方向。</p>
+
+					<span>18 May 2015</span>
 				</li>
+				
 				
 			</ul>
 		</div>
@@ -180,6 +193,18 @@
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/index.js"></script>
 <script type="text/javascript" src="/js/toc.js"></script>
+
+<!--
+<script type="text/javascript" src="http://www.youziku.com/webfont/FastJS/7977c55e5c5e42f3806db65fe29e93f8.js"></script>-->
+
 	</div>
 </body>
+<!--<script  type="text/javascript">
+	$youziku.load("#motto", "7977c55e5c5e42f3806db65fe29e93f8", "STKaiti");
+	$youziku.load(".post", "7977c55e5c5e42f3806db65fe29e93f8", "STKaiti");
+	/*[$youziku.load(".class1", "7977c55e5c5e42f3806db65fe29e93f8", "STKaiti");]*/
+	/*[$youziku.load(".class1", "7977c55e5c5e42f3806db65fe29e93f8", "STKaiti");]*/
+	/*[．．．]*/
+	$youziku.draw();
+</script>-->
 </html>

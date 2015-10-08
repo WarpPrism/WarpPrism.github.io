@@ -17,10 +17,6 @@
     padding:10px 30px;
 }
 
-.post {
-
-}
-
 .post table{
     border-top:2px solid #777;
     border-bottom: 2px solid #777;
@@ -68,7 +64,7 @@
 }
 
 .post p {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .post img{

@@ -17,28 +17,28 @@ styles: [index.css]
 
 			<div class="carousel-inner">
 				<div class="item active">
-					<img class="img-thumbnail img-responsive center-block" src="resource/show1.jpg" alt="First slide">
+					<img class="img-thumbnail img-responsive center-block" src="imgs/show1.jpg" alt="First slide">
 					<div class="carousel-caption">
 						<h4>Image copyright &copy; Tsinghua University</h4>
 						<p></p>
 					</div>
 				</div>
 				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="resource/show2.jpg" alt="Second slide">
+					<img class="img-thumbnail img-responsive center-block" src="imgs/show2.jpg" alt="Second slide">
 					<div class="carousel-caption">
 						<h4>Image copyright &copy; Tsinghua University</h4>
 						<p></p>
 					</div>
 				</div>
 				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="resource/show3.jpg" alt="Third slide">
+					<img class="img-thumbnail img-responsive center-block" src="imgs/show3.jpg" alt="Third slide">
 					<div class="carousel-caption">
 						<h4>Image copyright &copy; Tsinghua University</h4>
 						<p></p>
 					</div>
 				</div>
 				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="resource/show4.jpg" alt="Fourth slide">
+					<img class="img-thumbnail img-responsive center-block" src="imgs/show4.jpg" alt="Fourth slide">
 					<div class="carousel-caption">
 						<h4>Image copyright &copy; Tsinghua University</h4>
 						<p></p>
@@ -64,10 +64,13 @@ styles: [index.css]
 			</div>
 			<ul>
 				{% for post in site.posts %}
+				{% if post.categories contains 'tech-notes' %}
 				<li>
 					<a href="{{ post.url }}">{{ post.title }}</a>
+					{{ post.excerpt | remove: 'test'}}
 					<span>{{ post.date | date_to_string }}</span>
 				</li>
+				{% endif %}
 				{% endfor %}
 			</ul>
 		</div>
@@ -78,10 +81,13 @@ styles: [index.css]
 			</div>
 			<ul>
 				{% for post in site.posts %}
+				{% if post.categories contains 'essay' %}
 				<li>
 					<a href="{{ post.url }}">{{ post.title }}</a>
+					{{ post.excerpt | remove: 'test' }}
 					<span>{{ post.date | date_to_string }}</span>
 				</li>
+				{% endif %}
 				{% endfor %}
 			</ul>
 		</div>
