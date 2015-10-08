@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<script type="text/javascript" src="../lib/jquery-2.1.4.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<link rel="stylesheet" href="../lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
-	<script type="text/javascript" src="../lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
+    <link rel="stylesheet" href="/css/index.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/post.css"/>
+    <link rel="stylesheet" href="/css/highlight.css"/>
 
-	<link rel="stylesheet" href="../css/index.css"/>
-	<script type="text/javascript" src="../js/index.js"></script>
-	<title>My Blog</title>
+
+    <title>Home</title>
 </head>
 <body>
+	<div class="alert alert-info" role="alert" style="justify-content: center; align-items: center; display: -webkit-flex; text-decoration: underline; margin: 0; border: solid 2px gray;">
+    <h4>Blog Is Under Developing</h4>
+</div>
+
+<!--Blog Header-->
+<div class="row">
+    <div id="index-header">
+        <h1><img src="/resource/logo.png" alt=""/>Hello Hello</h1>
+        <h4 id="motto">" Never let it go. "</h4>
+    </div>
+</div>
+<div class="row" id="index-nav">
+    <ul>
+        <li>
+            <a href="/">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                &nbsp;&nbsp;Home
+            </a>
+        </li>
+        <li>
+            <a>
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                &nbsp;&nbsp;Essay
+            </a>
+        </li>
+        <li>
+            <a>
+                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                &nbsp;&nbsp;Tech
+            </a>
+        </li>
+        <li>
+            <a>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                &nbsp;&nbsp;About
+            </a>
+        </li>
+    </ul>
+    <span id="nav-indicator"></span>
+</div>
+
 	<div class="container-fluid" id="index-container">
-	<div class="row">
-		<div id="index-header">
-			<h1><img src="resource/logo.png" alt=""/>Welcome to Jihao's blog</h1>
-			<h4 id="motto">" Never let it go. "</h4>
-		</div>
-	</div>
-	<div class="row" id="index-nav">
-		<ul>
-			<li>
-				<a>
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					&nbsp;&nbsp;Home
-				</a>
-			</li>
-			<li>
-				<a>
-					<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-					&nbsp;&nbsp;Essay
-				</a>
-			</li>
-			<li>
-				<a>
-					<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-					&nbsp;&nbsp;Tech
-				</a>
-			</li>
-			<li>
-				<a>
-					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-					&nbsp;&nbsp;About
-				</a>
-			</li>
-		</ul>
-		<span id="nav-indicator"></span>
-	</div>
 
 	<div class="row" id="img-carousel">
 		<div class="carousel slide" id="myCarousel">
@@ -108,14 +119,8 @@
 			<ul>
 				
 				<li>
-					<a href="/2015/10/07/Hello-World.html">Hello World</a>
-					<span>07 Oct 2015</span>
-				</li>
-				
-				
-				<li>
-					<a href="/2015/10/07/Hello-World.html">Hello World</a>
-					<span>07 Oct 2015</span>
+					<a href="/2015/10/08/JS-closure.html">JavaScript Closure</a>
+					<span>08 Oct 2015</span>
 				</li>
 				
 			</ul>
@@ -128,21 +133,40 @@
 			<ul>
 				
 				<li>
-					<a href="/2015/10/07/Hello-World.html">Hello World</a>
-					<span>07 Oct 2015</span>
+					<a href="/2015/10/08/JS-closure.html">JavaScript Closure</a>
+					<span>08 Oct 2015</span>
 				</li>
 				
 			</ul>
 		</div>
 	</div>
-
-	<div class="row" id="index-footer">
-		<div class="page-header">
-			<h2>Hello Everyone!</h2>
-			<p></p>
-		</div>
-	</div>
 </div>
 
+
+	<footer  class="footnote footnote-tiffany">
+    <div class="container-fluid">
+        <a class="foot-item" href="mailto:" target="_blank">
+            <span class="octicon octicon-mail"></span>
+        </a>
+        <a class="foot-item" href="https://github.com/" target="_blank">
+            <span class="octicon octicon-mark-github"></span>
+        </a>
+        <a class="foot-item" href="//feed.xml" target="_blank">
+            <span class="octicon octicon-rss"></span>
+        </a>
+        <a class="foot-item" href="//link/">
+            <span class="octicon octicon-link-external"></span>
+        </a>
+        &nbsp;
+        <a href="#">
+            <span class="word-keep">&copy; WarpPrism</span>
+        </a>
+    </div>
+</footer>
+
+	<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/toc.js"></script>
 </body>
 </html>

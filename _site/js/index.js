@@ -9,24 +9,7 @@ $(document).ready(function() {
             var leftOff = this.getBoundingClientRect().left;
             var width = this.offsetWidth;
             /*console.log(leftOff);*/
-            navIndicator.css("left", leftOff + width / 2.0 - 5);
+            navIndicator.css("left", leftOff + width / 2.0);
         })
     }
 });
-
-/*
-function getTop(e) {
-    var offset = e.offsetTop;
-    if (e.offsetParent != null) {
-        offset += getTop(e.offsetParent);
-    }
-    return offset;
-}
-
-function getLeft(e) {
-    var offset = e.offsetLeft;
-    if (e.offsetParent != null) {
-        offset += getLeft(e.offsetParent);
-    }
-    return offset;
-}*/

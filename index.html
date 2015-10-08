@@ -1,44 +1,9 @@
 ---
-layout: index_layout
-title: My Blog
+layout: default
+title: Home
 ---
 
 <div class="container-fluid" id="index-container">
-	<div class="row">
-		<div id="index-header">
-			<h1><img src="resource/logo.png" alt=""/>Welcome to Jihao's blog</h1>
-			<h4 id="motto">" Never let it go. "</h4>
-		</div>
-	</div>
-	<div class="row" id="index-nav">
-		<ul>
-			<li>
-				<a>
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					&nbsp;&nbsp;Home
-				</a>
-			</li>
-			<li>
-				<a>
-					<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-					&nbsp;&nbsp;Essay
-				</a>
-			</li>
-			<li>
-				<a>
-					<span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-					&nbsp;&nbsp;Tech
-				</a>
-			</li>
-			<li>
-				<a>
-					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-					&nbsp;&nbsp;About
-				</a>
-			</li>
-		</ul>
-		<span id="nav-indicator"></span>
-	</div>
 
 	<div class="row" id="img-carousel">
 		<div class="carousel slide" id="myCarousel">
@@ -99,13 +64,7 @@ title: My Blog
 			<ul>
 				{% for post in site.posts %}
 				<li>
-					<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-					<span>{{ post.date | date_to_string }}</span>
-				</li>
-				{% endfor %}
-				{% for post in site.posts %}
-				<li>
-					<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+					<a href="{{ post.url }}">{{ post.title }}</a>
 					<span>{{ post.date | date_to_string }}</span>
 				</li>
 				{% endfor %}
@@ -119,18 +78,11 @@ title: My Blog
 			<ul>
 				{% for post in site.posts %}
 				<li>
-					<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+					<a href="{{ post.url }}">{{ post.title }}</a>
 					<span>{{ post.date | date_to_string }}</span>
 				</li>
 				{% endfor %}
 			</ul>
-		</div>
-	</div>
-
-	<div class="row" id="index-footer">
-		<div class="page-header">
-			<h2>Hello Everyone!</h2>
-			<p></p>
 		</div>
 	</div>
 </div>

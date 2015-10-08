@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#index-nav a {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#index-nav a:hover {
+    text-decoration: none;
+    color: #00A1EA;
+}
+
+#index-header {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 10px;
+    border: solid 10px #27292a;
+    background: #444444;
+    color: #FFFFFF;
+}
+
+#index-header h1 {
+    padding: 5px;
+}
+
+#index-header img {
+    width: 70px;
+    height: 70px;
+    margin: 0 30px;
+}
+
+#index-header #motto {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-style: italic;
+}
+
+
+#index-nav {
+    border-bottom: solid 7px #00A1EA;
+    position: relative;
+    background: #27292a;
+}
+
+#index-nav ul {
+    padding: 0;
+    width: 100%;
+    margin-left: 50%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+#index-nav ul li {
+    display: inline;
+    font-size: 20px;
+    list-style: none;
+    margin: 30px;
+    padding: 5px;
+    text-align: center;
+}
+
+#index-nav ul li a {
+    color: #FFFFFF;
+}
+
+#index-nav ul li a:hover {
+    color: #00A1EA;
+    text-shadow: 1px 1px 1px gray;
+}
+
+
+#index-nav #nav-indicator {
+    position: absolute;
+    bottom: 0;
+    left: -1000px;
+    width: 0;
+    height: 0;
+    border-bottom: 7px solid #00a1ea;
+    border-left: solid 7px transparent;
+    border-right: solid 7px transparent;
+
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}

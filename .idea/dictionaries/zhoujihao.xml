@@ -2,8 +2,12 @@
   <dictionary name="zhoujihao">
     <words>
       <w>baseurl</w>
+      <w>blockquotes</w>
       <w>endfor</w>
+      <w>github</w>
       <w>jumbotron</w>
+      <w>octicon</w>
+      <w>octicons</w>
       <w>tsinghua</w>
     </words>
   </dictionary>
