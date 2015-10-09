@@ -11,15 +11,21 @@
 }
 
 #index-main-content {
-    border: solid 5px gray;
+    -webkit-box-shadow: inset 3px 3px 30px gray;
+    -moz-box-shadow: inset 3px 3px 30px gray;
+    box-shadow: inset 3px 3px 30px gray;
+
+    background: whitesmoke;
 }
 
 #index-main-content .content-column {
-    margin: 20px 4%;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
-    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+    margin: 50px 4%;
+    -webkit-box-shadow: 0 3px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+    -moz-box-shadow: 0 3px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+    -o-box-shadow: 0 3px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+    box-shadow: 0 3px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+
+    background-color: #FFFFFF;
 }
 
 #index-main-content .content-column .page-header {

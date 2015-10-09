@@ -7,7 +7,7 @@ categories: tech-notes
 
 ## **Chapter1 Introduction**
 
-### Network Architecture
+### > Network Architecture
 
 - host / end system
 - communication link</br>Different link holds different bandwidth.(transmission rate)
@@ -15,7 +15,7 @@ categories: tech-notes
 
 * * *
 
-### Network Edge
+### > Network Edge
 Hosts sometimes are divided into 2 categories: **client host** and **server host**. They combine together and form a model called **CS Model**. CS Internet application is a kind of **distributed application**.
 
 Another model is **P2P model（对等网络模型）**. For each host, it not only plays the role of client, but also the role of server. There are many P2P applications such as Internet phone, P2P file system...
@@ -27,11 +27,11 @@ Another model is **P2P model（对等网络模型）**. For each host, it not on
 
 * * *
 
-### Network Core
+### > Network Core
 
 ==**circuit switching**==
 
-==**pachek switching**==
+==**packet switching**==
 
 Message is divided into several packets. Packets get through the link in max speed of that communication link.
 
