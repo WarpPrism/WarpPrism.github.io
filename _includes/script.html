@@ -1,7 +1,9 @@
 <script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/index.js"></script>
-<script type="text/javascript" src="/js/toc.js"></script>
-
+<script type="text/javascript" src="/js/header.js"></script>
 <!--
 <script type="text/javascript" src="http://www.youziku.com/webfont/FastJS/7977c55e5c5e42f3806db65fe29e93f8.js"></script>-->
+
+{% for script in page.scripts %}
+    <script type="text/javascript" src="{{ '/js/' | append: script}}"></script>
+{% endfor %}

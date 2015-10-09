@@ -1,6 +1,5 @@
 ---
 layout: default
-title: Home
 styles: [index.css]
 ---
 
@@ -60,15 +59,15 @@ styles: [index.css]
 	<div class="row" id="index-main-content">
 		<div class="col-sm-5 content-column">
 			<div class="page-header">
-				<h3>Technical Notes</h3>
+				<h3><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Technical Notes</h3>
 			</div>
 			<ul>
 				{% for post in site.posts %}
 				{% if post.categories contains 'tech-notes' %}
 				<li>
 					<a href="{{ post.url }}">{{ post.title }}</a>
-					{{ post.excerpt | remove: 'test'}}
-					<span>{{ post.date | date_to_string }}</span>
+					<!--{{ post.excerpt | remove: 'test'}}-->
+					<span class="date">{{ post.date | date_to_string }}</span>
 				</li>
 				{% endif %}
 				{% endfor %}
@@ -77,15 +76,15 @@ styles: [index.css]
 
 		<div class="col-sm-5 content-column">
 			<div class="page-header">
-				<h3>Casual Essay Notes</h3>
+				<h3><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Casual Essay Notes</h3>
 			</div>
 			<ul>
 				{% for post in site.posts %}
 				{% if post.categories contains 'essay' %}
 				<li>
-					<a href="{{ post.url }}">{{ post.title }}</a>
-					{{ post.excerpt | remove: 'test' }}
-					<span>{{ post.date | date_to_string }}</span>
+					<a href="{{ post.url }}"> {{ post.title }}</a>
+					<!--{{ post.excerpt | remove: 'test' }}-->
+					<span class="date">{{ post.date | date_to_string }}</span>
 				</li>
 				{% endif %}
 				{% endfor %}

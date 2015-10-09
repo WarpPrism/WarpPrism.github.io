@@ -16,30 +16,20 @@
 
 #index-main-content .content-column {
     margin: 20px 4%;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
 }
 
 #index-main-content .content-column .page-header {
     text-align: center;
     padding: 9px;
     border-bottom: solid 3px #00a1ea;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -ms-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out;
-}
-
-#index-main-content .content-column .page-header:hover {
-    color: #FFFFFF;
-    cursor: pointer;
-    background: #00a1ea;
-    -webkit-box-shadow: inset 5px 5px 40px #27292a;
-    -moz-box-shadow: inset 5px 5px 40px #27292a;
-    box-shadow: inset 5px 5px 40px #27292a;
 }
 
 #index-main-content ul {
-    padding: 0;
+    padding: 15px;
 }
 
 #index-main-content ul li {
@@ -54,7 +44,7 @@
     font-size: 25px;
 }
 
-#index-main-content ul li span {
+#index-main-content ul li span.date {
     font-style: italic;
     position: absolute;
     right: 15px;
