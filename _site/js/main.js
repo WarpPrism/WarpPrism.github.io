@@ -2,6 +2,10 @@
  * Created by zhoujihao on 15-10-7.
  */
 $(document).ready(function() {
+    menuAnimation();
+});
+
+function menuAnimation() {
     var navItems = $("#index-nav").find("a");
     var navIndicator = $("#nav-indicator");
     for (var i = 0; i < navItems.length; i++) {
@@ -12,4 +16,4 @@ $(document).ready(function() {
             navIndicator.css("left", leftOff + width / 2.0);
         })
     }
-});
+}
