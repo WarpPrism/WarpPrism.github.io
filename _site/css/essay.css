@@ -1,9 +1,9 @@
-#tech-container {
+#essay-container {
     width: 100%;
     padding: 0;
 }
 
-#tech-container #tech-col {
+#essay-container #essay-col {
     margin-left: 50%;
     -webkit-transform: translateX(-50%);
     -moz-transform: translateX(-50%);
@@ -21,11 +21,11 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
 }
 
-#tech-container #tech-col #tech-header {
+#essay-container #essay-col #essay-header {
     text-align: center;
 }
 
-#tech-container #tech-col ul li {
+#essay-container #essay-col ul li {
     position: relative;
     list-style: none;
     border-bottom: solid 3px gray;
@@ -34,12 +34,12 @@
     font-size: 25px;
 }
 
-#tech-container #tech-col ul li a:hover {
+#essay-container #essay-col ul li a:hover {
     color: #009999;
     font-weight: bold;
 }
 
-#tech-container #tech-col ul li span.date {
+#essay-container #essay-col ul li span.date {
     position: absolute;
     right: 20px;
 }

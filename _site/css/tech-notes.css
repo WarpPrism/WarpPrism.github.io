@@ -1,15 +1,20 @@
 #tech-container {
     width: 100%;
-
-    justify-content: center;
-    align-items: center;
-    display: flex;
+    padding: 0;
 }
 
 #tech-container #tech-col {
-    margin: 10px;
+    margin-left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+
+    width: 100%;
     padding: 10px;
-    background-color: #FFFFFF;
+    background-color: #EEEEEE;
+
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
     -o-box-shadow: 0 1px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
