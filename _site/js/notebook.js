@@ -1,26 +1,9 @@
 $(function() {
-    // Create the flipbook
-
-    $('.flipbook').turn({
-        // Width
-
-        width: 300,
-
-        // Height
-
-        height: 400,
-
-        // Elevation
-
-        elevation: 50,
-
-        // Enable gradients
-
-        gradients: true,
-
-        // Auto center this flipbook
-
-        autoCenter: true
-
-    });
+   $(".open").click(function(e) {
+       var t = this.parentNode;
+       console.log(t);
+       t.style.top = "-500px";
+       t.style.opacity = 0;
+       t.style.zIndex = -2;
+   })
 });

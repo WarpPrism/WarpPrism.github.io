@@ -2,7 +2,7 @@
 layout: post
 title: Computer Network Chapter1
 categories: notes
-
+tags: Computer-Network
 ---
 
 ## **Chapter1 Introduction**
