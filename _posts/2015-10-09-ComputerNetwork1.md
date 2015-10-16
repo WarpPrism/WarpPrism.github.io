@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Computer Network Chapter1
-categories: tech-notes
+categories: notes
 
 ---
 

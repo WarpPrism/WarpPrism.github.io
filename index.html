@@ -60,11 +60,11 @@ scripts: [index.js]
 	<div class="row" id="index-main-content">
 		<div class="col-sm-5 content-column">
 			<div class="page-header">
-				<h3><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Technical Notes</h3>
+				<h3><span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span> Technical Posts</h3>
 			</div>
 			<ul>
 				{% for post in site.posts %}
-				{% if post.categories contains 'tech-notes' %}
+				{% if post.categories contains 'tech-posts' %}
 				<li>
 					<a href="{{ post.url }}">{{ post.title }}</a>
 					<!--{{ post.excerpt | remove: 'test'}}-->

@@ -1,0 +1,19 @@
+
+.flipbook {
+    -webkit-box-shadow: 3px 3px 30px gray;
+    -moz-box-shadow: 3px 3px 30px gray;
+    box-shadow: 3px 3px 30px gray;
+
+    background: #EEEEEE;
+    border: solid 2px #00a1ea;
+    overflow: hidden;
+
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.flipbook a {
+    font-size: 16px;
+    border-bottom: dashed 1px gray;
+}

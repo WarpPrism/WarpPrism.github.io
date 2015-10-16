@@ -7,20 +7,28 @@ styles: [essay.css]
     <div class="col-sm-12" id="essay-col">
         <div class="page-header" id="essay-header">
             <h1>All Essay</h1>
-            <!--<img src="/imgs/show1.jpg" alt="essay" class="img-responsive"/>-->
+        </div>
+
+        <div class="well">
+            <p>What I think and what I experienced in daily life.</p>
         </div>
         <ul>
-        {% for post in site.posts %}
+            {% for post in site.posts %}
 
             {% if post.categories contains 'essay' %}
             <li>
-                <a href="{{ post.url }}">{{ post.title }}</a>
-<!--                {{ post.excerpt | remove: 'html' }}-->
-                <span class="date">{{ post.date | date_to_string }}</span>
+                <h3>
+                    <span class="glyphicon small glyphicon-leaf" aria-hidden="true"></span>&nbsp;
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                    <span class="date">
+                        <span class="glyphicon small glyphicon-calendar" aria-hidden="true"></span>&nbsp;
+                        {{ post.date | date_to_long_string }}
+                    </span>
+                </h3>
             </li>
             {% endif %}
 
-        {% endfor %}
+            {% endfor %}
         </ul>
     </div>
 </div>

@@ -1,0 +1,21 @@
+---
+layout: default
+styles: [notebook.css]
+scripts: [turn.min.js, modernizr.2.5.3.min.js, notebook.js]
+---
+
+<div class="container-fluid">
+    <div class="flipbook">
+        <div class="hard">Computer Network</div>
+        <div class="hard"></div>
+        {% for post in site.posts %}
+        {% if post.categories contains 'notes' %}
+        <div>
+            <a href="{{post.url}}">{{post.title}}</a>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <div class="hard"></div>
+        <div class="hard"></div>
+    </div>
+</div>
