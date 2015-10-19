@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="/imgs/favicon.ico"/>
+    <!--Bootstrap And Octicons-->
+    <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
+
+
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+
+    
+        <link rel="stylesheet" href="/css/post.css"/>
+    
+        <link rel="stylesheet" href="/css/highlight.css"/>
+    
+
+    <title>Ji Hao's Blog</title>
+</head>
+<body>
+	<div class="container-fluid" id="default-container">
+		
+<!--Blog Header-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="alert alert-danger" role="alert" style="border-radius: 0; text-align: center; text-decoration: underline; margin: 0; border: solid 2px gray;">
+            <h4>Blog Is Under Developing</h4>
+            <!--<h4>“为社会福，为邦家光，勖哉诸君，努力自强。”</h4>-->
+        </div>
+    </div>
+    <div class="row">
+        <div id="index-header">
+            <h1><img src="/imgs/logo.png" alt=""/>Ji Hao's Blog</h1>
+            <h4 id="motto">
+                <span>"Never let it go."</span>
+            </h4>
+        </div>
+    </div>
+    <div class="row" id="index-nav">
+        <ul>
+            <li>
+                <a href="/">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Home
+                </a>
+            </li>
+            <li>
+                <a href="/pages/tech-notes.html">
+                    <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Tech Posts
+                </a>
+            </li>
+
+            <li>
+                <a href="/pages/essay.html">
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Essay
+                </a>
+            </li>
+
+            <li>
+                <a href="/pages/notebook.html">
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                    &nbsp;&nbsp;My Notebook
+                </a>
+            </li>
+            <li>
+                <a href="/pages/about.html">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    &nbsp;&nbsp;About
+                </a>
+            </li>
+        </ul>
+        <span id="nav-indicator"></span>
+    </div>
+</div>
+		<div class="row">
+    <div class="col-sm-12" id="post-body">
+        <div class="post">
+          <header>
+            <h2>关于图像处理中的插值算法（Matlab语言描述）</h2>
+            <p class="post-meta">
+                <span class="octicon octicon-clock"></span>
+                Oct 18, 2015
+            </p>
+            <p class="post-tag">
+                <span>
+                    
+                    <a href="//category/#tech-posts">
+                        <span class="octicon octicon-list-unordered"></span>
+                        &nbsp;tech-posts
+                    </a>
+                    
+                </span>
+                <span>
+                    
+                </span>
+            </p>
+          </header>
+          <hr class="boundary">
+          <article>
+            <p>数字图像处理的第一次作业就是用图像的插值算法实现图片的放缩，在网上查了一些资料后，总结如下：</p>
+
+<p>首先我们定义几个变量：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">- 原图矩阵: Source
+- 目标图矩阵: Destination
+- 宽度缩放比: ratioW
+- 高度缩放比: ratioH
+</code></pre></div>
+<p>先得到原图的宽和高</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Source = imread(&#39;src.png&#39;);
+[srcM, srcN] = size(Source);
+</code></pre></div>
+<p>接着根据下面的公式计算出目标图的宽和高：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">ratioW = dstM / srcM;
+ratioH = dstN / srcN;
+</code></pre></div>
+<p>新建目标图，根据目标图的大小建立一个空的Matrix，记作M</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Destination = zeros(dstM, dstN);
+M = Destination;
+</code></pre></div>
+<p>然后要对M中的每个点赋值，即所谓的<strong>插值运算</strong>，这个值从哪里来呢？当然是原图。</p>
+
+<p>现在 设M矩阵的坐标点为(dx, dy)，则它对应的原图坐标(sx, sy)满足：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">dx / sx = dstM / srcM;
+dy / sy = dstN / srcN;
+</code></pre></div>
+<p>这样我们就能求出</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">(sx, sy) = (dx * srcM / dstM, dy * srcN / dstN);
+</code></pre></div>
+<p>到此，我们就把目标图中的坐标点映射到原图中去了</p>
+
+<p>但是这个坐标点不一定是整数，假如(2, 0) 映射的结果为 (0.75, 0)，这显然是不科学的，怎么办呢？
+第一种方法，<strong>四舍五入</strong>得到 (1, 0)，然后把原图中(1, 0)点的像素值赋给目标图的(2, 0)位置即可：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">fd(2, 0) = fs(1, 0);
+</code></pre></div>
+<p>这种放大图像的方法就叫做<strong>最临近插值算法</strong>，这是一种最基本、最简单的图像缩放算法，效果也是最不好的，放大后的图像有很严重的马赛克，缩小后的图像有很严重的失真。</p>
+
+<p>另一种算法就是<strong>双线性插值算法</strong>，它的失真情况会好很多。</p>
+
+<p>算法思路是：
+对于一个目的像素，映射后得到的浮点坐标为(i+u,j+v)，
+(其中i、j均为浮点坐标的整数部分，u、v为浮点坐标的小数部分，是取值[0,1)区间的浮点数)，则这个像素得值 f(dx,dy) 可由原图像中坐标为 (i,j)、(i+1,j)、(i,j+1)、(i+1,j+1)所对应的周围四个像素的值决定，即：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">f(dx, dy) = (1-u)(1-v)f(i,j) + (1-u)vf(i,j+1) + u(1-v)f(i+1,j) + uvf(i+1,j+1)
+</code></pre></div>
+<p>这里我们就可以由原图中的 4 个像素点推出了目标图中1个像素点，最后遍历目标图，我们就能实现图片的放缩了。</p>
+
+<p>双线性插值算法代码如下所示：</p>
+<div class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c">% Bilinear Function</span>
+<span class="k">function</span><span class="w"> </span>[ output_img ] <span class="p">=</span><span class="w"> </span><span class="nf">scale</span><span class="p">(</span> input_img, Size <span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Using bilinear algorithm to change the SIZE of input_img. </span>
+    <span class="n">dstM</span> <span class="p">=</span> <span class="n">Size</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">dstN</span> <span class="p">=</span> <span class="n">Size</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">[</span><span class="n">srcM</span> <span class="n">srcN</span><span class="p">]=</span><span class="nb">size</span><span class="p">(</span><span class="n">input_img</span><span class="p">);</span>
+    <span class="n">output_img</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">dstM</span><span class="p">,</span> <span class="n">dstN</span><span class="p">);</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">dstM</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="nb">j</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">dstN</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">src_i</span> <span class="p">=</span> <span class="nb">i</span> <span class="o">*</span> <span class="p">(</span><span class="n">srcM</span> <span class="o">/</span> <span class="n">dstM</span><span class="p">);</span>
+            <span class="n">src_j</span> <span class="p">=</span> <span class="nb">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">srcN</span> <span class="o">/</span> <span class="n">dstN</span><span class="p">);</span>
+            <span class="n">int_i</span> <span class="p">=</span> <span class="nb">fix</span><span class="p">(</span><span class="n">src_i</span><span class="p">);</span>
+            <span class="n">int_j</span> <span class="p">=</span> <span class="nb">fix</span><span class="p">(</span><span class="n">src_j</span><span class="p">);</span>
+            <span class="n">u</span> <span class="p">=</span> <span class="n">src_i</span> <span class="o">-</span> <span class="n">int_i</span><span class="p">;</span>
+            <span class="n">v</span> <span class="p">=</span> <span class="n">src_j</span> <span class="o">-</span> <span class="n">int_j</span><span class="p">;</span>
+            <span class="k">if</span> <span class="n">int_i</span> <span class="o">==</span> <span class="mi">0</span>
+                <span class="n">int_i</span> <span class="p">=</span> <span class="n">int_i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">end</span>
+            <span class="k">if</span> <span class="n">int_j</span> <span class="o">==</span> <span class="mi">0</span>
+                <span class="n">int_j</span> <span class="p">=</span> <span class="n">int_j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">end</span>
+            <span class="n">output_img</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)=(</span><span class="mi">1</span><span class="o">-</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">input_img</span><span class="p">(</span><span class="n">int_i</span><span class="p">,</span><span class="n">int_j</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">input_img</span><span class="p">(</span><span class="n">int_i</span><span class="p">,</span><span class="n">int_j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                            <span class="o">+</span><span class="n">u</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">input_img</span><span class="p">(</span><span class="n">int_i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">int_j</span><span class="p">)</span><span class="o">+</span><span class="n">u</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">input_img</span><span class="p">(</span><span class="n">int_i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">int_j</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">output_img</span> <span class="p">=</span> <span class="n">uint8</span><span class="p">(</span><span class="n">output_img</span><span class="p">);</span>
+    <span class="n">figure</span><span class="p">,</span><span class="n">imshow</span><span class="p">(</span><span class="n">input_img</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="n">on</span>
+    <span class="n">figure</span><span class="p">,</span><span class="n">imshow</span><span class="p">(</span><span class="n">output_img</span><span class="p">)</span>
+    <span class="n">axis</span> <span class="n">on</span>
+<span class="k">end</span>
+
+<span class="c">% call function scale()</span>
+<span class="n">close</span> <span class="n">all</span>
+<span class="n">clear</span> <span class="n">all</span>
+<span class="n">clc</span>
+
+<span class="n">input_img</span> <span class="p">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">&#39;test.png&#39;</span><span class="p">)</span>
+<span class="nb">size</span> <span class="p">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="n">output_img</span> <span class="p">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="nb">size</span><span class="p">)</span>
+<span class="n">imtool</span><span class="p">(</span><span class="n">output_img</span><span class="p">)</span>
+</code></pre></div>
+          </article>
+          <hr class="boundary">
+        </div>
+    </div>
+</div>
+		<div class="container-fluid">
+    <div class="row">
+        <footer id="footer">
+            <a href="mailto:249662605@qq.com" class="foot-item" role="button" data-toggle="tooltip" data-placement="top" title="Mail address: 249662605@qq.com">
+                <span class="octicon octicon-mail"></span>
+                <span>Email@me</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/warpprism" target="_blank">
+                <span class="octicon octicon-mark-github"></span>
+                <span>My Github</span>
+            </a>
+            &nbsp;
+        </footer>
+    </div>
+</div>
+
+		<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+	</div>
+</body>
+</html>

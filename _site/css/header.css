@@ -81,7 +81,7 @@
 #index-nav #nav-indicator {
     position: absolute;
     bottom: 0;
-    left: 0px;
+    left: 80px;
     width: 0;
     height: 0;
     border-bottom: 7px solid #00a1ea;
