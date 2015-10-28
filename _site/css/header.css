@@ -19,6 +19,7 @@
     border: solid 10px #27292a;
     background: #444444;
     color: #FFFFFF;
+    overflow: hidden;
 }
 
 #index-header h1 {

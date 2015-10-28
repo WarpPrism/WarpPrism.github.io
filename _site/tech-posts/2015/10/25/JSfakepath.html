@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="/css/footer.css"/>
 
     
-        <link rel="stylesheet" href="/css/index.css"/>
+        <link rel="stylesheet" href="/css/post.css"/>
+    
+        <link rel="stylesheet" href="/css/highlight.css"/>
     
 
     <title>Ji Hao's Blog</title>
@@ -78,71 +80,32 @@
         <span id="nav-indicator"></span>
     </div>
 </div>
-		<div class="container-fluid" id="index-container">
-
-	<div class="row" id="img-carousel">
-		<div class="carousel slide" id="myCarousel">
-			<ol class="carousel-indicators">
-				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-				<li data-target="#myCarousel" data-slide-to="3"></li>
-			</ol>
-
-			<div class="carousel-inner">
-				<div class="item active">
-					<img class="img-thumbnail img-responsive center-block" src="imgs/show1.jpg" alt="First slide">
-					<div class="carousel-caption">
-						<h4>Image copyright &copy; Tsinghua University</h4>
-						<p></p>
-					</div>
-				</div>
-				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="imgs/show2.jpg" alt="Second slide">
-					<div class="carousel-caption">
-						<h4>Image copyright &copy; Tsinghua University</h4>
-						<p></p>
-					</div>
-				</div>
-				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="imgs/show3.jpg" alt="Third slide">
-					<div class="carousel-caption">
-						<h4>Image copyright &copy; Tsinghua University</h4>
-						<p></p>
-					</div>
-				</div>
-				<div class="item">
-					<img class="img-thumbnail img-responsive center-block" src="imgs/show4.jpg" alt="Fourth slide">
-					<div class="carousel-caption">
-						<h4>Image copyright &copy; Tsinghua University</h4>
-						<p></p>
-					</div>
-				</div>
-			</div>
-
-			<a class="carousel-control left" href="#myCarousel" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control right" href="#myCarousel" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-		</div>
-	</div>
-
-	<div class="row" id="index-main-content">
-		<h2>Recently Published</h2>
-		<div class="col-sm-5 content-column">
-			<div class="page-header">
-				<h3><span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span> Technical Posts</h3>
-			</div>
-			<ul class="post-list1">
-				
-				
-				<li>
-					<a href="/tech-posts/2015/10/25/JSfakepath.html">如何引用本地文件的绝对路径（fakepath问题）</a>
-					<!--<p>直接上代码：</p>
+		<div class="row">
+    <div class="col-sm-12" id="post-body">
+        <div class="post">
+          <header>
+            <h2>如何引用本地文件的绝对路径（fakepath问题）</h2>
+            <p class="post-meta">
+                <span class="octicon octicon-clock"></span>
+                Oct 25, 2015
+            </p>
+            <p class="post-tag">
+                <span>
+                    
+                    <a href="//category/#tech-posts">
+                        <span class="octicon octicon-list-unordered"></span>
+                        &nbsp;tech-posts
+                    </a>
+                    
+                </span>
+                <span>
+                    
+                </span>
+            </p>
+          </header>
+          <hr class="boundary">
+          <article>
+            <p>直接上代码：</p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">getPath</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">fileQuery</span><span class="p">,</span><span class="nx">transImg</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;MSIE&quot;</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">){</span>
         <span class="nx">obj</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
@@ -187,99 +150,12 @@
 </code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">GET file:///C:/fakepath/src.jpg net::ERR_FILE_NOT_FOUND
 </code></pre></div>
 <p>这里fakepath就把文件的真实路径隐藏了。</p>
--->
-					<span class="date">25 Oct 2015</span>
-				</li>
-				
-				
-				
-				<li>
-					<a href="/tech-posts/2015/10/18/bilinear.html">关于图像处理中的插值算法（Matlab语言描述）</a>
-					<!--<p>数字图像处理的第一次作业就是用图像的插值算法实现图片的放缩，在网上查了一些资料后，总结如下：</p>
--->
-					<span class="date">18 Oct 2015</span>
-				</li>
-				
-				
-				
-				<li>
-					<a href="/tech-posts/2015/10/17/TornadoIntroduction.html">开始搭建Tornado服务器</a>
-					<!--<h3 id="前言">前言</h3>
 
-<p>最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案，因为它轻量且高效，足够满足一个微信号的访问需求。而我对tornado还不是很了解，所以需要深入学习一下。</p>
--->
-					<span class="date">17 Oct 2015</span>
-				</li>
-				
-				
-				
-				<li>
-					<a href="/tech-posts/2015/10/12/ajax.html">全面理解Ajax</a>
-					<!--<p>Ajax = Asynchronous javascript and XML
-Ajax 不是一种新的编程语言，而是使用现有技术的新标准。
-Ajax 是在不重新加载整个页面的情况下，实现与服务器的数据交互并更新部分页面。</p>
--->
-					<span class="date">12 Oct 2015</span>
-				</li>
-				
-				
-				
-				
-				
-				
-				
-				
-				<a href="/pages/tech-notes.html" class="more">
-					More
-					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-				</a>
-			</ul>
-		</div>
-
-		<div class="col-sm-5 content-column">
-			<div class="page-header">
-				<h3><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Casual Essay Notes</h3>
-			</div>
-			<ul class="post-list2">
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				<li>
-					<a href="/essay/2015/10/10/ShareWithOthers.html"> The co-op business model:share whatever you've got</a>
-					<!--<p>Article from <strong><a href="http://sivers.org/sharing">Sivers</a></strong></p>
--->
-					<span class="date">10 Oct 2015</span>
-				</li>
-				
-				
-				
-				
-				
-				<li>
-					<a href="/essay/2015/05/18/%E9%82%A3%E4%BC%B4%E6%88%91%E7%9A%84%E7%BC%96%E7%A8%8B.html"> 那伴我的编程</a>
-					<!--<p>今天在图书馆偶然把心中关于编程的问题想通彻了，所以写此文章记录下自己当时的灵感，同时和自己谈谈心，
-回顾一下这一年多来自己的编程历程，当然也要展望下未来，看清自己的方向。</p>
--->
-					<span class="date">18 May 2015</span>
-				</li>
-				
-				
-				<a href="/pages/essay.html" class="more">
-					More
-					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-				</a>
-			</ul>
-		</div>
-	</div>
+          </article>
+          <hr class="boundary">
+        </div>
+    </div>
 </div>
-
 		<div class="container-fluid">
     <div class="row">
         <footer id="footer">
@@ -301,8 +177,6 @@ Ajax 是在不重新加载整个页面的情况下，实现与服务器的数据
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
 
-
-    <script type="text/javascript" src="/js/index.js"></script>
 
 	</div>
 </body>

@@ -1,4 +1,6 @@
-
+#index-container {
+    overflow: hidden;
+}
 #index-container a {
     color: #000;
     text-decoration: none;
@@ -20,7 +22,7 @@
 
 #index-main-content .content-column {
     opacity: 0;
-    margin: 50px 4%;
+    margin: 30px 4% 50px;
     position: relative;
     top: 70px;
     -webkit-box-shadow: 0 3px 2px rgba(0,0,0,0.4),0 0 30px rgba(10,10,0,0.1) inset;
@@ -35,6 +37,7 @@
     text-align: center;
     padding: 9px;
     border-bottom: solid 3px #00a1ea;
+    margin: 10px;
 }
 
 #index-main-content ul {
@@ -58,4 +61,33 @@
     position: absolute;
     right: 15px;
     bottom: 7px;
+}
+
+.more {
+    float: right;
+    margin: 30px;
+    padding: 5px;
+    border: solid 1px #000000;
+    color: gray;
+    border-radius: 7px;
+
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#index-container .more:hover {
+    color: #FFFFFF;
+    border: solid 1px #00a1ea;
+    background: #00a1ea;
+    margin-right: 10px;
+}
+
+#index-main-content h2 {
+    background: #009926;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px;
 }

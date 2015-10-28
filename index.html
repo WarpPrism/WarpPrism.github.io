@@ -2,6 +2,7 @@
 layout: default
 styles: [index.css]
 scripts: [index.js]
+paginate_path: "/page:num"
 ---
 
 <div class="container-fluid" id="index-container">
@@ -58,11 +59,12 @@ scripts: [index.js]
 	</div>
 
 	<div class="row" id="index-main-content">
+		<h2>Recently Published</h2>
 		<div class="col-sm-5 content-column">
 			<div class="page-header">
 				<h3><span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span> Technical Posts</h3>
 			</div>
-			<ul>
+			<ul class="post-list1">
 				{% for post in site.posts %}
 				{% if post.categories contains 'tech-posts' %}
 				<li>
@@ -72,6 +74,10 @@ scripts: [index.js]
 				</li>
 				{% endif %}
 				{% endfor %}
+				<a href="/pages/tech-notes.html" class="more">
+					More
+					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+				</a>
 			</ul>
 		</div>
 
@@ -79,7 +85,7 @@ scripts: [index.js]
 			<div class="page-header">
 				<h3><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Casual Essay Notes</h3>
 			</div>
-			<ul>
+			<ul class="post-list2">
 				{% for post in site.posts %}
 				{% if post.categories contains 'essay' %}
 				<li>
@@ -89,6 +95,10 @@ scripts: [index.js]
 				</li>
 				{% endif %}
 				{% endfor %}
+				<a href="/pages/essay.html" class="more">
+					More
+					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+				</a>
 			</ul>
 		</div>
 	</div>
