@@ -172,7 +172,7 @@
 }
 
 .boundary{
-   border-bottom: .1875em solid #ccc
+   border-bottom: .1895em solid #cccccc
 }
 
 
@@ -198,4 +198,18 @@
 .word-keep{
     display: inline-block;
     word-break: keep-all;
+}
+
+.guest-op {
+    font-weight: normal;
+    margin: 10px 0;
+    padding: 0;
+    text-shadow: 1px 1px 10px #FFFFFF;
+}
+
+.guest-op span {
+    color: #FFFFFF;
+    text-shadow: 1px 1px 10px gray;
+    position: relative;
+    top: 5px;
 }

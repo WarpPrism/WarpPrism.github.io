@@ -77,12 +77,6 @@
                 </a>
             </li>
 
-            <li>
-                <a href="/pages/message-board.html">
-                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Message Board
-                </a>
-            </li>
         </ul>
         <span id="nav-indicator"></span>
     </div>
@@ -169,11 +163,93 @@
           <hr class="boundary">
         </div>
 
-        <h2>Leave A Comment :)</h2>
-        <!-- UY BEGIN -->
-        <div id="uyan_frame"></div>
-        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2067647"></script>
-        <!-- UY END -->
+        <h2 class="guest-op">
+            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+            &nbsp;Share This Post
+        </h2>
+        <div class="ds-share" data-thread-key="" data-title="Computer Network Chapter1" data-images="" data-content="<h2 id="chapter1-introduction"><strong>Chapter1 Introduction</strong></h2>
+
+<h3 id="gt-network-architecture">&gt; Network Architecture</h3>
+
+<ul>
+<li>host / end system</li>
+<li>communication link</br>Different link holds different bandwidth.(transmission rate)</li>
+<li>packet switch (router)</li>
+</ul>
+
+<hr>
+
+<h3 id="gt-network-edge">&gt; Network Edge</h3>
+
+<p>Hosts sometimes are divided into 2 categories: <strong>client host</strong> and <strong>server host</strong>. They combine together and form a model called <strong>CS Model</strong>. CS Internet application is a kind of <strong>distributed application</strong>.</p>
+
+<p>Another model is <strong>P2P model（对等网络模型）</strong>. For each host, it not only plays the role of client, but also the role of server. There are many P2P applications such as Internet phone, P2P file system...</p>
+
+<p><strong>Access Network</strong></p>
+
+<ul>
+<li>residential access (dial up modem, DSL, HFC)</li>
+<li>company access (LAN)</li>
+<li>wireless access</li>
+</ul>
+
+<hr>
+
+<h3 id="gt-network-core">&gt; Network Core</h3>
+
+<p><mark><strong>circuit switching</strong></mark></p>
+
+<p><mark><strong>packet switching</strong></mark></p>
+
+<p>Message is divided into several packets. Packets get through the link in max speed of that communication link.</p>
+
+<p><strong>Store and forward transmission（存储转发机制）</strong></p>
+
+<p>cause transmission delay</p>
+
+<p><strong>output buffer or output queue</strong></p>
+
+<p>cause packet lost and queuing delay</p>
+
+<p><strong>statictical multiplexing(统计多路复用)</strong></p>
+
+<p>分组交换使用按需的方式分配链路，从而提高了链路的利用效率。</p>
+" data-url="//notes/2015/10/09/ComputerNetwork1.html">
+            <div class="ds-share-inline">
+                <ul  class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                    <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+
+        <h2 class="guest-op">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            &nbsp;Leave A Comment
+        </h2>
+        <!-- 多说评论框 start -->
+        <div class="ds-thread" data-thread-key="/notes/2015/10/09/ComputerNetwork1.html" data-title="Computer Network Chapter1" data-url="//notes/2015/10/09/ComputerNetwork1.html"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:"zhoujihao"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+        <!-- 多说公共JS代码 end -->
     </div>
 </div>
 		<div class="container-fluid">
