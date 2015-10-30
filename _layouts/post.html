@@ -43,11 +43,13 @@ styles: [post.css,highlight.css]
             &nbsp;Share This Post
         </h2>
 
-        <div class="ds-share" data-thread-key="{{PAGE.URL}}" data-title="{{page.title}}" data-images="" data-content="{{page.content}}" data-url="{{page.url | prepend: site.baseurl}}">
+        <div class="ds-share" data-thread-key="{{page.url}}" data-title="{{page.title}}" data-images="" data-content="{{page.content}}" data-url="{{ page.url | prepend: 'warpprism.github.io/' }}">
             <div class="ds-share-inline">
                 <ul  class="ds-share-icons-16">
 
-                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li data-toggle="ds-share-icons-more">
+                        <a class="ds-more" href="javascript:void(0);">分享到：</a>
+                    </li>
                     <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
                     <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
                     <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
@@ -64,7 +66,7 @@ styles: [post.css,highlight.css]
             &nbsp;Leave A Comment
         </h2>
         <!-- 多说评论框 start -->
-        <div class="ds-thread" data-thread-key="{{page.url}}" data-title="{{page.title}}" data-url="{{page.url | prepend: site.baseurl}}"></div>
+        <div class="ds-thread" data-thread-key="{{page.url}}" data-title="{{page.title}}" data-url="{{page.url | prepend: 'warpprism.github.io'}}"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">

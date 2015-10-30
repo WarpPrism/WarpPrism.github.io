@@ -201,15 +201,15 @@
 }
 
 .guest-op {
-    font-weight: normal;
     margin: 10px 0;
     padding: 0;
-    text-shadow: 1px 1px 10px #FFFFFF;
+    text-shadow: 0.5px 0.5px 5px #FFFFFF;
+    color: #888888;
 }
 
 .guest-op span {
-    color: #FFFFFF;
-    text-shadow: 1px 1px 10px gray;
+    color: #DDDDDD;
+    text-shadow: 0.5px 0.5px 3px gray;
     position: relative;
     top: 5px;
 }

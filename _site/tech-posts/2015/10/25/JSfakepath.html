@@ -160,56 +160,67 @@
             <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
             &nbsp;Share This Post
         </h2>
-        <div class="ds-share" data-thread-key="" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-images="" data-content="<p>直接上代码：</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">getPath</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">fileQuery</span><span class="p">,</span><span class="nx">transImg</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;MSIE&quot;</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">){</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
-        <span class="kd">var</span> <span class="nx">path</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">selection</span><span class="p">.</span><span class="nx">createRange</span><span class="p">().</span><span class="nx">text</span><span class="p">;</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">);</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">,</span><span class="nx">transImg</span><span class="p">);</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">filter</span><span class="o">=</span>
-            <span class="s2">&quot;progid:DXImageTransform.Microsoft.AlphaImageLoader(src=&#39;&quot;</span><span class="o">+</span><span class="nx">path</span><span class="o">+</span><span class="s2">&quot;&#39;, sizingMethod=&#39;scale&#39;);&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span><span class="nx">fileQuery</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-        <span class="kd">var</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
-        <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
-            <span class="nx">obj</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">,</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span>
-        <span class="p">};</span>
-        <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></div>
-<p>现在我们有一个Image对象，要将该对象的src属性指向一个本地文件，就可以通过下面方法实现。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;file&quot;</span> <span class="na">id=</span><span class="s">&quot;file&quot;</span> <span class="nt">/&gt;</span>
-</code></pre></div><div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
-<span class="nx">file</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-<span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">getPath</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
-    <span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// your code here.</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>这样img的src就是本地文件的引用了，当然src的内容是经过加密的，浏览器很重视这方面的安全性。
-如果采用下面这种做法，就会遇到fakepath问题：</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <div class="ds-share" data-thread-key="/tech-posts/2015/10/25/JSfakepath.html" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-images="" data-content="直接上代码：
+~~~javascript
+var getPath = function(obj,fileQuery,transImg){
+    if(window.navigator.userAgent.indexOf("MSIE")>=1){
+        obj.select();
+        var path=document.selection.createRange().text;
+        obj.removeAttribute("src");
+        obj.setAttribute("src",transImg);
+        obj.style.filter=
+            "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+path+"', sizingMethod='scale');";
+    }
+    else{
+        var file =fileQuery.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e){
+            obj.setAttribute("src",e.target.result)
+        };
+        reader.readAsDataURL(file);
+    }
+};
+~~~
 
-    <span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// your code here.</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">GET file:///C:/fakepath/src.jpg net::ERR_FILE_NOT_FOUND
-</code></pre></div>
-<p>这里fakepath就把文件的真实路径隐藏了。</p>
-" data-url="//tech-posts/2015/10/25/JSfakepath.html">
+现在我们有一个Image对象，要将该对象的src属性指向一个本地文件，就可以通过下面方法实现。
+~~~html
+<input type="file" id="file" />
+~~~
+~~~javascript
+var file = document.getElementById("file");
+var img = new Image();
+file.click();
+file.onchange = function() {
+	getPath(img, this, null);
+	img.onload = function() {
+		// your code here.
+	}
+}
+~~~
+这样img的src就是本地文件的引用了，当然src的内容是经过加密的，浏览器很重视这方面的安全性。
+如果采用下面这种做法，就会遇到fakepath问题：
+~~~javascript
+file.onchange = function() {
+
+	img.src = file.value;
+
+	img.onload = function() {
+		// your code here.
+	}
+}
+~~~
+
+~~~
+GET file:///C:/fakepath/src.jpg net::ERR_FILE_NOT_FOUND
+~~~
+这里fakepath就把文件的真实路径隐藏了。" data-url="warpprism.github.io//tech-posts/2015/10/25/JSfakepath.html">
             <div class="ds-share-inline">
                 <ul  class="ds-share-icons-16">
 
-                    <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+                    <li data-toggle="ds-share-icons-more">
+                        <a class="ds-more" href="javascript:void(0);">分享到：</a>
+                    </li>
                     <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
                     <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
                     <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
@@ -226,7 +237,7 @@
             &nbsp;Leave A Comment
         </h2>
         <!-- 多说评论框 start -->
-        <div class="ds-thread" data-thread-key="/tech-posts/2015/10/25/JSfakepath.html" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-url="//tech-posts/2015/10/25/JSfakepath.html"></div>
+        <div class="ds-thread" data-thread-key="/tech-posts/2015/10/25/JSfakepath.html" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-url="warpprism.github.io/tech-posts/2015/10/25/JSfakepath.html"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
