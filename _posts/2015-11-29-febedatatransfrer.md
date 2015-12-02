@@ -1,21 +1,8 @@
 ---
-layout:post
-title:Data transfer mode between FE and BE
-categories:tech-posts
+layout: post
+title: 前后端数据交互方法（转载）
+categories: tech-posts
 ---
-
-前后端数据交互方法
-===============
-<!--_PAGEDATA
-{
-    "title": "前后端数据交互方法",
-    "githubissuesid": 13,
-    "createData": "2015-03-09",
-    "keywords": "Web开发,前后端数据交互,json,前端开发,ajax",
-    "description":"介绍几种常用的前后端数据交互的方法，并给出使用建议"
-}
-_PAGEDATA-->
-
 
 在此介绍几种常用的前后端数据交互方法，并给出使用建议。以提高前后端协同开发的效率。  
 此文章适合前后端协同开发经验不足的新手阅读。

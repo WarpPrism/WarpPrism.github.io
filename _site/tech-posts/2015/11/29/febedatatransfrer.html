@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="/imgs/favicon.ico"/>
+    <!--Bootstrap And Octicons-->
+    <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
+
+
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+
+    
+        <link rel="stylesheet" href="/css/post.css"/>
+    
+        <link rel="stylesheet" href="/css/highlight.css"/>
+    
+
+    <title>Ji Hao's Blog</title>
+</head>
+<body>
+	<div class="container-fluid" id="default-container">
+		
+<!--Blog Header-->
+<div class="container-fluid">
+    <!--<div class="row">
+        <div class="alert alert-danger" role="alert" style="border-radius: 0; text-align: center; text-decoration: underline; margin: 0; border: solid 2px gray;">
+            <h4>Blog Is Under Developing</h4>
+            &lt;!&ndash;<h4>“为社会福，为邦家光，勖哉诸君，努力自强。”</h4>&ndash;&gt;
+        </div>
+    </div>-->
+    <div class="row">
+        <div id="index-header">
+            <h1><img src="/imgs/logo.png" alt=""/>Ji Hao's Blog</h1>
+            <h4 id="motto">
+                <span>"Never let it go."</span>
+            </h4>
+        </div>
+    </div>
+    <div class="row" id="index-nav">
+        <ul>
+            <li>
+                <a href="/">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Home
+                </a>
+            </li>
+            <li>
+                <a href="/pages/tech-notes.html">
+                    <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Tech Posts
+                </a>
+            </li>
+
+            <li>
+                <a href="/pages/essay.html">
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Essay
+                </a>
+            </li>
+
+            <!--<li>
+                <a href="/pages/notebook.html">
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                    &nbsp;&nbsp;My Notebook
+                </a>
+            </li>-->
+            <li>
+                <a href="/pages/about.html">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    &nbsp;&nbsp;About
+                </a>
+            </li>
+
+        </ul>
+        <span id="nav-indicator"></span>
+    </div>
+</div>
+		<div class="row">
+    <div class="col-sm-12" id="post-body">
+        <div class="post">
+          <header>
+            <h2>前后端数据交互方法（转载）</h2>
+            <p class="post-meta">
+                <span class="octicon octicon-clock"></span>
+                Nov 29, 2015
+            </p>
+            <p class="post-tag">
+                <span>
+                    
+                    <a href="//category/#tech-posts">
+                        <span class="octicon octicon-list-unordered"></span>
+                        &nbsp;tech-posts
+                    </a>
+                    
+                </span>
+                <span>
+                    
+                </span>
+            </p>
+          </header>
+          <hr class="boundary">
+          <article>
+            <p>在此介绍几种常用的前后端数据交互方法，并给出使用建议。以提高前后端协同开发的效率。<br>
+此文章适合前后端协同开发经验不足的新手阅读。</p>
+
+<p><strong>目录:</strong>  </p>
+
+<ol>
+<li><a href="#hash_htmlvalue1">HTML赋值</a></li>
+<li><a href="#hash_jsvar2">JS赋值</a></li>
+<li><a href="#hash_json3">script填充JSON</a></li>
+<li><a href="#hash_ajaxjson4">AJAX获取JSON</a></li>
+<li><a href="#hash_websocket5">WebSocket实时传输数据</a></li>
+<li><a href="#hash_summary6">总结</a></li>
+</ol>
+
+<p><a title="HTML赋值" id="hash_htmlvalue1" name="hash_htmlvalue1"></a></p>
+
+<h2 id="html赋值">HTML赋值</h2>
+
+<p>输出到 Element 的 value 或 data-name </p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">&lt;input type=&quot;hidden&quot; value=&quot;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$user_avatar</span><span class="p">;</span><span class="cp">?&gt;</span><span class="x">&quot; /&gt;</span>
+<span class="x">&lt;div data-value=&quot;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$user_avatar</span><span class="p">;</span><span class="cp">?&gt;</span><span class="x">&quot;&gt;&lt;/div&gt;</span>
+</code></pre></div>
+<p>渲染结果</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;https://avatars1.githubusercontent.com/u/3949015?v=3&amp;s=40&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">data-avatar=</span><span class="s">&quot;https://avatars1.githubusercontent.com/u/3949015?v=3&amp;s=40&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div>
+<p>使用 JS 获取</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+<span class="c1">// http://jquery.bootcss.com/jQuery.data/</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;avatar&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>优点：</strong><br>
+不占用全局变量，由 JS 自由获取。</p>
+
+<p><strong>使用建议：</strong>  </p>
+
+<p>适合传递简单数据，也非常适合多个简单数据与 Element 绑定关系。</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul&gt;</span>
+<span class="nt">&lt;li&gt;</span>nimojs <span class="nt">&lt;span</span> <span class="na">data-userid=</span><span class="s">&quot;1&quot;</span> <span class="nt">&gt;</span>删除<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>nimo22 <span class="nt">&lt;span</span> <span class="na">data-userid=</span><span class="s">&quot;2&quot;</span> <span class="nt">&gt;</span>删除<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>nimo33 <span class="nt">&lt;span</span> <span class="na">data-userid=</span><span class="s">&quot;3&quot;</span> <span class="nt">&gt;</span>删除<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>nimo44 <span class="nt">&lt;span</span> <span class="na">data-userid=</span><span class="s">&quot;4&quot;</span> <span class="nt">&gt;</span>删除<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;</span>nimo55 <span class="nt">&lt;span</span> <span class="na">data-userid=</span><span class="s">&quot;5&quot;</span> <span class="nt">&gt;</span>删除<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/ajax/remove/&#39;</span><span class="p">,</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;userid&#39;</span><span class="p">),</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+<p><a title="JS赋值" id="hash_jsvar2" name="hash_jsvar2"></a></p>
+
+<h2 id="js赋值">JS赋值</h2>
+
+<p>将数据填充到 <code class="prettyprint">&lt;script&gt;</code> 的 JavaScript 变量声明中。</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">&lt;script&gt;</span>
+<span class="x">var user_avatar = &quot;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$user_avatar</span><span class="p">;</span><span class="cp">?&gt;</span><span class="x">&quot;;</span>
+<span class="x">// 渲染结果</span>
+<span class="x">// var user_avatar = &quot;https://avatars1.githubusercontent.com/u/3949015?v=3&amp;s=40&quot;;</span>
+<span class="x">&lt;/script&gt;</span>
+</code></pre></div>
+<p>或使用 Smarty 后端模板引擎：</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="kd">var</span> <span class="nx">user_avatar</span> <span class="o">=</span> <span class="s2">&quot;{$user_avatar}&quot;</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<p><strong>优点：</strong>
+传递数据非常方便。前端直接调用 user_avatar 变量使用数据。</p>
+
+<p><strong>缺点：</strong></p>
+
+<ol>
+<li>为了传递一个字符串数据占用了全局变量 <code class="prettyprint">user_avatar</code>，当有很多数据需要传输时则会占用很多全局变量。</li>
+<li>如果返回数据存在换行将会导致JS报错</li>
+</ol>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 渲染结果有换行符</span>
+<span class="kd">var</span> <span class="nx">user_id</span> <span class="o">=</span> <span class="s2">&quot;</span>
+
+<span class="s2">https://avatars1.githubusercontent.com/u/3949015?v=3&amp;s=40&quot;</span><span class="p">;</span>
+<span class="c1">// Uncaught SyntaxError: Unexpected token ILLEGAL</span>
+</code></pre></div>
+<p><strong>优化：</strong><br>
+可以通过指向的某一个变量存放所有后端返回的内容，最小程度占用全局变量。例：</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// PHP 代码</span>
+<span class="kd">var</span> <span class="nx">SERVER_DATA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">username</span><span class="o">:</span> <span class="p">{</span><span class="nx">$username</span><span class="p">},</span>
+    <span class="nx">userid</span><span class="o">:</span> <span class="p">{</span><span class="nx">$userid</span><span class="p">},</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="p">{</span><span class="nx">$title</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 渲染结果</span>
+<span class="kd">var</span> <span class="nx">SERVER_DATA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">username</span><span class="o">:</span> <span class="s2">&quot;NimoChu&quot;</span><span class="p">,</span>
+    <span class="nx">userid</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;F2E&#39;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>使用建议：</strong><br>
+需要最快速度传递数据给 JS 并十分确定此数据稳定时，使用此方式。数据格式复杂的建议使用script填充JSON 或AJAX获取JSON 方法。</p>
+
+<p><a title="script填充JSON" id="hash_json3" name="hash_json3"></a></p>
+
+<h2 id="script填充json">script填充JSON</h2>
+
+<p><a href="http://www.w3school.com.cn/json/json_syntax.asp">什么是JSON？</a></p>
+
+<p>填充 JSON 数据到 <code class="prettyprint">&lt;script&gt;</code> 标签中，前端通过 DOM 获取 JSON字符串并解析成对象。</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- PHP 代码 --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/template&quot;</span> <span class="na">id=</span><span class="s">&quot;data&quot;</span><span class="nt">&gt;</span><span class="o">&lt;?</span><span class="nx">php</span> <span class="nx">echo</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nx">$data</span><span class="p">)</span> <span class="o">?&gt;</span><span class="nt">&lt;/script&gt;</span>
+<span class="c">&lt;!-- 页面渲染结果 --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/template&quot;</span> <span class="na">id=</span><span class="s">&quot;data&quot;</span><span class="nt">&gt;</span><span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="o">:</span><span class="s2">&quot;nimojs&quot;</span><span class="p">,</span><span class="s2">&quot;userid&quot;</span><span class="o">:</span><span class="mi">1</span><span class="p">}</span><span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#data&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">());</span>
+<span class="c1">//{username:&quot;nimojs&quot;,userid:1}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+<p><strong>优点：</strong><br>
+页面加载完成后就可以获取到数据。不占用全局变量，可传递大量数据集合。</p>
+
+<p><strong>缺点：</strong><br>
+数据量特别大时会导致页面初次加载变慢。变慢并不只是文件大小导致的，也因为服务器查询数据并返回合集是需要时间，可使用AJAX获取JSON完成按需加载和加载等待。</p>
+
+<p><strong>使用建议：</strong><br>
+适合传递在DOM加载完成时就需要用到的大量数据集合。例如：前端控制页面渲染，后端将JSON数据源填充到 <code class="prettyprint">&lt;script&gt;</code> 由前端使用 <a href="http://www.gbtags.com/technology/javascript/20120917-javascript-template-engine-chooser/">JavaScript模板引擎</a>进行页面渲染。</p>
+
+<p><a title="AJAX获取JSON" id="hash_ajaxjson4" name="hash_ajaxjson4"></a></p>
+
+<h2 id="ajax获取json">AJAX获取JSON</h2>
+
+<p>使用 AJAX 获取JSON数据</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">&quot;showdata&quot;</span><span class="nt">&gt;</span>查看资料<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;display:none;&quot;</span> <span class="na">id=</span><span class="s">&quot;box&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h2&gt;</span>用户信息<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;info&quot;</span><span class="nt">&gt;&lt;img</span> <span class="na">src=</span><span class="s">&quot;loading.gif&quot;</span> <span class="nt">/&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div><div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#showdata&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#box&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="s1">&#39;/ajax/userdata/&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">oData</span><span class="p">){</span>
+        <span class="c1">// oData = {&quot;username&quot;:&quot;nimojs&quot;,&quot;userid&quot;:1}</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#info&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;用户名：&#39;</span> <span class="o">+</span> <span class="nx">oData</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s1">&#39;&lt;br&gt;用户ID：&#39;</span> <span class="o">+</span> <span class="nx">oData</span><span class="p">.</span><span class="nx">userid</span><span class="p">);</span>
+    <span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>这是一个通过AJAX 获取用户资料的示例。流程如下：</p>
+
+<ol>
+<li>页面上只显示查看资料</li>
+<li>用户点击查看资料</li>
+<li>显示用户信息和 loading 图片</li>
+<li>向服务器发送获取用户信息的AJAX请求</li>
+<li>服务器返回JSON字符串，$.getJSON  自动将返回的 JSON字符串转换为对象</li>
+<li>填充内容到 <code class="prettyprint">&lt;p id=&quot;info&quot;&gt;</code></li>
+</ol>
+
+<p><strong>优点：</strong><br>
+不占用全局变量和 DOM 节点，可以自由控制获取数据的触发条件（页面加载完成时、用户点击查看资料时或用户点击某个按钮时）。当开始获取数据时可使用 loading 图片占位提示用户数据正在读取。防止页面加载所有数据导致的页面加载缓慢。</p>
+
+<p><strong>缺点：</strong><br>
+会产生额外的HTTP请求。不能在DOM加载完成以后立即获取，需要发送请求-接收响应。</p>
+
+<p><strong>使用建议：</strong><br>
+适合加载非主要信息、设定触发条件（用户点击查看资料时），并提供友好的数据读取等待提示。</p>
+
+<p><a title="WebSocket实时传输数据" id="hash_websocket5" name="hash_websocket5"></a></p>
+
+<h2 id="websocket实时传输数据">WebSocket实时传输数据</h2>
+
+<p>如果将 AJAX请求和响应比喻成给服务器发短信和等待服务器回复短信，而 WebSocket 就如同和服务器打电话。</p>
+
+<p>此处不对WebSocket做过多介绍，附上参考资料：</p>
+
+<ol>
+<li><a href="http://zh.wikipedia.org/wiki/WebSocket">Wiki:WebSocket</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/web/1112_huangxa_websocket/">使用 HTML5 WebSocket 构建实时 Web 应用</a></li>
+<li><a href="http://www.web-tinker.com/article/20372.html?utm_source=tuicool">Ajax vs WebSocket</a></li>
+</ol>
+
+<p><a title="总结" id="hash_summary6" name="hash_summary6"></a></p>
+
+<h2 id="总结">总结</h2>
+
+<p>每种情况都有每种情况的用处，没有绝对正确的方法。<strong>根据实际情况灵活的选择获取数据方式</strong>。</p>
+
+<p>相关链接</p>
+
+<ul>
+<li><a href="http://www.zhihu.com/question/26532621">知乎：前端 ，后端 关于数据交互的问题?</a></li>
+</ul>
+
+<p><a href="https://github.com/nimojs/blog/issues/15">点此订阅博客</a></p>
+
+<p>若作者显示不是Nimo（被转载了），请访问Github原文进行讨论：<a href="https://github.com/nimojs/blog/issues/13">https://github.com/nimojs/blog/issues/13</a></p>
+
+          </article>
+          <hr class="boundary">
+        </div>
+
+        <h2 class="guest-op">
+            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+            &nbsp;Share This Post
+        </h2>
+
+        <div class="ds-share" data-thread-key=/tech-posts/2015/11/29/febedatatransfrer.html data-title=前后端数据交互方法（转载） data-images="" data-content="" data-url="warpprism.github.io/tech-posts/2015/11/29/febedatatransfrer.html">
+            <div class="ds-share-inline">
+                <ul  class="ds-share-icons-16">
+
+                    <li data-toggle="ds-share-icons-more">
+                        <a class="ds-more" href="javascript:void(0);">分享到：</a>
+                    </li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                    <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+
+        <h2 class="guest-op">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            &nbsp;Leave A Comment
+        </h2>
+        <!-- 多说评论框 start -->
+        <div class="ds-thread" data-thread-key="/tech-posts/2015/11/29/febedatatransfrer.html" data-title="前后端数据交互方法（转载）" data-url="warpprism.github.io/tech-posts/2015/11/29/febedatatransfrer.html"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:"zhoujihao"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+        <!-- 多说公共JS代码 end -->
+    </div>
+</div>
+		<div class="container-fluid">
+    <div class="row">
+        <footer id="footer">
+            <a href="mailto:249662605@qq.com" class="foot-item" role="button" data-toggle="tooltip" data-placement="top" title="Mail address: 249662605@qq.com">
+                <span class="octicon octicon-mail"></span>
+                <span>Email@me</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/warpprism" target="_blank">
+                <span class="octicon octicon-mark-github"></span>
+                <span>My Github</span>
+            </a>
+            &nbsp;
+        </footer>
+    </div>
+</div>
+
+		<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+	</div>
+</body>
+</html>
