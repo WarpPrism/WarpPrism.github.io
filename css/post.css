@@ -213,3 +213,54 @@
     position: relative;
     top: 5px;
 }
+
+#top {
+    display: block;
+    background: #AAAAAA;
+    color: #FFFFFF;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#top .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -7px;
+    margin-top: -8px;
+
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+}
+
+#top .text {
+    position: relative;
+    top: 60%;
+    font-weight: bold;
+    opacity: 0;
+
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+}
+
+#top:hover .icon {
+    opacity: 0;
+    top: -50%;
+}
+
+#top:hover .text {
+    opacity: 1;
+    top: 10%;
+}
