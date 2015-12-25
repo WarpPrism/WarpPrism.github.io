@@ -3,6 +3,7 @@
  */
 $(document).ready(function() {
     menuAnimation();
+    goToTop();
 });
 
 function menuAnimation() {
@@ -16,4 +17,20 @@ function menuAnimation() {
             navIndicator.css("left", leftOff + width / 2.0);
         })
     }
+}
+
+function goToTop() {
+    $(window).scroll(function() {
+        if ($(document).scrollTop() <= 10) {
+            $("#top").css("opacity", 0);
+        } else {
+            $("#top").css("opacity", 1);
+        }
+    });
+    $("#top").click(function(event) {
+        event.preventDefault();
+        $('body,html').animate({
+            scrollTop: 0
+        }, '1000');
+    })
 }

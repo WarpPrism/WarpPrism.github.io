@@ -68,7 +68,6 @@ scripts: [index.js]
 				{% if post.categories contains 'tech-posts' %}
 				<li>
 					<a href="{{ post.url }}">{{ post.title }}</a>
-					<!--{{ post.excerpt | remove: 'test'}}-->
 					<span class="date">{{ post.date | date_to_string }}</span>
 				</li>
 				{% endif %}
@@ -89,7 +88,6 @@ scripts: [index.js]
 				{% if post.categories contains 'essay' %}
 				<li>
 					<a href="{{ post.url }}"> {{ post.title }}</a>
-					<!--{{ post.excerpt | remove: 'test' }}-->
 					<span class="date">{{ post.date | date_to_string }}</span>
 				</li>
 				{% endif %}

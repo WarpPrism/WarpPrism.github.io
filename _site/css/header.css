@@ -22,6 +22,12 @@
     overflow: hidden;
 }
 
+#index-header a {
+    display: block;
+    color:#FFFFFF;
+    text-decoration: none;
+}
+
 #index-header h1 {
     padding: 5px;
     font-family: blackjackregular, serif;

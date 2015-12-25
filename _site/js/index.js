@@ -16,12 +16,10 @@ function scrollAnimation() {
     if (stop != 1) {
         var scrollTop = $(document).scrollTop();
         var columns = $("#index-main-content").find('.content-column');
-        if (scrollTop >= $(columns[0]).offset().top - 400) {
+        if (scrollTop >= $(columns[0]).offset().top - 300) {
             for (var i = 0; i < columns.length; i++) {
-                $(columns[i]).animate({
-                    opacity: 1,
-                    top: 0
-                }, '1000');
+                $(columns[i]).addClass("animated flipInY");
+                $(columns[i]).css("opacity", 1);
             }
             stop = 1;
         } else {
