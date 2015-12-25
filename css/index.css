@@ -17,7 +17,7 @@
     -moz-box-shadow: inset 3px 3px 30px gray;
     box-shadow: inset 3px 3px 30px gray;
     overflow: hidden;
-    background: #DDDDDD;
+    background: rgba(100,100,100,0.2);
 }
 
 #index-main-content .content-column {
@@ -82,12 +82,17 @@
     color: #FFFFFF;
     border: solid 1px #00a1ea;
     background: #00a1ea;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 #index-main-content h2 {
-    background: #009926;
+    background: rgba(100,100,100,0.5);
     color: #FFFFFF;
     text-align: center;
     padding: 10px;
+}
+
+#index-main-content .pg-canvas {
+    position: absolute;
+    z-index: -10;
 }

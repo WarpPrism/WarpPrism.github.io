@@ -1,5 +1,5 @@
-#footer {
-    border-top: solid 5px gray;;
+.footer1 {
+    border-top: solid 5px gray;
     background: #333333;
     padding: 10px;
     text-align: center;
@@ -7,20 +7,36 @@
     color: #FFFFFF;
 }
 
-#footer .foot-item {
+.footer1 .foot-item {
     color: #FFFFFF;
     margin: 0 10px;
 }
 
-#footer a:hover {
+.footer1 a:hover {
     color: #0072E3;
     text-decoration: none;
 }
 
-#footer span.octicon {
-
+.modal-header {
+    background: #00a1ea;
+    color: #FFFFFF;
+    border-radius: 5px;
 }
 
-#footer span {
-    margin: 0 5px;
+.footer2 {
+    background: #333333;
+    padding: 5px;
+    text-align: center;
+    overflow: hidden;
+    color: #FFFFFF;
 }
+
+.footer2 span {
+    color: #FFFFFF;
+    margin: 0 10px;
+    font-family: blackjackregular, serif;
+}
+
+
+
+
