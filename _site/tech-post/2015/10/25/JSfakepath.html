@@ -37,9 +37,14 @@
     </div>-->
     <div class="row">
         <div id="index-header">
-            <a href="/">
-                <h1 class="animated flipInX"><img src="/imgs/logo.png" alt=""/>Ji Hao's Blog</h1>
-            </a>
+
+                <h1 class="animated flipInX">
+                    <a href="/">
+                        <img src="/imgs/logo.png" alt=""/>
+                        Ji Hao's Blog
+                    </a>
+
+                </h1>
             <h4 id="motto">
                 <span class="animated fadeIn"><b>"Never let it go."</b></span>
             </h4>
@@ -90,20 +95,29 @@
             <p class="post-tag">
                 <span>
                     
-                    <a href="//category/#tech-posts">
+                    <a href="//category/#tech-post">
                         <span class="octicon octicon-list-unordered"></span>
-                        &nbsp;tech-posts
+                        &nbsp;tech-post
                     </a>
                     
                 </span>
                 <span>
+                    
+                    <a class="word-keep" href="//tags/#javascript">
+                        <span class="octicon octicon-tag"></span>
+                        &nbsp;javascript
+                    </a>
                     
                 </span>
             </p>
           </header>
           <hr class="boundary">
           <article>
-            <p>直接上代码：</p>
+            <blockquote>
+<p>Some browsers have a security feature that prevents javascript from knowing your file&#39;s local full path. It makes sense - as a client, you don&#39;t want the server to know your local machine&#39;s filesystem. It would be nice if all browsers did this.</p>
+</blockquote>
+
+<p><strong>上代码：</strong></p>
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">getPath</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">fileQuery</span><span class="p">,</span><span class="nx">transImg</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;MSIE&quot;</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">){</span>
         <span class="nx">obj</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
@@ -149,6 +163,10 @@
 </code></pre></div>
 <p>这里fakepath就把文件的真实路径隐藏了。</p>
 
+<blockquote>
+<p><a href="http://stackoverflow.com/questions/4851595/how-to-resolve-the-c-fakepath">Related Topic In Stackoverflow</a></p>
+</blockquote>
+
           </article>
           <hr class="boundary">
         </div>
@@ -158,7 +176,7 @@
             &nbsp;Share This Post
         </h2>
 
-        <div class="ds-share" data-thread-key=/tech-posts/2015/10/25/JSfakepath.html data-title=如何引用本地文件的绝对路径（fakepath问题） data-images="" data-content="" data-url="warpprism.github.io/tech-posts/2015/10/25/JSfakepath.html">
+        <div class="ds-share" data-thread-key=/tech-post/2015/10/25/JSfakepath.html data-title=如何引用本地文件的绝对路径（fakepath问题） data-images="" data-content="" data-url="warpprism.github.io/tech-post/2015/10/25/JSfakepath.html">
             <div class="ds-share-inline">
                 <ul  class="ds-share-icons-16">
 
@@ -181,7 +199,7 @@
             &nbsp;Leave A Comment
         </h2>
         <!-- 多说评论框 start -->
-        <div class="ds-thread" data-thread-key="/tech-posts/2015/10/25/JSfakepath.html" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-url="warpprism.github.io/tech-posts/2015/10/25/JSfakepath.html"></div>
+        <div class="ds-thread" data-thread-key="/tech-post/2015/10/25/JSfakepath.html" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-url="warpprism.github.io/tech-post/2015/10/25/JSfakepath.html"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
@@ -205,7 +223,7 @@
     </a>
 </div>
 		
-<div class="container-fluid">
+<div class="container-fluid" id="footer-div">
     <div class="row">
         <div class="footer1">
             <a href="#" class="foot-item" role="button" data-toggle="modal" data-target=".email-modal">

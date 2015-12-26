@@ -1,4 +1,68 @@
 ---
 layout: default
 styles: [tech-notes.css]
+scripts: [tech-notes.js]
 ---
+
+<div class="container-fluid" id="tn-wrapper">
+	<div class="row">
+		<!-- left bar -->
+		<div class="col-sm-9" id="tn-left">
+			{% for post in site.categories.tech-post %}
+			<div class="row animated" id="tn-item" data-tag={{post.tags}}>
+				<a href="{{post.url}}" id="tn-title">
+					<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+					&nbsp;
+					{{post.title}}
+				</a>
+				<div id="tag-div">
+					{% for tag in post.tags %}
+					<span class="tag">
+						<span class="octicon octicon-tag"></span>
+						<em>{{tag}}</em>
+					</span>
+					{% endfor %}
+				</div>
+				<div><a href="{{post.url}}" id="tn-excerpt">{{ post.excerpt | strip_html }}</a></div>
+				<div id="tn-date">
+					<span class="octicon octicon-calendar"></span>
+					{{ post.date | date_to_string }}
+				</div>
+
+			</div>
+			<!--<hr/>-->
+			{% endfor %}
+		</div>
+
+		<!-- right bar -->
+		<div class="col-sm-3 animated rollIn" id="tn-right">
+			<div id="tag-title">Featured Tags</div>
+			<div id="tag-btn-div">
+				<span id="all-tag" class="btn btn-primary">
+					<span class="octicon octicon-list-unordered"></span>
+					ALL/显示所有
+				</span>
+
+				{% for post in site.posts %}
+				{% for tag in post.tags %}
+				<span data-tag={{tag}} class="tag-btn btn btn-default">
+					<span class="octicon octicon-tag"></span>
+					{{tag}}
+				</span>
+				{% endfor %}
+				{% endfor %}
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Return To Top -->
+	<a id="top" href="#">
+		<span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
+		<span class="text">Top</span>
+	</a>
+</div>
+
+<script>
+
+</script>

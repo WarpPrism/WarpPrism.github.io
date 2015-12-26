@@ -1,10 +1,17 @@
 ---
 layout: post
 title: 如何引用本地文件的绝对路径（fakepath问题）
-categories: tech-posts
+categories: tech-post
+tags: [javascript]
+excerpt: Some browsers have a security feature that prevents javascript from knowing your file's local full path. It makes sense - as a client, you don't want the server to know your local machine's filesystem. It would be nice if all browsers did this.
 ---
 
-直接上代码：
+
+> Some browsers have a security feature that prevents javascript from knowing your file's local full path. It makes sense - as a client, you don't want the server to know your local machine's filesystem. It would be nice if all browsers did this.
+
+
+**上代码：**
+
 ~~~javascript
 var getPath = function(obj,fileQuery,transImg){
     if(window.navigator.userAgent.indexOf("MSIE")>=1){
@@ -58,3 +65,6 @@ file.onchange = function() {
 GET file:///C:/fakepath/src.jpg net::ERR_FILE_NOT_FOUND
 ~~~
 这里fakepath就把文件的真实路径隐藏了。
+
+
+> [Related Topic In Stackoverflow](http://stackoverflow.com/questions/4851595/how-to-resolve-the-c-fakepath)

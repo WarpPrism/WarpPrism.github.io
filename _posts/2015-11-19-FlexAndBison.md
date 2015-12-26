@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Flex + Bison 实现语法分析
-categories: tech-posts
+categories: tech-post
+tags: compile-principle
 ---
 
 ###关于Flex###

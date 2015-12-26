@@ -20,13 +20,13 @@ function menuAnimation() {
 }
 
 function goToTop() {
-    $(window).scroll(function() {
+    /*$(window).scroll(function() {
         if ($(document).scrollTop() <= 10) {
             $("#top").css("opacity", 0);
         } else {
             $("#top").css("opacity", 1);
         }
-    });
+    });*/
     $("#top").click(function(event) {
         event.preventDefault();
         $('body,html').animate({

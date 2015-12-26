@@ -1,0 +1,149 @@
+#tn-wrapper {
+	background: #DDDDDD;
+}
+
+#tn-left {
+	margin: 0;
+	padding: 0;
+	border-right: solid 1px #EEEEEE;
+}
+
+#tn-right {
+	margin: 0;
+	padding: 0;
+}
+
+#tn-item {
+	margin: 20px;
+	padding: 15px;
+	border-left: solid 3px #00a1ea;
+	background: #EEEEEE;
+}
+
+#tn-title {
+	display: block;
+	font-size: x-large;
+	color: #222222;
+	/*-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;*/
+}
+
+#tn-title:hover {
+	color: #00a1ea;
+}
+
+#tn-left #tag-div {
+	margin: 7px;
+	padding: 5px;
+	text-align: right;
+}
+
+#tn-left .tag {
+	color: #FFFFFF;
+	background: #00a1ea;
+	padding: 5px;
+	margin: 7px;
+	border-radius: 2px;
+	text-shadow: 1px 1px 1px gray;
+}
+
+#tn-excerpt {
+	display: block;
+	margin-top: 7px;
+	color: #555555;
+	font-style: italic;
+	line-height: 25px;
+}
+
+#tn-excerpt:hover {
+	color: #1b6d85;
+}
+
+#tn-date {
+	margin-top: 7px;
+	float: right;
+}
+
+#tag-title {
+	margin: 10px;
+	padding: 7px;
+	font-size: x-large;
+	text-align: center;
+	border-bottom: solid 1px gray;
+	
+}
+
+/* #tn-right {
+	background: #DDDDDD;
+	border: solid 2px #000000;
+} */
+
+#tag-btn-div {
+	margin: 10px;
+	padding: 7px;
+	text-align: left;
+}
+
+#tag-btn-div .tag-btn {
+	margin: 5px 2px;
+}
+
+#tag-btn-div .tag-btn:hover {
+	border-color: #16ab39;
+	background: #009926;
+	color: #FFFFFF;
+}
+
+#top {
+	display: block;
+	background: #AAAAAA;
+	color: #FFFFFF;
+	width: 40px;
+	height: 40px;
+	padding: 5px;
+	position: fixed;
+	right: 20px;
+	bottom: 100px;
+	text-align: center;
+	text-decoration: none;
+}
+
+#top .icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -7px;
+	margin-top: -8px;
+
+	transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+}
+
+#top .text {
+	position: relative;
+	top: 60%;
+	font-weight: bold;
+	opacity: 0;
+
+	transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+}
+
+#top:hover .icon {
+	opacity: 0;
+	top: -50%;
+}
+
+#top:hover .text {
+	opacity: 1;
+	top: 10%;
+}
