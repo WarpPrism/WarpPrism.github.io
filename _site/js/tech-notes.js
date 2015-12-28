@@ -14,12 +14,21 @@ $(function() {
         }
     }
 
-    var tag_btns = $("#tag-btn-div").find(".tag-btn");
+    var tag_btns = $("#tag-div").find(".tag-btn");
 
     for (var j = 0; j < tag_btns.length; j++) {
 
         $(tag_btns[j]).click(function() {
             var data_tag = $(this).attr("data-tag");
+
+            for (var jj = 0; jj < tag_btns.length; jj++) {
+                var temp = $(tag_btns[jj]);
+                if (temp.hasClass("active-btn")) {
+                    temp.removeClass("active-btn");
+                }
+            }
+
+            $(this).addClass("active-btn");
 
             for (var k = 0; k < tn_items.length; k++) {
                 var item = $(tn_items[k]);

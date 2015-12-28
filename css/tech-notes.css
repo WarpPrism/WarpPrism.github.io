@@ -2,15 +2,12 @@
 	background: #DDDDDD;
 }
 
+/* Left Bar */
+
 #tn-left {
 	margin: 0;
 	padding: 0;
 	border-right: solid 1px #EEEEEE;
-}
-
-#tn-right {
-	margin: 0;
-	padding: 0;
 }
 
 #tn-item {
@@ -24,18 +21,13 @@
 	display: block;
 	font-size: x-large;
 	color: #222222;
-	/*-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	-ms-transition: all 0.5s;
-	-o-transition: all 0.5s;
-	transition: all 0.5s;*/
 }
 
 #tn-title:hover {
 	color: #00a1ea;
 }
 
-#tn-left #tag-div {
+#tn-left #left-tag-div {
 	margin: 7px;
 	padding: 5px;
 	text-align: right;
@@ -47,14 +39,13 @@
 	padding: 5px;
 	margin: 7px;
 	border-radius: 2px;
-	text-shadow: 1px 1px 1px gray;
+	text-shadow: 1px 1px 10px gray;
 }
 
 #tn-excerpt {
 	display: block;
 	margin-top: 7px;
 	color: #555555;
-	font-style: italic;
 	line-height: 25px;
 }
 
@@ -67,48 +58,57 @@
 	float: right;
 }
 
+
+/* Right Bar */
+
+#tn-right {
+	margin: 0;
+	padding: 0;
+}
+
 #tag-title {
 	margin: 10px;
 	padding: 7px;
 	font-size: x-large;
 	text-align: center;
 	border-bottom: solid 1px gray;
+	text-shadow: 2px 2px 10px #FFFFFF;
 	
 }
 
-/* #tn-right {
-	background: #DDDDDD;
-	border: solid 2px #000000;
-} */
-
-#tag-btn-div {
+#tag-div {
 	margin: 10px;
 	padding: 7px;
 	text-align: left;
+	background-color: rgba(200, 200, 200, 0.7);
 }
 
-#tag-btn-div .tag-btn {
+#tag-div .tag-btn {
 	margin: 5px 2px;
 }
 
-#tag-btn-div .tag-btn:hover {
-	border-color: #16ab39;
-	background: #009926;
+#tag-div .tag-btn:hover {
+	background: #737373;
+	color: #FFFFFF;
+}
+
+.active-btn {
+	background: #737373;
 	color: #FFFFFF;
 }
 
 #top {
-	display: block;
+	position: fixed;
 	background: #AAAAAA;
 	color: #FFFFFF;
 	width: 40px;
 	height: 40px;
 	padding: 5px;
-	position: fixed;
 	right: 20px;
 	bottom: 100px;
 	text-align: center;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 #top .icon {
