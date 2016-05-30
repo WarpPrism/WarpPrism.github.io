@@ -2,23 +2,23 @@
  * Created by zhoujihao on 15-12-26.
  */
 $(function() {
-    var wrapper = $("#tn-wrapper");
+    var wrapper = $("#essay-wrapper");
     var init_height = wrapper.css("height");
 
-    var tn_items = $("#tn-left").find(".row");
-    for (var i = 0; i < tn_items.length; i++) {
+    var essay_items = $("#essay-left").find(".row");
+    for (var i = 0; i < essay_items.length; i++) {
         if (i % 2 == 0) {
-            if (!$(tn_items[i]).hasClass("slideInLeft")) {
-                $(tn_items[i]).addClass("slideInLeft");
+            if (!$(essay_items[i]).hasClass("slideInLeft")) {
+                $(essay_items[i]).addClass("slideInLeft");
             }
         } else {
-            if (!$(tn_items[i]).hasClass("slideInRight")) {
-                $(tn_items[i]).addClass("slideInRight");
+            if (!$(essay_items[i]).hasClass("slideInRight")) {
+                $(essay_items[i]).addClass("slideInRight");
             }
         }
     }
 
-    var tag_btns = $("#tag-div").find(".tag-btn");
+    var tag_btns = $("#right-tag-div").find(".tag-btn");
 
     for (var j = 0; j < tag_btns.length; j++) {
 
@@ -34,8 +34,8 @@ $(function() {
 
             $(this).addClass("active-btn");
 
-            for (var k = 0; k < tn_items.length; k++) {
-                var item = $(tn_items[k]);
+            for (var k = 0; k < essay_items.length; k++) {
+                var item = $(essay_items[k]);
                 var item_data_tag = item.attr("data-tag");
                 /*console.log(typeof(data_tag));*/
 
@@ -55,14 +55,14 @@ $(function() {
     }
 
     $("#all-tag").click(function() {
-        for (var k = 0; k < tn_items.length; k++) {
-            var item = $(tn_items[k]);
+        for (var k = 0; k < essay_items.length; k++) {
+            var item = $(essay_items[k]);
             item.show();
         }
         wrapper.css("height", init_height);
     });
 
-    function handleDuplicateTags() {        
+    function handleDuplicateTags() {
 
         var dups1 = $("span[data-tag=javascript]");
 
@@ -72,4 +72,3 @@ $(function() {
     }
     handleDuplicateTags();
 }());
-

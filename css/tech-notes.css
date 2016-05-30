@@ -1,5 +1,6 @@
 #tn-wrapper {
 	background: #DDDDDD;
+	width: 100%;
 }
 
 /* Left Bar */
@@ -106,7 +107,6 @@
 	padding: 5px;
 	right: 20px;
 	bottom: 100px;
-	text-align: center;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -126,8 +126,9 @@
 }
 
 #top .text {
-	position: relative;
-	top: 60%;
+	position: absolute;
+	left: 20%;
+	top: 70%;
 	font-weight: bold;
 	opacity: 0;
 
@@ -145,5 +146,15 @@
 
 #top:hover .text {
 	opacity: 1;
-	top: 10%;
+	top: 20%;
+	left: 20%;
+}
+
+#canvas {
+	border: solid 1px #000000;
+	width: 100%;
+	position: relative;
+	left: 50%;
+
+	transform: translateX(-50%);
 }

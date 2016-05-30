@@ -1,58 +1,29 @@
-#about-container {
+#about-wrapper {
     width: 100%;
-    padding-top: 50px;
     margin: 0;
-    background: #EEEEEE;
-
-    -webkit-box-shadow: inset 3px 3px 30px gray;
-    -moz-box-shadow: inset 3px 3px 30px gray;
-    box-shadow: inset 3px 3px 30px gray;
+    padding: 0;
     overflow: hidden;
+    background-color: #DDDDDD;
 }
 
-#about-container a {
-    color: #00a1ea;
-}
-
-#about-container a:hover {
-    font-weight: bold;
-}
-
-.page-block {
-    width: 80%;
-    margin: 15px auto 40px;
-    padding: 30px;
-    background: #FFFFFF;
-    border: solid 1px lightgray;
+#about-wrapper .left-bar {
+    width: 30%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    float: left;
+    box-sizing: border-box;
     position: relative;
+    border: solid 2px red;
 }
 
-.page-block .page-title {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -o-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    background: #00a1ea;
-    color: #FFFFFF;
-    padding: 5px 10px;
-    border-radius: 10px;
-    text-align: center;
-    font-size: x-large;
-    border: solid 1px lightgray;
-
-    -webkit-box-shadow: inset 1px 1px 10px lightgray;
-    -moz-box-shadow: inset 1px 1px 10px lightgray;
-    box-shadow: inset 1px 1px 10px lightgray;
-}
-
-.page-block hr {
-    border-bottom: solid 1px #CCCCCC;
-}
-
-.page-block p {
-    font-size: large;
+#about-wrapper .right-bar {
+    width: 70%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    float: left;
+    box-sizing: border-box;
+    position: relative;
+    border: solid 2px blue;
 }

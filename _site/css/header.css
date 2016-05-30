@@ -22,21 +22,16 @@
     overflow: hidden;
 }
 
-#index-header a {
-    display: block;
-    color:#FFFFFF;
-    text-decoration: none;
+#index-header #logo {
+    cursor: pointer;
+    width: 70px;
+    height: 70px;
+    margin: 0 30px;
 }
 
 #index-header h1 {
     padding: 5px;
     font-family: blackjackregular, serif;
-}
-
-#index-header img {
-    width: 70px;
-    height: 70px;
-    margin: 0 30px;
 }
 
 #index-header #motto {

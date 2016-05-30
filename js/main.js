@@ -4,6 +4,10 @@
 $(document).ready(function() {
     menuAnimation();
     goToTop();
+
+    $("#logo").click(function() {
+        window.location = "\\";
+    });
 });
 
 function menuAnimation() {
@@ -20,16 +24,17 @@ function menuAnimation() {
 }
 
 function goToTop() {
-    /*$(window).scroll(function() {
-        if ($(document).scrollTop() <= 10) {
-            $("#top").css("opacity", 0);
-        } else {
-            $("#top").css("opacity", 1);
-        }
-    });*/
+    // $(window).scroll(function() {
+    //     if ($(document).scrollTop() <= 10) {
+    //         $("#top").slideUp("slow");
+    //     } else {
+    //         $("#top").slideDown("slow");
+    //     }
+    // });
     $("#top").click(function(event) {
+        event = event || window.event;
         event.preventDefault();
-        $('body,html').animate({
+        $("body").animate({
             scrollTop: 0
         }, '1000');
     })

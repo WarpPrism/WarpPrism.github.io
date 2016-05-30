@@ -27,25 +27,23 @@
 		
 <!--Blog Header-->
 <div class="container-fluid">
-    <!--<div class="row">
-        <div class="alert alert-danger" role="alert" style="border-radius: 0; text-align: center; text-decoration: underline; margin: 0; border: solid 2px gray;">
+    <div class="row">
+        <div class="alert alert-info" role="alert" style="border-radius: 0; text-align: center; text-decoration: underline; margin: 0; border: solid 2px gray;">
             <h4>Blog Is Under Developing</h4>
-            &lt;!&ndash;<h4>“为社会福，为邦家光，勖哉诸君，努力自强。”</h4>&ndash;&gt;
         </div>
-    </div>-->
+    </div>
     <div class="row">
         <div id="index-header">
 
-                <h1 class="animated flipInX">
-                    <a href="/">
-                        <img src="/imgs/logo.png" alt=""/>
-                        Ji Hao's Blog
-                    </a>
+            <h1 class="animated flipInX">
+                <img id="logo" src="/imgs/logo.png" alt=""/>
+                Ji Hao's Blog
+            </h1>
 
-                </h1>
             <h4 id="motto">
-                <span class="animated fadeIn"><b>"Never let it go."</b></span>
+                <span><b>"Never let it go."</b></span>
             </h4>
+
         </div>
     </div>
     <div class="row" id="index-nav">
@@ -69,19 +67,86 @@
                     &nbsp;&nbsp;Essay
                 </a>
             </li>
-            
-            <li>
+
+            <!-- <li>
                 <a href="/pages/about.html">
                     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                     &nbsp;&nbsp;About
                 </a>
-            </li>
+            </li> -->
 
         </ul>
         <span id="nav-indicator"></span>
     </div>
 </div>
-		
+
+		<div class="container-fluid" id="essay-wrapper">
+    <div class="row">
+        <!-- left bar -->
+        <div class="col-sm-9" id="essay-left">
+            
+            <div class="row animated" id="essay-item" data-tag=>
+                <a href="/essay/2015/10/10/ShareWithOthers.html" id="essay-title">
+                    <span class="glyphicon glyphicon-star-empty" arial-hidden="true"></span>
+                    &nbsp;
+                    The co-op business model:share whatever you've got
+                </a>
+                <div id="left-tag-div">
+                    
+                </div>
+                <div><a href="/essay/2015/10/10/ShareWithOthers.html" id="essay-excerpt">Article from Sivers
+</a></div>
+                <div id="essay-date">
+                    <span class="octicon octicon-calendar"></span>
+					10 Oct 2015
+                </div>
+            </div>
+            
+            <div class="row animated" id="essay-item" data-tag=>
+                <a href="/essay/2015/05/18/%E9%82%A3%E4%BC%B4%E6%88%91%E7%9A%84%E7%BC%96%E7%A8%8B.html" id="essay-title">
+                    <span class="glyphicon glyphicon-star-empty" arial-hidden="true"></span>
+                    &nbsp;
+                    那伴我的编程
+                </a>
+                <div id="left-tag-div">
+                    
+                </div>
+                <div><a href="/essay/2015/05/18/%E9%82%A3%E4%BC%B4%E6%88%91%E7%9A%84%E7%BC%96%E7%A8%8B.html" id="essay-excerpt">今天在图书馆偶然把心中关于编程的问题想通彻了，所以写此文章记录下自己当时的灵感，同时和自己谈谈心，
+回顾一下这一年多来自己的编程历程，当然也要展望下未来，看清自己的方向。
+</a></div>
+                <div id="essay-date">
+                    <span class="octicon octicon-calendar"></span>
+					18 May 2015
+                </div>
+            </div>
+            
+        </div>
+        <!-- right bar -->
+        <div class="col-sm-3 animated slideInDown" id="essay-right">
+            <div id="right-tag-div">
+                <div id="tag-title">Featured Tags</div>
+					<div>
+					<span id="all-tag" class="btn btn-primary ">
+						<span class="octicon octicon-list-unordered"></span>
+						显示所有标签
+					</span>
+					
+					
+					
+					
+					
+				</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Return To Top -->
+	<div id="top">
+		<span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
+		<span class="text">Top</span>
+	</div>
+</div>
+
 		
 <div class="container-fluid" id="footer-div">
     <div class="row">
@@ -135,6 +200,8 @@
 <script type="text/javascript" src="/lib/particleground.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
 
+
+    <script type="text/javascript" src="/js/essay.js"></script>
 
 	</div>
 </body>

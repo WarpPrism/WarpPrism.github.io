@@ -1,5 +1,9 @@
 #index-container {
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 #index-container a {
     color: #000;
@@ -12,12 +16,21 @@
     color: #00A1EA;
 }
 
+#index-container #img-carousel {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 #index-main-content {
     -webkit-box-shadow: inset 3px 3px 30px gray;
     -moz-box-shadow: inset 3px 3px 30px gray;
     box-shadow: inset 3px 3px 30px gray;
     overflow: hidden;
     background: rgba(100,100,100,0.2);
+    width: 100%;
+    margin: 0;
+    padding-top: 20px;
 }
 
 #index-main-content .content-column {
