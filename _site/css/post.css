@@ -1,9 +1,13 @@
-.row {
-    background: #DDDDDD;
+#post-wrapper {
+    width: 100%;
+    min-height: 600px;
+    margin: 0;
+    padding: 0;
+    background: #ccc;
 }
 
 #post-body {
-    width: 80%;
+    width: 95%;
     margin-left: 50%;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -218,6 +222,7 @@
     display: block;
     background: #AAAAAA;
     color: #FFFFFF;
+    opacity: 0.8;
     width: 40px;
     height: 40px;
     padding: 5px;

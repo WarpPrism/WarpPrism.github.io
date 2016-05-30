@@ -3,29 +3,31 @@ layout: default
 styles: [post.css,highlight.css]
 
 ---
-<div class="row">
-    <div class="col-sm-12" id="post-body">
+<div class="row" id="post-wrapper">
+    <div id="post-body">
         <div class="post">
           <header>
             <h2>{{ page.title }}</h2>
             <p class="post-meta">
                 <span class="octicon octicon-clock"></span>
-                {{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}
+                {{ page.date | date: "%b %-d, %Y" }}
+                {% if page.author %} • {{ page.author }}{% endif %}
+                {% if page.meta %} • {{ page.meta }}{% endif %}
             </p>
             <p class="post-tag">
                 <span>
                     {% for cat in page.categories %}
-                    <a href="{{ '/category' | prepend: site.baseurl | prepend: site.url }}/#{{ cat }}">
+                    <a href="#">
                         <span class="octicon octicon-list-unordered"></span>
-                        &nbsp;{{ cat }}
+                        {{ cat }}
                     </a>
                     {% endfor %}
                 </span>
                 <span>
                     {% for tag in page.tags %}
-                    <a class="word-keep" href="{{ '/tags' | prepend: site.baseurl | prepend: site.url }}/#{{ tag }}">
+                    <a href="#">
                         <span class="octicon octicon-tag"></span>
-                        &nbsp;{{ tag }}
+                        {{ tag }}
                     </a>
                     {% endfor %}
                 </span>
@@ -37,6 +39,7 @@ styles: [post.css,highlight.css]
           </article>
           <hr class="boundary">
         </div>
+
 
         <h2 class="guest-op">
             <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
@@ -65,6 +68,7 @@ styles: [post.css,highlight.css]
             <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
             &nbsp;Leave A Comment
         </h2>
+
         <!-- 多说评论框 start -->
         <div class="ds-thread" data-thread-key="{{page.url}}" data-title="{{page.title}}" data-url="{{page.url | prepend: 'warpprism.github.io'}}"></div>
         <!-- 多说评论框 end -->
@@ -83,6 +87,7 @@ styles: [post.css,highlight.css]
         <!-- 多说公共JS代码 end -->
 
     </div>
+
     <!-- Return To Top -->
     <a id="top" href="#">
         <span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
