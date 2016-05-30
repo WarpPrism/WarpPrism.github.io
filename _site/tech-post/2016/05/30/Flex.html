@@ -86,10 +86,10 @@
     <div id="post-body">
         <div class="post">
             <div class="header">
-                <h2>如何引用本地文件的绝对路径（fakepath问题）</h2>
+                <h2>Flex布局</h2>
                 <p class="post-meta">
                     <span class="octicon octicon-clock"></span>
-                        Oct 25, 2015
+                        May 30, 2016
                         
                         
                 </p>
@@ -106,7 +106,7 @@
                         
                         <a href="#">
                             <span class="octicon octicon-tag"></span>
-                            javascript
+                            css
                         </a>
                         
                     </span>
@@ -114,72 +114,66 @@
             </div>
             <hr class="boundary">
             <article>
-                <blockquote>
-  <p>Some browsers have a security feature that prevents javascript from knowing your file’s local full path. It makes sense - as a client, you don’t want the server to know your local machine’s filesystem. It would be nice if all browsers did this.</p>
-</blockquote>
+                <p>Flex即Fexible Box，即弹性布局，可以简便、完整、响应式地实现各种页面布局。<br />
+任何一个容器或行内元素都可指定为Flex布局：</p>
 
-<p><strong>上代码：</strong></p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">getPath</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">fileQuery</span><span class="p">,</span><span class="nx">transImg</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"MSIE"</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">){</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
-        <span class="kd">var</span> <span class="nx">path</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">selection</span><span class="p">.</span><span class="nx">createRange</span><span class="p">().</span><span class="nx">text</span><span class="p">;</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="s2">"src"</span><span class="p">);</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">"src"</span><span class="p">,</span><span class="nx">transImg</span><span class="p">);</span>
-        <span class="nx">obj</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">filter</span><span class="o">=</span>
-            <span class="s2">"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"</span><span class="o">+</span><span class="nx">path</span><span class="o">+</span><span class="s2">"', sizingMethod='scale');"</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span><span class="nx">fileQuery</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-        <span class="kd">var</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
-        <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
-            <span class="nx">obj</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">"src"</span><span class="p">,</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span>
-        <span class="p">};</span>
-        <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre>
-</div>
-
-<p>现在我们有一个Image对象，要将该对象的src属性指向一个本地文件，就可以通过下面方法实现。</p>
-
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"file"</span> <span class="nt">/&gt;</span>
-</code></pre>
-</div>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"file"</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
-<span class="nx">file</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-<span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">getPath</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
-	<span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-		<span class="c1">// your code here.</span>
-	<span class="p">}</span>
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.box</span><span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-</div>
-<p>这样img的src就是本地文件的引用了，当然src的内容是经过加密的，浏览器很重视这方面的安全性。<br />
-如果采用下面这种做法，就会遇到fakepath问题：</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-
-	<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
-
-	<span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-		<span class="c1">// your code here.</span>
-	<span class="p">}</span>
+<span class="nc">.box</span><span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">inline-flex</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>GET file:///C:/fakepath/src.jpg net::ERR_FILE_NOT_FOUND
-</code></pre>
-</div>
+<p>注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。</p>
 
-<p>这里fakepath就把文件的真实路径隐藏了。</p>
+<h3 id="section">基本概念</h3>
+<p>采用Flex布局的元素，称为Flex容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称”项目”。<br />
+<img src="/imgs/tech_post/flex.png" alt="Flex" /><br />
+容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。<br />
+项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。</p>
 
+<h3 id="section-1">容器的属性</h3>
+
+<ul>
+  <li>flex-direction: row | row-inverse | column | column-inverse;<br />
+  决定主轴的方向，row为默认值，意思是主轴是水平方向，从左到右</li>
+  <li>flex-wrap: nowrap | wrap | wrap-inverse;<br />
+  定义如果一条轴线排不下，如何换行, nowrap为默认值，不换行</li>
+  <li>flex-flow: <flex-direction> | <flex-wrap>
+  是flex-direction属性和flex-wrap属性的合并形式</flex-wrap></flex-direction></li>
+  <li>justify-content: flex-start | flex-end | center | space-between | space-around;<br />
+  定义了项目在主轴（假设主轴为从左到右）上的对齐方式，flex-start(默认值)左对齐，center居中</li>
+  <li>align-items: flex-start | flex-end | center | baseline | stretch;<br />
+  定义项目在交叉轴上如何对齐</li>
+  <li>align-content: flex-start | flex-end | center | space-between | space-around | stretch;<br />
+  定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</li>
+</ul>
+
+<h3 id="item">项目(item)的属性</h3>
+<ul>
+  <li>order: &lt;integer&gt;;<br />
+  定义项目的排列顺序。数值越小，排列越靠前，默认为0</li>
+  <li>flex-grow: &lt;number&gt;;<br />
+  定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。<br />
+  如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</li>
+  <li>flex-shrink: &lt;number&gt;;<br />
+  定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。<br />
+  如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。 负值对该属性无效。</li>
+  <li>flex-basis: &lt;length&gt; | auto;  (default auto)<br />
+  定义了在分配多余空间之前，项目占据的主轴空间（main size）</li>
+  <li>flex:<br />
+  flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto<br />
+  该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。<br />
+  建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</li>
+  <li>align-self: auto | flex-start | flex-end | center | baseline | stretch;<br />
+  align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch</li>
+</ul>
+
+<h3 id="section-2">参考:</h3>
 <blockquote>
-  <p><a href="http://stackoverflow.com/questions/4851595/how-to-resolve-the-c-fakepath">Related Topic In Stackoverflow</a></p>
+  <p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool">阮一峰 flex布局教程</a></p>
 </blockquote>
 
             </article>
@@ -192,7 +186,7 @@
             &nbsp;Share This Post
         </h2>
 
-        <div class="ds-share" data-thread-key=/tech-post/2015/10/25/JSfakepath.html data-title=如何引用本地文件的绝对路径（fakepath问题） data-images="" data-content="" data-url="warpprism.github.io/tech-post/2015/10/25/JSfakepath.html">
+        <div class="ds-share" data-thread-key=/tech-post/2016/05/30/Flex.html data-title=Flex布局 data-images="" data-content="" data-url="warpprism.github.io/tech-post/2016/05/30/Flex.html">
             <div class="ds-share-inline">
                 <ul  class="ds-share-icons-16">
 
@@ -216,7 +210,7 @@
         </h2>
 
         <!-- 多说评论框 start -->
-        <div class="ds-thread" data-thread-key="/tech-post/2015/10/25/JSfakepath.html" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-url="warpprism.github.io/tech-post/2015/10/25/JSfakepath.html"></div>
+        <div class="ds-thread" data-thread-key="/tech-post/2016/05/30/Flex.html" data-title="Flex布局" data-url="warpprism.github.io/tech-post/2016/05/30/Flex.html"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">

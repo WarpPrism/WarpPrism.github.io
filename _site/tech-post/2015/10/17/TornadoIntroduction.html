@@ -85,41 +85,41 @@
 		<div class="row" id="post-wrapper">
     <div id="post-body">
         <div class="post">
-          <header>
-            <h2>开始搭建Tornado服务器</h2>
-            <p class="post-meta">
-                <span class="octicon octicon-clock"></span>
-                Oct 17, 2015
-                
-                
-            </p>
-            <p class="post-tag">
-                <span>
-                    
-                    <a href="#">
-                        <span class="octicon octicon-list-unordered"></span>
-                        tech-post
-                    </a>
-                    
-                </span>
-                <span>
-                    
-                    <a href="#">
-                        <span class="octicon octicon-tag"></span>
-                        tornado
-                    </a>
-                    
-                    <a href="#">
-                        <span class="octicon octicon-tag"></span>
-                        python
-                    </a>
-                    
-                </span>
-            </p>
-          </header>
-          <hr class="boundary">
-          <article>
-            <h3 id="section">前言</h3>
+            <div class="header">
+                <h2>开始搭建Tornado服务器</h2>
+                <p class="post-meta">
+                    <span class="octicon octicon-clock"></span>
+                        Oct 17, 2015
+                        
+                        
+                </p>
+                <p class="post-tag">
+                    <span>
+                        
+                        <a href="#">
+                            <span class="octicon octicon-list-unordered"></span>
+                            tech-post
+                        </a>
+                        
+                    </span>
+                    <span>
+                        
+                        <a href="#">
+                            <span class="octicon octicon-tag"></span>
+                            tornado
+                        </a>
+                        
+                        <a href="#">
+                            <span class="octicon octicon-tag"></span>
+                            python
+                        </a>
+                        
+                    </span>
+                </p>
+            </div>
+            <hr class="boundary">
+            <article>
+                <h3 id="section">前言</h3>
 <p>最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案，因为它轻量且高效，足够满足一个微信号的访问需求。而我对tornado还不是很了解，所以需要深入学习一下。</p>
 
 <h3 id="section-1">介绍</h3>
@@ -133,7 +133,7 @@
 <p>$ <strong>HTTPConnection</strong>，这个类用来处理 http 的请求，包括读取http请求头，读取post过来的数据，调用用户自定义的处理方法，以及把响应数据写给客户端socket。</p>
 
 <p>具体关系如图所示：<br />
-&gt; <img src="/imgs/post/tornado1.gif" alt="" /></p>
+<img src="/imgs/tech_post/tornado1.gif" alt="" /></p>
 
 <h3 id="section-3">示例服务器代码</h3>
 <p>在项目架构中， templates文件夹存放HTML模板文件， static文件夹存放img， css， js等等。</p>
@@ -173,8 +173,8 @@
 </code></pre>
 </div>
 
-          </article>
-          <hr class="boundary">
+            </article>
+            <hr class="boundary">
         </div>
 
 

@@ -19,7 +19,7 @@ $ **IOStream**，用来处理 socket 的异步读写。
 $ **HTTPConnection**，这个类用来处理 http 的请求，包括读取http请求头，读取post过来的数据，调用用户自定义的处理方法，以及把响应数据写给客户端socket。
 
 具体关系如图所示：
-> ![](/imgs/post/tornado1.gif)
+![](/imgs/tech_post/tornado1.gif)
 
 ### 示例服务器代码 ###
 在项目架构中， templates文件夹存放HTML模板文件， static文件夹存放img， css， js等等。

@@ -7,38 +7,38 @@ styles: [highlight.css, post.css]
 <div class="row" id="post-wrapper">
     <div id="post-body">
         <div class="post">
-          <header>
-            <h2>{{ page.title }}</h2>
-            <p class="post-meta">
-                <span class="octicon octicon-clock"></span>
-                {{ page.date | date: "%b %-d, %Y" }}
-                {% if page.author %} • {{ page.author }}{% endif %}
-                {% if page.meta %} • {{ page.meta }}{% endif %}
-            </p>
-            <p class="post-tag">
-                <span>
-                    {% for cat in page.categories %}
-                    <a href="#">
-                        <span class="octicon octicon-list-unordered"></span>
-                        {{ cat }}
-                    </a>
-                    {% endfor %}
-                </span>
-                <span>
-                    {% for tag in page.tags %}
-                    <a href="#">
-                        <span class="octicon octicon-tag"></span>
-                        {{ tag }}
-                    </a>
-                    {% endfor %}
-                </span>
-            </p>
-          </header>
-          <hr class="boundary">
-          <article>
-            {{content}}
-          </article>
-          <hr class="boundary">
+            <div class="header">
+                <h2>{{ page.title }}</h2>
+                <p class="post-meta">
+                    <span class="octicon octicon-clock"></span>
+                        {{ page.date | date: "%b %-d, %Y" }}
+                        {% if page.author %} • {{ page.author }}{% endif %}
+                        {% if page.meta %} • {{ page.meta }}{% endif %}
+                </p>
+                <p class="post-tag">
+                    <span>
+                        {% for cat in page.categories %}
+                        <a href="#">
+                            <span class="octicon octicon-list-unordered"></span>
+                            {{ cat }}
+                        </a>
+                        {% endfor %}
+                    </span>
+                    <span>
+                        {% for tag in page.tags %}
+                        <a href="#">
+                            <span class="octicon octicon-tag"></span>
+                            {{ tag }}
+                        </a>
+                        {% endfor %}
+                    </span>
+                </p>
+            </div>
+            <hr class="boundary">
+            <article>
+                {{content}}
+            </article>
+            <hr class="boundary">
         </div>
 
 
