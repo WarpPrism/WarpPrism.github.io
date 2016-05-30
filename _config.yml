@@ -1,5 +1,7 @@
 url: "http://warpprism.github.io"
 baseurl: "/"
+email: "249662605@qq.com"
+github_username: "warpprism"
 paginate: 5
 
 highlighter: pygments
@@ -21,8 +23,3 @@ redcarpet:
    ,"prettify"
 #   ,"html_toc"
   ]
-
-
-
-email: "249662605@qq.com"
-github_username: "warpprism"
