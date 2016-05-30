@@ -9,7 +9,7 @@ tags: 前后端
 此文章适合前后端协同开发经验不足的新手阅读。
 
 
-**目录:**  
+**目录:**
 
 1. [HTML赋值](#hash_htmlvalue1)
 2. [JS赋值](#hash_jsvar2)
@@ -24,9 +24,9 @@ tags: 前后端
 
 HTML赋值
 -------------------
-输出到 Element 的 value 或 data-name 
+输出到 Element 的 value 或 data-name
 
-```php
+```html
 <input type="hidden" value="<?php echo $user_avatar;?>" />
 <div data-value="<?php echo $user_avatar;?>"></div>
 
@@ -81,7 +81,7 @@ JS赋值
 ---------
 将数据填充到 `<script>` 的 JavaScript 变量声明中。
 
-```php
+```html
 <script>
 var user_avatar = "<?php echo $user_avatar;?>";
 // 渲染结果
@@ -93,11 +93,12 @@ var user_avatar = "<?php echo $user_avatar;?>";
 或使用 Smarty 后端模板引擎：
 
 
-```js
+~~~ html
 <script>
-var user_avatar = "{$user_avatar}";
+    var user_avatar = "{$user_avatar}";
 </script>
-```
+
+~~~
 
 **优点：**
 传递数据非常方便。前端直接调用 user_avatar 变量使用数据。

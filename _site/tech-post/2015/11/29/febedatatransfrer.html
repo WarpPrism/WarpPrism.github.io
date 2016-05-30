@@ -117,7 +117,7 @@
             <p>在此介绍几种常用的前后端数据交互方法，并给出使用建议。以提高前后端协同开发的效率。<br>
 此文章适合前后端协同开发经验不足的新手阅读。</p>
 
-<p><strong>目录:</strong>  </p>
+<p><strong>目录:</strong></p>
 
 <ol>
 <li><a href="#hash_htmlvalue1">HTML赋值</a></li>
@@ -132,9 +132,9 @@
 
 <h2 id="html赋值">HTML赋值</h2>
 
-<p>输出到 Element 的 value 或 data-name </p>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">&lt;input type=&quot;hidden&quot; value=&quot;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$user_avatar</span><span class="p">;</span><span class="cp">?&gt;</span><span class="x">&quot; /&gt;</span>
-<span class="x">&lt;div data-value=&quot;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$user_avatar</span><span class="p">;</span><span class="cp">?&gt;</span><span class="x">&quot;&gt;&lt;/div&gt;</span>
+<p>输出到 Element 的 value 或 data-name</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;&lt;?php echo $user_avatar;?&gt;&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">data-value=</span><span class="s">&quot;&lt;?php echo $user_avatar;?&gt;&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
 </code></pre></div>
 <p>渲染结果</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;https://avatars1.githubusercontent.com/u/3949015?v=3&amp;s=40&quot;</span> <span class="nt">/&gt;</span>
@@ -171,16 +171,16 @@
 <h2 id="js赋值">JS赋值</h2>
 
 <p>将数据填充到 <code class="prettyprint">&lt;script&gt;</code> 的 JavaScript 变量声明中。</p>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">&lt;script&gt;</span>
-<span class="x">var user_avatar = &quot;</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$user_avatar</span><span class="p">;</span><span class="cp">?&gt;</span><span class="x">&quot;;</span>
-<span class="x">// 渲染结果</span>
-<span class="x">// var user_avatar = &quot;https://avatars1.githubusercontent.com/u/3949015?v=3&amp;s=40&quot;;</span>
-<span class="x">&lt;/script&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
+<span class="kd">var</span> <span class="nx">user_avatar</span> <span class="o">=</span> <span class="s2">&quot;&lt;?php echo $user_avatar;?&gt;&quot;</span><span class="p">;</span>
+<span class="c1">// 渲染结果</span>
+<span class="c1">// var user_avatar = &quot;https://avatars1.githubusercontent.com/u/3949015?v=3&amp;s=40&quot;;</span>
+<span class="nt">&lt;/script&gt;</span>
 </code></pre></div>
 <p>或使用 Smarty 后端模板引擎：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-<span class="kd">var</span> <span class="nx">user_avatar</span> <span class="o">=</span> <span class="s2">&quot;{$user_avatar}&quot;</span><span class="p">;</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
+    <span class="kd">var</span> <span class="nx">user_avatar</span> <span class="o">=</span> <span class="s2">&quot;{$user_avatar}&quot;</span><span class="p">;</span>
+<span class="nt">&lt;/script&gt;</span>
 </code></pre></div>
 <p><strong>优点：</strong>
 传递数据非常方便。前端直接调用 user_avatar 变量使用数据。</p>
