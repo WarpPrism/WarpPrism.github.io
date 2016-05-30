@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="/css/footer.css"/>
 
     
-        <link rel="stylesheet" href="/css/post.css"/>
-    
         <link rel="stylesheet" href="/css/highlight.css"/>
+    
+        <link rel="stylesheet" href="/css/post.css"/>
     
 
     <title>Ji Hao's Blog</title>
@@ -114,139 +114,166 @@
           </header>
           <hr class="boundary">
           <article>
-            <p>Ajax = Asynchronous javascript and XML
-Ajax 不是一种新的编程语言，而是使用现有技术的新标准。
+            <p>Ajax = Asynchronous javascript and XML<br />
+Ajax 不是一种新的编程语言，而是使用现有技术的新标准。<br />
 Ajax 是在不重新加载整个页面的情况下，实现与服务器的数据交互并更新部分页面。</p>
 
-<h3 id="起源：">起源：</h3>
-
+<h3 id="section">起源：</h3>
 <p>Google Suggest：当你在Google搜索框上输入关键字时，JavaScript会把这些字符发送到服务器，然后服务器会返回一个搜索建议的列表。</p>
 
-<h3 id="原理：">原理：</h3>
-
+<h3 id="section-1">原理：</h3>
 <p>XMLHttpRequest对象是Ajax的基础，用于在Browser后台与服务器交换数据。</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">xmlhttp</span><span class="p">;</span>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">xmlhttp</span><span class="p">;</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// code for IE7+, Firefox, Chrome, Opera, Safari</span>
-    <span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+	<span class="c1">// code for IE7+, Firefox, Chrome, Opera, Safari</span>
+	<span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// code for IE5, 6</span>
-    <span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">&quot;Microsoft.XMLHTTP&quot;</span><span class="p">);</span>
+	<span class="c1">// code for IE5, 6</span>
+	<span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">"Microsoft.XMLHTTP"</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre>
+</div>
 <p>然后发送请求：</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// true: async = true;</span>
-<span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;GET/POST&quot;</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// true: async = true;</span>
+<span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET/POST"</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 <span class="c1">// send(string), string is only enabled when you use POST requset.</span>
 <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
-</code></pre></div>
+</code></pre>
+</div>
 <p>你有可能请求到缓存中的数据，为了避免这种情况，应在url后面加上 + Math.random()。</p>
 
 <p>然后服务器响应：</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// codes after response</span>
-    <span class="p">}</span>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// codes after response</span>
+	<span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>解释：
-每当 readyState 改变时，就会触发 onreadystatechange 事件。readyState有5种状态，所以onreadystatechange函数在整个请求过程中会被调用5次。
+</code></pre>
+</div>
+<p>解释：<br />
+每当 readyState 改变时，就会触发 onreadystatechange 事件。readyState有5种状态，所以onreadystatechange函数在整个请求过程中会被调用5次。<br />
 如下所示：</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">• 0: 请求未初始化
+
+<div class="highlighter-rouge"><pre class="highlight"><code>• 0: 请求未初始化
 • 1: 服务器连接已建立
 • 2: 请求已接收
 • 3: 请求处理中
 • 4: 请求已完成，且响应已就绪
-</code></pre></div>
+</code></pre>
+</div>
 <p>而status有以下两种状态：</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">200：OK
+
+<div class="highlighter-rouge"><pre class="highlight"><code>200：OK
 404: File Not Found
-</code></pre></div>
+</code></pre>
+</div>
+
 <p>如果要获取服务器相应的内容，我们可以使用XMLHttpRequest对象的responseText和responseXML属性。</p>
 
 <p>在实际开发过程中，我们一般使用回调函数callback的方法调用onreadystatechange：</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">xmlhttp</span><span class="p">;</span>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">xmlhttp</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">ajaxReq</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// code for IE7+, Firefox, Chrome, Opera, Safari</span>
-        <span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">// code for IE5, 6</span>
-        <span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">&quot;Microsoft.XMLHTTP&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">;</span>
-    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-    <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// code for IE7+, Firefox, Chrome, Opera, Safari</span>
+		<span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="c1">// code for IE5, 6</span>
+		<span class="nx">xmlhttp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">"Microsoft.XMLHTTP"</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">;</span>
+	<span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+	<span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nx">ajaxReq</span><span class="p">(</span><span class="nx">myurl</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">readyState</span><span class="o">==</span><span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">status</span><span class="o">==</span><span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;myDiv&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="o">=</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">responseText</span><span class="p">;</span>
-    <span class="p">}</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">readyState</span><span class="o">==</span><span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">status</span><span class="o">==</span><span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"myDiv"</span><span class="p">).</span><span class="nx">innerHTML</span><span class="o">=</span><span class="nx">xmlhttp</span><span class="p">.</span><span class="nx">responseText</span><span class="p">;</span>
+	<span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div>
-<h3 id="jquery中的ajax：">jQuery中的Ajax：</h3>
+</code></pre>
+</div>
 
+<h3 id="jqueryajax">jQuery中的Ajax：</h3>
 <p>编写常规的 AJAX 代码并不容易，因为不同的浏览器对 AJAX 的实现并不相同。这意味着您必须编写额外的代码对浏览器进行测试。不过，jQuery 团队为我们解决了这个难题，我们只需要一行简单的代码，就可以实现 AJAX 功能。</p>
 
 <p><strong>ajax方法（常用）：</strong></p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
-    <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;POST/GET&quot;</span>
-    <span class="nx">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;server/handle.php&quot;</span><span class="p">,</span>
-    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="nx">username</span><span class="o">:</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#username&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span> <span class="nx">content</span><span class="o">:</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#content&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">()},</span>
-    <span class="nx">dataType</span><span class="o">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-    <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// codes when response is ready</span>
-    <span class="p">}</span>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+	<span class="na">type</span><span class="p">:</span> <span class="s2">"POST/GET"</span>
+	<span class="na">async</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="na">url</span><span class="p">:</span> <span class="s2">"server/handle.php"</span><span class="p">,</span>
+	<span class="na">data</span><span class="p">:</span> <span class="p">{</span><span class="na">username</span><span class="p">:</span><span class="nx">$</span><span class="p">(</span><span class="s2">"#username"</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span> <span class="na">content</span><span class="p">:</span><span class="nx">$</span><span class="p">(</span><span class="s2">"#content"</span><span class="p">).</span><span class="nx">val</span><span class="p">()},</span>
+	<span class="na">dataType</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">,</span>
+	<span class="na">success</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// codes when response is ready</span>
+	<span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div>
-<hr>
+</code></pre>
+</div>
+
+<hr />
 
 <p><strong>load方法：</strong></p>
 
 <p>load() 方法从服务器加载数据，并把返回的数据放入被选元素中。</p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">load</span><span class="p">(</span><span class="nx">URL</span><span class="p">,</span><span class="nx">data</span><span class="p">,</span><span class="nx">callback</span><span class="p">);</span>
-</code></pre></div>
-<p>必需的 URL 参数规定您希望加载的 URL。
-可选的 data 参数规定与请求一同发送的查询字符串键/值对集合。
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">load</span><span class="p">(</span><span class="nx">URL</span><span class="p">,</span><span class="nx">data</span><span class="p">,</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre>
+</div>
+<p>必需的 URL 参数规定您希望加载的 URL。<br />
+可选的 data 参数规定与请求一同发送的查询字符串键/值对集合。<br />
 可选的 callback 参数是 load() 方法完成后所执行的函数名称。</p>
 
 <p><strong>get方法：</strong></p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// $.get(URL,callback);</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;demo_test.asp&quot;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Data: &quot;</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s2">&quot;\nStatus: &quot;</span> <span class="o">+</span> <span class="nx">status</span><span class="p">);</span>
-    <span class="p">});</span>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// $.get(URL,callback);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"button"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+	<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">"demo_test.asp"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">alert</span><span class="p">(</span><span class="s2">"Data: "</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s2">"\nStatus: "</span> <span class="o">+</span> <span class="nx">status</span><span class="p">);</span>
+	<span class="p">});</span>
 <span class="p">});</span>
-</code></pre></div>
+</code></pre>
+</div>
 <p>asp文件：</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;%
-response.write(&quot;This is some text from an external ASP file.&quot;)
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;%
+response.write("This is some text from an external ASP file.")
 %&gt;
-</code></pre></div>
+</code></pre>
+</div>
+
 <p><strong>post方法：</strong></p>
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// $.post(URL,data,callback);</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;demo_test_post.asp&quot;</span><span class="p">,</span>
-        <span class="p">{</span>
-            <span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Donald Duck&quot;</span><span class="p">,</span>
-            <span class="nx">city</span><span class="o">:</span><span class="s2">&quot;Duckburg&quot;</span>
-        <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">status</span><span class="p">){</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Data: &quot;</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s2">&quot;\nStatus: &quot;</span> <span class="o">+</span> <span class="nx">status</span><span class="p">);</span>
-        <span class="p">});</span>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// $.post(URL,data,callback);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s2">"button"</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+	<span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">"demo_test_post.asp"</span><span class="p">,</span>
+		<span class="p">{</span>
+			<span class="na">name</span><span class="p">:</span><span class="s2">"Donald Duck"</span><span class="p">,</span>
+			<span class="na">city</span><span class="p">:</span><span class="s2">"Duckburg"</span>
+		<span class="p">},</span>
+		<span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">status</span><span class="p">){</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="s2">"Data: "</span> <span class="o">+</span> <span class="nx">data</span> <span class="o">+</span> <span class="s2">"\nStatus: "</span> <span class="o">+</span> <span class="nx">status</span><span class="p">);</span>
+		<span class="p">});</span>
 <span class="p">});</span>
-</code></pre></div>
+</code></pre>
+</div>
+
 <p>asp文件：</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;%
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;%
 dim fname,city
-fname=Request.Form(&quot;name&quot;)
-city=Request.Form(&quot;city&quot;)
-Response.Write(&quot;Dear &quot; &amp; fname &amp; &quot;. &quot;)
-Response.Write(&quot;Hope you live well in &quot; &amp; city &amp; &quot;.&quot;)
+fname=Request.Form("name")
+city=Request.Form("city")
+Response.Write("Dear " &amp; fname &amp; ". ")
+Response.Write("Hope you live well in " &amp; city &amp; ".")
 %&gt;
-</code></pre></div>
+</code></pre>
+</div>
+
           </article>
           <hr class="boundary">
         </div>

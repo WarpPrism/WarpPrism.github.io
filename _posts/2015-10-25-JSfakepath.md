@@ -34,9 +34,11 @@ var getPath = function(obj,fileQuery,transImg){
 ~~~
 
 现在我们有一个Image对象，要将该对象的src属性指向一个本地文件，就可以通过下面方法实现。
+
 ~~~html
 <input type="file" id="file" />
 ~~~
+
 ~~~javascript
 var file = document.getElementById("file");
 var img = new Image();
@@ -50,6 +52,7 @@ file.onchange = function() {
 ~~~
 这样img的src就是本地文件的引用了，当然src的内容是经过加密的，浏览器很重视这方面的安全性。
 如果采用下面这种做法，就会遇到fakepath问题：
+
 ~~~javascript
 file.onchange = function() {
 
@@ -64,7 +67,7 @@ file.onchange = function() {
 ~~~
 GET file:///C:/fakepath/src.jpg net::ERR_FILE_NOT_FOUND
 ~~~
-这里fakepath就把文件的真实路径隐藏了。
 
+这里fakepath就把文件的真实路径隐藏了。
 
 > [Related Topic In Stackoverflow](http://stackoverflow.com/questions/4851595/how-to-resolve-the-c-fakepath)
