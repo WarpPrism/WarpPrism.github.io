@@ -9,8 +9,17 @@ paginate: 5
 highlighter: rouge
 markdown: kramdown
 kramdown:
-  input:  GFM
-  syntax_highlighter: rouge
+    input:  GFM
+    syntax_highlighter: rouge
+
+defaults:
+    -
+        scope:
+            path: ""
+            type: "posts"
+        values:
+            layout: post
+            styles : [highlight.css,post.css]
 
 # syntax_highlighter: rouge
 # markdown: redcarpet
