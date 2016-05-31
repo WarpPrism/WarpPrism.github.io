@@ -2,7 +2,7 @@
 layout: post
 title: 开始搭建Tornado服务器
 categories: tech-post
-tags: [tornado, python]
+tags: [tornado, back-end]
 ---
 
 ### 前言 ###

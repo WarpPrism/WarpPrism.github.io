@@ -2,7 +2,7 @@
 layout: post
 title: 如何引用本地文件的绝对路径（fakepath问题）
 categories: tech-post
-tags: [javascript]
+tags: [JavaScript]
 excerpt: Some browsers have a security feature that prevents javascript from knowing your file's local full path. It makes sense - as a client, you don't want the server to know your local machine's filesystem. It would be nice if all browsers did this.
 ---
 

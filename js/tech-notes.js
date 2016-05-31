@@ -62,14 +62,18 @@ $(function() {
         wrapper.css("height", init_height);
     });
 
-    function handleDuplicateTags() {        
+    function handleDuplicateTags() {
 
-        var dups1 = $("span[data-tag=javascript]");
-
-        for (var i = 1; i < dups1.length; i++) {
-            dups1[i].style.display = "none";
+        var allTags = $(".tag-btn.btn");
+        var tagsArr = [];
+        for (var i = 0; i < allTags.length; i++) {
+            var value = allTags[i].innerHTML;
+            if (tagsArr.indexOf(value, 0) == -1) {
+                tagsArr.push(value);
+            } else {
+                allTags[i].style.display = "none";
+            }
         }
     }
     handleDuplicateTags();
 }());
-

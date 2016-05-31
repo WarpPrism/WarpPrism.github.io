@@ -23,7 +23,7 @@
 }
 
 .post {
-    font-family: sans-serif;
+    font-family: Arial Black, Gadget, sans-serif;
 }
 /*post header style*/
 .post .header {
@@ -106,7 +106,7 @@
     overflow: auto;
     word-wrap: normal;
     white-space: pre;
-    font-size: 16px;
+    font-size: 14px;
     margin: 12px;
 }
 
@@ -141,7 +141,6 @@
     display: inline-block;
     color: #0066aa;
     text-decoration: none;
-    font-style: italic;
 }
 .post a:hover {
     color: #00a1ea;

@@ -7,11 +7,6 @@ $(function() {
     $("#myCarousel").carousel({
         interval: 3000
     });
-    
-    $('#index-main-content').particleground({
-        dotColor: '#5cbdaa',
-        lineColor: '#5cbdaa'
-    });
 
     $(window).scroll(scrollAnimation);
     handleRecent();
