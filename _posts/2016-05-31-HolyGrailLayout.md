@@ -3,7 +3,7 @@ layout: post
 title: 圣杯布局和双飞翼布局
 tags: [css]
 categories: tech-post
-excerpt: Flex即Fexible Box，即弹性布局，可以简便、完整、响应式地实现各种页面布局。任何一个容器或行内元素都可指定为Flex布局。
+excerpt: 圣杯布局要求三列布局，中间宽度自适应，两边定宽，这样做的优势是重要的东西放在文档流前面可以优先渲染...
 ---
 
 ## 圣杯布局 !
