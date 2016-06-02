@@ -1,3 +1,7 @@
 ## 个人博客
 
-![点此进入]("http://warpprism.github.io")
+> Jekyll + Bootstrap + animate.css 自定义theme
+
+> 任何意见可直接电邮
+
+>  <a href="http://warpprism.github.io">点此进入</a>
