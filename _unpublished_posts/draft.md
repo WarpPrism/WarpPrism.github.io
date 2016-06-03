@@ -82,6 +82,7 @@ console.log(cat1.hasOwnProperty("name")); //true
 console.log(cat1.hasOwnProperty("type")); //false
 console.log("name" in cat1); //true
 console.log("type" in cat1); //true
+console.log(cat1.__proto__ === cat2.__proto__); //true
 ~~~
 
 **继承机制** e.g.
@@ -110,11 +111,27 @@ cat.sayColor();
 console.log(cat.__proto__);
 ~~~
 
+### ES6 class语法糖
 
+~~~javascript
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+  toString() {
+    return '(' + this.x + ',' + this.y + ')';
+  }
+}
 
-
-
-
-
-
-
+class ColorPoint extends Point {
+  constructor(color, x, y) {
+    super(x, y); 
+    /* 子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。*/
+    this.color = color;
+  }
+  toString() {
+    return this.color + ' ' + super.toString(); // 调用父类的toString()
+  }
+}
+~~~
