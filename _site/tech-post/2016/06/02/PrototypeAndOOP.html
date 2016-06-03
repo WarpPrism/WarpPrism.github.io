@@ -86,25 +86,59 @@
     <div id="post-body">
         <div class="post">
             <div class="header">
-                <h2>Prototypeandoop</h2>
+                <h2>JavaScript Prototype And OOP</h2>
                 <p class="post-meta">
                     <span class="octicon octicon-clock"></span>
-                        Jun 2, 2015
+                        Jun 2, 2016
                         
                         
                 </p>
                 <p class="post-tag">
                     <span>
                         
+                        <a href="#">
+                            <span class="octicon octicon-list-unordered"></span>
+                            tech-post
+                        </a>
+                        
                     </span>
                     <span>
+                        
+                        <a href="#">
+                            <span class="octicon octicon-tag"></span>
+                            JavaScript
+                        </a>
                         
                     </span>
                 </p>
             </div>
             <hr class="boundary">
             <article>
-                
+                <h2 id="section">基础概念</h2>
+<p>在Javacript中，有两种类型的值，原始值和对象，原始值（primitive type）有Undifined, Null, Boolean, Number, String，一般存储在栈stack中，而对象分为普通对象和函数对象，存储在堆heap中，Object和Function是JS自带的函数对象。举例如下：</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// 注：函数作为构造子，一般情况首字母要大写</span>
+<span class="kd">var</span> <span class="nx">f2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+<span class="kd">var</span> <span class="nx">f3</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">'str'</span><span class="p">,</span> <span class="s1">'console.log(str)'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">o1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">f1</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">o2</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">o3</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nb">Object</span><span class="p">));</span> <span class="c1">//function</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nb">Function</span><span class="p">));</span> <span class="c1">//function</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">f1</span><span class="p">));</span> <span class="c1">//function</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">f2</span><span class="p">));</span> <span class="c1">//function</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">f3</span><span class="p">));</span> <span class="c1">//function</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">o1</span><span class="p">));</span> <span class="c1">//object</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">o2</span><span class="p">));</span> <span class="c1">//object</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">o3</span><span class="p">));</span> <span class="c1">//object</span>
+</code></pre>
+</div>
+<p>显而易见，函数对象就是通过new Function()创建出来的，Object，Function本身也是。<br />
+而普通对象则是由函数对象通过new关键字创建出来的。</p>
 
             </article>
             <hr class="boundary">
@@ -116,8 +150,7 @@
             &nbsp;Share This Post
         </h2>
 
-        <div class="ds-share flat" data-thread-key="/2015/06/02/PrototypeAndOOP" data-title="Prototypeandoop" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="
-......" data-url="http://warpprism.github.io/2015/06/02/PrototypeAndOOP.html">
+        <div class="ds-share flat" data-thread-key="/tech-post/2016/06/02/PrototypeAndOOP" data-title="JavaScript Prototype And OOP" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="圣杯布局要求三列布局，中间宽度自适应，两边定宽，这样做的优势是重要的东西放在文档流前面可以优先渲染........." data-url="http://warpprism.github.io/tech-post/2016/06/02/PrototypeAndOOP.html">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
                     <li data-toggle="ds-share-icons-more">
@@ -139,7 +172,7 @@
         </h2>
 
         <!-- 多说评论框 start -->
-        <div class="ds-thread" data-thread-key="/2015/06/02/PrototypeAndOOP" data-title="Prototypeandoop" data-url="http://warpprism.github.io/2015/06/02/PrototypeAndOOP.html"></div>
+        <div class="ds-thread" data-thread-key="/tech-post/2016/06/02/PrototypeAndOOP" data-title="JavaScript Prototype And OOP" data-url="http://warpprism.github.io/tech-post/2016/06/02/PrototypeAndOOP.html"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">
