@@ -86,7 +86,7 @@
     <div id="post-body">
         <div class="post">
             <div class="header">
-                <h2>JavaScript Prototype And OOP</h2>
+                <h2>JavaScript Prototype And Oop</h2>
                 <p class="post-meta">
                     <span class="octicon octicon-clock"></span>
                         Jun 2, 2016
@@ -140,6 +140,146 @@
 <p>显而易见，函数对象就是通过new Function()创建出来的，Object，Function本身也是。<br />
 而普通对象则是由函数对象通过new关键字创建出来的。</p>
 
+<h2 id="section-1">原型对象</h2>
+<p>在javascript中，每当定义一个对象（函数）时，都会包含一些预定义的属性。其中，函数对象的一个属性就是prototype，而普通对象没有prototype，但有__proto__属性，它指向创建它的函数的prototype属性。</p>
+
+<p><strong>原型对象其实就是普通对象</strong>（Function.prototype除外，它很特殊，它是函数对象，但没有prototype属性）</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">f1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">//f1{}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">f1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">//object</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">//function</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">//object</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">//undifined</span>
+</code></pre>
+</div>
+<p>可以看出f1.prototype就是函数f1的一个实例对象，函数f1在创建的时候，就将它的一个实例对象赋值给其prototype属性。即：</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">f1</span><span class="p">();</span>
+<span class="nx">f1</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>所以Function.prototype为什么是函数对象就迎刃而解了。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">();</span>
+<span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<h2 id="section-2">原型链</h2>
+<p><strong>无论普通对象还是函数对象</strong> 都有一个__proto__属性，它指向创建它的函数对象的prototype对象 e.g.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">showName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">xiaoming</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">"xiaoming"</span><span class="p">);</span>
+<span class="nx">xiaoming</span><span class="p">.</span><span class="nx">showName</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xiaoming</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span> <span class="c1">//true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span> <span class="c1">//true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span>  <span class="c1">//null</span>
+</code></pre>
+</div>
+
+<p>我们把这个由__proto__串起来一直到Object.prototype.__proto__ === null的链叫做原型链。<br />
+所以说，<strong>原型链的形成真正靠的是__proto__，而不是prototype</strong>。</p>
+
+<p>原型对象prototype中都有个预定义的constructor属性，用来引用它的函数对象，这是一种循环引用。</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">Person</span><span class="p">;</span> <span class="c1">//true</span>
+<span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">;</span> <span class="c1">//true</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">;</span> <span class="c1">//true</span>
+</code></pre>
+</div>
+
+<p>所以要查找一个对象的constructor，只需找到它原型链上遇到的第一个constructor属性指向的对象。</p>
+
+<p>下图是原型链的汇总图：<br />
+<img src="/imgs/tech_post/PrototypeChain.jpg" alt="PrototypeChain" /></p>
+
+<h2 id="prototype">prototype与面向对象程序设计</h2>
+<p>虽然JavaScript是一种object-based的语言，遇到的所有东西几乎都是对象，但是它又不是一种真正的oop语言，因为没有class这个概念。、<br />
+所以要实现oop，我们需要将属性和方法封装成一个对象，即 <strong>Encapulation</strong>，e.g.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// 新建constructor</span>
+<span class="kd">var</span> <span class="nx">Cat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 把不变的属性和方法放在原型对象中以节约内存</span>
+<span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s2">"猫科动物"</span><span class="p">;</span>
+<span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">eat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"吃老鼠"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">cat1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">(</span><span class="s2">"cat1"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cat2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">(</span><span class="s2">"cat2"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">eat</span> <span class="o">===</span> <span class="nx">cat2</span><span class="p">.</span><span class="nx">eat</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">cat1</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"name"</span><span class="p">));</span> <span class="c1">//true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"type"</span><span class="p">));</span> <span class="c1">//false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"name"</span> <span class="k">in</span> <span class="nx">cat1</span><span class="p">);</span> <span class="c1">//true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"type"</span> <span class="k">in</span> <span class="nx">cat1</span><span class="p">);</span> <span class="c1">//true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat1</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">cat2</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span> <span class="c1">//true</span>
+</code></pre>
+</div>
+
+<p><strong>继承机制</strong> e.g.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Parent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">Child</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">();</span>
+<span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Child</span><span class="p">;</span>
+<span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayColor</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child</span><span class="p">(</span><span class="s2">"cat"</span><span class="p">,</span> <span class="s2">"white"</span><span class="p">);</span>
+<span class="nx">cat</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>
+<span class="nx">cat</span><span class="p">.</span><span class="nx">sayColor</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h2 id="es6-class">ES6 class语法糖</h2>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">class</span> <span class="nx">Point</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">toString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">'('</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="s1">','</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="s1">')'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">ColorPoint</span> <span class="kr">extends</span> <span class="nx">Point</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+    <span class="cm">/* 子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。*/</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">toString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="kr">super</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span> <span class="c1">// 调用父类的toString()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
             </article>
             <hr class="boundary">
         </div>
@@ -150,7 +290,7 @@
             &nbsp;Share This Post
         </h2>
 
-        <div class="ds-share flat" data-thread-key="/tech-post/2016/06/02/PrototypeAndOOP" data-title="JavaScript Prototype And OOP" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="圣杯布局要求三列布局，中间宽度自适应，两边定宽，这样做的优势是重要的东西放在文档流前面可以优先渲染........." data-url="http://warpprism.github.io/tech-post/2016/06/02/PrototypeAndOOP.html">
+        <div class="ds-share flat" data-thread-key="/tech-post/2016/06/02/PrototypeAndOOP" data-title="JavaScript Prototype And Oop" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="在Javacript中，有两种类型的值，原始值和对象，原始值（primitive type）有Undifined,......" data-url="http://warpprism.github.io/tech-post/2016/06/02/PrototypeAndOOP.html">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
                     <li data-toggle="ds-share-icons-more">
@@ -172,7 +312,7 @@
         </h2>
 
         <!-- 多说评论框 start -->
-        <div class="ds-thread" data-thread-key="/tech-post/2016/06/02/PrototypeAndOOP" data-title="JavaScript Prototype And OOP" data-url="http://warpprism.github.io/tech-post/2016/06/02/PrototypeAndOOP.html"></div>
+        <div class="ds-thread" data-thread-key="/tech-post/2016/06/02/PrototypeAndOOP" data-title="JavaScript Prototype And Oop" data-url="http://warpprism.github.io/tech-post/2016/06/02/PrototypeAndOOP.html"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">

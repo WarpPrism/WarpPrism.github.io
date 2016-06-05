@@ -26,7 +26,7 @@ Function.prototype = temp;
 ~~~
 
 ### 原型链
-**无论普通对象还是函数对象**都有一个\__proto__属性，它指向创建它的函数对象的prototype对象 e.g.
+**无论普通对象还是函数对象** 都有一个\__proto__属性，它指向创建它的函数对象的prototype对象 e.g.
 
 ~~~javascript
 var Person = function(name) {
@@ -126,7 +126,7 @@ class Point {
 
 class ColorPoint extends Point {
   constructor(color, x, y) {
-    super(x, y); 
+    super(x, y);
     /* 子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行加工。如果不调用super方法，子类就得不到this对象。*/
     this.color = color;
   }
