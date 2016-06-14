@@ -1,5 +1,5 @@
 ### 基本概念
-websocket是HTML5提出的新标准之一，被称为“web的TCP”，它的出现方便了实时web应用的开发。所谓实时web应用就是指服务器和客户端之间通信频繁的应用，比如在线游戏，在线证券，实时聊天系统等等，传统的request-response模式是无法实现实时web应用的，这种情况下，客户端得到的信息往往是过时的。
+**WebSocket**是HTML5提出的新标准之一，被称为“web的TCP”，它的出现方便了实时web应用的开发。所谓实时web应用就是指服务器和客户端之间通信频繁的应用，比如在线游戏，在线证券，实时聊天系统等等，传统的request-response模式是无法实现实时web应用的，这种情况下，客户端得到的信息往往是过时的。
 > **MDN:**  WebSockets is an advanced technology that makes it possible to open an interactive communication session between the user's browser and a server. With this API, you can send messages to a server and receive event-driven responses without having to poll the server for a reply.
 
 在websocket出现以前，开发人员想要实现实时web应用的开发，只能采取一些折衷的方案，主要有：
@@ -47,7 +47,27 @@ WebSocket-Location: ws://example.com/demo
 3. 客户端和服务器进行全双工通信（full-duplex）。
 4. 其中一方关闭连接
 
-### 
+### WebSocket的JS接口
+
+~~~javascript
+var ws_server_url = "ws://localhost:8888/Demo";
+var mysocket = new WebSocket(ws_server_url);
+mysocket.onopen = function(e) {
+  console.log("ws_server is ready for message!");
+  mysocket.send("Hello World!");
+}
+mysocket.onmessage = function(e) {
+  console.log(e.data);
+}
+mysocket.onerror = function(e) {
+  console.log(e.data);
+}
+mysocket.onclose = function(e) {
+  console.log("ws_server closed.");
+}
+mysocket.close();
+~~~
+
 
 
 ### 参考链接
