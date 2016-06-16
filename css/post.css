@@ -227,5 +227,6 @@
         margin: 7px;
         padding: 20px;
         opacity: 0.9;
+        box-shadow: none;
     }
 }
