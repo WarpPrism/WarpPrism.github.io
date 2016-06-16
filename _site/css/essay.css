@@ -160,3 +160,21 @@
 
 	transform: translateX(-50%);
 }
+
+@media screen and (max-width: 425px) {
+	#essay-left {
+		padding: 7px;
+	}
+	#essay-item {
+		padding: 10px;
+	}
+	#essay-title {
+		font-size: 20px;
+	}
+	#essay-excerpt {
+		font-size: 16px;
+	}
+	#essay-left #left-tag-div .tag {
+		font-size: 12px;
+	}
+}

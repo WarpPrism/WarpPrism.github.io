@@ -1,5 +1,6 @@
 ---
 layout: default
+title: "Jihao's Blog"
 styles: [index.css]
 scripts: [index.js]
 ---
@@ -59,7 +60,7 @@ scripts: [index.js]
 			<div class="page-header">
 				<h3><span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span> Technical Posts</h3>
 			</div>
-			<ul class="post-list1">
+			<ul class="post-list1 post-list">
 				{% for post in site.posts %}
 				{% if post.categories contains 'tech-post' %}
 				<li>
@@ -68,18 +69,18 @@ scripts: [index.js]
 				</li>
 				{% endif %}
 				{% endfor %}
-				<a href="/pages/tech-notes.html" class="more">
-					More
-					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-				</a>
 			</ul>
+			<a href="/pages/tech-notes.html" class="more">
+				More
+				<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+			</a>
 		</div>
 
 		<div class="col-sm-5 content-column">
 			<div class="page-header">
 				<h3><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Casual Essay Notes</h3>
 			</div>
-			<ul class="post-list2">
+			<ul class="post-list2 post-list">
 				{% for post in site.posts %}
 				{% if post.categories contains 'essay' %}
 				<li>
@@ -88,11 +89,11 @@ scripts: [index.js]
 				</li>
 				{% endif %}
 				{% endfor %}
-				<a href="/pages/essay.html" class="more">
-					More
-					<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-				</a>
 			</ul>
+			<a href="/pages/essay.html" class="more">
+				More
+				<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+			</a>
 		</div>
 	</div>
 </div>

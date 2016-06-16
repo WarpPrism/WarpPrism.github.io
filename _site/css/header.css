@@ -76,7 +76,6 @@
 
 #index-nav ul li a:hover {
     color: #00A1EA;
-    text-shadow: 1px 1px 1px gray;
 }
 
 
@@ -95,4 +94,41 @@
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 425px) {
+    #index-header {
+        padding: 5px;
+    }
+    #index-header #logo {
+        width: 50px;
+        height: 50px;
+        margin: 0 10px;
+    }
+    #index-header h1 {
+        font-size: 25px;
+    }
+    #index-header #motto {
+        display: none;
+    }
+    #index-nav {
+        border-bottom: solid 5px #00a1ea;
+    }
+    #index-nav ul {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        padding-left: 8px;
+    }
+    #index-nav ul li {
+        text-align: center;
+        font-size: 13px;
+        margin: 0;
+        padding: 2px;
+    }
+    #index-nav ul li span {
+        display: none;
+    }
+    #index-nav #nav-indicator {
+        display: none;
+    }
 }

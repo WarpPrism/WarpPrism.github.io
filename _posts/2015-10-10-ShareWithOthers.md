@@ -3,7 +3,6 @@ layout: post
 title: "The co-op business model:share whatever you've got"
 categories: essay
 excerpt: I feel like I know almost nothing about business, because the only business I’ve ever done is the co-op sharing model...
-
 ---
 
 Article from **[Sivers](http://sivers.org/sharing)**

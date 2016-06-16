@@ -158,3 +158,21 @@
 
 	transform: translateX(-50%);
 }
+
+@media screen and (max-width: 425px) {
+	#tn-left {
+		padding: 7px;
+	}
+	#tn-item {
+		padding: 10px;
+	}
+	#tn-title {
+		font-size: 20px;
+	}
+	#tn-excerpt {
+		font-size: 16px;
+	}
+	#tn-left #left-tag-div .tag {
+		font-size: 12px;
+	}
+}

@@ -48,9 +48,9 @@ $(function() {
                 }
             }
 
-            if (wrapper.css("height") < screen.height + "px") {
-                wrapper.css("height", screen.height + "px");
-            }
+            // if (wrapper.css("height") < screen.height + "px") {
+            //     wrapper.css("height", screen.height + "px");
+            // }
         });
     }
 
