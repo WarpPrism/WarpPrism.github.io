@@ -116,12 +116,12 @@
     }
     #index-nav ul {
         margin-bottom: 5px;
-        margin-top: 5px;
+        margin-top: 0;
         padding-left: 8px;
     }
     #index-nav ul li {
         text-align: center;
-        font-size: 13px;
+        font-size: 15px;
         margin: 0;
         padding: 2px;
     }

@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 #post-wrapper #post-body {
@@ -74,7 +75,7 @@
 }
 
 /*image style*/
-.post img{
+.post img {
     max-width: 100%;
     margin: 20px;
     border: solid 6px #fff;
@@ -224,14 +225,25 @@
 @media screen and (max-width: 425px) {
     #post-wrapper {
         width: 100%;
+        overflow: hidden;
     }
     #post-wrapper #post-body {
         width: 100%;
-        margin: 7px;
+        margin: 0;
         padding: 20px;
         box-shadow: none;
         -webkit-box-shadow: none;
         overflow: hidden;
+    }
+    .post img {
+        margin: 10px;
+        box-shadow: none;
+        position: relative;
+        left: -10px;
+        -webkit-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
     }
     .ds-share, .ds-thread, .guest-op {
         display: none;
