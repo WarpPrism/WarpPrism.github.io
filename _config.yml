@@ -1,9 +1,11 @@
 title: "JiHao's Blog"
+owner: "zhoujihao"
 url: "http://warpprism.github.io"
 baseurl: "/"
 email: "249662605@qq.com"
 github_username: "warpprism"
-paginate: 7
+description: >
+    '人生中有很多珍贵的东西，只是当它们唾手可得的时候，你不觉得珍贵。珍惜身边的一切，不要等失去了再后悔莫及'——coder and also a traveller.
 
 
 
