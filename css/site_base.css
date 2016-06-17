@@ -1,4 +1,64 @@
+/*normal.css*/
+@font-face {
+    font-family: 'blackjackregular';
+    src: url('/fonts/black_jack-webfont.eot');
+    src: url('/fonts/black_jack-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/black_jack-webfont.woff') format('woff'),
+    url('/fonts/black_jack-webfont.ttf') format('truetype'),
+    url('/fonts/black_jack-webfont.svg#blackjackregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'bellotalight';
+    src: url('/fonts/Bellota-Light-webfont.eot');
+    src: url('/fonts/Bellota-Light-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/Bellota-Light-webfont.woff') format('woff'),
+    url('/fonts/Bellota-Light-webfont.ttf') format('truetype'),
+    url('/fonts/Bellota-Light-webfont.svg#bellotalight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: bellotalight, serif;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #00a1ea;
+}
+
+#default-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid, .row {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, p, ul, li, span, div {
+    margin: 0;
+    padding: 0;
+}
+
+
+/*header*/
 #index-nav a {
     color: #000;
     text-decoration: none;
@@ -132,4 +192,52 @@
     #index-nav #nav-indicator {
         display: none;
     }
+}
+
+/*footer*/
+#footer-div {
+    width: 100%;
+}
+.footer1 a {
+    text-decoration: none;
+}
+
+.footer1 {
+    border-top: solid 5px gray;
+    background: #333333;
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+    color: #FFFFFF;
+}
+
+.footer1 .foot-item {
+    color: #FFFFFF;
+    margin: 0 10px;
+}
+
+.footer1 a:hover {
+    color: #0072E3;
+    text-decoration: none;
+}
+
+.modal-header {
+    background: #00a1ea;
+    color: #FFFFFF;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.footer2 {
+    background: #333333;
+    padding: 5px;
+    text-align: center;
+    overflow: hidden;
+    color: #FFFFFF;
+}
+
+.footer2 span {
+    color: #FFFFFF;
+    margin: 0 10px;
+    font-family: blackjackregular, serif;
 }
