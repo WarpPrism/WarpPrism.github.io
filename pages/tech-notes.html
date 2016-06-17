@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "TechPosts"
+title: "TechPosts | JiHao"
 styles: [tech-notes.css]
 scripts: [tech-notes.js]
 ---
@@ -33,6 +33,8 @@ scripts: [tech-notes.js]
 			</div>
 			<!--<hr/>-->
 			{% endfor %}
+
+			<div id="paginate-div"></div>
 		</div>
 
 		<!-- right bar -->
@@ -42,7 +44,7 @@ scripts: [tech-notes.js]
 					<div>
 					<span id="all-tag" class="btn btn-primary ">
 						<span class="octicon octicon-list-unordered"></span>
-						显示所有标签
+						显示所有
 					</span>
 					{% for post in site.categories.tech-post %}
 					{% for tag in post.tags %}

@@ -71,11 +71,12 @@
 }
 
 #index-nav ul li a {
-    color: #FFFFFF;
+    color: #fff;
+    font-weight: normal;
 }
 
 #index-nav ul li a:hover {
-    color: #00A1EA;
+    color: #00acfa;
 }
 
 

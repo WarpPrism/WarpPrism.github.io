@@ -8,6 +8,7 @@ $(document).ready(function() {
     $("#logo").click(function() {
         window.location = "\\";
     });
+
 });
 
 function menuAnimation() {
@@ -19,7 +20,7 @@ function menuAnimation() {
             var width = this.offsetWidth;
             /*console.log(leftOff);*/
             navIndicator.css("left", leftOff + width / 2.0);
-        })
+        });
     }
 }
 

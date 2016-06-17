@@ -2,21 +2,8 @@
  * Created by zhoujihao on 15-12-26.
  */
 $(function() {
-    var wrapper = $("#essay-wrapper");
-    var init_height = wrapper.css("height");
 
     var essay_items = $("#essay-left").find(".row");
-    for (var i = 0; i < essay_items.length; i++) {
-        if (i % 2 == 0) {
-            if (!$(essay_items[i]).hasClass("slideInLeft")) {
-                $(essay_items[i]).addClass("slideInLeft");
-            }
-        } else {
-            if (!$(essay_items[i]).hasClass("slideInRight")) {
-                $(essay_items[i]).addClass("slideInRight");
-            }
-        }
-    }
 
     var tag_btns = $("#right-tag-div").find(".tag-btn");
 
@@ -47,10 +34,6 @@ $(function() {
                     item.hide();
                 }
             }
-
-            // if (wrapper.css("height") < screen.height + "px") {
-            //     wrapper.css("height", screen.height + "px");
-            // }
         });
     }
 
@@ -59,7 +42,6 @@ $(function() {
             var item = $(essay_items[k]);
             item.show();
         }
-        wrapper.css("height", init_height);
     });
 
     function handleDuplicateTags() {
