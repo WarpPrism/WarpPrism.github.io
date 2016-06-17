@@ -162,6 +162,20 @@
    border-bottom: .1895em solid #cccccc
 }
 
+.post-copyright {
+    background: #c5d7ed;
+    border-radius: 10px;
+    padding: 15px 30px;
+    margin: 20px 0;
+    color: #555;
+    line-height: 2;
+}
+
+.post-copyright a {
+    text-decoration: none;
+    color: #205caa;
+}
+
 .guest-op {
     margin: 10px 0;
     padding: 0;
@@ -170,8 +184,8 @@
 }
 
 .guest-op span {
-    color: #DDDDDD;
-    text-shadow: 0.5px 0.5px 3px gray;
+    color: #ddd;
+    /*text-shadow: 0.5px 0.5px 3px gray;*/
     position: relative;
     top: 5px;
 }
