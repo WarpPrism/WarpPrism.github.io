@@ -178,6 +178,9 @@
 	}
 	#essay-item {
 		padding: 10px;
+		border-left: none;
+		border-radius: 5px;
+		margin-bottom: 5px;
 	}
 	#essay-title {
 		font-size: 20px;
@@ -187,5 +190,8 @@
 	}
 	#essay-left #left-tag-div .tag {
 		font-size: 12px;
+	}
+	#top {
+		display: none;
 	}
 }

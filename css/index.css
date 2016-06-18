@@ -113,13 +113,14 @@
 @media screen and (max-width: 425px) {
     #index-main-content {
         padding-top: 10px;
+        box-shadow: none;
     }
     #index-main-content h2 {
-        font-size: 17px;
+        display: none;
     }
     #index-main-content .content-column {
         width: 100%;
-        margin: 0 5px;
+        margin: 0 2px;
         background: none;
         box-shadow: none;
         border-bottom: solid 1px gray;
@@ -135,6 +136,9 @@
         font-size: 16px;
     }
     #index-main-content ul li span.date {
+        display: none;
+    }
+    #index-container #img-carousel {
         display: none;
     }
     .more {

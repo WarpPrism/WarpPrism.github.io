@@ -157,6 +157,54 @@ h1, h2, h3, h4, h5, p, ul, li, span, div {
     transition: all 0.5s ease-in-out;
 }
 
+/*footer*/
+#footer-div {
+    width: 100%;
+}
+#footer-div .footer1 a {
+    text-decoration: none;
+}
+
+#footer-div .footer1 {
+    border-top: solid 5px gray;
+    background: #333333;
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+    color: #FFFFFF;
+}
+
+#footer-div .footer1 .foot-item {
+    color: #FFFFFF;
+    margin: 0 10px;
+}
+
+#footer-div .footer1 a:hover {
+    color: #0072E3;
+    text-decoration: none;
+}
+
+#footer-div .modal-header {
+    background: #00a1ea;
+    color: #FFFFFF;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#footer-div .footer2 {
+    background: #333;
+    padding: 5px;
+    text-align: center;
+    overflow: hidden;
+    color: #FFFFFF;
+}
+
+#footer-div .footer2 span {
+    color: #FFFFFF;
+    margin: 0 10px;
+    font-family: blackjackregular, serif;
+}
+
 @media screen and (max-width: 425px) {
     #index-header {
         padding: 5px;
@@ -167,7 +215,7 @@ h1, h2, h3, h4, h5, p, ul, li, span, div {
         margin: 0 10px;
     }
     #index-header h1 {
-        font-size: 25px;
+        font-size: 30px;
     }
     #index-header #motto {
         display: none;
@@ -176,13 +224,15 @@ h1, h2, h3, h4, h5, p, ul, li, span, div {
         border-bottom: solid 5px #00a1ea;
     }
     #index-nav ul {
-        margin-bottom: 5px;
         margin-top: 0;
-        padding-left: 8px;
+        margin-bottom: 0;
+        padding-left: 10px;
+        padding-bottom: 5px;
+        overflow: hidden;
     }
     #index-nav ul li {
         text-align: center;
-        font-size: 15px;
+        font-size: 17px;
         margin: 0;
         padding: 2px;
     }
@@ -192,52 +242,14 @@ h1, h2, h3, h4, h5, p, ul, li, span, div {
     #index-nav #nav-indicator {
         display: none;
     }
-}
 
-/*footer*/
-#footer-div {
-    width: 100%;
-}
-.footer1 a {
-    text-decoration: none;
-}
-
-.footer1 {
-    border-top: solid 5px gray;
-    background: #333333;
-    padding: 10px;
-    text-align: center;
-    overflow: hidden;
-    color: #FFFFFF;
-}
-
-.footer1 .foot-item {
-    color: #FFFFFF;
-    margin: 0 10px;
-}
-
-.footer1 a:hover {
-    color: #0072E3;
-    text-decoration: none;
-}
-
-.modal-header {
-    background: #00a1ea;
-    color: #FFFFFF;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.footer2 {
-    background: #333333;
-    padding: 5px;
-    text-align: center;
-    overflow: hidden;
-    color: #FFFFFF;
-}
-
-.footer2 span {
-    color: #FFFFFF;
-    margin: 0 10px;
-    font-family: blackjackregular, serif;
+    #footer-div .footer1 .foot-item {
+        margin: 0;
+    }
+    #footer-div .footer1 span.octicon {
+        display: none;
+    }
+    #footer-div .footer1, .footer2 {
+        padding: 5px 0 0 0;
+    }
 }

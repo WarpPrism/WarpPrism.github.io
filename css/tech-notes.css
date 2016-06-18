@@ -176,6 +176,9 @@
 	}
 	#tn-item {
 		padding: 10px;
+		border-left: none;
+		border-radius: 5px;
+		margin-bottom: 5px;
 	}
 	#tn-title {
 		font-size: 20px;
@@ -185,5 +188,8 @@
 	}
 	#tn-left #left-tag-div .tag {
 		font-size: 12px;
+	}
+	#top {
+		display: none;
 	}
 }

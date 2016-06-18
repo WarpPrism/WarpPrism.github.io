@@ -255,6 +255,9 @@
         -webkit-box-shadow: none;
         overflow: hidden;
     }
+    #top {
+        display: none;
+    }
     .post .header h2 {
         font-size: 25px;
     }
