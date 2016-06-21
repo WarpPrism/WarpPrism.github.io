@@ -2,72 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="baidu-site-verification" content="3EBiLq4RXv" />
-    <meta name="keywords" content="ZhouJihao, zhoujihao, 周吉昊, blog, jihaoblog, 前端开发, 个人博客"/>
-    <meta name="description" content="<h3 id="section">前言</h3>
-<p>最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案，因为它轻量且高效，足够满足一个微信号的访问需求。而我对tornado还不是很了解，所以需要深入学习一下。</p>
-
- "/>
-    <meta name="robots" content="index,follow"/>
-    <meta name="google" content="index,follow" />
-    <meta name="googlebot" content="index,follow" />
-    <meta name="verify" content="index,follow" />
-    <meta name="author" content="Jihao" />
-    <meta name="HandheldFriendly" content="true">
-
-    <link rel="icon" href="/imgs/favicon.ico"/>
+    <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
+    <meta name="description" content="最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案"/>
+    <link rel="shortcut icon" href="/imgs/favicon.ico"/>
     <!--Bootstrap And Octicons-->
     <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
     <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
 
-    <!-- Release Mode -->
-    <link rel="stylesheet" href="/build/css/site_base.css"/>
     
-        <link rel="stylesheet" href="/build/css/highlight.css"/>
+        <link rel="stylesheet" href="/build/css/site_base.css"/>
+        
+            <link rel="stylesheet" href="/build/css/highlight.css"/>
+        
+            <link rel="stylesheet" href="/build/css/post.css"/>
+        
+
+        <!-- 百度js推送 -->
+        <script>
+            (function(){
+                var bp = document.createElement('script');
+                var curProtocol = window.location.protocol.split(':')[0];
+                if (curProtocol === 'https') {
+                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                }
+                else {
+                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                }
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(bp, s);
+            })();
+        </script>
+
+        <!--baidu analysis-->
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?d2cf9f077383b0c8be2ddc28c141314d";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+        <!--Google Analysis-->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-79596803-1', 'auto');
+          ga('send', 'pageview');
+        </script>
     
-        <link rel="stylesheet" href="/build/css/post.css"/>
-    
-
-    <!-- Debug Mode -->
-    <!-- <link rel="stylesheet" href="/css/site_base.css"/>
-    
-        <link rel="stylesheet" href="/css/highlight.css"/>
-    
-        <link rel="stylesheet" href="/css/post.css"/>
-     -->
-
-    <!-- 百度js推送 -->
-    <script>
-        (function(){
-            var bp = document.createElement('script');
-            var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') {
-                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-            }
-            else {
-                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-            }
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(bp, s);
-        })();
-    </script>
-
-    <!--baidu analysis-->
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?d2cf9f077383b0c8be2ddc28c141314d";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-
-
-
     <title>开始搭建Tornado服务器</title>
 </head>
 
@@ -86,10 +75,10 @@
 
             <h1 class="animated flipInX">
                 <img id="logo" src="/build/imgs/logo.png" alt=""/>
-                Ji Hao's Blog
+                Jihao's Blog
             </h1>
             <h4 id="motto">
-                <span><b>"Never let it go."</b></span>
+                <span><b>Never let it go</b></span>
             </h4>
         </div>
     </div>
@@ -162,6 +151,7 @@
             <hr class="boundary">
             <article>
                 <h3 id="section">前言</h3>
+
 <p>最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案，因为它轻量且高效，足够满足一个微信号的访问需求。而我对tornado还不是很了解，所以需要深入学习一下。</p>
 
 <h3 id="section-1">介绍</h3>
@@ -233,10 +223,7 @@
             &nbsp;Share This Post
         </h2>
 
-        <div class="ds-share flat" data-thread-key="/tech-post/2015/10/17/TornadoIntroduction" data-title="开始搭建Tornado服务器" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="<h3 id="section">前言</h3>
-<p>最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案，因为它轻量且高效，足够满足一个微信号的访问需求。而我对tornado还不是很了解，所以需要深入学习一下。</p>
-
-......" data-url="http://warpprism.github.io/tech-post/2015/10/17/TornadoIntroduction.html">
+        <div class="ds-share flat" data-thread-key="/tech-post/2015/10/17/TornadoIntroduction" data-title="开始搭建Tornado服务器" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案......" data-url="http://warpprism.github.io/tech-post/2015/10/17/TornadoIntroduction.html">
             <div class="ds-share-inline">
                 <ul class="ds-share-icons-16">
                     <li data-toggle="ds-share-icons-more">
@@ -330,8 +317,10 @@
 
 	</div>
 	<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/build/js/main.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/build/js/main.js"></script>
+
+    
 
 
 </body>

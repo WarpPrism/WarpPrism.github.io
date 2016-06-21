@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Iridescent"
+title: Jihao's Blog
 styles: [index.css]
 scripts: [index.js]
 ---
@@ -64,7 +64,6 @@ scripts: [index.js]
                 {% if post.categories contains 'tech-post' %}
                 <li>
                     <a href="{{ post.url }}">{{ post.title }}</a>
-                    <span class="date">{{ post.date | date_to_string }}</span>
                 </li>
                 {% endif %}
                 {% endfor %}
@@ -79,13 +78,13 @@ scripts: [index.js]
             <div class="page-header">
                 <h3><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Casual Essay Notes</h3>
             </div>
-            
+
             <ul class="post-list2 post-list">
                 {% for post in site.posts %}
                 {% if post.categories contains 'essay' %}
                 <li>
                     <a href="{{ post.url }}"> {{ post.title }}</a>
-                    <span class="date">{{ post.date | date_to_string }}</span>
+                    <!-- <span class="date">{{ post.date | date_to_string }}</span> -->
                 </li>
                 {% endif %}
                 {% endfor %}
