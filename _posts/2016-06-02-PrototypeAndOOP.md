@@ -7,7 +7,7 @@ excerpt: 在Javacript中，有两种类型的值，原始值和对象，原始�
 ---
 
 ## 基础概念
-在Javacript中，有两种类型的值，原始值和对象，原始值（primitive type）有Undifined, Null, Boolean, Number, String，一般存储在栈stack中，而对象分为普通对象和函数对象，存储在堆heap中，Object和Function是JS自带的函数对象。举例如下：
+在Javacript中，有两种类型的值，基本类型）和 引用类型 （对象）， 基本类型 （primitive type）有Undifined, Null, Boolean, Number, String，一般存储在栈stack中，而对象分为普通对象和函数对象，存储在堆heap中，Object和Function是JS自带的函数对象。举例如下：
 
 ~~~ javascript
 function f1() {} // 注：函数作为构造子，一般情况首字母要大写
