@@ -1,3 +1,12 @@
+---
+layout: post
+title: Javacript中的排序算法
+tags: [JavaScript]
+categories: tech-post
+excerpt: 对于Javascript来说，推荐快速排序算法，其执行效率比较高。
+---
+
+三种常用的简单排序算法（Javacript描述），默认从小到大排列，下面是code：
 ~~~javascript
 function quickSort(arr) {
 	if (Object.prototype.toString.call(arr) != '[object Array]') {
@@ -20,8 +29,44 @@ function quickSort(arr) {
 	return (quickSort(left).concat([pivot], quickSort(right)));
 }
 
-var a = [10, 3, 8, 0, 10, 2, 78, 09, 33, 2, 10.65, 89, 106];
-console.log(quickSort(a));
-var b = new Function();
-console.log(quickSort(b));
+function selectSort(arr) {
+	if (Object.prototype.toString.call(arr) != '[object Array]') {
+		return;
+	}
+	if (arr.length <= 1) return arr;
+
+	for (var i = 0; i < arr.length - 1; i++) {
+		var min = i;
+		for (var j = i + 1; j < arr.length; j++) {
+			if (arr[j] < arr[min]) {
+				min = j;
+			}
+		}
+		var temp = arr[min];
+		arr[min] = arr[i];
+		arr[i] = temp;
+	}
+	return arr;
+}
+
+function bubbleSort(arr) {
+	if (Object.prototype.toString.call(arr) != '[object Array]') {
+		return;
+	}
+	if (arr.length <= 1) return arr;
+
+	for (var i = 0; i < arr.length - 1; i++) {
+		for (var j = i; j < arr.length; j++) {
+			if (arr[j + 1] < arr[j]) {
+				// swap
+				var temp = arr[j + 1];
+				arr[j + 1] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+	return arr;
+}
 ~~~
+
+对于Javascript来说，推荐快速排序算法，其执行效率比较高。
