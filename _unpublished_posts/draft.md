@@ -6,7 +6,7 @@ categories: tech-post
 excerpt: 对于Javascript来说，推荐快速排序算法，其执行效率比较高。
 ---
 
-## 一 单例模式
+## 一. 单例模式
 所谓单例模式，就是为一个类创建**唯一的**一个实例。
 但JS是一种无类语言，只能说创建一个唯一的对象{}，这个对象具有独一无二的功能。
 
@@ -44,7 +44,7 @@ console.log(createMask());
 ~~~
 
 
-## 二 观察者模式
+## 二. 观察者模式
 又称作发布-订阅模式，发布者发布信息事件，而订阅者**主动监听**信息事件，并执行后续的函数。一般情况下，
 发布者和订阅者为同一对象。
 
@@ -87,7 +87,7 @@ Observer.prototype = {
         }
     }
 };
-
+// Test
 var Message = new Observer();
 Message.listen("ready", function() {
     console.log("Hello World!");
@@ -104,6 +104,10 @@ Message.trigger("not_ready");
 
 Message.trigger("ready", "XiaoMing");
 ~~~
+
+## 参考
+
+[常用的Javascript设计模式](http://blog.jobbole.com/29454/)
 
 
 
