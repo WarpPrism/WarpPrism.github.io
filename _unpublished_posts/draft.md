@@ -6,67 +6,106 @@ categories: tech-post
 excerpt: 对于Javascript来说，推荐快速排序算法，其执行效率比较高。
 ---
 
-三种常用的简单排序算法（Javacript描述），默认从小到大排列，下面是code：
+## 一 单例模式
+所谓单例模式，就是为一个类创建**唯一的**一个实例。
+但JS是一种无类语言，只能说创建一个唯一的对象{}，这个对象具有独一无二的功能。
+
+比如页面上唯一一个遮罩层mask，就可以这样实现：
+
+#### 闭包实现
+
 ~~~javascript
-function quickSort(arr) {
-	if (Object.prototype.toString.call(arr) != '[object Array]') {
-		return 'Error: Not Array Object';
-	}
-	if (arr.length <= 1) {
-		return arr;
-	}
-
-	var middle = Math.floor(arr.length / 2);
-	var pivot = arr.splice(middle, 1)[0];
-	var left = [], right = [];
-	for (var i = 0; i < arr.length; i++) {
-		if (arr[i] < pivot) {
-			left.push(arr[i]);
-		} else {
-			right.push(arr[i]);
-		}
-	}
-	return (quickSort(left).concat([pivot], quickSort(right)));
-}
-
-function selectSort(arr) {
-	if (Object.prototype.toString.call(arr) != '[object Array]') {
-		return;
-	}
-	if (arr.length <= 1) return arr;
-
-	for (var i = 0; i < arr.length - 1; i++) {
-		var min = i;
-		for (var j = i + 1; j < arr.length; j++) {
-			if (arr[j] < arr[min]) {
-				min = j;
-			}
-		}
-		var temp = arr[min];
-		arr[min] = arr[i];
-		arr[i] = temp;
-	}
-	return arr;
-}
-
-function bubbleSort(arr) {
-	if (Object.prototype.toString.call(arr) != '[object Array]') {
-		return;
-	}
-	if (arr.length <= 1) return arr;
-
-	for (var i = 0; i < arr.length - 1; i++) {
-		for (var j = i; j < arr.length; j++) {
-			if (arr[j + 1] < arr[j]) {
-				// swap
-				var temp = arr[j + 1];
-				arr[j + 1] = arr[j];
-				arr[j] = temp;
-			}
-		}
-	}
-	return arr;
-}
+var createMask = function() {
+    var mask;
+    return function() {
+        return mask || 
+        (mask = document.body.appendChild(document.createElement("div")));
+    }
+}()
+var m = createMask();
+console.log(m);
 ~~~
 
-对于Javascript来说，推荐快速排序算法，其执行效率比较高。
+#### 桥接模式实现（函数可以作为参数传入）
+
+~~~javascript
+var singleton = function(fn) {
+    var obj;
+    return function() {
+        console.log(this, arguments);
+        return obj || (obj = fn.apply(this, arguments));
+    }
+}
+
+var createMask = singleton(function() {
+    return document.body.appendChild(document.createElement('div'));
+});
+console.log(createMask());
+~~~
+
+
+## 二 观察者模式
+又称作发布-订阅模式，发布者发布信息事件，而订阅者**主动监听**信息事件，并执行后续的函数。一般情况下，
+发布者和订阅者为同一对象。
+
+> 观察者模式可以很好的实现模块间的解耦。
+
+代码如下：
+
+~~~javascript
+function Observer() {
+    this.handlers = {};
+}
+Observer.prototype = {
+    constructor: Observer,
+    listen: function(event, handler) {
+        if (typeof this.handlers[event] == "undefined" || !this.handlers[event]) {
+            console.log("Add new handler type: " + event);
+            this.handlers[event] = [];
+        }
+        this.handlers[event].push(handler);
+    },
+    trigger: function(event, data=null) {
+        if (typeof this.handlers[event] == "undefined" || !this.handlers[event]) {
+            console.log("Observer has no such event: " + event);
+            return;
+        } else {
+            for (var i = 0; i < this.handlers[event].length; i++) {
+                this.handlers[event][i](data);
+            }
+        }
+    },
+    remove: function(event, handler) {
+        var handlers = this.handlers[event];
+        if (Object.prototype.toString.call(handlers) == "[object Array]") {
+            for (var i = 0; i < handlers.length; i++) {
+                if (handlers[i] === handler) {
+                    break;
+                }
+            }
+            handlers.splice(i, 1);
+        }
+    }
+};
+
+var Message = new Observer();
+Message.listen("ready", function() {
+    console.log("Hello World!");
+});
+
+Message.listen("ready", function(data) {
+    if (!data) {
+        console.log("Good Night!");
+    } else {
+        console.log("Good Night! " + data);
+    }
+});
+Message.trigger("not_ready");
+
+Message.trigger("ready", "XiaoMing");
+~~~
+
+
+
+
+
