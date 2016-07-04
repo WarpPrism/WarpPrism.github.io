@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Javacript中的排序算法
+title: 常用的Javacript设计模式
 tags: [JavaScript]
 categories: tech-post
-excerpt: 对于Javascript来说，推荐快速排序算法，其执行效率比较高。
+excerpt: 本文探讨了几种常用的设计模式，总结的不是很全，因为笔者没有太多这方面的实践经验。需要完整版请参考更多资料。
 ---
 
 ## 一. 单例模式
@@ -104,6 +104,7 @@ Message.trigger("not_ready");
 
 Message.trigger("ready", "XiaoMing");
 ~~~
+
 
 ## 参考
 
