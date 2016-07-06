@@ -9,6 +9,8 @@ excerpt: 本文探讨了几种常用的设计模式，总结的不是很全，�
 ## 前言
 大二和大三期间分别作了两个小项目，Quoridor和ImageProcessor，都用到了Canvas，但当时只是为了尽快的完成项目，没有仔细总结canvas的用法，时间久了，难免遗忘，在此回顾总结一下。
 
+[什么是Canvas呢，这是一个Demo](http://warpprism.github.io/Advanced-WFE/Canvas_Clock/)
+
 ~~~javascript
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
