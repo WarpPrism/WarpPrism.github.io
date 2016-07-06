@@ -1,3 +1,11 @@
+---
+layout: post
+title: JavaScript正则攻略
+tags: [JavaScript, RegExp]
+categories: tech-post
+excerpt: 正则表达式(regular expression)是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。最近的六十年中，正则表达式逐渐从模糊而深奥的数学概念演变成为计算机技术森林中的一只形神美丽且声音动听的百灵鸟。在数以亿万计的各种应用软件中，我们都可以看到正则表达式优美的舞姿。
+---
+> 正则表达式(regular expression)是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。最近的六十年中，正则表达式逐渐从模糊而深奥的数学概念演变成为计算机技术森林中的一只形神美丽且声音动听的百灵鸟。在数以亿万计的各种应用软件中，我们都可以看到正则表达式优美的舞姿。
 
 ### JavaScript RegExp对象
 RegExp是正则表达式的缩写,可以根据正则匹配模式(pattern) 通过new关键字来创建.
@@ -8,6 +16,7 @@ new RegExp(pattern, attributes)
 ~~~
 
 attributes 可以取i(匹配时大小写不敏感), g(全剧匹配), m(多行匹配)
+
 RegExp有三个方法,分别是:
 
 1. RegExp.test(str), 检验str是否存在pattern定义的字符串,返回true和false
@@ -31,6 +40,21 @@ if (pattern.global) {
 console.log(pattern.source); //ain
 ~~~
 
+### 贪婪匹配和懒惰匹配
+贪婪匹配：在匹配过程中，匹配结果的长度越长越好。
+
+懒惰匹配：与之相反
+
+js中默认使用贪婪匹配，使用懒惰匹配需要限定符 '?'
+
+~~~javascript
+var str = 'hello world welcome to my world';
+pattern1 = /hello.*world/;  //贪婪
+pattern2 = /hello.*?world/; //懒惰
+console.log(pattern1.exec(str));
+console.log(pattern2.exec(str));
+~~~
+
 ### 常用正则格式
 - [adgk]            查找括号内的任意字符
 - [^adgk]           查找__非__括号内的任意字符
@@ -45,6 +69,34 @@ console.log(pattern.source); //ain
 - \D                查找非数字字符
 - \s                查找空白字符
 - \S                查找非空白字符
+- \w                查找单词字符
+- \W                查找非单词字符
+
+### String对象中与正则有关的方法
+
+~~~javascript
+str.search(RegExp || substr)
+返回第一个匹配子串的下标位置，若不存在，返回-1
+同时忽略全局匹配标志g，但不会忽略i标志
+
+str.match(RegExp || substr)
+返回值：数组或者null
+如果RegExp存在标志g，则返回arr: [匹配的子串, 子表达式匹配的子串]
+返回的数组还含有两个对象属性。index 属性声明的是匹配文本的起始字符
+在stringObject中的位置，input属性声明的是对 stringObject 的引用。
+
+不存在标志g，返回arr: [匹配结果1, 匹配结果2, 匹配结果3......]
+
+str.replace(RegExp/substr, replacement)
+用replacement替换匹配到的子串
+没有g标志是，只替换第一个匹配结果
+replacement可以为字符串，也可以是函数
+
+str.split(separator, howmany(optional))
+separator 必需，正则或字符串
+返回值是数组，即被separator分开的部分组成的数组，但不包括separator本身
+String.split() ~= Array.join()
+~~~
 
 ### 常用的匹配模式
 - 正整数            /^[1-9]\d*$/
@@ -61,5 +113,7 @@ console.log(pattern.source); //ain
 - 15位或18位身份证                  /\d{15}|\d{18}/
 - ip格式                            /\d+\.\d+\.\d+\.\d/
 - 验证是否含有^%&',;=?$\"等字符     /[^%&',;=?$\x22]+/
+- [更多](http://www.codefans.net/articles/915.shtml)
 
-[更多](http://www.codefans.net/articles/915.shtml)
+### 参考
+[我所认识的JavaScript正则表达式](http://www.php100.com/html/it/biancheng/2015/0320/8825.html)
