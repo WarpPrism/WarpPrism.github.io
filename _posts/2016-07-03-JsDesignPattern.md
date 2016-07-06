@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 常用的Javacript设计模式
+title: 常用的JavaScript设计模式
 tags: [JavaScript]
 categories: tech-post
 excerpt: 本文探讨了几种常用的设计模式，总结的不是很全，因为笔者没有太多这方面的实践经验。需要完整版请参考更多资料。
