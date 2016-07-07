@@ -18,8 +18,8 @@ canvas坐标系：
 ~~~javascript
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
-canvas.width = _w;
-canvas.height = _h;
+canvas.width = number;
+canvas.height = number;
 ~~~
 
 ### 颜色，样式，阴影
