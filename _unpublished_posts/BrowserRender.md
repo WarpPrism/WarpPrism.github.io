@@ -30,8 +30,11 @@ Render Tree Example
 8. 减少DOM元素个数
 9. favicon.icon要尽可能小且可缓存
 10. 配置Etags，（实体标签）用于判断浏览器中缓存内容和服务器中是否一致，比last-modified date更加灵活的机制。
+11. [More On Yacent's Blog](https://www.zybuluo.com/yacent/note/370110)
 
+## 谈谈requestAnimationFrame原理，以及你知道的其他前端动画方法
+The window.requestAnimationFrame() method tells the browser that you wish to perform an animation and requests that the browser call a specified function to update an animation before the next repaint. The method takes as an argument a callback to be invoked before the repaint.
 
-## 总结
+requestAnimationFrame(callback fn)的核心原理是__递归__，即在update函数内部递归调用requestAnimationFrame(update)，从而完成动画。它是为浏览器专门设计的动画API，当窗口处于未激活状态时，动画会自动停止，降低了CPU开销。
 
-PS：要好好复习一下计网的知识了，我可是交了学费的，不能把知识还给老师啊。
+其他实现动画的方法：CSS3 animation @keyframes || CSS3 transition: all 1s ease-in-out 0.5s; || setInterval setTimeout draw() update() loop()模式 || jQuery 动画API || canvas 等等。
