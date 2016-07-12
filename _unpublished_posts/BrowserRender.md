@@ -38,3 +38,60 @@ The window.requestAnimationFrame() method tells the browser that you wish to per
 requestAnimationFrame(callback fn)的核心原理是__递归__，即在update函数内部递归调用requestAnimationFrame(update)，从而完成动画。它是为浏览器专门设计的动画API，当窗口处于未激活状态时，动画会自动停止，降低了CPU开销。
 
 其他实现动画的方法：CSS3 animation @keyframes || CSS3 transition: all 1s ease-in-out 0.5s; || setInterval setTimeout draw() update() loop()模式 || jQuery 动画API || canvas 等等。
+
+## 写一下快速排序
+
+~~~javascript
+function quickSort(arr) {
+  if (Object.prototype.toString.call(arr) != "[object Array]") {
+    return;
+  }
+  if (arr.length <= 1) {
+    return arr;
+  }
+  var middle = Math.floor(arr.length / 2);
+  var pivot = arr.splice(middle, 1)[0];
+  var left = [];
+  var right = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
+    }
+  }
+  
+  return quickSort(left).concat([pivot], quickSort(right));
+}
+~~~
+
+## 那再写一下二分搜索
+
+~~~javascript
+function binarySearch(arr, target) {
+  if (Object.prototype.toString.call(arr) != "[object Array]") {
+    return;
+  }
+  // arr前提要是从小到大排列的数组
+  arr = quickSort(arr);
+  var bottom = 0;
+  var top = arr.length - 1;
+  var position;
+  
+  while (bottom < top) {
+    var middle = Math.floor((bottom + top) / 2);
+    if (arr[middle] == target) {
+      position = middle;
+      console.log("Find target at position: " + position);
+      return position;
+    } else if (arr[middle] < target) {
+      bottom = middle + 1;
+    } else if (arr[middle] > target) {
+      top = middle;
+    }
+  }
+  
+  return position;
+}
+~~~
+
