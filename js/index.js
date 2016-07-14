@@ -7,7 +7,7 @@ $(function() {
     $("#myCarousel").carousel({
         interval: 3000
     });
-    var window_width = window.innerHeight || document.documentElement.clientWidth;
+    var window_width = window.innerWidth || document.documentElement.clientWidth;
     if (window_width > 425) {
         $(window).scroll(scrollAnimation);
     }
