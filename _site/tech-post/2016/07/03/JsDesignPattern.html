@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="baidu-site-verification" content="3EBiLq4RXv" />
+    <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
+    <meta name="description" content="本文探讨了几种常用的设计模式，总结的不是很全，因为笔者没有太多这方面的实践经验。需要完整版请参考更多资料。"/>
+    <link rel="shortcut icon" href="/imgs/favicon.ico"/>
+    <!--Bootstrap And Octicons-->
+    <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
+
+    
+        <link rel="stylesheet" href="/css/site_base.css"/>
+        
+            <link rel="stylesheet" href="/css/highlight.css"/>
+        
+            <link rel="stylesheet" href="/css/post.css"/>
+        
+    
+    <title>常用的JavaScript设计模式</title>
+</head>
+
+<body>
+	<div class="container-fluid" id="default-wrapper">
+		
+<!--Blog Header-->
+<div class="container-fluid">
+    <!-- <div class="row">
+        <div class="alert alert-info" role="alert" style="border-radius: 0; text-align: center; text-decoration: underline; margin: 0; border: solid 2px gray;">
+            <h4>Blog Is Under Developing</h4>
+        </div>
+    </div> -->
+    <div class="row">
+        <div id="index-header">
+
+            <h1 class="animated flipInX">
+                <img id="logo" src="/build/imgs/logo.png" alt=""/>
+                Jihao's Blog
+            </h1>
+            <h4 id="motto">
+                <span><b>Never let it go</b></span>
+            </h4>
+        </div>
+    </div>
+    <div class="row" id="index-nav">
+        <ul>
+            <li>
+                <a href="/">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Home
+                </a>
+            </li>
+            <li>
+                <a href="/pages/tech-notes.html">
+                    <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Tech Posts
+                </a>
+            </li>
+            <li>
+                <a href="/pages/essay.html">
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    &nbsp;&nbsp;Essay
+                </a>
+            </li>
+            <li>
+                <a href="/pages/about.html">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    &nbsp;&nbsp;About
+                </a>
+            </li>
+        </ul>
+        <span id="nav-indicator"></span>
+    </div>
+</div>
+
+		<div class="row" id="post-wrapper">
+    <div id="post-body">
+        <div class="post">
+            <div class="header">
+                <h2>常用的JavaScript设计模式</h2>
+                <p class="post-meta">
+                    <span class="octicon octicon-clock"></span>
+                        Jul 3, 2016
+                        
+                        
+                </p>
+                <p class="post-tag">
+                    <span>
+                        
+                        <a href="javascript:void(0)">
+                            <span class="octicon octicon-list-unordered"></span>
+                            tech-post
+                        </a>
+                        
+                    </span>
+                    <span>
+                        
+                        <a href="javascript:void(0)">
+                            <span class="octicon octicon-tag"></span>
+                            JavaScript
+                        </a>
+                        
+                    </span>
+                </p>
+            </div>
+            <hr class="boundary">
+            <article>
+                <h2 id="section">一. 单例模式</h2>
+<p>所谓单例模式，就是为一个类创建<strong>唯一的</strong>一个实例。<br />
+但JS是一种无类语言，只能说创建一个唯一的对象{}，这个对象具有独一无二的功能。</p>
+
+<p>比如页面上唯一一个遮罩层mask，就可以这样实现：</p>
+
+<h4 id="section-1">闭包实现</h4>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">createMask</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">mask</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">mask</span> <span class="o">||</span> 
+        <span class="p">(</span><span class="nx">mask</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)));</span>
+    <span class="p">}</span>
+<span class="p">}()</span>
+<span class="kd">var</span> <span class="nx">m</span> <span class="o">=</span> <span class="nx">createMask</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h4 id="section-2">桥接模式实现（函数可以作为参数传入）</h4>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">singleton</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">obj</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nx">obj</span> <span class="o">||</span> <span class="p">(</span><span class="nx">obj</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">createMask</span> <span class="o">=</span> <span class="nx">singleton</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'div'</span><span class="p">));</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">createMask</span><span class="p">());</span>
+</code></pre>
+</div>
+
+<h2 id="section-3">二. 观察者模式</h2>
+<p>又称作发布-订阅模式，发布者发布信息事件，而订阅者<strong>主动监听</strong>信息事件，并执行后续的函数。一般情况下，<br />
+发布者和订阅者为同一对象。</p>
+
+<p><strong>观察者模式可以很好的实现模块间的解耦。</strong></p>
+
+<p>代码如下：</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Observer</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="p">}</span>
+<span class="nx">Observer</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">constructor</span><span class="p">:</span> <span class="nx">Observer</span><span class="p">,</span>
+    <span class="na">listen</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"undefined"</span> <span class="o">||</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Add new handler type: "</span> <span class="o">+</span> <span class="nx">event</span><span class="p">);</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">handler</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="na">trigger</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">data</span><span class="o">=</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"undefined"</span> <span class="o">||</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Observer has no such event: "</span> <span class="o">+</span> <span class="nx">event</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">][</span><span class="nx">i</span><span class="p">](</span><span class="nx">data</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">remove</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">handlers</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">event</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">handlers</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"[object Array]"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">handlers</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">handlers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="nx">handlers</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">// Test</span>
+<span class="kd">var</span> <span class="nx">Message</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Observer</span><span class="p">();</span>
+<span class="nx">Message</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="s2">"ready"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">Message</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="s2">"ready"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Good Night!"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Good Night! "</span> <span class="o">+</span> <span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="nx">Message</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">"not_ready"</span><span class="p">);</span>
+
+<span class="nx">Message</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">"ready"</span><span class="p">,</span> <span class="s2">"XiaoMing"</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h2 id="section-4">参考</h2>
+
+<p><a href="http://blog.jobbole.com/29454/">常用的Javascript设计模式</a></p>
+
+
+            </article>
+            <hr class="boundary">
+        </div>
+
+        <p class="post-copyright">
+            本文的版权归作者
+            <a href="http://warpprism.github.io">ZhouJihao</a>
+            所有，采用
+            <a href="http://creativecommons.org/licenses/by-nc/3.0/">Attribution-NonCommercial 3.0 License</a>。
+            任何人可以进行转载、分享，但不可在未经允许的情况下用于商业用途；转载请注明出处。感谢配合！
+        </p>
+
+
+        <h2 class="guest-op">
+            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+            &nbsp;Share This Post
+        </h2>
+
+        <div class="ds-share flat" data-thread-key="/tech-post/2016/07/03/JsDesignPattern" data-title="常用的JavaScript设计模式" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="本文探讨了几种常用的设计模式，总结的不是很全，因为笔者没有太多这方面的实践经验。需要完整版请参考更多资料。......" data-url="http://warpprism.github.io/tech-post/2016/07/03/JsDesignPattern.html">
+            <div class="ds-share-inline">
+                <ul class="ds-share-icons-16">
+                    <li data-toggle="ds-share-icons-more">
+                        <a class="ds-more" href="javascript:void(0);">分享到：</a>
+                    </li>
+                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                    <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+                    <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                </ul>
+                <div class="ds-share-icons-more">
+                </div>
+            </div>
+        </div>
+
+        <h2 class="guest-op">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            &nbsp;Leave A Comment
+        </h2>
+
+        <!-- 多说评论框 start -->
+        <div class="ds-thread" data-thread-key="/tech-post/2016/07/03/JsDesignPattern" data-title="常用的JavaScript设计模式" data-url="http://warpprism.github.io/tech-post/2016/07/03/JsDesignPattern.html"></div>
+        <!-- 多说评论框 end -->
+        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:"zhoujihao"};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+        <!-- 多说公共JS代码 end -->
+
+    </div>
+
+    <!-- Return To Top -->
+    <a id="top" href="#">
+        <span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
+        <span class="text">Top</span>
+    </a>
+</div>
+
+		
+<div class="container-fluid" id="footer-div">
+    <div class="row">
+        <div class="footer1">
+            <a href="#" class="foot-item" role="button" data-toggle="modal" data-target=".email-modal">
+                <span class="octicon octicon-mail"></span>
+                <span>Email@me</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/warpprism" target="_blank">
+                <span class="octicon octicon-mark-github"></span>
+                <span>My Github</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/WarpPrism/WarpPrism.github.io" target="_blank">
+                <span class="octicon octicon-heart"></span>
+                <span>Download Theme</span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="footer2">
+            <span>Copyright &copy; ZhouJihao</span>
+            |
+            <span>Powered By Jekyll</span>
+        </div>
+    </div>
+
+
+    <div class="modal fade email-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <b>
+                        My Email Address
+                    </b>
+                </div>
+                <div class="modal-body">
+                    <b>249662605@qq.com</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	</div>
+	<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/build/js/main.js"></script>
+
+    
+
+
+</body>
+</html>

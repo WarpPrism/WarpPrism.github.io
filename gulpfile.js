@@ -16,6 +16,7 @@ gulp.task('style', function() {
 gulp.task('script', function() {
     return gulp.src('js/*.js')
         .pipe(jshint())
+        .pipe(jshint.reporter('default'))
         .pipe(uglify())
         .pipe(gulp.dest('build/js'));
 });
