@@ -1,4 +1,10 @@
-
+---
+layout: post
+title: 我的Gulp自动化流程
+tags: [Gulp, 前端自动化]
+categories: tech-post
+excerpt: Gulp is a streaming build system, intended for automating and enhance your workflow， 它是一个服务于前端工程自动化的强有力工具，其工作性质和C++ 的make，Java中的Ant， Maven差不多，都是为了方便开发而设计的
+---
 ### 简介
 __Gulp is a streaming build system, intended for automating and enhance your workflow__
 
