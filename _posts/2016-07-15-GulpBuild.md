@@ -114,6 +114,19 @@ gulp.task("watch", function() {
 gulp.task("default", function() {
     gulp.start("templates", "style", "script", "serve", "watch");
 });
+
+
+// if development is node, just add nodemon
+/*var nodemon = require('gulp-nodemon');
+
+gulp.task('nodemon', function() {
+    return nodemon({
+        script: 'app.js',
+        env: {
+            'NODE_ENV': 'development'
+        }
+    })
+});*/
 ~~~
 
 ### 链接
