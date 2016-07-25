@@ -1,34 +1,6 @@
 /**
  * Created by zhoujihao on 15-10-12.
  */
-var stop = 0;
-
-$(function() {
-    $("#myCarousel").carousel({
-        interval: 3000
-    });
-    var window_width = window.innerWidth || document.documentElement.clientWidth;
-    if (window_width > 425) {
-        $(window).scroll(scrollAnimation);
-    }
-    handleRecent();
-});
-
-function scrollAnimation() {
-    if (stop != 1) {
-        var scrollTop = $(document).scrollTop();
-        var columns = $("#index-main-content").find('.content-column');
-        if (scrollTop >= $(columns[0]).offset().top - 300) {
-            for (var i = 0; i < columns.length; i++) {
-                $(columns[i]).addClass("animated flipInY");
-                $(columns[i]).css("opacity", 1);
-            }
-            stop = 1;
-        } else {
-            return;
-        }
-    }
-}
 
 function handleRecent() {
     // 主也显示 7 篇最近发布的文章
@@ -46,3 +18,12 @@ function handleRecent() {
         }
     }
 }
+window.onload = function() {
+    $('#loader-mask').fadeOut();
+
+    $("#myCarousel").carousel({
+        interval: 3000
+    });
+
+    handleRecent();
+};

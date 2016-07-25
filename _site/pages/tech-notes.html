@@ -3,82 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="baidu-site-verification" content="3EBiLq4RXv" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
     <meta name="description" content="博客寄语：人生中有很多珍贵的东西，只是当它们唾手可得的时候，你不觉得珍贵。珍惜身边的一切，不要等失去了再后悔莫及。"/>
-    <link rel="shortcut icon" href="/imgs/favicon.ico"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
     <!--Bootstrap And Octicons-->
     <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
     <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
 
     
-        <link rel="stylesheet" href="/css/site_base.css"/>
+        <link rel="stylesheet" href="/build/css/site_base.css"/>
         
-            <link rel="stylesheet" href="/css/tech-notes.css"/>
+            <link rel="stylesheet" href="/build/css/tech-notes.css"/>
         
+        <!--Google Analysis-->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-79596803-1', 'auto');
+          ga('send', 'pageview');
+        </script>
     
     <title>TechPosts</title>
 </head>
 
 <body>
-	<div class="container-fluid" id="default-wrapper">
-		
-<!--Blog Header-->
-<div class="container-fluid">
-    <!-- <div class="row">
-        <div class="alert alert-info" role="alert" style="border-radius: 0; text-align: center; text-decoration: underline; margin: 0; border: solid 2px gray;">
-            <h4>Blog Is Under Developing</h4>
-        </div>
-    </div> -->
-    <div class="row">
-        <div id="index-header">
-
-            <h1 class="animated flipInX">
-                <img id="logo" src="/build/imgs/logo.png" alt=""/>
-                Jihao's Blog
-            </h1>
-            <h4 id="motto">
-                <span><b>Never let it go</b></span>
-            </h4>
-        </div>
+	<div class="container-fluid" id="site-wrapper">
+		<div class="container-fluid">
+  <div class="row">
+    <div id="index-header">
+      <h1 class="animated flipInX">
+        <img id="logo" src="/build/imgs/logo.png" alt=""/>
+        Jihao's Blog
+      </h1>
+      <h4 id="motto"><span><b>Never let it go</b></span></h4>
     </div>
-    <div class="row" id="index-nav">
-        <ul>
-            <li>
-                <a href="/">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Home
-                </a>
-            </li>
-            <li>
-                <a href="/pages/tech-notes.html">
-                    <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Tech Posts
-                </a>
-            </li>
-            <li>
-                <a href="/pages/essay.html">
-                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Essay
-                </a>
-            </li>
-            <li>
-                <a href="/pages/about.html">
-                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    &nbsp;&nbsp;About
-                </a>
-            </li>
-        </ul>
-        <span id="nav-indicator"></span>
-    </div>
+  </div>
+  <div class="row" id="index-nav">
+    <ul>
+      <li>
+        <a href="/">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          &nbsp;&nbsp;Home
+        </a>
+      </li>
+      <li>
+        <a href="/pages/tech-notes.html">
+          <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+          &nbsp;&nbsp;Tech Posts
+        </a>
+      </li>
+      <li>
+        <a href="/pages/essay.html">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          &nbsp;&nbsp;Essay
+        </a>
+      </li>
+      <li>
+        <a href="/pages/about.html">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          &nbsp;&nbsp;About
+        </a>
+      </li>
+    </ul>
+    <span id="nav-indicator"></span>
+  </div>
 </div>
 
 		<div class="container-fluid" id="tn-wrapper">
 	<div class="row">
 		<!-- left bar -->
 		<div class="col-sm-9" id="tn-left">
+			
+			<div class="row animated" id="tn-item" data-tag=JavaScriptcanvas>
+				<a href="/tech-post/2016/07/21/CanvasBasis.html" id="tn-title">
+					<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+					&nbsp;
+					HTML5之Canvas —— 代码画出我的心
+				</a>
+				<div id="left-tag-div">
+					
+					<span class="tag">
+						<span class="octicon octicon-tag"></span>
+						JavaScript
+					</span>
+					
+					<span class="tag">
+						<span class="octicon octicon-tag"></span>
+						canvas
+					</span>
+					
+				</div>
+				<div><a href="/tech-post/2016/07/21/CanvasBasis.html" id="tn-excerpt">大二和大三期间分别作了两个小项目，Quoridor和ImageProcessor，都用到了Canvas，但当时只是为了尽快的完成项目，没有仔细总结canvas的用法，时间久了，难免遗忘，在此回顾总结一下。</a></div>
+				<div id="tn-date">
+					<span class="octicon octicon-calendar"></span>
+					21 Jul 2016
+				</div>
+
+			</div>
+			<!--<hr/>-->
 			
 			<div class="row animated" id="tn-item" data-tag=Gulp前端自动化>
 				<a href="/tech-post/2016/07/15/GulpBuild.html" id="tn-title">
@@ -437,6 +463,18 @@
 					</span>
 					
 					
+					<span data-tag=JavaScript class="tag-btn btn btn-default">
+						<span class="octicon octicon-tag"></span>
+						JavaScript
+					</span>
+					
+					<span data-tag=canvas class="tag-btn btn btn-default">
+						<span class="octicon octicon-tag"></span>
+						canvas
+					</span>
+					
+					
+					
 					<span data-tag=Gulp class="tag-btn btn btn-default">
 						<span class="octicon octicon-tag"></span>
 						Gulp
@@ -613,7 +651,7 @@
 <script type="text/javascript" src="/build/js/main.js"></script>
 
     
-        <script type="text/javascript" src="/js/tech-notes.js"></script>
+        <script type="text/javascript" src="/build/js/tech-notes.js"></script>
     
 
 

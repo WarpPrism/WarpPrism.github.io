@@ -25,13 +25,6 @@ function menuAnimation() {
 }
 
 function goToTop() {
-    // $(window).scroll(function() {
-    //     if ($(document).scrollTop() <= 10) {
-    //         $("#top").slideUp("slow");
-    //     } else {
-    //         $("#top").slideDown("slow");
-    //     }
-    // });
     $("#top").click(function(event) {
         event = event || window.event;
         event.preventDefault();

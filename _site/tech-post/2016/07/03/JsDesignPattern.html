@@ -3,78 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="baidu-site-verification" content="3EBiLq4RXv" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
     <meta name="description" content="本文探讨了几种常用的设计模式，总结的不是很全，因为笔者没有太多这方面的实践经验。需要完整版请参考更多资料。"/>
-    <link rel="shortcut icon" href="/imgs/favicon.ico"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
     <!--Bootstrap And Octicons-->
     <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
     <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
 
     
-        <link rel="stylesheet" href="/css/site_base.css"/>
+        <link rel="stylesheet" href="/build/css/site_base.css"/>
         
-            <link rel="stylesheet" href="/css/highlight.css"/>
+            <link rel="stylesheet" href="/build/css/highlight.css"/>
         
-            <link rel="stylesheet" href="/css/post.css"/>
+            <link rel="stylesheet" href="/build/css/post.css"/>
         
+        <!--Google Analysis-->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-79596803-1', 'auto');
+          ga('send', 'pageview');
+        </script>
     
     <title>常用的JavaScript设计模式</title>
 </head>
 
 <body>
-	<div class="container-fluid" id="default-wrapper">
-		
-<!--Blog Header-->
-<div class="container-fluid">
-    <!-- <div class="row">
-        <div class="alert alert-info" role="alert" style="border-radius: 0; text-align: center; text-decoration: underline; margin: 0; border: solid 2px gray;">
-            <h4>Blog Is Under Developing</h4>
-        </div>
-    </div> -->
-    <div class="row">
-        <div id="index-header">
-
-            <h1 class="animated flipInX">
-                <img id="logo" src="/build/imgs/logo.png" alt=""/>
-                Jihao's Blog
-            </h1>
-            <h4 id="motto">
-                <span><b>Never let it go</b></span>
-            </h4>
-        </div>
+	<div class="container-fluid" id="site-wrapper">
+		<div class="container-fluid">
+  <div class="row">
+    <div id="index-header">
+      <h1 class="animated flipInX">
+        <img id="logo" src="/build/imgs/logo.png" alt=""/>
+        Jihao's Blog
+      </h1>
+      <h4 id="motto"><span><b>Never let it go</b></span></h4>
     </div>
-    <div class="row" id="index-nav">
-        <ul>
-            <li>
-                <a href="/">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Home
-                </a>
-            </li>
-            <li>
-                <a href="/pages/tech-notes.html">
-                    <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Tech Posts
-                </a>
-            </li>
-            <li>
-                <a href="/pages/essay.html">
-                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Essay
-                </a>
-            </li>
-            <li>
-                <a href="/pages/about.html">
-                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    &nbsp;&nbsp;About
-                </a>
-            </li>
-        </ul>
-        <span id="nav-indicator"></span>
-    </div>
+  </div>
+  <div class="row" id="index-nav">
+    <ul>
+      <li>
+        <a href="/">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          &nbsp;&nbsp;Home
+        </a>
+      </li>
+      <li>
+        <a href="/pages/tech-notes.html">
+          <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+          &nbsp;&nbsp;Tech Posts
+        </a>
+      </li>
+      <li>
+        <a href="/pages/essay.html">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          &nbsp;&nbsp;Essay
+        </a>
+      </li>
+      <li>
+        <a href="/pages/about.html">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          &nbsp;&nbsp;About
+        </a>
+      </li>
+    </ul>
+    <span id="nav-indicator"></span>
+  </div>
 </div>
 
 		<div class="row" id="post-wrapper">

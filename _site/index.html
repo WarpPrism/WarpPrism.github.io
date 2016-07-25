@@ -3,277 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="baidu-site-verification" content="3EBiLq4RXv" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
     <meta name="description" content="博客寄语：人生中有很多珍贵的东西，只是当它们唾手可得的时候，你不觉得珍贵。珍惜身边的一切，不要等失去了再后悔莫及。"/>
-    <link rel="shortcut icon" href="/imgs/favicon.ico"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
     <!--Bootstrap And Octicons-->
     <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
     <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
 
     
-        <link rel="stylesheet" href="/css/site_base.css"/>
+        <link rel="stylesheet" href="/build/css/site_base.css"/>
         
-            <link rel="stylesheet" href="/css/index.css"/>
+            <link rel="stylesheet" href="/build/css/index.css"/>
         
+        <!--Google Analysis-->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-79596803-1', 'auto');
+          ga('send', 'pageview');
+        </script>
     
     <title>Jihao's Blog</title>
 </head>
 
 <body>
-	<div class="container-fluid" id="default-wrapper">
-		
-<!--Blog Header-->
-<div class="container-fluid">
-    <!-- <div class="row">
-        <div class="alert alert-info" role="alert" style="border-radius: 0; text-align: center; text-decoration: underline; margin: 0; border: solid 2px gray;">
-            <h4>Blog Is Under Developing</h4>
-        </div>
-    </div> -->
-    <div class="row">
-        <div id="index-header">
-
-            <h1 class="animated flipInX">
-                <img id="logo" src="/build/imgs/logo.png" alt=""/>
-                Jihao's Blog
-            </h1>
-            <h4 id="motto">
-                <span><b>Never let it go</b></span>
-            </h4>
-        </div>
+	<div class="container-fluid" id="site-wrapper">
+		<div class="container-fluid">
+  <div class="row">
+    <div id="index-header">
+      <h1 class="animated flipInX">
+        <img id="logo" src="/build/imgs/logo.png" alt=""/>
+        Jihao's Blog
+      </h1>
+      <h4 id="motto"><span><b>Never let it go</b></span></h4>
     </div>
-    <div class="row" id="index-nav">
-        <ul>
-            <li>
-                <a href="/">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Home
-                </a>
-            </li>
-            <li>
-                <a href="/pages/tech-notes.html">
-                    <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Tech Posts
-                </a>
-            </li>
-            <li>
-                <a href="/pages/essay.html">
-                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                    &nbsp;&nbsp;Essay
-                </a>
-            </li>
-            <li>
-                <a href="/pages/about.html">
-                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    &nbsp;&nbsp;About
-                </a>
-            </li>
-        </ul>
-        <span id="nav-indicator"></span>
-    </div>
+  </div>
+  <div class="row" id="index-nav">
+    <ul>
+      <li>
+        <a href="/">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          &nbsp;&nbsp;Home
+        </a>
+      </li>
+      <li>
+        <a href="/pages/tech-notes.html">
+          <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+          &nbsp;&nbsp;Tech Posts
+        </a>
+      </li>
+      <li>
+        <a href="/pages/essay.html">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          &nbsp;&nbsp;Essay
+        </a>
+      </li>
+      <li>
+        <a href="/pages/about.html">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          &nbsp;&nbsp;About
+        </a>
+      </li>
+    </ul>
+    <span id="nav-indicator"></span>
+  </div>
 </div>
 
-		<div class="container-fluid" id="index-container">
-    <div class="row" id="img-carousel">
-        <div class="carousel slide" id="myCarousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol>
-
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img class="img-thumbnail img-responsive center-block" src="build/imgs/show1.jpg" alt="First slide">
-                    <div class="carousel-caption">
-                        <p></p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="img-thumbnail img-responsive center-block" src="build/imgs/show2.jpg" alt="Second slide">
-                    <div class="carousel-caption">
-                        <p></p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="img-thumbnail img-responsive center-block" src="build/imgs/show3.jpg" alt="Third slide">
-                    <div class="carousel-caption">
-                        <p></p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img class="img-thumbnail img-responsive center-block" src="build/imgs/show4.jpg" alt="Fourth slide">
-                    <div class="carousel-caption">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-
-            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-
-    <div class="row" id="index-main-content">
-        <h2>Recently Published</h2>
-        <div class="col-sm-5 content-column">
-            <div class="page-header">
-                <h3><span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span> Technical Posts</h3>
-            </div>
-            <ul class="post-list1 post-list">
-                
-                
-                <li>
-                    <a href="/tech-post/2016/07/15/GulpBuild.html">我的Gulp自动化流程</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2016/07/07/Throttle.html">JS函数节流原理分析</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2016/07/05/RegExp.html">JavaScript正则攻略</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2016/07/03/JsDesignPattern.html">常用的JavaScript设计模式</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2016/06/15/WebSocketBasis.html">HTML5之WebSocket</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2016/06/02/PrototypeAndOOP.html">JavaScript Prototype And Oop</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2016/05/31/HolyGrailLayout.html">圣杯布局和双飞翼布局</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2016/05/30/Flex.html">CSS3:Flex</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2016/04/24/JSSortingMethod.html">JavaScript中的排序算法</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2015/11/29/%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92.html">前后端数据交互方法（转载）</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2015/10/25/Fakepath.html">如何引用本地文件的绝对路径（fakepath问题）</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2015/10/18/%E5%8F%8C%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95.html">关于图像处理中的插值算法（Matlab语言描述）</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2015/10/17/TornadoIntroduction.html">开始搭建Tornado服务器</a>
-                </li>
-                
-                
-                
-                <li>
-                    <a href="/tech-post/2015/10/12/Ajax.html">全面理解Ajax</a>
-                </li>
-                
-                
-                
-                
-            </ul>
-            <a href="/pages/tech-notes.html" class="more">
-                More
-                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div class="col-sm-5 content-column">
-            <div class="page-header">
-                <h3><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Casual Essay Notes</h3>
-            </div>
-
-            <ul class="post-list2 post-list">
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                <li>
-                    <a href="/essay/2015/10/10/ShareWithOthers.html"> The co-op business model:share whatever you've got</a>
-                    <!-- <span class="date">10 Oct 2015</span> -->
-                </li>
-                
-                
-            </ul>
-            <a href="/pages/essay.html" class="more">
-                More
-                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-            </a>
-        </div>
-    </div>
+		<div id="loader-mask">
+  <div id="loader-div">
+    <p id="loader-text">Loading...</p>
+    <div id="triangle"></div>
+  </div>
 </div>
+<div class="container-fluid" id="index-container">
+  <div class="row" id="img-carousel">
+    <div class="carousel slide" id="myCarousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+      </ol>
+
+      <div class="carousel-inner">
+        <div class="item active">
+          <img class="img-thumbnail img-responsive center-block" src="build/imgs/show1.jpg" alt="First slide">
+          <div class="carousel-caption">
+            <p></p>
+          </div>
+        </div>
+        <div class="item">
+          <img class="img-thumbnail img-responsive center-block" src="build/imgs/show2.jpg" alt="Second slide">
+          <div class="carousel-caption">
+            <p></p>
+          </div>
+        </div>
+        <div class="item">
+          <img class="img-thumbnail img-responsive center-block" src="build/imgs/show3.jpg" alt="Third slide">
+          <div class="carousel-caption">
+            <p></p>
+          </div>
+        </div>
+        <div class="item">
+          <img class="img-thumbnail img-responsive center-block" src="build/imgs/show4.jpg" alt="Fourth slide">
+          <div class="carousel-caption">
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+      <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control right" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="row" id="index-main-content">
+    <h2>Recently Published</h2>
+    <div class="col-sm-5 content-column">
+      <div class="page-header">
+        <h3><span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span> Technical Posts</h3>
+      </div>
+      <ul class="post-list1 post-list">
+        
+        
+        <li>
+          <a href="/tech-post/2016/07/21/CanvasBasis.html">HTML5之Canvas —— 代码画出我的心</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/07/15/GulpBuild.html">我的Gulp自动化流程</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/07/07/Throttle.html">JS函数节流原理分析</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/07/05/RegExp.html">JavaScript正则攻略</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/07/03/JsDesignPattern.html">常用的JavaScript设计模式</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/06/15/WebSocketBasis.html">HTML5之WebSocket</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/06/02/PrototypeAndOOP.html">JavaScript Prototype And Oop</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/05/31/HolyGrailLayout.html">圣杯布局和双飞翼布局</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/05/30/Flex.html">CSS3:Flex</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2016/04/24/JSSortingMethod.html">JavaScript中的排序算法</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2015/11/29/%E5%89%8D%E5%90%8E%E7%AB%AF%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92.html">前后端数据交互方法（转载）</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2015/10/25/Fakepath.html">如何引用本地文件的绝对路径（fakepath问题）</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2015/10/18/%E5%8F%8C%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95.html">关于图像处理中的插值算法（Matlab语言描述）</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2015/10/17/TornadoIntroduction.html">开始搭建Tornado服务器</a>
+        </li>
+        
+        
+        
+        <li>
+          <a href="/tech-post/2015/10/12/Ajax.html">全面理解Ajax</a>
+        </li>
+        
+        
+        
+        
+      </ul>
+      <a href="/pages/tech-notes.html" class="more">
+        More
+        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="col-sm-5 content-column">
+      <div class="page-header">
+        <h3><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Casual Essay Notes</h3>
+      </div>
+      <ul class="post-list2 post-list">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <li>
+          <a href="/essay/2015/10/10/ShareWithOthers.html"> The co-op business model:share whatever you've got</a>
+          <!-- <span class="date">10 Oct 2015</span> -->
+        </li>
+        
+        
+      </ul>
+      <a href="/pages/essay.html" class="more">
+        More
+        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
 
 		
 <div class="container-fluid" id="footer-div">
@@ -326,7 +338,7 @@
 <script type="text/javascript" src="/build/js/main.js"></script>
 
     
-        <script type="text/javascript" src="/js/index.js"></script>
+        <script type="text/javascript" src="/build/js/index.js"></script>
     
 
 
