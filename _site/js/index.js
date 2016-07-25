@@ -19,7 +19,9 @@ function handleRecent() {
     }
 }
 window.onload = function() {
-    $('#loader-mask').fadeOut();
+    if ($('#loader-mask').fadeOut()) {} else {
+        document.getElementById('loader-mask').style.display="none";
+    }
 
     $("#myCarousel").carousel({
         interval: 3000

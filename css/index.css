@@ -13,8 +13,14 @@
     width: 200px;
     height: 200px;
     position: absolute;
-    top: calc(50% - 100px);
-    left: calc(50% - 100px);
+    /*top: calc(50% - 100px);
+    left: calc(50% - 100px);*/
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+
 }
             
 #loader-mask #triangle {
@@ -33,6 +39,9 @@
     
     animation: loading 2s ease-in-out infinite;
     -webkit-animation: loading 2s ease-in-out infinite;
+    -moz-animation: loading 2s ease-in-out infinite;
+    -o-animation: loading 2s ease-in-out infinite;
+    -ms-animation: loading 2s ease-in-out infinite;
 }
 
 #loader-text {
@@ -165,6 +174,9 @@
 }
 
 @media screen and (max-width: 425px) {
+    #loader-mask {
+        display: none;
+    }
     #index-main-content {
         padding-top: 10px;
         box-shadow: none;
