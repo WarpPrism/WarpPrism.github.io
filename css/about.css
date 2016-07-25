@@ -30,12 +30,9 @@
 .right-bar .header {
     margin-bottom: 10px;
     padding: 10px;
-    border-left: solid 5px #00a1ea;
-    background: #ccc;
 }
 
 .my-project .project-row {
-    display: block;
     margin: 0px 0 15px 0;
     padding: 0;
     letter-spacing: -100px;
@@ -54,9 +51,10 @@
 }
 .project-item {
     background: #eee;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-top: 15px;
-    padding: 10px;
+    padding: 20px;
+    box-shadow: 2px 2px 10px #aaa;
 }
 
 .project-col .project-item h3 {
@@ -64,9 +62,8 @@
 }
 .project-col .project-item .project-desc {
     margin: 10px 0;
-    padding: 5px;
+    padding: 15px 0;
     border-top: solid 1px #aaa;
-    border-bottom: solid 1px #aaa;
 }
 .project-item .project-link a {
     display:inline-block;
@@ -74,14 +71,13 @@
     padding: 5px;
     margin-left: 5px;
     margin-bottom: 7px;
-    background: #00a1ea;
+    background-color: #00a1ea;
     color: #fff;
     border-radius: 5px;
     text-decoration: none;
 }
 .project-item .project-link a:hover {
-    background-color: #20a1ca;
-    text-decoration: none;
+    opacity: 0.8;
 }
 .project-link span {
     font-size: 19px;
