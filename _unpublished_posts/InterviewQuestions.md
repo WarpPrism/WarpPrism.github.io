@@ -39,6 +39,9 @@ requestAnimationFrame(callback fn)的核心原理是__递归__，即在update函
 
 其他实现动画的方法：CSS3 animation @keyframes || CSS3 transition: all 1s ease-in-out 0.5s; || setInterval setTimeout draw() update() loop()模式 || jQuery 动画API || canvas 等等。
 
+## 解释下闭包
+闭包可以理解为函数中定义的函数，由于存在作用域链，内层函数可以访问外层函数的变量，那么内层函数就可以实时的对那个变量进行操作，而如果把这个内层函数当作返回值的话，那么外层函数的外部就可以突破作用域限制访问那个变量。常见的用法有循环中循环变量的获取等等。
+
 ## 写一下快速排序
 
 ~~~javascript
@@ -128,7 +131,55 @@ var fibonacci = (function fn(n) {
 });
 ~~~
 
-## 解释下闭包
-闭包可以理解为函数中定义的函数，由于存在作用域链，内层函数可以访问外层函数的变量，那么内层函数就可以实时的对那个变量进行操作，而如果把这个内层函数当作返回值的话，那么外层函数的外部就可以突破作用域限制访问那个变量。常见的用法有循环中循环变量的获取等等。
+## 实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Number、String、Object、Array、Boolean）进行值复制
 
+~~~javascript
+// method 1
+function clone(obj) {
+  var result;
+  if (Object.prototype.toString.call(obj) == "[object Array]") {
+    result = [];
+    for (var i = 0; i < obj.length; i++) {
+      result[i] = clone(obj[i]);
+    }
+    return result;
+  } else if (Object.prototype.toString.call(obj) == "[object Object]") {
+    result = {};
+    for (var key in obj) {
+      result[key] = clone(obj[key]);
+    }
+    return result;
+  } else {
+    return obj;
+  }
+}
+// method 2 (for object or array)
+Object.prototype.clone = function() {
+  var o = (this.constructor == Array) ? [] : {};
+  for (var i in this) {
+    o[i] = (typeof(this[i]) == "object") ? this[i].clone() : this[i];
+  }
+  return o;
+}
+~~~
+
+## 数组去重
+
+~~~javascript
+Array.prototype.unique = function() {
+  var hash = {};
+  var result = [];
+  for(var i = 0; i < this.length; i++) {
+    var t = this[i];
+    if (!hash[t]) {
+      result.push(t);
+      hash[t] = true;
+    }
+  }
+  return result;
+}
+
+var a = [1, 1, 2, 2, 3, 4, 4, 5, 7, 9, 9].unique();
+a;
+~~~
 
