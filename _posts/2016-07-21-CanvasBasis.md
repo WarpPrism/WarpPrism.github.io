@@ -13,7 +13,7 @@ excerpt: 大二和大三期间分别作了两个小项目，Quoridor和ImageProc
 
 canvas坐标系：
 
-![横向x纵向y](http://images.cnblogs.com/cnblogs_com/stswordman/Coordcanvas.png)
+![横向x纵向y](/imgs/tech_post/Coordcanvas.png)
 
 ~~~javascript
 var canvas = document.getElementById("canvas");

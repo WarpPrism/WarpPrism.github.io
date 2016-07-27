@@ -28,4 +28,6 @@ window.onload = function() {
     });
 
     handleRecent();
+
+    dynamicAppendText("Jihao's Blog", $('#site-name')[0], null);
 };

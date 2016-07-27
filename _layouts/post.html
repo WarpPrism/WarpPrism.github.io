@@ -1,103 +1,103 @@
 ---
 layout: default
 styles: [highlight.css, post.css]
-
+scripts: [main.js]
 ---
 
 <div class="row" id="post-wrapper">
-    <div id="post-body">
-        <div class="post">
-            <div class="header">
-                <h2>{{ page.title }}</h2>
-                <p class="post-meta">
-                    <span class="octicon octicon-clock"></span>
-                        {{ page.date | date: "%b %-d, %Y" }}
-                        {% if page.author %} • {{ page.author }}{% endif %}
-                        {% if page.meta %} • {{ page.meta }}{% endif %}
-                </p>
-                <p class="post-tag">
-                    <span>
-                        {% for cat in page.categories %}
-                        <a href="javascript:void(0)">
-                            <span class="octicon octicon-list-unordered"></span>
-                            {{ cat }}
-                        </a>
-                        {% endfor %}
-                    </span>
-                    <span>
-                        {% for tag in page.tags %}
-                        <a href="javascript:void(0)">
-                            <span class="octicon octicon-tag"></span>
-                            {{ tag }}
-                        </a>
-                        {% endfor %}
-                    </span>
-                </p>
-            </div>
-            <hr class="boundary">
-            <article>
-                {{content}}
-            </article>
-            <hr class="boundary">
-        </div>
-
-        <p class="post-copyright">
-            本文的版权归作者
-            <a href="http://warpprism.github.io">ZhouJihao</a>
-            所有，采用
-            <a href="http://creativecommons.org/licenses/by-nc/3.0/">Attribution-NonCommercial 3.0 License</a>。
-            任何人可以进行转载、分享，但不可在未经允许的情况下用于商业用途；转载请注明出处。感谢配合！
+  <div id="post-body">
+    <div class="post">
+      <div class="header">
+        <h2>{{ page.title }}</h2>
+        <p class="post-meta">
+          <span class="octicon octicon-clock"></span>
+            {{ page.date | date: "%b %-d, %Y" }}
+            {% if page.author %} • {{ page.author }}{% endif %}
+            {% if page.meta %} • {{ page.meta }}{% endif %}
         </p>
-
-
-        <h2 class="guest-op">
-            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
-            &nbsp;Share This Post
-        </h2>
-
-        <div class="ds-share flat" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-images="{{'/imgs/show4.jpg' | prepend: 'http://warpprism.github.io'}}" data-content="{{page.excerpt}}......" data-url="{{ page.url | prepend: 'http://warpprism.github.io' }}">
-            <div class="ds-share-inline">
-                <ul class="ds-share-icons-16">
-                    <li data-toggle="ds-share-icons-more">
-                        <a class="ds-more" href="javascript:void(0);">分享到：</a>
-                    </li>
-                    <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-                    <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-                    <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-                    <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-                </ul>
-                <div class="ds-share-icons-more">
-                </div>
-            </div>
-        </div>
-
-        <h2 class="guest-op">
-            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-            &nbsp;Leave A Comment
-        </h2>
-
-        <!-- 多说评论框 start -->
-        <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{page.url | prepend: 'http://warpprism.github.io'}}"></div>
-        <!-- 多说评论框 end -->
-        <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-        <script type="text/javascript">
-            var duoshuoQuery = {short_name:"zhoujihao"};
-            (function() {
-                var ds = document.createElement('script');
-                ds.type = 'text/javascript';ds.async = true;
-                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                ds.charset = 'UTF-8';
-                (document.getElementsByTagName('head')[0]
-                || document.getElementsByTagName('body')[0]).appendChild(ds);
-            })();
-        </script>
-        <!-- 多说公共JS代码 end -->
-
+        <p class="post-tag">
+          <span>
+            {% for cat in page.categories %}
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-list-unordered"></span>
+              {{ cat }}
+            </a>
+            {% endfor %}
+          </span>
+          <span>
+            {% for tag in page.tags %}
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-tag"></span>
+              {{ tag }}
+            </a>
+            {% endfor %}
+          </span>
+        </p>
+      </div>
+      <hr class="boundary">
+      <article>
+        {{content}}
+      </article>
+      <hr class="boundary">
     </div>
 
-    <!-- Return To Top -->
-    <a id="top" href="#">
-        <span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
-        <span class="text">Top</span>
-    </a>
+    <p class="post-copyright">
+      本文的版权归作者
+      <a href="http://warpprism.github.io">ZhouJihao</a>
+      所有，采用
+      <a href="http://creativecommons.org/licenses/by-nc/3.0/">Attribution-NonCommercial 3.0 License</a>。
+      任何人可以进行转载、分享，但不可在未经允许的情况下用于商业用途；转载请注明出处。感谢配合！
+    </p>
+
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+      &nbsp;Share This Post
+    </h2>
+
+    <div class="ds-share flat" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-images="{{'/imgs/show4.jpg' | prepend: 'http://warpprism.github.io'}}" data-content="{{page.excerpt}}......" data-url="{{ page.url | prepend: 'http://warpprism.github.io' }}">
+      <div class="ds-share-inline">
+        <ul class="ds-share-icons-16">
+          <li data-toggle="ds-share-icons-more">
+            <a class="ds-more" href="javascript:void(0);">分享到：</a>
+          </li>
+          <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+          <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+          <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+          <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        </ul>
+        <div class="ds-share-icons-more">
+        </div>
+      </div>
+    </div>
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+      &nbsp;Leave A Comment
+    </h2>
+
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="{{page.id}}" data-title="{{page.title}}" data-url="{{page.url | prepend: 'http://warpprism.github.io'}}"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhoujihao"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+  </div>
+
+  <!-- Return To Top -->
+  <a id="top" href="#">
+    <span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
+    <span class="text">Top</span>
+  </a>
 </div>
