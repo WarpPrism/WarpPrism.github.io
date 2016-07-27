@@ -95,6 +95,39 @@ function binarySearch(arr, target) {
 }
 ~~~
 
+## 写一个fibonacci数列函数0， 1， 1， 2， 3....
+
+~~~javascript
+var fibonacci = (function f(n) {
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+  else {
+    return f(n - 2) + f(n - 1);
+    // or: return arguments.callee(n - 2) + arguments.callee(n - 1);
+  }
+});
+
+fibonacci(3);
+~~~
+
+## 用查表法改进上述算法
+
+好的，查表，查表，查表。。。
+
+~~~javascript
+var f_result = [];
+var fibonacci = (function fn(n) {
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+  if (f_result[n]) {
+    return f_result[n];
+  } else {
+    f_result[n] = fn(n - 2) + fn(n - 1);
+    return f_result[n];
+  }
+});
+~~~
+
 ## 解释下闭包
 闭包可以理解为函数中定义的函数，由于存在作用域链，内层函数可以访问外层函数的变量，那么内层函数就可以实时的对那个变量进行操作，而如果把这个内层函数当作返回值的话，那么外层函数的外部就可以突破作用域限制访问那个变量。常见的用法有循环中循环变量的获取等等。
 
