@@ -183,3 +183,53 @@ var a = [1, 1, 2, 2, 3, 4, 4, 5, 7, 9, 9].unique();
 a;
 ~~~
 
+## 自定义console.log方法，使得可以传入多个参数，并且自动加上app前缀
+
+~~~javascript
+function log(){
+  var args = Array.prototype.slice.call(arguments);  //为了使用unshift数组方法，将argument转化为真正的数组
+  args.unshift('(app)');
+  
+  console.log.apply(console, args);
+};
+log("zhoujihao", "yes!")
+~~~
+
+## 请封装cookie操作方法
+
+~~~javascript
+var CookieUtil = {
+  // 设置cookie的名字，值，有效天数，路径，域，以及安全标志
+  set: function(name, value, days, path, domain, secure) {
+    var cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    if (days) {
+      var exp = new Date();
+      exp.setTime(exp.getTime() + days * 24 * 60 * 60 * 1000);
+      cookieText += "; expires=" + exp.toGMTString();
+    }
+    if (path) {cookieText += "; path=" + path;}
+    if (domain) {cookieText += "; domain=" + domain;}
+    if (secure) {cookieText += "; secure";}
+    document.cookie = cookieText;
+  },
+  // 通过名字获取cookie的值
+  get: function(name) {
+    var cookieName = encodeURIComponent(name) + "=";
+    var cookieStart = document.cookie.indexOf(cookieName);
+    var cookieValue = null;
+    if (cookieStart > -1) {
+      var cookieEnd = document.cookie.indexOf(";", cookieStart);
+      if (cookieEnd == -1) {
+        cookieEnd = document.cookie.length;
+      }
+      cookieValue = document.cookie.substring(cookieStart + cookieName.length, cookieEnd);
+    }
+    return cookieValue;
+  }, 
+  
+  unset: function(name, path, domain, secure) {
+    this.set(name, "", 0, path, domain, secure);
+  }
+  
+};
+~~~
