@@ -15,24 +15,24 @@ scripts: [main.js]
             {% if page.author %} • {{ page.author }}{% endif %}
             {% if page.meta %} • {{ page.meta }}{% endif %}
         </p>
-        <p class="post-tag">
-          <span>
+        <div class="post-tag">
+          <div>
             {% for cat in page.categories %}
             <a href="javascript:void(0)">
               <span class="octicon octicon-list-unordered"></span>
               {{ cat }}
             </a>
             {% endfor %}
-          </span>
-          <span>
+          </div>
+          <div>
             {% for tag in page.tags %}
             <a href="javascript:void(0)">
               <span class="octicon octicon-tag"></span>
               {{ tag }}
             </a>
             {% endfor %}
-          </span>
-        </p>
+          </div>
+        </div>
       </div>
       <hr class="boundary">
       <article>

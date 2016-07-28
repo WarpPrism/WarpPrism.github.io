@@ -1,35 +1,6 @@
 /**
  * Created by zhoujihao on 15-10-7.
  */
-$(document).ready(function() {
-    menuAnimation();
-
-    $("#top").click(function(event) {
-        event = event || window.event;
-        event.preventDefault();
-        $("body").animate({
-            scrollTop: 0
-        }, '800');
-    });
-
-    $("#logo").click(function() {
-        window.location = "\\";
-    });
-
-});
-
-function menuAnimation() {
-    var navItems = $("#index-nav").find("a");
-    var navIndicator = $("#nav-indicator");
-    for (var i = 0; i < navItems.length; i++) {
-        $(navItems[i]).mouseover(function(e) {
-            var leftOff = this.getBoundingClientRect().left;
-            var width = this.offsetWidth;
-            /*console.log(leftOff);*/
-            navIndicator.css("left", leftOff + width / 2.0);
-        });
-    }
-}
 
 // typewriter effect
 function dynamicAppendText(mystr, target, callback) {
@@ -39,8 +10,7 @@ function dynamicAppendText(mystr, target, callback) {
     
     var timer = setInterval(function() {
         if (progress <= len) {
-            target.innerHTML = mystr.substring(0, progress)
-                + '<span id="cursor">' + ((progress & 1)?'_':'') + '</span>';
+            target.innerHTML = mystr.substring(0, progress) + '<span id="cursor">' + ((progress & 1)?'_':'') + '</span>';
             
             var random = Math.floor(Math.random() * colors.length);
             document.getElementById('cursor').style.color = colors[random] + '';
@@ -55,3 +25,34 @@ function dynamicAppendText(mystr, target, callback) {
         }
     }, 200);
 }
+
+(function() {
+    function menuAnimation() {
+        var navItems = $("#index-nav").find("a");
+        var navIndicator = $("#nav-indicator");
+        var handler = function() {
+            var leftOff = this.getBoundingClientRect().left;
+            var width = this.offsetWidth;
+            navIndicator.css("left", leftOff + width / 2.0);
+        };
+        
+        for (var i = 0; i < navItems.length; i++) {
+            $(navItems[i]).mouseover(handler);
+        }
+    }
+
+    $(document).ready(function() {
+        menuAnimation();
+        $("#top").click(function(event) {
+            event = event || window.event;
+            event.preventDefault();
+            $("body").animate({
+                scrollTop: 0
+            }, '800');
+        });
+        $("#logo").click(function() {
+            window.location = "\\";
+        });
+    });
+}());
+
