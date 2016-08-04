@@ -9,7 +9,7 @@
 #essay-left {
 	margin: 0;
 	padding: 20px;
-	border-right: solid 1px #EEEEEE;
+	border-right: solid 1px #eee;
 }
 
 #essay-item {
@@ -17,13 +17,13 @@
 	padding: 15px;
 	border-left: solid 3px #00a1ea;
 	border-bottom: dashed 1.5px #00a1ea;
-	background: #EEEEEE;
+	background: #eee;
 }
 
 #essay-title {
 	display: block;
 	font-size: x-large;
-	color: #222222;
+	color: #222;
 }
 
 #essay-title:hover {
@@ -37,7 +37,7 @@
 }
 
 #essay-left .tag {
-	color: #FFFFFF;
+	color: #fff;
 	background: #00a1ea;
 	padding: 5px;
 	margin: 7px;
@@ -48,7 +48,7 @@
 #essay-excerpt {
 	display: block;
 	margin-top: 7px;
-	color: #555555;
+	color: #555;
 	line-height: 25px;
 }
 
