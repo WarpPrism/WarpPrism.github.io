@@ -44,3 +44,11 @@ nginx -s stop // 运行时快速关闭nginx
 nginx -s quit // 运行时优雅关闭nginx
 ~~~
 
+## git
+
+下图中，四个仓库区域分别是 工作区，暂存区，本地仓库，远程仓库。箭头则是git常用的命令。
+
+![git outline](http://yanhaijing.com/blog/146.png)
+
+> [git笔记](http://yanhaijing.com/git/2014/11/01/my-git-note/)
+
