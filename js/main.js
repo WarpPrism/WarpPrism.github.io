@@ -43,13 +43,17 @@ function dynamicAppendText(mystr, target, callback) {
 
     $(document).ready(function() {
         menuAnimation();
-        $("#top").click(function(event) {
-            event = event || window.event;
-            event.preventDefault();
-            $("body").animate({
-                scrollTop: 0
-            }, '800');
-        });
+        // $("#top").click(function(event) {
+        //     event = event || window.event;
+        //     event.preventDefault();
+        //     // $("body").animate({
+        //     //     scrollTop: 0
+        //     // }, '800');
+        //     console.log('top!');
+        //     document.documentElement.scrollTop = document.body.scrollTop = 0;
+        //     console.log(document.body.scrollTop);
+        // });
+
         $("#logo").click(function() {
             window.location = "\\";
         });

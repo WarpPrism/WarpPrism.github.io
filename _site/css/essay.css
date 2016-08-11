@@ -1,5 +1,5 @@
 #essay-wrapper {
-	background: #DDDDDD;
+	background: #ddd;
 	width: 100%;
 	min-height: 768px;
 }
@@ -9,7 +9,7 @@
 #essay-left {
 	margin: 0;
 	padding: 20px;
-	border-right: solid 1px #EEEEEE;
+	border-right: solid 1px #eee;
 }
 
 #essay-item {
@@ -17,13 +17,13 @@
 	padding: 15px;
 	border-left: solid 3px #00a1ea;
 	border-bottom: dashed 1.5px #00a1ea;
-	background: #EEEEEE;
+	background: #eee;
 }
 
 #essay-title {
 	display: block;
 	font-size: x-large;
-	color: #222222;
+	color: #222;
 }
 
 #essay-title:hover {
@@ -37,7 +37,7 @@
 }
 
 #essay-left .tag {
-	color: #FFFFFF;
+	color: #fff;
 	background: #00a1ea;
 	padding: 5px;
 	margin: 7px;
@@ -48,7 +48,7 @@
 #essay-excerpt {
 	display: block;
 	margin-top: 7px;
-	color: #555555;
+	color: #555;
 	line-height: 25px;
 }
 
@@ -86,7 +86,7 @@
 	font-size: x-large;
 	text-align: center;
 	border-bottom: solid 1px gray;
-	text-shadow: 2px 2px 10px #FFFFFF;
+	text-shadow: 2px 2px 10px #fff;
 
 }
 
@@ -103,18 +103,18 @@
 
 #right-tag-div .tag-btn:hover {
 	background: #737373;
-	color: #FFFFFF;
+	color: #fff;
 }
 
 .active-btn {
 	background: #737373;
-	color: #FFFFFF;
+	color: #fff;
 }
 
 #top {
 	position: fixed;
-	background: #AAAAAA;
-	color: #FFFFFF;
+	background: #aaa;
+	color: #fff;
 	width: 40px;
 	height: 40px;
 	padding: 5px;
@@ -164,7 +164,7 @@
 }
 
 #canvas {
-	border: solid 1px #000000;
+	border: solid 1px #000;
 	width: 100%;
 	position: relative;
 	left: 50%;

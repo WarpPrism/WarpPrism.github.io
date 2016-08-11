@@ -1,5 +1,5 @@
 #essay-wrapper {
-	background: #DDDDDD;
+	background: #ddd;
 	width: 100%;
 	min-height: 768px;
 }
@@ -86,7 +86,7 @@
 	font-size: x-large;
 	text-align: center;
 	border-bottom: solid 1px gray;
-	text-shadow: 2px 2px 10px #FFFFFF;
+	text-shadow: 2px 2px 10px #fff;
 
 }
 
@@ -103,18 +103,18 @@
 
 #right-tag-div .tag-btn:hover {
 	background: #737373;
-	color: #FFFFFF;
+	color: #fff;
 }
 
 .active-btn {
 	background: #737373;
-	color: #FFFFFF;
+	color: #fff;
 }
 
 #top {
 	position: fixed;
-	background: #AAAAAA;
-	color: #FFFFFF;
+	background: #aaa;
+	color: #fff;
 	width: 40px;
 	height: 40px;
 	padding: 5px;
@@ -164,7 +164,7 @@
 }
 
 #canvas {
-	border: solid 1px #000000;
+	border: solid 1px #000;
 	width: 100%;
 	position: relative;
 	left: 50%;

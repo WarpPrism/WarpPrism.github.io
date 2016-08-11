@@ -18,20 +18,21 @@
             }
         }
     }
-    $(document).ready(function() {
-        $("#myCarousel").carousel({
-            interval: 3000
-        });
-    
-        handleRecent();
-    });
 
     window.onload = function() {
-        if ($('#loader-mask').fadeOut()) {
+        handleRecent();
+
+        // hide loader mask
+        if ($('#loader-mask').slideUp()) {
             //
         } else {
             document.getElementById('loader-mask').style.display="none";
         }
+
+        $("#myCarousel").carousel({
+            interval: 3000
+        });
+
         dynamicAppendText("Jihao's Blog", $('#site-name')[0], null);
     };
 }());
