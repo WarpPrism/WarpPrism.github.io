@@ -19,6 +19,7 @@
         }
     }
 
+    document.documentElement.style.overflowY = 'hidden';
     window.onload = function() {
         handleRecent();
 
@@ -28,6 +29,7 @@
         } else {
             document.getElementById('loader-mask').style.display="none";
         }
+        document.documentElement.style.overflowY = 'visible';
 
         $("#myCarousel").carousel({
             interval: 3000
