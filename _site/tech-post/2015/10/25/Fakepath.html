@@ -113,7 +113,7 @@
 
 <p><strong>上代码：</strong></p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">getPath</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">fileQuery</span><span class="p">,</span><span class="nx">transImg</span><span class="p">){</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">getPath</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">fileQuery</span><span class="p">,</span><span class="nx">transImg</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"MSIE"</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">){</span>
         <span class="nx">obj</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
         <span class="kd">var</span> <span class="nx">path</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">selection</span><span class="p">.</span><span class="nx">createRange</span><span class="p">().</span><span class="nx">text</span><span class="p">;</span>
@@ -136,11 +136,11 @@
 
 <p>现在我们有一个Image对象，要将该对象的src属性指向一个本地文件，就可以通过下面方法实现。</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"file"</span> <span class="nt">/&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"file"</span> <span class="nt">/&gt;</span>
 </code></pre>
 </div>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"file"</span><span class="p">);</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"file"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
 <span class="nx">file</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
 <span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -154,7 +154,7 @@
 <p>这样img的src就是本地文件的引用了，当然src的内容是经过加密的，浏览器很重视这方面的安全性。<br />
 如果采用下面这种做法，就会遇到fakepath问题：</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
 	<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
 
@@ -290,9 +290,6 @@
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
 
-    
-        <script type="text/javascript" src="/build/js/main.js"></script>
-        <script type="text/javascript" src="/build/js/main.js"></script>
     
 
 

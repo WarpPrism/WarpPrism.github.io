@@ -121,7 +121,7 @@
 
 <p><img src="/imgs/tech_post/Coordcanvas.png" alt="横向x纵向y" /></p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"canvas"</span><span class="p">);</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"canvas"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">"2d"</span><span class="p">);</span>
 <span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">number</span><span class="p">;</span>
 <span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">number</span><span class="p">;</span>
@@ -129,7 +129,7 @@
 </div>
 
 <h3 id="section-1">颜色，样式，阴影</h3>
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// 定义cxt填充模式，颜色|渐变|填充绘图</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 定义cxt填充模式，颜色|渐变|填充绘图</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span><span class="o">=</span><span class="nx">color</span><span class="o">|</span><span class="nx">gradient</span><span class="o">|</span><span class="nx">pattern</span><span class="p">;</span>
 
 <span class="c1">// 定义笔触</span>
@@ -153,7 +153,7 @@
 
 <h3 id="section-2">线条样式</h3>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// 设置线段末端线帽的样式</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 设置线段末端线帽的样式</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">lineCap</span> <span class="o">=</span> <span class="s2">"butt|square|round"</span><span class="p">;</span>
 <span class="c1">// 设置两条线交点的样式</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">lineJoin</span> <span class="o">=</span> <span class="s2">"round|miter|bevel"</span><span class="p">;</span>
@@ -163,7 +163,7 @@
 
 <h3 id="section-3">矩形</h3>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">context</span><span class="p">.</span><span class="nx">rect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span> <span class="c1">// 只是定义矩形路径</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">context</span><span class="p">.</span><span class="nx">rect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span> <span class="c1">// 只是定义矩形路径</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">strokeRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span> <span class="c1">// 常用来清楚canvas</span>
@@ -171,7 +171,7 @@
 </div>
 
 <h3 id="section-4">路径和曲线</h3>
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// 开始路径或重置当前路径</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 开始路径或重置当前路径</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
 <span class="c1">// 将路径闭合掉，即创建从当前点回到起始点的路径</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">();</span>
@@ -193,7 +193,7 @@
 
 <h3 id="section-5">文字</h3>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">context</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="s2">"20px Geogia"</span><span class="p">;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">context</span><span class="p">.</span><span class="nx">font</span> <span class="o">=</span> <span class="s2">"20px Geogia"</span><span class="p">;</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">textAlign</span> <span class="o">=</span> <span class="s2">"center|start|end"</span><span class="p">;</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">textBaseLine</span> <span class="o">=</span> <span class="s2">"top|middle|bottom"</span><span class="p">;</span>
 <span class="nx">context</span><span class="p">.</span><span class="nx">fillText</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">maxWidth</span><span class="p">(</span><span class="nx">optional</span><span class="p">));</span>
@@ -317,9 +317,6 @@
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
 
-    
-        <script type="text/javascript" src="/build/js/main.js"></script>
-        <script type="text/javascript" src="/build/js/main.js"></script>
     
 
 

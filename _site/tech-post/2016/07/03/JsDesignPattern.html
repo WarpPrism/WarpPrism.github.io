@@ -115,7 +115,7 @@
 
 <h4 id="section-1">闭包实现</h4>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">createMask</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">createMask</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">mask</span><span class="p">;</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">mask</span> <span class="o">||</span> 
@@ -129,7 +129,7 @@
 
 <h4 id="section-2">桥接模式实现（函数可以作为参数传入）</h4>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">singleton</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">singleton</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">obj</span><span class="p">;</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
@@ -152,7 +152,7 @@
 
 <p>代码如下：</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Observer</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Observer</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">handlers</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="p">}</span>
 <span class="nx">Observer</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
@@ -325,9 +325,6 @@
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
 
-    
-        <script type="text/javascript" src="/build/js/main.js"></script>
-        <script type="text/javascript" src="/build/js/main.js"></script>
     
 
 

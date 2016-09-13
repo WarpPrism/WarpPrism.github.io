@@ -123,7 +123,7 @@
 
 <p>下面是一个按钮点击的例子：</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// example</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// example</span>
 <span class="kd">var</span> <span class="nx">throttle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">delay</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">timer</span><span class="p">);</span>
@@ -152,7 +152,7 @@
 <p>有时候我们有这样的需求：既不想频繁的调用函数，又想要这个函数在一定时间内定期执行一次，该怎么做呢，我们可以采用一个mustRun变量，<br />
 当定时器经过了mustRun规定的时间时，就必须调用这个函数，代码如下：</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">throttle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">delay</span><span class="p">,</span> <span class="nx">mustRun</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">throttle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">delay</span><span class="p">,</span> <span class="nx">mustRun</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">now</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">previous</span><span class="p">;</span>
@@ -306,9 +306,6 @@
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
 
-    
-        <script type="text/javascript" src="/build/js/main.js"></script>
-        <script type="text/javascript" src="/build/js/main.js"></script>
     
 
 

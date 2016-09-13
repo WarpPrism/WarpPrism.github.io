@@ -110,7 +110,7 @@
         <h2 id="section">基础概念</h2>
 <p>在Javacript中，有两种类型的值，基本类型）和 引用类型 （对象）， 基本类型 （primitive type）有Undifined, Null, Boolean, Number, String，一般存储在栈stack中，而对象分为普通对象和函数对象，存储在堆heap中，Object和Function是JS自带的函数对象。举例如下：</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// 注：函数作为构造子，一般情况首字母要大写</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{}</span> <span class="c1">// 注：函数作为构造子，一般情况首字母要大写</span>
 <span class="kd">var</span> <span class="nx">f2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
 <span class="kd">var</span> <span class="nx">f3</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">'str'</span><span class="p">,</span> <span class="s1">'console.log(str)'</span><span class="p">);</span>
 
@@ -138,7 +138,7 @@
 
 <p><strong>原型对象其实就是普通对象</strong>（Function.prototype除外，它很特殊，它是函数对象，但没有prototype属性）</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{}</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">f1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">//f1{}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">f1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">//object</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">//function</span>
@@ -148,14 +148,14 @@
 </div>
 <p>可以看出f1.prototype就是函数f1的一个实例对象，函数f1在创建的时候，就将它的一个实例对象赋值给其prototype属性。即：</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">f1</span><span class="p">();</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">f1</span><span class="p">();</span>
 <span class="nx">f1</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
 </code></pre>
 </div>
 
 <p>所以Function.prototype为什么是函数对象就迎刃而解了。</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">();</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">();</span>
 <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
 </code></pre>
 </div>
@@ -163,7 +163,7 @@
 <h2 id="section-2">原型链</h2>
 <p><strong>无论普通对象还是函数对象</strong> 都有一个__proto__属性，它指向创建它的函数对象的prototype对象 e.g.</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">showName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -184,7 +184,7 @@
 
 <p>原型对象prototype中都有个预定义的constructor属性，用来引用它的函数对象，这是一种循环引用。</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">Person</span><span class="p">;</span> <span class="c1">//true</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">Person</span><span class="p">;</span> <span class="c1">//true</span>
 <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">;</span> <span class="c1">//true</span>
 <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">;</span> <span class="c1">//true</span>
 </code></pre>
@@ -199,7 +199,7 @@
 <p>虽然JavaScript是一种object-based的语言，遇到的所有东西几乎都是对象，但是它又不是一种真正的oop语言，因为没有class这个概念。、<br />
 所以要实现oop，我们需要将属性和方法封装成一个对象，即 <strong>Encapulation</strong>，e.g.</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// 新建constructor</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// 新建constructor</span>
 <span class="kd">var</span> <span class="nx">Cat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
@@ -224,7 +224,7 @@
 
 <p><strong>继承机制</strong> e.g.</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Parent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Parent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -250,7 +250,7 @@
 
 <h2 id="es6-class">ES6 class语法糖</h2>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">class</span> <span class="nx">Point</span> <span class="p">{</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">class</span> <span class="nx">Point</span> <span class="p">{</span>
   <span class="nx">constructor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
@@ -388,9 +388,6 @@
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
 
-    
-        <script type="text/javascript" src="/build/js/main.js"></script>
-        <script type="text/javascript" src="/build/js/main.js"></script>
     
 
 

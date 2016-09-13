@@ -120,7 +120,7 @@
 <p>RegExp是正则表达式的缩写,可以根据正则匹配模式(pattern) 通过new关键字来创建.<br />
 创建语法:</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">attributes</span><span class="p">)</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">attributes</span><span class="p">)</span>
 </code></pre>
 </div>
 
@@ -134,7 +134,7 @@
   <li>RegExp.compile(str), 该方法用于改变匹配模式</li>
 </ol>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">pattern</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">"ain"</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">);</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">pattern</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="s2">"ain"</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"The rain in Spain stays mainly in the plain"</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pattern</span><span class="p">.</span><span class="nx">ignoreCase</span><span class="p">);</span> <span class="c1">// 看是否具有标志 i false</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pattern</span><span class="p">.</span><span class="nx">global</span><span class="p">);</span>  <span class="c1">// 看是否具有标志 g true</span>
@@ -158,7 +158,7 @@
 
 <p>js中默认使用贪婪匹配，使用懒惰匹配需要限定符 ‘?’</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'hello world welcome to my world'</span><span class="p">;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'hello world welcome to my world'</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">pattern1</span> <span class="o">=</span> <span class="sr">/hello.*world/</span><span class="p">;</span>  <span class="c1">//贪婪</span>
 <span class="kd">var</span> <span class="nx">pattern2</span> <span class="o">=</span> <span class="sr">/hello.*</span><span class="se">?</span><span class="sr">world/</span><span class="p">;</span> <span class="c1">//懒惰</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pattern1</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">str</span><span class="p">));</span>
@@ -187,7 +187,7 @@
 
 <h3 id="string">String对象中与正则有关的方法</h3>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">str</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nb">RegExp</span> <span class="o">||</span> <span class="nx">substr</span><span class="p">)</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">str</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nb">RegExp</span> <span class="o">||</span> <span class="nx">substr</span><span class="p">)</span>
 <span class="c1">// 返回第一个匹配子串的下标位置，若不存在，返回-1</span>
 <span class="c1">// 同时忽略全局匹配标志g，但不会忽略i标志</span>
 
@@ -350,9 +350,6 @@
 <script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
 
-    
-        <script type="text/javascript" src="/build/js/main.js"></script>
-        <script type="text/javascript" src="/build/js/main.js"></script>
     
 
 
