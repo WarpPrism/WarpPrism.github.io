@@ -30,9 +30,15 @@ SSR：server side render 服务端渲染
 
 既然是迁移，注定会遇到很多的问题，主要有：
 
-- 从vue1.0 到 vue2.0 API的变更，例如不支持组件间dispatch 和 broadcast，只能采用vuex进行全局组件状态管理
+1. 从vue1.0 到 vue2.0 API的变更，例如不支持组件间dispatch 和 broadcast，只能采用vuex进行全局组件状态管理。
 
-- vue-router 也升级为vue-router2.0，导致路由列表变动：
+  vuex 是一种借鉴flux的应用架构，也是以单向数据流的方式进行信息传递，它的数据流动结构如下图所示：
+
+  ![Vuex](http://vuex.vuejs.org/zh-cn/vuex.png)
+
+  即 vue component 触发 action 操作，action 通过调度mutation触发对state的变更，state变更的时候就会更新所有受其影响的组件。action， mutation和store存储在vuex的store对象中。
+
+2. vue-router 也升级为vue-router2.0，导致路由列表变动：
 
 ~~~javascript
 const router = new VueRouter({
@@ -55,7 +61,7 @@ const router = new VueRouter({
 });
 ~~~
 
-- 如何实现 vue 组件的服务端渲染，并返回html代码？ （How to code T_T）
+3. 如何实现 vue 组件的服务端渲染，并返回html代码？ （How to code T_T）
 
 
 ## vue2.0 开启ssr
@@ -82,11 +88,11 @@ vue2.0于2016年4月开启public preview版本，提供了一系列新特性： 
 
 很显然，要兵分两路：
 
-1. 服务端渲染： server-entry => server-bundle => bundleRenderer => render to html
+1 服务端渲染： server-entry => server-bundle => bundleRenderer => render to html
 
 &
 
-2. 客户端混合： client-entry => client-bundle => virtual dom => Hydrate
+2 客户端混合： client-entry => client-bundle => virtual dom => Hydrate
 
 
 ### 兵线 1 服务端渲染
