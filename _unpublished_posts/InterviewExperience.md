@@ -178,6 +178,12 @@ from cache 200 ...
 
 __1.2 按照你的理解，304和from cache有什么区别__
 
+304是缓存过期后，客户端发送了请求，并且收到了一个304状态码，表明资源not modified， 是一次完整的请求响应过程。
+
+而from cache 200 则是缓存没有过期，浏览器直接使用客户端缓存，没有向服务端发送请求。
+
+关于缓存的更多细节请参考 [浏览器http协议缓存机制](https://my.oschina.net/leejun2005/blog/369148)
+
 
 __2 OK，你曾经用nodeJS写过小项目，规模是怎样的？__
 
@@ -188,6 +194,18 @@ __3 要知道，nodeJS在4.0版本的时候已经支持ES6语法了，对此你�
 还是ES6的相关问题
 
 __4 Promise对象，它如何处理异常？__
+
+~~~javascript
+let p = new Promise(resolve, reject) {
+    if (done) {
+		resolve();
+	} else {
+		reject();
+	}
+};
+
+p.then(fn1).catch(fn2);
+~~~
 
 
 ### 总结
