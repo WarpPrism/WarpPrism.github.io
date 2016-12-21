@@ -1,0 +1,96 @@
+.blog-issue
+{
+    width: 100%;
+    height: 100%;
+}
+.blog-issue .app-top-bar
+{
+    position: relative;
+
+    width: 100%;
+    height: 90px;
+
+    border-bottom: solid 2px #d8d8d8;
+    background: #f8f6f7;
+}
+.app-title
+{
+    font-size: 20px;
+    font-weight: 150;
+
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+
+    width: 50%;
+
+    transform: translateX(-50%);
+    text-align: center;
+}
+.search-btn
+{
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+
+    width: 25px;
+    height: 25px;
+
+    background: url('/images/search.png') no-repeat;
+    background-size: 100%;
+}
+.return-btn
+{
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+
+    width: 25px;
+    height: 25px;
+
+    background: url('/images/return.png') no-repeat;
+    background-size: 100%;
+}
+
+.blog-issue .slide-part
+{
+    overflow: auto;
+
+    width: 100%;
+    height: 570px;
+
+    background: #fff;
+}
+
+.article-list
+{
+    width: 100%;
+    padding: 10px;
+
+    list-style: none;
+}
+.article-list-item
+{
+    display: table;
+
+    box-sizing: content-box;
+    width: 100%;
+    min-height: 50px;
+
+    border-bottom: solid 1px #d8d8d8;
+}
+.article-list-item a
+{
+    display: table-cell;
+
+    padding-left: 10px;
+
+    vertical-align: middle;
+    text-decoration: none;
+
+    color: #000;
+}
+.article-list-item a:hover
+{
+    background-color: #e7f4fd;
+}

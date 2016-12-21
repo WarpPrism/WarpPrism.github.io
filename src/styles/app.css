@@ -1,3 +1,5 @@
+/*app common style*/
+
 *
 {
     box-sizing: border-box;
@@ -6,9 +8,13 @@
 }
 body
 {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+    font-size: 16px;
+    font-weight: 100;
 
     width: 100%;
+
+    background-color: #afafaf;
 }
 
 .clearfix:before,
@@ -29,4 +35,20 @@ body
 .clearfix
 {
     zoom: 1;
+}
+.fr
+{
+    float: right;
+}
+.fl
+{
+    float: left;
+}
+.blur1
+{
+    background:         linear-gradient(90deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+    background:    -moz-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+    background:     -ms-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+    background:      -o-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
 }

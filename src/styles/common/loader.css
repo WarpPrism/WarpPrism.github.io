@@ -1,0 +1,86 @@
+.loader
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+    margin: auto;
+}
+.loader-bar
+{
+    position: absolute;
+    bottom: 15px;
+    left: -10px;
+
+    width: 6px;
+    height: 15px;
+
+    transform: rotate(0deg);
+    transform-origin: 10px 35px;
+    animation: loading .9s infinite;
+
+    border-radius: 5px;
+}
+.loader-bar:nth-child(2)
+{
+    transform: rotate(45deg);
+    animation-delay: .1s;
+}
+.loader-bar:nth-child(3)
+{
+    transform: rotate(90deg);
+    animation-delay: .2s;
+}
+.loader-bar:nth-child(4)
+{
+    transform: rotate(135deg);
+    animation-delay: .3s;
+}
+.loader-bar:nth-child(5)
+{
+    transform: rotate(180deg);
+    animation-delay: .4s;
+}
+.loader-bar:nth-child(6)
+{
+    transform: rotate(225deg);
+    animation-delay: .5s;
+}
+.loader-bar:nth-child(7)
+{
+    transform: rotate(270deg);
+    animation-delay: .6s;
+}
+.loader-bar:nth-child(8)
+{
+    transform: rotate(315deg);
+    animation-delay: .7s;
+}
+
+@keyframes loading
+{
+    0%
+    {
+        left: -10px;
+
+        transform-origin: 10px 35px;
+
+        background: transparent;
+    }
+    30%
+    {
+        background: #1266f5;
+    }
+    100%
+    {
+        left: 10px;
+
+        transform-origin: -10px 35px;
+
+        background: transparent;
+    }
+}

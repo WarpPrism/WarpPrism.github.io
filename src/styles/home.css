@@ -1,99 +1,25 @@
-.home-wrap
+.iphone-home
 {
-    overflow: hidden;
+    position: relative;
 
     width: 100%;
     height: 100%;
+
+    background: url('/images/lockScreen.jpg') no-repeat;
+    background-size: 100%;
 }
-.vedio
+.iphone-home .slide-part
 {
-    position: absolute;
-    z-index: -100;
-    top: 0;
-    left: 0;
+    position: relative;
 
     width: 100%;
-
-    transition: 1s opacity;
-
-    background-size: cover;
+    height: 100%;
+    padding: .1px;
 }
-.home-intro
-{
-    font-size: 1.2rem;
-    line-height: 2rem;
-
-    position: absolute;
-    top: 50%;
-    left: 2rem;
-
-    width: 45%;
-    padding: 2rem;
-
-    transform: translateY(-50%);
-
-    color: #fff;
-    background: rgba(0, 0, 0, .3);
-}
-.home-header
-{
-    font-size: 30px;
-    font-style: italic;
-
-    margin-bottom: 10px;
-}
-.home-intro__txt
-{
-    word-break: keep-all;
-}
-
-.home-nav
+.iphone-home .home-msg
 {
     position: absolute;
-    top: 50%;
-    right: 2rem;
+    top: 250px;
 
-    width: 45%;
-    height: 500px;
-
-    transform: translateY(-50%);
-}
-.home-nav-item
-{
-    line-height: 100px;
-
-    position: absolute;
-
-    display: block;
-
-    width: 100px;
-    height: 100px;
-
-    text-align: center;
-    text-decoration: none;
-
-    color: #fff;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, .3);
-}
-.home-nav-item:hover
-{
-    box-shadow: 0 0 0 15px rgba(255, 255,255,.2);
-}
-
-.about-nav
-{
-    top: 0;
-    left: 100px;
-}
-.blog-nav
-{
-    top: 200px;
-    left: 300px;
-}
-
-.project-nav
-{
-    bottom: 0;
-    left: 100px;
+    width: 100%;
 }
