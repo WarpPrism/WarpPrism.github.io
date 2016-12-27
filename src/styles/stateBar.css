@@ -93,3 +93,27 @@
 
     background: #fff;
 }
+/* Dark Theme */
+.state-bar-dark
+{
+    color: #000;
+}
+.state-bar-dark .signal-dot
+{
+    background: #000;
+}
+.state-bar-dark .wifi
+{
+    background: url('/images/wifi-dark.png') no-repeat;
+    background-size: 100%;
+}
+.state-bar-dark .battery
+{
+    border: solid 1px #000;
+    background: #000;
+    background-clip: content-box;
+}
+.state-bar-dark .battery:after
+{
+    background: #000;
+}

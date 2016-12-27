@@ -14,7 +14,9 @@ body
 
     width: 100%;
 
+    background: url('/images/desktop.jpg') no-repeat;
     background-color: #afafaf;
+    background-size: cover;
 }
 
 .clearfix:before,
@@ -51,4 +53,19 @@ body
     background:    -moz-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
     background:     -ms-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
     background:      -o-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+}
+.blur
+{
+            filter: blur(2px);
+    -webkit-filter: blur(2px);
+       -moz-filter: blur(2px);
+         -o-filter: blur(2px);
+}
+.blur2
+{
+    background:         linear-gradient(90deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+    background:    -moz-linear-gradient(0deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+    background:     -ms-linear-gradient(0deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+    background:      -o-linear-gradient(0deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
 }

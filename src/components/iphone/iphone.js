@@ -4,7 +4,7 @@ require('styles/iphone.css');
 class Iphone extends React.Component {
     render() {
         return (
-            <div className='iphone'>
+            <div className='iphone fr'>
                 <div className='iphone-top'>
                     <span className='camera'></span>
                     <span className='speaker'></span>

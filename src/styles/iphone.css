@@ -4,7 +4,8 @@
 
     width: 423px;
     height: 871px;
-    margin: 30px auto;
+    margin: 0;
+    margin-right: 120px;
     padding: 15px;
 
     transform: scale(.75);
