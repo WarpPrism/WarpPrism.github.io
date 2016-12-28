@@ -8,6 +8,7 @@ import Iphone from 'components/iphone/iphone.js';
 import LockScreen from 'components/iphone/lockScreen';
 import IphoneHome from 'components/iphone/home.js';
 import BlogIssue from 'components/iphone/blogIssue.js';
+import ProjectPage from 'components/iphone/projectPage.js';
 
 require('normalize.css/normalize.css');
 require('styles/app.css');
@@ -21,6 +22,7 @@ render((
             <Route path='/iphone_lock' component={LockScreen}/>
             <Route path='/iphone_home' component={IphoneHome}/>
             <Route path='/iphone_blog' component={BlogIssue}/>
+            <Route path='/iphone_projects' component={ProjectPage}/>
         </Route>
     </Router>
 ), document.getElementById('app'));
