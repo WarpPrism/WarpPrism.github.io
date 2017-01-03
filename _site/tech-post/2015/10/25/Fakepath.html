@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
+    <meta name="description" content="Some browsers have a security feature that prevents javascript from knowing your file's local full path. It makes sense - as a client, you don't want the server to know your local machine's filesystem. It would be nice if all browsers did this."/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <!--Bootstrap And Octicons-->
+    <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
+
+    
+        <link rel="stylesheet" href="/build/css/site_base.css"/>
+        
+            <link rel="stylesheet" href="/build/css/highlight.css"/>
+        
+            <link rel="stylesheet" href="/build/css/post.css"/>
+        
+        <!--Google Analysis-->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-79596803-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    
+    <title>如何引用本地文件的绝对路径（fakepath问题）</title>
+</head>
+
+<body>
+	<div class="container-fluid" id="site-wrapper">
+		<div class="container-fluid">
+  <div class="row">
+    <div id="index-header">
+      <h1 class="animated flipInX">
+        <img id="logo" src="/build/imgs/logo.png" alt=""/>
+        <span id="site-name">Jihao's Blog</span>
+      </h1>
+      <h4 id="motto"><span><b>Never let it go</b></span></h4>
+    </div>
+  </div>
+  <div class="row" id="index-nav">
+    <ul>
+      <li>
+        <a href="/">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          &nbsp;&nbsp;Home
+        </a>
+      </li>
+      <li>
+        <a href="/pages/tech-notes.html">
+          <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+          &nbsp;&nbsp;Tech Posts
+        </a>
+      </li>
+      <li>
+        <a href="/pages/essay.html">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          &nbsp;&nbsp;Essay
+        </a>
+      </li>
+      <li>
+        <a href="/pages/about.html">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          &nbsp;&nbsp;About
+        </a>
+      </li>
+    </ul>
+    <span id="nav-indicator"></span>
+  </div>
+</div>
+
+		<div class="row" id="post-wrapper">
+  <div id="post-body">
+    <div class="post">
+      <div class="header">
+        <h2>如何引用本地文件的绝对路径（fakepath问题）</h2>
+        <p class="post-meta">
+          <span class="octicon octicon-clock"></span>
+            Oct 25, 2015
+            
+            
+        </p>
+        <div class="post-tag">
+          <div>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-list-unordered"></span>
+              tech-post
+            </a>
+            
+          </div>
+          <div>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-tag"></span>
+              JavaScript
+            </a>
+            
+          </div>
+        </div>
+      </div>
+      <hr class="boundary">
+      <article>
+        <blockquote>
+  <p>Some browsers have a security feature that prevents javascript from knowing your file’s local full path. It makes sense - as a client, you don’t want the server to know your local machine’s filesystem. It would be nice if all browsers did this.</p>
+</blockquote>
+
+<p><strong>上代码：</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">getPath</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">fileQuery</span><span class="p">,</span><span class="nx">transImg</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"MSIE"</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">){</span>
+        <span class="nx">obj</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">path</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">selection</span><span class="p">.</span><span class="nx">createRange</span><span class="p">().</span><span class="nx">text</span><span class="p">;</span>
+        <span class="nx">obj</span><span class="p">.</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="s2">"src"</span><span class="p">);</span>
+        <span class="nx">obj</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">"src"</span><span class="p">,</span><span class="nx">transImg</span><span class="p">);</span>
+        <span class="nx">obj</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">filter</span><span class="o">=</span>
+            <span class="s2">"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"</span><span class="o">+</span><span class="nx">path</span><span class="o">+</span><span class="s2">"', sizingMethod='scale');"</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span><span class="nx">fileQuery</span><span class="p">.</span><span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="kd">var</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
+        <span class="nx">reader</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+            <span class="nx">obj</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">"src"</span><span class="p">,</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span>
+        <span class="p">};</span>
+        <span class="nx">reader</span><span class="p">.</span><span class="nx">readAsDataURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>现在我们有一个Image对象，要将该对象的src属性指向一个本地文件，就可以通过下面方法实现。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"file"</span> <span class="nt">/&gt;</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"file"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span>
+<span class="nx">file</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+<span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">getPath</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+	<span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="c1">// your code here.</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+<p>这样img的src就是本地文件的引用了，当然src的内容是经过加密的，浏览器很重视这方面的安全性。<br />
+如果采用下面这种做法，就会遇到fakepath问题：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">file</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+
+	<span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="c1">// your code here.</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>GET file:///C:/fakepath/src.jpg net::ERR_FILE_NOT_FOUND
+</code></pre>
+</div>
+
+<p>这里fakepath就把文件的真实路径隐藏了。</p>
+
+<blockquote>
+  <p><a href="http://stackoverflow.com/questions/4851595/how-to-resolve-the-c-fakepath">Related Topic In Stackoverflow</a></p>
+</blockquote>
+
+      </article>
+      <hr class="boundary">
+    </div>
+
+    <p class="post-copyright">
+      本文的版权归作者
+      <a href="http://warpprism.github.io">ZhouJihao</a>
+      所有，采用
+      <a href="http://creativecommons.org/licenses/by-nc/3.0/">Attribution-NonCommercial 3.0 License</a>。
+      任何人可以进行转载、分享，但不可在未经允许的情况下用于商业用途；转载请注明出处。感谢配合！
+    </p>
+
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+      &nbsp;Share This Post
+    </h2>
+
+    <div class="ds-share flat" data-thread-key="/tech-post/2015/10/25/Fakepath" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="Some browsers have a security feature that prevents javascript from knowing your file's local full path. It makes sense - as a client, you don't want the server to know your local machine's filesystem. It would be nice if all browsers did this......." data-url="http://warpprism.github.io/tech-post/2015/10/25/Fakepath.html">
+      <div class="ds-share-inline">
+        <ul class="ds-share-icons-16">
+          <li data-toggle="ds-share-icons-more">
+            <a class="ds-more" href="javascript:void(0);">分享到：</a>
+          </li>
+          <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+          <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+          <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+          <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        </ul>
+        <div class="ds-share-icons-more">
+        </div>
+      </div>
+    </div>
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+      &nbsp;Leave A Comment
+    </h2>
+
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="/tech-post/2015/10/25/Fakepath" data-title="如何引用本地文件的绝对路径（fakepath问题）" data-url="http://warpprism.github.io/tech-post/2015/10/25/Fakepath.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhoujihao"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+  </div>
+
+  <!-- Return To Top -->
+  <a id="top" href="#">
+    <span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
+    <span class="text">Top</span>
+  </a>
+</div>
+
+		
+<div class="container-fluid" id="footer-div">
+    <div class="row">
+        <div class="footer1">
+            <a href="#" class="foot-item" role="button" data-toggle="modal" data-target=".email-modal">
+                <span class="octicon octicon-mail"></span>
+                <span>Email@me</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/warpprism" target="_blank">
+                <span class="octicon octicon-mark-github"></span>
+                <span>My Github</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/WarpPrism/WarpPrism.github.io" target="_blank">
+                <span class="octicon octicon-heart"></span>
+                <span>Download Theme</span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="footer2">
+            <span>Copyright &copy; ZhouJihao</span>
+            |
+            <span>Powered By Jekyll</span>
+        </div>
+    </div>
+
+
+    <div class="modal fade email-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <b>
+                        My Email Address
+                    </b>
+                </div>
+                <div class="modal-body">
+                    <b>249662605@qq.com</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	</div>
+	<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+
+    
+
+
+</body>
+</html>

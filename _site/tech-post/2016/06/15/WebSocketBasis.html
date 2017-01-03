@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
+    <meta name="description" content="WebSocket是HTML5提出的新标准之一，被称为“web的TCP”，它的出现方便了实时web应用的开发。"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <!--Bootstrap And Octicons-->
+    <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
+
+    
+        <link rel="stylesheet" href="/build/css/site_base.css"/>
+        
+            <link rel="stylesheet" href="/build/css/highlight.css"/>
+        
+            <link rel="stylesheet" href="/build/css/post.css"/>
+        
+        <!--Google Analysis-->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-79596803-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    
+    <title>HTML5之WebSocket</title>
+</head>
+
+<body>
+	<div class="container-fluid" id="site-wrapper">
+		<div class="container-fluid">
+  <div class="row">
+    <div id="index-header">
+      <h1 class="animated flipInX">
+        <img id="logo" src="/build/imgs/logo.png" alt=""/>
+        <span id="site-name">Jihao's Blog</span>
+      </h1>
+      <h4 id="motto"><span><b>Never let it go</b></span></h4>
+    </div>
+  </div>
+  <div class="row" id="index-nav">
+    <ul>
+      <li>
+        <a href="/">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          &nbsp;&nbsp;Home
+        </a>
+      </li>
+      <li>
+        <a href="/pages/tech-notes.html">
+          <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+          &nbsp;&nbsp;Tech Posts
+        </a>
+      </li>
+      <li>
+        <a href="/pages/essay.html">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          &nbsp;&nbsp;Essay
+        </a>
+      </li>
+      <li>
+        <a href="/pages/about.html">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          &nbsp;&nbsp;About
+        </a>
+      </li>
+    </ul>
+    <span id="nav-indicator"></span>
+  </div>
+</div>
+
+		<div class="row" id="post-wrapper">
+  <div id="post-body">
+    <div class="post">
+      <div class="header">
+        <h2>HTML5之WebSocket</h2>
+        <p class="post-meta">
+          <span class="octicon octicon-clock"></span>
+            Jun 15, 2016
+            
+            
+        </p>
+        <div class="post-tag">
+          <div>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-list-unordered"></span>
+              tech-post
+            </a>
+            
+          </div>
+          <div>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-tag"></span>
+              JavaScript
+            </a>
+            
+          </div>
+        </div>
+      </div>
+      <hr class="boundary">
+      <article>
+        <h3 id="section">基本概念</h3>
+<p><strong>WebSocket</strong> 是HTML5提出的新标准之一，被称为“web的TCP”，它的出现方便了实时web应用的开发。所谓实时web应用就是指服务器和客户端之间通信频繁的应用，比如在线游戏，在线证券，实时聊天系统等等，传统的request-response模式是无法实现实时web应用的，这种情况下，客户端得到的信息往往是过时的。<br />
+&gt; <strong>MDN:</strong>  WebSockets is an advanced technology that makes it possible to open an interactive communication session between the user’s browser and a server. With this API, you can send messages to a server and receive event-driven responses without having to poll the server for a reply.</p>
+
+<p>在websocket出现以前，开发人员想要实现实时web应用的开发，只能采取一些折衷的方案，主要有：</p>
+
+<ul>
+  <li>轮询（polling）</li>
+  <li>Comet
+    <ul>
+      <li>长轮询</li>
+      <li>流</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>轮询：</strong> 最古老的方法，客户端以一定的时间间隔发送请求，通过频繁请求的方式保持连接。缺点是当服务器没有数据更新的时候，多余的请求会占据网络带宽。</p>
+
+<p><strong>长轮询：</strong> 当服务器端没有数据更新的时候，连接会保持一段时间周期直到数据或状态改变或者时间过期，通过这种机制来减少无效的客户端和服务器间的交互。当然，如果服务端的数据变更非常频繁的话，这种机制和定时轮询比较起来没有本质上的性能的提高。</p>
+
+<p><strong>流：</strong> 流技术方案通常就是在客户端的页面使用一个隐藏的窗口向服务端发出一个长连接的请求。服务器端接到这个请求后作出回应并不断更新连接状态以保证客户端和服务器端的连接不过期。</p>
+
+<p>综合以上方法，可以发现它们都是用ajax方式进行的模拟长连接，实质上每次连接都是HTTP过程，自然每一次都包含类似的HTTP header，造成了冗余。</p>
+
+<p>而websocket就是为了取代轮询和Comet，它本质上是一种TCP连接，因此在连接稳定性，传输数据量方面都有着性能优势。</p>
+
+<h3 id="websocket">WebSocket连接建立过程</h3>
+
+<ul>
+  <li>客户端向服务器发送<strong>特定的HTTP请求</strong>，即握手阶段。</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>客户端到服务端：
+GET /demo HTTP/1.1
+Host: example.com
+Connection: Upgrade // 表明需要升级协议
+Sec-WebSocket-Key2: 12998 5 Y3 1 .P00
+Upgrade: WebSocket
+Sec-WebSocket-Key1: 4@1 46546xW%0l 1 5
+Origin: http://example.com
+[8-byte security key]
+
+服务端到客户端：
+HTTP/1.1 101 WebSocket Protocol Handshake
+Upgrade: WebSocket
+Connection: Upgrade
+WebSocket-Origin: http://example.com
+WebSocket-Location: ws://example.com/demo
+[16-byte hash response]
+</code></pre>
+</div>
+
+<ul>
+  <li>服务器端解析头信息，并在握手的过程中依据这些信息生成一个16位的安全密钥并返回给客户端，以表明服务器端获取了客户端的请求，同意创建WebSocket 连接。</li>
+  <li>客户端和服务器进行全双工通信（full-duplex）。</li>
+  <li>其中一方关闭连接</li>
+</ul>
+
+<h3 id="websocketjs">WebSocket的JS接口</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ws_server_url</span> <span class="o">=</span> <span class="s2">"ws://localhost:8888/Demo"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">mysocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="nx">ws_server_url</span><span class="p">);</span>
+<span class="nx">mysocket</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ws_server is ready for message!"</span><span class="p">);</span>
+  <span class="nx">mysocket</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">"Hello World!"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">mysocket</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">mysocket</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">mysocket</span><span class="p">.</span><span class="nx">onclose</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ws_server closed."</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">mysocket</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h3 id="section-1">参考链接</h3>
+<p><a href="http://www.ibm.com/developerworks/cn/web/1112_huangxa_websocket/">HTML5 WebSocket 简介</a></p>
+
+<p><a href="http://www.xyhtml5.com/websocket-javascript-example.html">WebSocket的JavaScript例子</a></p>
+
+      </article>
+      <hr class="boundary">
+    </div>
+
+    <p class="post-copyright">
+      本文的版权归作者
+      <a href="http://warpprism.github.io">ZhouJihao</a>
+      所有，采用
+      <a href="http://creativecommons.org/licenses/by-nc/3.0/">Attribution-NonCommercial 3.0 License</a>。
+      任何人可以进行转载、分享，但不可在未经允许的情况下用于商业用途；转载请注明出处。感谢配合！
+    </p>
+
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+      &nbsp;Share This Post
+    </h2>
+
+    <div class="ds-share flat" data-thread-key="/tech-post/2016/06/15/WebSocketBasis" data-title="HTML5之WebSocket" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="WebSocket是HTML5提出的新标准之一，被称为“web的TCP”，它的出现方便了实时web应用的开发。......" data-url="http://warpprism.github.io/tech-post/2016/06/15/WebSocketBasis.html">
+      <div class="ds-share-inline">
+        <ul class="ds-share-icons-16">
+          <li data-toggle="ds-share-icons-more">
+            <a class="ds-more" href="javascript:void(0);">分享到：</a>
+          </li>
+          <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+          <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+          <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+          <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        </ul>
+        <div class="ds-share-icons-more">
+        </div>
+      </div>
+    </div>
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+      &nbsp;Leave A Comment
+    </h2>
+
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="/tech-post/2016/06/15/WebSocketBasis" data-title="HTML5之WebSocket" data-url="http://warpprism.github.io/tech-post/2016/06/15/WebSocketBasis.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhoujihao"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+  </div>
+
+  <!-- Return To Top -->
+  <a id="top" href="#">
+    <span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
+    <span class="text">Top</span>
+  </a>
+</div>
+
+		
+<div class="container-fluid" id="footer-div">
+    <div class="row">
+        <div class="footer1">
+            <a href="#" class="foot-item" role="button" data-toggle="modal" data-target=".email-modal">
+                <span class="octicon octicon-mail"></span>
+                <span>Email@me</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/warpprism" target="_blank">
+                <span class="octicon octicon-mark-github"></span>
+                <span>My Github</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/WarpPrism/WarpPrism.github.io" target="_blank">
+                <span class="octicon octicon-heart"></span>
+                <span>Download Theme</span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="footer2">
+            <span>Copyright &copy; ZhouJihao</span>
+            |
+            <span>Powered By Jekyll</span>
+        </div>
+    </div>
+
+
+    <div class="modal fade email-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <b>
+                        My Email Address
+                    </b>
+                </div>
+                <div class="modal-body">
+                    <b>249662605@qq.com</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	</div>
+	<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+
+    
+
+
+</body>
+</html>

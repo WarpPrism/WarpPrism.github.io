@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
+    <meta name="description" content="最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <!--Bootstrap And Octicons-->
+    <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
+
+    
+        <link rel="stylesheet" href="/build/css/site_base.css"/>
+        
+            <link rel="stylesheet" href="/build/css/highlight.css"/>
+        
+            <link rel="stylesheet" href="/build/css/post.css"/>
+        
+        <!--Google Analysis-->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-79596803-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    
+    <title>开始搭建Tornado服务器</title>
+</head>
+
+<body>
+	<div class="container-fluid" id="site-wrapper">
+		<div class="container-fluid">
+  <div class="row">
+    <div id="index-header">
+      <h1 class="animated flipInX">
+        <img id="logo" src="/build/imgs/logo.png" alt=""/>
+        <span id="site-name">Jihao's Blog</span>
+      </h1>
+      <h4 id="motto"><span><b>Never let it go</b></span></h4>
+    </div>
+  </div>
+  <div class="row" id="index-nav">
+    <ul>
+      <li>
+        <a href="/">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          &nbsp;&nbsp;Home
+        </a>
+      </li>
+      <li>
+        <a href="/pages/tech-notes.html">
+          <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+          &nbsp;&nbsp;Tech Posts
+        </a>
+      </li>
+      <li>
+        <a href="/pages/essay.html">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          &nbsp;&nbsp;Essay
+        </a>
+      </li>
+      <li>
+        <a href="/pages/about.html">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          &nbsp;&nbsp;About
+        </a>
+      </li>
+    </ul>
+    <span id="nav-indicator"></span>
+  </div>
+</div>
+
+		<div class="row" id="post-wrapper">
+  <div id="post-body">
+    <div class="post">
+      <div class="header">
+        <h2>开始搭建Tornado服务器</h2>
+        <p class="post-meta">
+          <span class="octicon octicon-clock"></span>
+            Oct 17, 2015
+            
+            
+        </p>
+        <div class="post-tag">
+          <div>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-list-unordered"></span>
+              tech-post
+            </a>
+            
+          </div>
+          <div>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-tag"></span>
+              tornado
+            </a>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-tag"></span>
+              back-end
+            </a>
+            
+          </div>
+        </div>
+      </div>
+      <hr class="boundary">
+      <article>
+        <h3 id="section">前言</h3>
+
+<p>最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案，因为它轻量且高效，足够满足一个微信号的访问需求。而我对tornado还不是很了解，所以需要深入学习一下。</p>
+
+<h3 id="section-1">介绍</h3>
+<p>Tornado 和现在的主流 Web 服务器框架（包括大多数 Python 的框架）有着明显的区别：它是非阻塞式服务器，而且速度相当快。得利于其非阻塞的方式和对 epoll 的运用，Tornado 每秒可以处理数以千计的连接，这意味着对于实时 Web 服务来说，Tornado 是一个理想的 Web 框架。</p>
+
+<h3 id="section-2">模块分析</h3>
+<p>$ <strong>IOLoop</strong>, 基于epoll， 用来处理socket的读写事件，从而使tornado能高效率的处理高并发请求。</p>
+
+<p>$ <strong>IOStream</strong>，用来处理 socket 的异步读写。</p>
+
+<p>$ <strong>HTTPConnection</strong>，这个类用来处理 http 的请求，包括读取http请求头，读取post过来的数据，调用用户自定义的处理方法，以及把响应数据写给客户端socket。</p>
+
+<p>具体关系如图所示：<br />
+<img src="/imgs/tech_post/tornado1.gif" alt="" /></p>
+
+<h3 id="section-3">示例服务器代码</h3>
+<p>在项目架构中， templates文件夹存放HTML模板文件， static文件夹存放img， css， js等等。</p>
+
+<p>在下面的代码中，核心部分就是Handler， 用来处理来自客户端的get/post请求。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os.path</span>
+
+<span class="kn">import</span> <span class="nn">tornado.httpserver</span>
+<span class="kn">import</span> <span class="nn">tornado.ioloop</span>
+<span class="kn">import</span> <span class="nn">tornado.options</span>
+<span class="kn">import</span> <span class="nn">tornado.web</span>
+
+<span class="kn">from</span> <span class="nn">tornado.options</span> <span class="kn">import</span> <span class="n">define</span><span class="p">,</span> <span class="n">options</span>
+<span class="n">define</span><span class="p">(</span><span class="s">"port"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">"run on the given port"</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">IndexHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c"># tornado.options.parse_command_line()</span>
+
+    <span class="n">APP</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">Application</span><span class="p">(</span>
+        <span class="n">handlers</span> <span class="o">=</span> <span class="p">[(</span><span class="s">"/"</span><span class="p">,</span> <span class="n">IndexHandler</span><span class="p">)],</span>
+        <span class="n">template_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">"templates"</span><span class="p">),</span>
+        <span class="n">static_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">"static"</span><span class="p">),</span>
+        <span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="p">)</span>
+
+    <span class="n">HTTP_SERVER</span> <span class="o">=</span> <span class="n">tornado</span><span class="o">.</span><span class="n">httpserver</span><span class="o">.</span><span class="n">HTTPServer</span><span class="p">(</span><span class="n">APP</span><span class="p">)</span>
+    <span class="n">HTTP_SERVER</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+    <span class="n">tornado</span><span class="o">.</span><span class="n">ioloop</span><span class="o">.</span><span class="n">IOLoop</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre>
+</div>
+
+      </article>
+      <hr class="boundary">
+    </div>
+
+    <p class="post-copyright">
+      本文的版权归作者
+      <a href="http://warpprism.github.io">ZhouJihao</a>
+      所有，采用
+      <a href="http://creativecommons.org/licenses/by-nc/3.0/">Attribution-NonCommercial 3.0 License</a>。
+      任何人可以进行转载、分享，但不可在未经允许的情况下用于商业用途；转载请注明出处。感谢配合！
+    </p>
+
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+      &nbsp;Share This Post
+    </h2>
+
+    <div class="ds-share flat" data-thread-key="/tech-post/2015/10/17/TornadoIntroduction" data-title="开始搭建Tornado服务器" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="最近要为中大的官方微信搭建一个网站，主要是一个查询大厅的页面，想把这个页面嵌入到iSYSU公众号上面。我们技术部讨论之后，决定采用tornado作为后端的解决方案......" data-url="http://warpprism.github.io/tech-post/2015/10/17/TornadoIntroduction.html">
+      <div class="ds-share-inline">
+        <ul class="ds-share-icons-16">
+          <li data-toggle="ds-share-icons-more">
+            <a class="ds-more" href="javascript:void(0);">分享到：</a>
+          </li>
+          <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+          <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+          <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+          <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        </ul>
+        <div class="ds-share-icons-more">
+        </div>
+      </div>
+    </div>
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+      &nbsp;Leave A Comment
+    </h2>
+
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="/tech-post/2015/10/17/TornadoIntroduction" data-title="开始搭建Tornado服务器" data-url="http://warpprism.github.io/tech-post/2015/10/17/TornadoIntroduction.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhoujihao"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+  </div>
+
+  <!-- Return To Top -->
+  <a id="top" href="#">
+    <span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
+    <span class="text">Top</span>
+  </a>
+</div>
+
+		
+<div class="container-fluid" id="footer-div">
+    <div class="row">
+        <div class="footer1">
+            <a href="#" class="foot-item" role="button" data-toggle="modal" data-target=".email-modal">
+                <span class="octicon octicon-mail"></span>
+                <span>Email@me</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/warpprism" target="_blank">
+                <span class="octicon octicon-mark-github"></span>
+                <span>My Github</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/WarpPrism/WarpPrism.github.io" target="_blank">
+                <span class="octicon octicon-heart"></span>
+                <span>Download Theme</span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="footer2">
+            <span>Copyright &copy; ZhouJihao</span>
+            |
+            <span>Powered By Jekyll</span>
+        </div>
+    </div>
+
+
+    <div class="modal fade email-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <b>
+                        My Email Address
+                    </b>
+                </div>
+                <div class="modal-body">
+                    <b>249662605@qq.com</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	</div>
+	<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+
+    
+
+
+</body>
+</html>

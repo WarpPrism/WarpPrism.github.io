@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="周吉昊, ZhouJihao, zhoujihao, blog, jihao'sblog, 前端开发, 个人博客"/>
+    <meta name="description" content="Gulp is a streaming build system, intended for automating and enhance your workflow， 它是一个服务于前端工程自动化的强有力工具，其工作性质和C++ 的make，Java中的Ant， Maven差不多，都是为了方便开发而设计的"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <!--Bootstrap And Octicons-->
+    <link rel="stylesheet" href="/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/octicons/octicons.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/animate.css" />
+
+    
+        <link rel="stylesheet" href="/build/css/site_base.css"/>
+        
+            <link rel="stylesheet" href="/build/css/highlight.css"/>
+        
+            <link rel="stylesheet" href="/build/css/post.css"/>
+        
+        <!--Google Analysis-->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-79596803-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    
+    <title>我的Gulp自动化流程</title>
+</head>
+
+<body>
+	<div class="container-fluid" id="site-wrapper">
+		<div class="container-fluid">
+  <div class="row">
+    <div id="index-header">
+      <h1 class="animated flipInX">
+        <img id="logo" src="/build/imgs/logo.png" alt=""/>
+        <span id="site-name">Jihao's Blog</span>
+      </h1>
+      <h4 id="motto"><span><b>Never let it go</b></span></h4>
+    </div>
+  </div>
+  <div class="row" id="index-nav">
+    <ul>
+      <li>
+        <a href="/">
+          <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+          &nbsp;&nbsp;Home
+        </a>
+      </li>
+      <li>
+        <a href="/pages/tech-notes.html">
+          <span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+          &nbsp;&nbsp;Tech Posts
+        </a>
+      </li>
+      <li>
+        <a href="/pages/essay.html">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          &nbsp;&nbsp;Essay
+        </a>
+      </li>
+      <li>
+        <a href="/pages/about.html">
+          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+          &nbsp;&nbsp;About
+        </a>
+      </li>
+    </ul>
+    <span id="nav-indicator"></span>
+  </div>
+</div>
+
+		<div class="row" id="post-wrapper">
+  <div id="post-body">
+    <div class="post">
+      <div class="header">
+        <h2>我的Gulp自动化流程</h2>
+        <p class="post-meta">
+          <span class="octicon octicon-clock"></span>
+            Jul 15, 2016
+            
+            
+        </p>
+        <div class="post-tag">
+          <div>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-list-unordered"></span>
+              tech-post
+            </a>
+            
+          </div>
+          <div>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-tag"></span>
+              Gulp
+            </a>
+            
+            <a href="javascript:void(0)">
+              <span class="octicon octicon-tag"></span>
+              前端自动化
+            </a>
+            
+          </div>
+        </div>
+      </div>
+      <hr class="boundary">
+      <article>
+        <h3 id="section">简介</h3>
+<p><strong>Gulp is a streaming build system, intended for automating and enhance your workflow</strong></p>
+
+<p>上面是gulp官方给出的定义，表明它是一个服务于前端工程自动化的强有力工具，其工作性质和C++ 的make，Java中的Ant， Maven差不多，都是为了方便开发而设计的。</p>
+
+<p>相对于Grunt，它具有如下优点：</p>
+
+<ol>
+  <li>易于使用：采用代码优于配置策略，Gulp让简单的事情继续简单，复杂的任务变得可管理。</li>
+  <li>高效：通过利用Node.js强大的流，不需要往磁盘写中间文件，可以更快地完成构建。</li>
+  <li>高质量：Gulp严格的插件指导方针，确保插件简单并且按你期望的方式工作。</li>
+  <li>易于学习：通过把API降到最少，你能在很短的时间内学会Gulp。构建工作就像你设想的一样：是一系列流管道。</li>
+</ol>
+
+<p>下面是我常用的gulp工作流，如有错误，欢迎指正：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">pug</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-pug"</span><span class="p">);</span>    <span class="c1">// jade template engine</span>
+
+<span class="kd">var</span> <span class="nx">sass</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-sass"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cleanCss</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-clean-css"</span><span class="p">);</span>   <span class="c1">// css minify</span>
+<span class="kd">var</span> <span class="nx">autoprefixer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-autoprefixer"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">livescript</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-livescript"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">jshint</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-jshint"</span><span class="p">);</span>    <span class="c1">// js hint</span>
+<span class="kd">var</span> <span class="nx">concat</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-concat"</span><span class="p">);</span>    <span class="c1">// js concat</span>
+<span class="kd">var</span> <span class="nx">uglify</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-uglify"</span><span class="p">);</span>    <span class="c1">// js uglify</span>
+<span class="kd">var</span> <span class="nx">rename</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-rename"</span><span class="p">);</span>    <span class="c1">// rename</span>
+
+<span class="kd">var</span> <span class="nx">webserver</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-webserver"</span><span class="p">);</span>  <span class="c1">// a simple webserver</span>
+<span class="kd">var</span> <span class="nx">livereload</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-livereload"</span><span class="p">);</span>    <span class="c1">// livereload</span>
+
+<span class="kd">var</span> <span class="nx">clean</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"gulp-clean"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">errorNotifier</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp-error-notifier'</span><span class="p">);</span>
+
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s2">"serve"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s2">"./"</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">webserver</span><span class="p">({</span>
+            <span class="na">livereload</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+            <span class="na">open</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+            <span class="na">directoryListing</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">}));</span>
+<span class="p">});</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s2">"templates"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">src</span> <span class="o">=</span> <span class="s2">"./src/templates/*.jade"</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">dist</span> <span class="o">=</span> <span class="s2">"./"</span><span class="p">;</span>
+
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">errorNotifier</span><span class="p">.</span><span class="nx">handleError</span><span class="p">(</span>
+            <span class="nx">pug</span><span class="p">()</span>
+        <span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="nx">dist</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s2">"style"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">src</span> <span class="o">=</span> <span class="s2">"./src/scss/*.scss"</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">dist</span> <span class="o">=</span> <span class="s2">"./dist/css/"</span><span class="p">;</span>
+
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">errorNotifier</span><span class="p">.</span><span class="nx">handleError</span><span class="p">(</span>
+            <span class="nx">sass</span><span class="p">()</span>
+        <span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">autoprefixer</span><span class="p">({</span>
+            <span class="na">browsers</span><span class="p">:</span> <span class="p">[</span><span class="s1">'last 2 versions'</span><span class="p">],</span>
+            <span class="na">cascade</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">rename</span><span class="p">({</span><span class="na">suffix</span><span class="p">:</span> <span class="s2">".min"</span><span class="p">}))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">cleanCss</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="nx">dist</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s2">"script"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">src</span> <span class="o">=</span> <span class="s2">"./src/js/*.js"</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">dist</span> <span class="o">=</span> <span class="s2">"./dist/js/"</span><span class="p">;</span>
+
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span>
+        <span class="c1">// .pipe(errorNotifier.handleError(</span>
+        <span class="c1">//     livescript({</span>
+        <span class="c1">//         bare: true</span>
+        <span class="c1">//     })</span>
+        <span class="c1">// ))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">jshint</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">jshint</span><span class="p">.</span><span class="nx">reporter</span><span class="p">(</span><span class="s1">'default'</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">concat</span><span class="p">(</span><span class="s2">"main.js"</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">rename</span><span class="p">({</span><span class="na">suffix</span><span class="p">:</span> <span class="s2">".min"</span><span class="p">}))</span>
+        <span class="c1">//.pipe(uglify())</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="nx">dist</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s2">"clean"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="s2">"./dist/*"</span><span class="p">;</span>
+
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">([</span><span class="nx">target</span><span class="p">],</span> <span class="p">{</span><span class="na">read</span><span class="p">:</span> <span class="kc">false</span><span class="p">})</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">clean</span><span class="p">());</span>
+<span class="p">});</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s2">"watch"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s2">"./src/templates/*.jade"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"templates"</span><span class="p">]);</span>
+
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s2">"./src/scss/*.scss"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"style"</span><span class="p">]);</span>
+
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">watch</span><span class="p">(</span><span class="s2">"./src/js/*.js"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"script"</span><span class="p">]);</span>
+<span class="p">});</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s2">"default"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">gulp</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s2">"templates"</span><span class="p">,</span> <span class="s2">"style"</span><span class="p">,</span> <span class="s2">"script"</span><span class="p">,</span> <span class="s2">"serve"</span><span class="p">,</span> <span class="s2">"watch"</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+<span class="c1">// if development is node, just add nodemon</span>
+<span class="cm">/*var nodemon = require('gulp-nodemon');
+
+gulp.task('nodemon', function() {
+    return nodemon({
+        script: 'app.js',
+        env: {
+            'NODE_ENV': 'development'
+        }
+    })
+});*/</span>
+</code></pre>
+</div>
+
+<h3 id="section-1">链接</h3>
+
+<p><a href="http://gulpjs.com/">Gulp Official Site</a></p>
+
+      </article>
+      <hr class="boundary">
+    </div>
+
+    <p class="post-copyright">
+      本文的版权归作者
+      <a href="http://warpprism.github.io">ZhouJihao</a>
+      所有，采用
+      <a href="http://creativecommons.org/licenses/by-nc/3.0/">Attribution-NonCommercial 3.0 License</a>。
+      任何人可以进行转载、分享，但不可在未经允许的情况下用于商业用途；转载请注明出处。感谢配合！
+    </p>
+
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+      &nbsp;Share This Post
+    </h2>
+
+    <div class="ds-share flat" data-thread-key="/tech-post/2016/07/15/GulpBuild" data-title="我的Gulp自动化流程" data-images="http://warpprism.github.io/imgs/show4.jpg" data-content="Gulp is a streaming build system, intended for automating and enhance your workflow， 它是一个服务于前端工程自动化的强有力工具，其工作性质和C++ 的make，Java中的Ant， Maven差不多，都是为了方便开发而设计的......" data-url="http://warpprism.github.io/tech-post/2016/07/15/GulpBuild.html">
+      <div class="ds-share-inline">
+        <ul class="ds-share-icons-16">
+          <li data-toggle="ds-share-icons-more">
+            <a class="ds-more" href="javascript:void(0);">分享到：</a>
+          </li>
+          <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+          <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+          <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+          <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        </ul>
+        <div class="ds-share-icons-more">
+        </div>
+      </div>
+    </div>
+
+    <h2 class="guest-op">
+      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+      &nbsp;Leave A Comment
+    </h2>
+
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="/tech-post/2016/07/15/GulpBuild" data-title="我的Gulp自动化流程" data-url="http://warpprism.github.io/tech-post/2016/07/15/GulpBuild.html"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhoujihao"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+  </div>
+
+  <!-- Return To Top -->
+  <a id="top" href="#">
+    <span class="glyphicon glyphicon-chevron-up icon" aria-hidden="true"></span>
+    <span class="text">Top</span>
+  </a>
+</div>
+
+		
+<div class="container-fluid" id="footer-div">
+    <div class="row">
+        <div class="footer1">
+            <a href="#" class="foot-item" role="button" data-toggle="modal" data-target=".email-modal">
+                <span class="octicon octicon-mail"></span>
+                <span>Email@me</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/warpprism" target="_blank">
+                <span class="octicon octicon-mark-github"></span>
+                <span>My Github</span>
+            </a>
+            |
+            <a class="foot-item" href="https://github.com/WarpPrism/WarpPrism.github.io" target="_blank">
+                <span class="octicon octicon-heart"></span>
+                <span>Download Theme</span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="footer2">
+            <span>Copyright &copy; ZhouJihao</span>
+            |
+            <span>Powered By Jekyll</span>
+        </div>
+    </div>
+
+
+    <div class="modal fade email-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <b>
+                        My Email Address
+                    </b>
+                </div>
+                <div class="modal-body">
+                    <b>249662605@qq.com</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	</div>
+	<script type="text/javascript" src="/lib/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+
+    
+
+
+</body>
+</html>
