@@ -1,11 +1,12 @@
 .iphone
 {
     position: relative;
+    top: 0;
+    left: 200px;
 
     width: 423px;
     height: 871px;
     margin: 0;
-    margin-right: 120px;
     padding: 15px;
 
     transform: scale(.75);
@@ -141,7 +142,7 @@
 }
 .iphone-bottom
 {
-    padding: 10px 0 0;
+    padding: 20px 0 0;
 }
 .iphone-bottom .home-btn
 {

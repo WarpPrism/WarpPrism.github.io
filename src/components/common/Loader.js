@@ -13,7 +13,8 @@ class Loader extends React.Component {
                 <div className='loader-bar'></div>            
                 <div className='loader-bar'></div>            
                 <div className='loader-bar'></div>            
-                <div className='loader-bar'></div>            
+                <div className='loader-bar'></div>     
+                <span className='loader-txt'>Loading...</span>       
             </div>
         );
     }

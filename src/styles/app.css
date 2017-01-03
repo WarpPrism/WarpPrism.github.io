@@ -14,8 +14,8 @@ body
 
     width: 100%;
 
-    background: url('/images/desktop.jpg') no-repeat;
-    background-color: #afafaf;
+    background: url('../images/desktop.jpg') no-repeat;
+    background-color: #ddd;
     background-size: cover;
 }
 

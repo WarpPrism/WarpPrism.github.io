@@ -12,25 +12,25 @@ class FixedApps extends React.Component {
                 <div className='app-wrap'>
                     <div className='app' onClick={this.goBlog}>
                         <div className='app-icon'>
-                            <img src='images/iosicons/finder.png' alt='icon'></img>
+                            <img src='images/iosicons/finder.png' alt='icon'/>
                         </div>
                         <div className='app-name'>博客</div>
                     </div>
-                    <div className='app'>
+                    <div className='app' onClick={this.goProject}>
                         <div className='app-icon'>
-                            <img src='images/iosicons/game-center.png' alt='icon'></img>
+                            <img src='images/iosicons/game-center.png' alt='icon'/>
                         </div>
                         <div className='app-name'>项目</div>
                     </div>
                     <div className='app'>
                         <div className='app-icon'>
-                            <img src='images/iosicons/tips.png' alt='icon'></img>
+                            <img src='images/iosicons/tips.png' alt='icon'/>
                         </div>
                         <div className='app-name'>关于</div>
                     </div>
                     <div className='app'>
                         <div className='app-icon'>
-                            <img src='images/iosicons/messages.png' alt='icon'></img>
+                            <img src='images/iosicons/messages.png' alt='icon'/>
                         </div>
                         <div className='app-name'>留言板</div>
                     </div>
@@ -40,6 +40,9 @@ class FixedApps extends React.Component {
     }
     goBlog(e) {
         window.location.hash = '#iphone_blog';
+    }
+    goProject(e) {
+        window.location.hash = '#iphone_projects';
     }
 }
 

@@ -10,6 +10,16 @@
     height: 0;
     margin: auto;
 }
+.loader-txt
+{
+    position: absolute;
+    bottom: -70px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #333;
+}
 .loader-bar
 {
     position: absolute;

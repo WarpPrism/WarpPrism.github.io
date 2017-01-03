@@ -2,10 +2,18 @@ import React from 'react';
 require('styles/iphone.css');
 
 class Iphone extends React.Component {
+    constructor(props) {
+        super(props);
+        this.$drag = false;
+        this.initX = 0;
+        this.initY = 0;
+        this.initLeft = 200;
+        this.initTop = 0;
+    }
     render() {
         return (
-            <div className='iphone fr'>
-                <div className='iphone-top'>
+            <div className='iphone'>
+                <div className='iphone-top' onMouseDown={this.startDrag.bind(this)} onMouseMove={this.draging.bind(this)} onMouseUp={this.endDrag.bind(this)}>
                     <span className='camera'></span>
                     <span className='speaker'></span>
                     <span className='sensor'></span>
@@ -26,6 +34,44 @@ class Iphone extends React.Component {
                 </div>
             </div>
         )
+    }
+    // 增加iPhone拖动定位效果
+    startDrag(e) {
+        e.persist();
+        var x = e.nativeEvent.clientX;
+        var y = e.nativeEvent.clientY;
+        this.$drag = true;
+        this.initX = x;
+        this.initY = y;
+        this.initLeft = +$('.iphone').css('left').replace('px', '');
+        this.initTop = +$('.iphone').css('top').replace('px', '');
+    }
+    draging(e) {
+        if (this.$drag) {
+            e.persist();
+            // console.log(e.target, $('.iphone-top'));
+            if ((e.target) != $('.iphone-top')[0]) {
+                this.endDrag();
+                return;
+            }
+            var x = e.nativeEvent.clientX;
+            var y = e.nativeEvent.clientY;
+            var deltaX = x - this.initX;
+            var deltaY = y - this.initY;
+            var newTop = this.initTop + deltaY;
+            var newLeft = this.initLeft + deltaX;
+            $('.iphone').css({
+                'top': newTop + 'px',
+                'left': newLeft + 'px'
+            });
+        }
+    }
+    endDrag(e) {
+        this.$drag = false;
+        this.initX = 0;
+        this.initY = 0;
+        this.initLeft = +$('.iphone').css('left').replace('px', '');
+        this.initTop = +$('.iphone').css('top').replace('px', '');
     }
 }
 
