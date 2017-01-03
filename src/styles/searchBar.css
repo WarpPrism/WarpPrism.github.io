@@ -39,7 +39,7 @@
 
     vertical-align: middle;
 
-    background: url('/images/search-dark.png') no-repeat;
+    background: url('../images/search-dark.png') no-repeat;
     background-size: 100%;
 }
 .search-input

@@ -38,7 +38,7 @@
     width: 25px;
     height: 25px;
 
-    background: url('/images/search.png') no-repeat;
+    background: url('../images/search.png') no-repeat;
     background-size: 100%;
 }
 .return-btn
@@ -50,7 +50,7 @@
     width: 25px;
     height: 25px;
 
-    background: url('/images/return.png') no-repeat;
+    background: url('../images/return.png') no-repeat;
     background-size: 100%;
 }
 

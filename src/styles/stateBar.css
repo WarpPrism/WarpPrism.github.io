@@ -48,7 +48,7 @@
     height: 20px;
     margin-left: 5px;
 
-    background: url('/images/wifi.png') no-repeat;
+    background: url('../images/wifi.png') no-repeat;
     background-size: 100%;
 }
 .battery-txt
@@ -104,7 +104,7 @@
 }
 .state-bar-dark .wifi
 {
-    background: url('/images/wifi-dark.png') no-repeat;
+    background: url('../images/wifi-dark.png') no-repeat;
     background-size: 100%;
 }
 .state-bar-dark .battery
