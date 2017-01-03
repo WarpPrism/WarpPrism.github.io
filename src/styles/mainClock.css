@@ -1,0 +1,24 @@
+.lock-clock
+{
+    width: 50%;
+    margin: 90px auto 0;
+
+    text-align: center;
+
+    color: #fff;
+}
+.clock-time
+{
+    font-size: 70px;
+}
+.clock-time .second-flash
+{
+    position: relative;
+    top: -5px;
+}
+.clock-date
+{
+    font-size: 20px;
+
+    margin-top: 5px;;
+}

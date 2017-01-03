@@ -1,0 +1,119 @@
+.state-bar
+{
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    display: -webkit-flex;
+    display:    -moz-flex;
+    display:     -ms-flex;
+    display:      -o-flex;
+    display:         flex;
+
+    width: 100%;
+    padding: 2px;
+
+    color: #fff;
+
+    align-items: center;
+}
+.signal
+{
+    display: -webkit-flex;
+    display:    -moz-flex;
+    display:     -ms-flex;
+    display:      -o-flex;
+    display:         flex;
+
+    align-items: center;
+}
+.signal .signal-dot
+{
+    display: inline-block;
+
+    width: 8px;
+    height: 8px;
+    margin-left: 2px;
+
+    border-radius: 50%;
+    background: #fff;
+}
+.wifi
+{
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+
+    background: url('../images/wifi.png') no-repeat;
+    background-size: 100%;
+}
+.battery-txt
+{
+    position: absolute;
+    top: 50%;
+    right: 45px;
+
+    display: block;
+
+    transform: translateY(-50%);
+}
+.battery
+{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+
+    display: block;
+
+    width: 30px;
+    height: 14px;
+    margin: 0;
+    padding: 1.5px;
+
+    transform: translateY(-50%);
+
+    border: solid 1px #fff;
+    background: #fff;
+    background-clip: content-box;
+}
+.battery:after
+{
+    position: absolute;
+    top: 3.5px;
+    right: -3px;
+
+    width: 3px;
+    height: 4px;
+
+    content: '';
+
+    background: #fff;
+}
+/* Dark Theme */
+.state-bar-dark
+{
+    color: #000;
+}
+.state-bar-dark .signal-dot
+{
+    background: #000;
+}
+.state-bar-dark .wifi
+{
+    background: url('../images/wifi-dark.png') no-repeat;
+    background-size: 100%;
+}
+.state-bar-dark .battery
+{
+    border: solid 1px #000;
+    background: #000;
+    background-clip: content-box;
+}
+.state-bar-dark .battery:after
+{
+    background: #000;
+}

@@ -1,0 +1,79 @@
+.project-card
+{
+    position: relative;
+    right: -350px;
+
+    overflow: hidden;
+
+    width: 95%;
+    margin: 10px auto 25px;
+
+    -webkit-transition: all .5s cubic-bezier(.18, .89, .32, 1.28);
+       -moz-transition: all .5s cubic-bezier(.18, .89, .32, 1.28);
+        -ms-transition: all .5s cubic-bezier(.18, .89, .32, 1.28);
+         -o-transition: all .5s cubic-bezier(.18, .89, .32, 1.28);
+            transition: all .5s cubic-bezier(.18, .89, .32, 1.28);
+
+    opacity: 0;
+    border: solid 1px #d8d8d8;
+    border-top: solid 5px #3ad288;
+    border-radius: 7px;
+    background-color: #f8f6f7;
+    box-shadow: 0 0 10px 5px #d8d8d8;
+}
+
+.card-header
+{
+    padding: 0;
+}
+.card-body
+{
+    padding: 8px;
+}
+.card-footer
+{
+    padding: 10px;
+}
+
+.card-header .project-img
+{
+    width: 100%;
+    max-height: 250px;
+}
+.card-body .project-name
+{
+    font-weight: bold;
+
+    padding: 0 0 8px;
+}
+.card-body .project-desc
+{
+    font-style: italic;
+}
+.card-footer .project-link
+{
+    display: inline-block;
+
+    margin: 0 7px;
+    padding: 5px 7px;
+
+    text-decoration: none;
+
+    color: #fff;
+    border-radius: 3px;
+    background-color: #1266f5;
+}
+a.project-link:hover
+{
+    text-decoration: none;
+
+    opacity: .86;
+    color: #fff;
+}
+
+.project-card_anim
+{
+    right: 0;
+
+    opacity: 1;
+}
