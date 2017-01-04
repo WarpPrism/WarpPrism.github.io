@@ -3,6 +3,7 @@ import StateBar from 'components/iphone/stateBar.js';
 import MainClock from 'components/iphone/mainClock.js';
 import MsgWidget from 'components/iphone/msgWidget.js';
 import FixedApps from 'components/iphone/fixedApps.js';
+import MoreAppPage from 'components/iphone/moreAppPage.js';
 import Modal from 'components/iphone/modal.js';
 require('styles/home.css');
 
@@ -43,7 +44,7 @@ class IphoneHome extends React.Component {
                         </div>
                     </div>
                     <div className='slide-part-view2'>
-                        <MainClock />
+                        <MoreAppPage />
                     </div>
                 </div>
                 <FixedApps />
@@ -100,8 +101,8 @@ class IphoneHome extends React.Component {
         }
         if (this.current_view == 1 && this.slideDir == 'right' && this.$slide) {return};
         if (this.current_view == 2 && this.slideDir == 'left' && this.$slide) {return};
-        // 滑动差值需要大于50 才可以触发滑动操作
-        if (Math.abs(deltaX) < 50) {          
+        // 滑动差值需要大于20 才可以触发滑动操作, 数值越小，滑动操作越灵敏
+        if (Math.abs(deltaX) < 20) {          
             this.refs.slidePart.style.left = this.slideInit + 'px';
             return;
         } else {

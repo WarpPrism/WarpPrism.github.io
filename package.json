@@ -5,8 +5,9 @@
   "main": "",
   "scripts": {
     "clean": "rimraf dist/*",
-    "copy": "copyfiles -f ./src/index.html ./src/favicon.ico ./src/images ./src/libs ./dist",
-    "dist": "npm run copy & webpack --env=dist",
+    "static": "cp -rf ./src/index.html ./src/favicon.ico ./dist & cp -rf ./src/images/ ./dist/images/ & cp -rf ./src/libs/ ./dist/libs/",
+    "build": "npm run static & webpack --env=dist",
+    "publish": "cp -rf ./dist/* ./ & npm run clean",
     "lint": "eslint ./src",
     "posttest": "npm run lint",
     "serve": "node server.js --env=dev",

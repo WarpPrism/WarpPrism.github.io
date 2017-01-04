@@ -7,8 +7,12 @@ import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import Iphone from 'components/iphone/iphone.js';
 import LockScreen from 'components/iphone/lockScreen';
 import IphoneHome from 'components/iphone/home.js';
+/* Page */
 import BlogIssue from 'components/iphone/blogIssue.js';
 import ProjectPage from 'components/iphone/projectPage.js';
+
+/* App */
+import WeatherApp from 'components/app/weather.js';
 
 require('normalize.css/normalize.css');
 require('styles/app.css');
@@ -23,6 +27,7 @@ render((
             <Route path='/iphone_home' component={IphoneHome}/>
             <Route path='/iphone_blog' component={BlogIssue}/>
             <Route path='/iphone_projects' component={ProjectPage}/>
+            <Route path='/iphone_weather' component={WeatherApp}/>
         </Route>
     </Router>
 ), document.getElementById('app'));
