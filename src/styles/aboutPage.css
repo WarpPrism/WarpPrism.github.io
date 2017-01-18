@@ -4,3 +4,54 @@
 
     width: 100%;
 }
+
+.about-page .slide-part
+{
+    position: relative;
+
+    overflow: auto;
+
+    width: 100%;
+    height: 570px;
+
+    background: #ededed;
+}
+
+.about-page .about-section
+{
+    overflow: hidden;
+
+    width: 95%;
+    margin: 10px auto 0;
+    padding: 5px;
+
+    border-radius: 5px;
+    background: #fff;
+}
+.about-page .section-header
+{
+    font-size: 18px;
+
+    padding: 7px 0;
+
+    text-align: center;
+
+    color: #63b47a;
+}
+.about-page .section-list
+{
+    padding-left: 25px;
+
+    list-style: square;
+}
+
+.about-page a
+{
+    text-decoration: none;
+
+    color: #000;
+}
+.about-page a:hover
+{
+    text-decoration: underline;
+}

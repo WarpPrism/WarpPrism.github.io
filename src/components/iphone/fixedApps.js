@@ -22,7 +22,7 @@ class FixedApps extends React.Component {
                         </div>
                         <div className='app-name'>项目</div>
                     </div>
-                    <div className='app'>
+                    <div className='app' onClick={this.goAbout}>
                         <div className='app-icon'>
                             <img src='images/iosicons/tips.png' alt='icon'/>
                         </div>
@@ -43,6 +43,9 @@ class FixedApps extends React.Component {
     }
     goProject(e) {
         window.location.hash = '#iphone_projects';
+    }
+    goAbout(e) {
+        window.location.hash = '#iphone_about';
     }
 }
 

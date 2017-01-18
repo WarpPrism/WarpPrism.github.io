@@ -62,7 +62,7 @@ class ProjectPage extends React.Component {
     }
     goBack(e) {
         if (window) {
-            window.history.back();
+            window.location.hash = '#iphone_home';
         }
     } 
 }
