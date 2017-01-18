@@ -9,10 +9,13 @@ class Iphone extends React.Component {
         this.initY = 0;
         this.initLeft = 200;
         this.initTop = 0;
+        this.state = {
+            theme: 'dark'
+        }
     }
     render() {
         return (
-            <div className='iphone'>
+            <div className={(this.state.theme=='dark')?'iphone iphone-dark':'iphone'} ref='iPhone'>
                 <div className='iphone-top' onMouseDown={this.startDrag.bind(this)} onMouseMove={this.draging.bind(this)} onMouseUp={this.endDrag.bind(this)}>
                     <span className='camera'></span>
                     <span className='speaker'></span>
@@ -31,6 +34,10 @@ class Iphone extends React.Component {
                 <div className='bottom-bar'></div>
                 <div className='iphone-bottom'>
                     <span className='home-btn'></span>
+                </div>
+                <div className='theme-picker'>
+                    <div className='dark-picker' onClick={this.changeIphoneTheme.bind(this, 'dark')}></div>
+                    <div className='light-picker' onClick={this.changeIphoneTheme.bind(this, 'light')}></div>
                 </div>
             </div>
         )
@@ -72,6 +79,18 @@ class Iphone extends React.Component {
         this.initY = 0;
         this.initLeft = +$('.iphone').css('left').replace('px', '');
         this.initTop = +$('.iphone').css('top').replace('px', '');
+    }
+
+    changeIphoneTheme(theme) {
+        if (theme == 'dark') {
+            this.setState({
+                theme: 'dark'
+            });
+        } else if (theme == 'light') {
+            this.setState({
+                theme: 'light'
+            });           
+        }
     }
 }
 

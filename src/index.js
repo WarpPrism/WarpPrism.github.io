@@ -10,6 +10,7 @@ import IphoneHome from 'components/iphone/home.js';
 /* Page */
 import BlogIssue from 'components/iphone/blogIssue.js';
 import ProjectPage from 'components/iphone/projectPage.js';
+import AboutPage from 'components/iphone/aboutPage.js';
 
 /* App */
 import WeatherApp from 'components/app/weather.js';
@@ -27,6 +28,7 @@ render((
             <Route path='/iphone_home' component={IphoneHome}/>
             <Route path='/iphone_blog' component={BlogIssue}/>
             <Route path='/iphone_projects' component={ProjectPage}/>
+            <Route path='/iphone_about' component={AboutPage}/>
             <Route path='/iphone_weather' component={WeatherApp}/>
         </Route>
     </Router>

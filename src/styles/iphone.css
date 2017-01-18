@@ -185,3 +185,67 @@
 {
     transform: rotate(360deg);
 }
+
+.iphone .theme-picker
+{
+    position: absolute;
+    right: 20px;
+    bottom: -50px;
+}
+.iphone .dark-picker
+{
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+
+    cursor: pointer;
+    vertical-align: middle;
+
+    border-radius: 50%;
+    background: #000;
+}
+.iphone .light-picker
+{
+    display: inline-block;
+
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+
+    cursor: pointer;
+    vertical-align: middle;
+
+    border-radius: 50%;
+    background: #fff;
+}
+.iphone .active-picker
+{
+    border: solid 2px #00a1ea;
+}
+
+
+/*iphone dark theme*/
+.iphone-dark
+{
+    border: solid 5px #333;
+    background: #111;
+}
+.iphone-dark .home-btn:after
+{
+    background: #111;
+}
+.iphone-dark .bottom-bar,
+.top-bar
+{
+    border-right: 5px solid #9f9f9f;
+    border-left: 5px solid #9f9f9f;
+}
+.iphone-dark .on-off,
+.up,
+.down,
+.sleep
+{
+    background: #9f9f9f;
+}
