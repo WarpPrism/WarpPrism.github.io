@@ -1,0 +1,36 @@
+.msg-board
+{
+    position: relative;
+
+    width: 100%;
+
+    background: #fff;
+}
+
+.msg-board .slide-part
+{
+    position: relative;
+
+    overflow: auto;
+
+    width: 100%;
+    height: 570px;
+    padding: 0 10px;
+
+    background: #eee;
+}
+.msg-board .boss-message
+{
+    line-height: 25px;
+
+    margin: 10px 0 0;
+    padding: 7px;
+
+    color: #fff;
+    background: rgba(0, 150, 250, .7);
+}
+
+.msg-board #ds-reset .ds-login-buttons p
+{
+    display: none;
+}

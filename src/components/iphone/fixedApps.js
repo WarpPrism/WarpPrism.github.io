@@ -28,11 +28,11 @@ class FixedApps extends React.Component {
                         </div>
                         <div className='app-name'>关于</div>
                     </div>
-                    <div className='app'>
+                    <div className='app' onClick={this.goMsgBoard}>
                         <div className='app-icon'>
                             <img src='images/iosicons/messages.png' alt='icon'/>
                         </div>
-                        <div className='app-name'>留言板</div>
+                        <div className='app-name'>留言</div>
                     </div>
                 </div>
             </div>
@@ -46,6 +46,9 @@ class FixedApps extends React.Component {
     }
     goAbout(e) {
         window.location.hash = '#iphone_about';
+    }
+    goMsgBoard(e) {
+        window.location.href = '#iphone_msg_board';        
     }
 }
 
