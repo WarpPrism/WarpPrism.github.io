@@ -24,10 +24,12 @@ class MsgBoard extends React.Component {
                     <div className='app-title'>留言</div>
                 </div>
                 <div className='slide-part'>
-                    <div className='boss-message'>如果你对本网站有什么意见或建议，欢迎在下方评论。 😃</div>
-                    <iframe id='msgBoardIframe' src='https://warpprism.github.io/src/msgBoard.html' width='100%' frameBorder='0'>
+                    <iframe id='msgBoardIframe' src='https://warpprism.github.io/src/msgBoard.html' width='100%' height='100%' frameBorder='0'>
                         You browser doesn't support iframe technology.
                     </iframe>
+                    {/*<iframe id='msgBoardIframe' src='msgBoard.html' width='100%' height='100%' frameBorder='0'>
+                        You browser doesn't support iframe technology.
+                    </iframe>*/}
                 </div>
             </div>
         );

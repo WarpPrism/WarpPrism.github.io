@@ -33,7 +33,7 @@ class Iphone extends React.Component {
                 </div>
                 <div className='bottom-bar'></div>
                 <div className='iphone-bottom'>
-                    <span className='home-btn'></span>
+                    <span className='home-btn' onClick={this.handleHomeBtnAction.bind(this)}></span>
                 </div>
                 <div className='theme-picker'>
                     <div className='dark-picker' onClick={this.changeIphoneTheme.bind(this, 'dark')}></div>
@@ -91,6 +91,13 @@ class Iphone extends React.Component {
                 theme: 'light'
             });           
         }
+    }
+    // iphone home button 交互事件
+    handleHomeBtnAction() {
+        var hash = window.location.hash;
+        if (hash == '#/' || hash == '#') {
+        } else {}
+        window.location.hash = '#/iphone_home';
     }
 }
 

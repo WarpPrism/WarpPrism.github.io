@@ -48,7 +48,7 @@ class FixedApps extends React.Component {
         window.location.hash = '#iphone_about';
     }
     goMsgBoard(e) {
-        window.location.href = '#iphone_msg_board';        
+        window.location.hash = '#iphone_msg_board';        
     }
 }
 

@@ -1,0 +1,37 @@
+body
+{
+    margin: 0;
+    padding: 0;
+}
+.msgboard-iframe
+{
+    padding: 10px;
+}
+.msgboard-iframe .boss-message
+{
+    line-height: 25px;
+
+    margin: 10px 0 0;
+    padding: 7px;
+
+    color: #fff;
+    background: rgba(0, 150, 250, .7);
+}
+
+.msgboard-iframe #ds-reset .ds-login-buttons p
+{
+    display: none;
+}
+.msgboard-iframe #refresh-btn
+{
+    float: right;
+
+    margin: 7px;
+    padding: 7px;
+
+    cursor: pointer;
+
+    color: #fff;
+    border-radius: 2px;
+    background: rgba(0, 150, 250, .7);
+}

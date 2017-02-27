@@ -2,11 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./msgBoard.css">
     <title>留言板</title>
+    <script type='text/javascript'>
+        window.onload = function() {
+            var refresh = document.getElementById('refresh-btn');
+            if (refresh) {
+                refresh.addEventListener('click', function(e){
+                    window.location.reload();
+                }, false);
+            }
+        }
+    </script>
 </head>
 <body>
-    <h1>Hello</h1>
-    <div class="ds-thread" data-thread-key="msgboard" data-title="" data-url="https://warpprism.github.io/src/msgBoard.html"></div>
+    <div class='msgboard-iframe'>
+        <div class='boss-message'>如果你对本网站有什么意见或建议，欢迎在下方评论。 😃</div>
+        <div class="ds-thread" data-thread-key="msgboard" data-title="" data-url="https://warpprism.github.io/src/msgBoard.html"></div>
+        <div id='refresh-btn'>刷新评论区</div>
+    </div>
 
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

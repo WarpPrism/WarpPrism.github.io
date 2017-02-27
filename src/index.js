@@ -19,7 +19,6 @@ import WeatherApp from 'components/app/weather.js';
 require('normalize.css/normalize.css');
 require('styles/app.css');
 
-window.dsINIT = false;
 // Render the router into the dom
 
 render((
@@ -36,3 +35,12 @@ render((
         </Route>
     </Router>
 ), document.getElementById('app'));
+
+// random select desktop background
+// $(document).ready(function() {
+//     var random = Math.ceil(Math.random() * 9);
+//     $('body').css({
+//         'background': 'url("../images/desktop/' + random + '.jpg") no-repeat',
+//         'backgroundSize': 'cover'
+//     });
+// });
