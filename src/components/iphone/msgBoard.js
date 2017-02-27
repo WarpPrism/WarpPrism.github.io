@@ -8,11 +8,11 @@ class MsgBoard extends React.Component {
         super(props);
     }
     componentDidMount() {
-        setTimeout(() => {
-            if ($('#ds-reset').length <= 0) {
-                window.location.reload();
-            }
-        }, 1000);
+        // setTimeout(() => {
+        //     if ($('#ds-reset').length <= 0) {
+        //         window.location.reload();
+        //     }
+        // }, 1000);
     }
     render() {
         return (
@@ -25,7 +25,9 @@ class MsgBoard extends React.Component {
                 </div>
                 <div className='slide-part'>
                     <div className='boss-message'>如果你对本网站有什么意见或建议，欢迎在下方评论。 😃</div>
-                    <div className="ds-thread" data-thread-key="msgboard" data-title="" data-url="https://warpprism.github.io/#/iphone_msg_board"></div>                
+                    <iframe id='msgBoardIframe' src='iframes/msgBoard.html' width='100%' frameBorder='0'>
+                        You browser doesn't support iframe technology.
+                    </iframe>
                 </div>
             </div>
         );
