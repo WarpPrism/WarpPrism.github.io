@@ -5,6 +5,8 @@
     width: 100%;
     height: 100%;
 
+    user-select: none;
+
     background: url('../images/lockScreen.jpg') no-repeat;
     background-size: 100%;
 }

@@ -11,11 +11,11 @@ class MoreAppPage extends React.Component {
         return (
             <div className='more-app-page'>
                 <div className='app-page-row'>
-                    <div className='app'>
+                    <div className='app' onClick={this.openMusicApp}>
                         <div className='app-icon'>
-                            <img src='images/iosicons/camera.png' alt='icon'/>
+                            <img src='images/iosicons/music.png' alt='icon'/>
                         </div>
-                        <div className='app-name'>相机</div>
+                        <div className='app-name'>音乐</div>
                     </div>
                     <div className='app'>
                         <div className='app-icon'>
@@ -64,6 +64,9 @@ class MoreAppPage extends React.Component {
                 </div>
             </div>
         );
+    }
+    openMusicApp(e) {
+        window.location.hash = '#iphone_music';
     }
     openWeatherApp(e) {
         // 打开天气应用

@@ -19,7 +19,7 @@ class IphoneHome extends React.Component {
                 content2: 'Therefore we should hold our present and spare no effort to live a meaningful life.',
                 content3: 'Not only for ourselves, but also for the things we cherish.'
             },
-            modal: 'hide'
+            modal: 'show'
         };
         this.slideX = 0;
         this.slideY = 0;

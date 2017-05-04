@@ -15,9 +15,11 @@ import MsgBoard from 'components/iphone/msgBoard.js';
 
 /* App */
 import WeatherApp from 'components/app/weather.js';
+import MusicApp from 'components/app/music.js';
 
 require('normalize.css/normalize.css');
 require('styles/app.css');
+require('styles/common/animate.css');
 
 // Render the router into the dom
 
@@ -31,6 +33,7 @@ render((
             <Route path='/iphone_projects' component={ProjectPage}/>
             <Route path='/iphone_about' component={AboutPage}/>
             <Route path='/iphone_msg_board' component={MsgBoard}/>
+            <Route path='/iphone_music' component={MusicApp}/>
             <Route path='/iphone_weather' component={WeatherApp}/>
         </Route>
     </Router>

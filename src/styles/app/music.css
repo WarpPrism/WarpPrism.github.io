@@ -1,0 +1,283 @@
+.music-app
+{
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    padding: 1px;
+
+    user-select: none;
+
+    background: #fff;
+}
+.music-app .music-top-bar
+{
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 60px;
+
+    position: relative;
+    z-index: 100;
+
+    height: 60px;
+    margin-top: 24px;
+
+    text-align: center;
+    letter-spacing: 2px;
+
+    color: #000;
+}
+.music-app .music-top-bar .playlist-btn
+{
+    position: absolute;
+    z-index: 200;
+    top: 50%;
+    right: 10px;
+
+    width: 35px;
+    height: 35px;
+    margin-top: -8px;
+
+    background: url('../../images/music/playlist.png') no-repeat;
+    background-size: 100% 100%;
+}
+.music-app .slide-part
+{
+    position: absolute;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+}
+.music-app .music-pic
+{
+    position: absolute;
+    bottom: 280px;
+    left: 50%;
+
+    width: 280px;
+    height: 280px;
+    margin-left: -140px;
+
+    border-radius: 50%;
+    background: url('../../images/desktop/10.jpg') no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    box-shadow: 2px 2px 30px 0 #aaa;
+}
+.music-app .music-info
+{
+    font-weight: bold;
+
+    position: absolute;
+    bottom: 100px;
+
+    width: 100%;
+    padding: 7px;
+}
+.music-app .music-info .music-name
+{
+    font-size: 20px;
+
+    padding: 5px;
+
+    text-align: center;
+}
+.music-app .music-info .singer
+{
+    padding: 5px;
+
+    text-align: center;
+
+    color: #ff899d;
+}
+.music-app .progress-bar
+{
+    position: absolute;
+    bottom: 80px;
+
+    width: 100%;
+    height: 20px;
+
+    align-items: center;
+}
+.music-app .progress-bar .bar
+{
+    width: 72%;
+    height: 4px;
+    margin: 0 auto;
+    /*border: solid 1px #f00;*/
+
+    border-radius: 5px;
+}
+.music-app .progress-bar .bar1
+{
+    position: relative;
+
+    overflow: hidden;
+
+    background: #ccc;
+}
+.music-app .progress-bar .bar2
+{
+    position: absolute;
+    right: 100%;
+
+    width: 100%;
+
+    background: #707070;
+}
+.music-app .time-played,
+.time-total
+{
+    font-size: 13px;
+
+    margin: 0 5px;
+}
+
+.music-app .music-controls
+{
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 80px;
+
+    background: #fff;
+
+    justify-content: center;
+    align-items: center;
+}
+
+/*control-btns*/
+.music-app .music-controls .play-pre
+{
+    width: 40px;
+    height: 40px;
+    margin: 0 12px;
+
+    background: url('../../images/music/pre.png') no-repeat;
+    background-size: 100% 100%;
+}
+.music-app .music-controls .play-pause
+{
+    width: 50px;
+    height: 50px;
+    margin: 0 12px;
+
+    background: url('../../images/music/play.png') no-repeat;
+    background-size: 100% 100%;
+}
+.music-app .music-controls .play-next
+{
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+
+    background: url('../../images/music/next.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+canvas.dynamic-wave
+{
+    position: absolute;
+    bottom: 180px;
+
+    display: block;
+
+    width: 100%;
+    height: 80px;
+    margin: 0;
+    padding: 0;
+
+    /*border: solid 1px #000;*/
+}
+
+.music-app #audio
+{
+    display: none;
+}
+
+.music-app .playlist-wrap
+{
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, .6);
+}
+.music-app .playlist
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: none;
+    overflow: auto;
+
+    width: 100%;
+    height: 62%;
+    margin: auto;
+    padding: 10px;
+
+    background: #eee;
+}
+.music-app .playlist-title
+{
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 18px;
+
+    width: 110px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    margin-left: -10px;
+    padding: 10px;
+
+    text-align: center;
+
+    color: #fff;
+    /*border: solid 1px #b72712;*/
+    background: #b72712;
+}
+.music-app .playlist ol
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+.music-app .playlist-item
+{
+    font-size: 17px;
+    line-height: 22px;
+
+    padding: 7px;
+
+    border-top: solid .5px #ccc;
+}
+
+.music-app .playlist-item:hover
+{
+    color: #fff;
+    background: #b72712;
+}
+.music-app .close-playlist
+{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+
+    width: 30px;
+    height: 30px;
+
+    background: url('../../images/music/close.png') no-repeat;
+    background-size: 100% 100%;
+}
