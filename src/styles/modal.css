@@ -46,10 +46,12 @@
 
     color: #1266f5;
     border-radius: 0 0 10px 10px;
+
+    justify-content: center;
 }
 .ios-modal-btn
 {
-    width: 50%;
+    width: 100%;
     padding: 20px;
 
     text-align: center;

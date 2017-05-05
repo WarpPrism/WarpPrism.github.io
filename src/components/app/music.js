@@ -1,6 +1,8 @@
 // Cloud Music api https://api.imjad.cn/
 import React from 'react';
 import StateBar from 'components/iphone/stateBar.js';
+import Modal from 'components/iphone/modal.js';
+
 require('styles/app/music.css');
 
 class Music extends React.Component {
@@ -14,7 +16,8 @@ class Music extends React.Component {
             duration: 0,//歌曲总时长
             playList: [],//播放列表
             playId: -1,//当前播放的歌曲的index
-            totalNum: 0//播放列表歌曲数
+            totalNum: 0,//播放列表歌曲数,
+            modal: 'hide'//modal状态
         };
         this.timer = null;
         this.coverTimer = null;
@@ -22,7 +25,7 @@ class Music extends React.Component {
         this.waveTimer = null;
     }
     componentDidMount() {
-        this.getMusicInfo();
+        this.getInitMusicInfo();
     }
     componentWillUnmount() {
         this.refs.audio.pause();
@@ -36,10 +39,15 @@ class Music extends React.Component {
     render() {
         return (
             <div className='music-app'>
+                <Modal title='提示' msg='该音乐为付费音乐，自动为您播放下一首' option1= '' option2='确定' state={this.state.modal} hideModal={this.hideModal.bind(this)}/>
                 <StateBar theme='dark'/>
                 <div className='music-top-bar'>
                     <header>Music</header>
-                    <div className='playlist-btn' onClick={this.showPlayList.bind(this)}></div>
+                    <div className='playlist-btn' onClick={this.showPlayList.bind(this)}>
+                        <span className='playlist-title-num'>
+                            {this.state.totalNum}
+                        </span>
+                    </div>
                 </div>
                 <div className='slide-part'>
                     <div className='music-pic'></div>
@@ -61,37 +69,40 @@ class Music extends React.Component {
                         <div className='play-next' onClick={this.playNext.bind(this)}></div>
                     </div>
                 </div>
-                <audio id='audio' ref='audio' src="others/music.mp3"></audio>
-                <div className='playlist-wrap'>
+                <audio id='audio' ref='audio'></audio>
+                <div className='playlist-wrap' onClick={this.hidePlayList.bind(this)}>
                     <div ref='playlist' className='playlist'>
-                        <div className='playlist-title'>播放列表</div>
+                        <div className='playlist-title'>
+                            播放列表
+                        </div>
                         <span className='close-playlist' onClick={this.hidePlayList.bind(this)}/>
                         <ol>
                             {
                                 this.state.playList.map(function(item, index) {
                                     return (
                                         <li className='playlist-item' key={index} onClick={this.playNext.bind(this, index)}>
-                                            {item.name}
+                                            {index+1}. {item.name}
                                         </li>
                                     );
                                 }.bind(this))
                             }
                         </ol>
+                        <div className='netease-cr'>Powered By &copy; Netease Music</div>
                     </div>
                 </div>
             </div>
         );
     }
-    switchPlayState() {       
+    switchPlayState() {
         if (this.state.play == false) {
             this.playMusic();
-        } else if (this.state.play == true || state == 0) {
+        } else if (this.state.play == true) {
             this.pauseMusic();
         }
     }
     playMusic() {
         this.refs.audio.play();
-            
+
         $('.play-pause').css('background-image', 'url("../../images/music/pause.png")');
         this.setState({
             play: true
@@ -109,22 +120,34 @@ class Music extends React.Component {
         clearInterval(this.waveTimer);
     }
     //播放器初始信息
-    getMusicInfo() {
+    getInitMusicInfo() {
         var vm = this;
-        // 播网易云的音乐
+        // 播放本地资源的音乐
         if (vm.state.playId == -1) {
-            vm.refs.audio.src = 'others/music.mp3';
-            var curTime, duration;
-            curTime = this.refs.audio.currentTime;
-            this.setState({
+            vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
+            vm.setState({
                 musicName: 'Cannon Flying In the Sky',
-                singer: '全智贤',
-                curTime: curTime
+                singer: '全智贤'
             });
         }
 
+        vm.refs.audio.oncanplay = function() {
+            var duration = vm.refs.audio.duration;
+            vm.setState({
+                duration: duration
+            });
+        }
+        vm.getPlayList();
+
+    }
+    // 获取播放列表
+    getPlayList(id) {
         // 网易云音乐API, 获取歌单"喜欢的音乐"
         var listId = 136410100;
+        // listId = 5071630;
+        if (id) {
+            listId = id;
+        }
         $.get(`https://api.imjad.cn/cloudmusic/?type=playlist&id=${listId}`).then((result) => {
             if (result.code == 200) {
                 var playList = [];
@@ -147,32 +170,20 @@ class Music extends React.Component {
                 });
             }
         });
-
     }
     // 音乐播放中
     playing() {
         var vm = this;
         vm.spinTheCover();
         vm.startTheWave();
-        var duration;
-        duration = vm.refs.audio.duration;        
-        vm.refs.audio.oncanplay = function() {
-            duration = vm.refs.audio.duration;
-            vm.setState({
-                duration: duration
-            });
-        }
-        if (vm.state.playId == -1) {
-            duration = 207;
-        }
-        
+        var duration = vm.state.duration || vm.refs.audio.duration;
+
         vm.timer = setInterval(function() {
             var curTime = vm.refs.audio.currentTime;
             var percent = (curTime / duration).toFixed(3);
             $('.bar2').css('right', (1 - percent)*100 + '%');
             vm.setState({
-                curTime: curTime,
-                duration: duration
+                curTime: curTime
             });
 
         }, 500);
@@ -183,7 +194,7 @@ class Music extends React.Component {
         vm.coverTimer = setInterval(() => {
             vm.coverDeg = (vm.coverDeg + 0.1) % 360;
             $('.music-pic').css('transform', `rotate(${vm.coverDeg}deg)`)
-        }, 16);
+        }, 20);
     }
     // 音乐动感波浪
     startTheWave() {
@@ -192,16 +203,14 @@ class Music extends React.Component {
         var ctx = canvas.getContext('2d');
         canvas.width = 371;
         canvas.height = 80;
-        // ctx.moveTo(0, 40);
-        
-        // drawSinCurve(ctx);
+
         function drawSinCurve(ctx, A=30, w=0.1, o=0, color) {
             // 绘制正弦曲线
             ctx.beginPath();
             if (color) {
                 ctx.strokeStyle = color;
             }
-            for (var x = 1; x < 370; x++) {
+            for (var x = 5; x < 365; x+=3) {
                 ctx.moveTo(x-1, A*Math.sin(w*(x-1) + o)+40);
                 ctx.lineTo(x, A*Math.sin(w*x + o)+40);
                 ctx.stroke();
@@ -210,15 +219,15 @@ class Music extends React.Component {
         }
         var a=30, w=0.1, o=0, color;
         vm.waveTimer = setInterval(() => {
-            ctx.clearRect(0, 0, 371, 80);  
+            ctx.clearRect(0, 0, 371, 80);
             o -= 0.2;
             a = parseInt(30 * Math.random());
             color = '#ff899d';
             drawSinCurve(ctx, a, w, o, color);
             a = parseInt(30 * Math.random());
-            color = '#d998ff';     
-            drawSinCurve(ctx, a, w, o+10, color);      
-        }, 1000/8);
+            color = '#d998ff';
+            drawSinCurve(ctx, a, w, o+10, color);
+        }, 125);
     }
     // 播放时间格式化
     formatTime(t) {
@@ -227,7 +236,7 @@ class Music extends React.Component {
         m = (m < 10)?('0' + m):m;
         var s = t % 60;
         s = (s < 10)?('0' + s):s;
-        return '' + m + ':' + s; 
+        return '' + m + ':' + s;
     }
     playNext(id) {
         var vm = this;
@@ -235,8 +244,10 @@ class Music extends React.Component {
         if (nextId >= vm.state.totalNum) {
             nextId = 0;
         }
+        var clickfromplaylist = false;
         if (id != undefined && id != null && typeof id == 'number') {
             nextId = id;
+            clickfromplaylist = true;
             vm.hidePlayList();
         }
         var nextMusic = vm.state.playList[nextId];
@@ -245,19 +256,26 @@ class Music extends React.Component {
                 if (result.code == 200) {
                     if (result.data && result.data.length > 0) {
                         // 切换音乐
+                        console.log(result);
                         var musicUrl = result.data[0].url;
-                        vm.pauseMusic();                     
-                        vm.refs.audio.src = musicUrl;
-                        vm.setState({
-                            musicName: nextMusic.name,
-                            singer: nextMusic.artist,
-                            playId: nextId
-                        });
-                        // 切换歌曲封面
-                        $('.music-pic').css('background-image', `url("${nextMusic.picUrl}")`);
-                        setTimeout(() => {
-                            vm.playMusic();
-                        }, 0);
+                        if (musicUrl == null) {
+                            // 付费音乐
+                            if (clickfromplaylist) vm.showModal();
+                            vm.playNext(nextId+1);
+                        } else {
+                            vm.pauseMusic();
+                            vm.refs.audio.src = musicUrl;
+                            vm.setState({
+                                musicName: nextMusic.name,
+                                singer: nextMusic.artist,
+                                playId: nextId
+                            });
+                            // 切换歌曲封面
+                            $('.music-pic').css('background-image', `url("${nextMusic.picUrl}")`);
+                            setTimeout(() => {
+                                vm.playMusic();
+                            }, 0);
+                        }
                     }
                 }
             });
@@ -276,18 +294,23 @@ class Music extends React.Component {
                     if (result.data && result.data.length > 0) {
                         // 切换音乐
                         var musicUrl = result.data[0].url;
-                        vm.pauseMusic();                     
-                        vm.refs.audio.src = musicUrl;
-                        vm.setState({
-                            musicName: nextMusic.name,
-                            singer: nextMusic.artist,
-                            playId: nextId
-                        });
-                        // 切换歌曲封面
-                        $('.music-pic').css('background-image', `url("${nextMusic.picUrl}")`);
-                        setTimeout(() => {
-                            vm.playMusic();
-                        }, 0);
+                        if (musicUrl == null) {
+                            // 付费音乐
+                            vm.playNext(nextId - 1);
+                        } else {
+                            vm.pauseMusic();
+                            vm.refs.audio.src = musicUrl;
+                            vm.setState({
+                                musicName: nextMusic.name,
+                                singer: nextMusic.artist,
+                                playId: nextId
+                            });
+                            // 切换歌曲封面
+                            $('.music-pic').css('background-image', `url("${nextMusic.picUrl}")`);
+                            setTimeout(() => {
+                                vm.playMusic();
+                            }, 0);
+                        }
                     }
                 }
             });
@@ -300,14 +323,31 @@ class Music extends React.Component {
         $('.playlist').css('display', 'block');
         $(vm.refs.playlist).addClass('animated bounceInUp');
     }
-    hidePlayList() {
+    hidePlayList(e) {
         var vm = this;
+        if (e != undefined) {
+            var target = e.target || e.srcElement;
+            if (target != $('.playlist-wrap')[0] && target != $('.close-playlist')[0]) {
+                return;
+            }
+        }
         $(vm.refs.playlist).addClass('animated bounceOutDown');
         setTimeout(() => {
             $('.playlist-wrap').css('display', 'none');
             $('.playlist').css('display', 'none');
             $(vm.refs.playlist).removeClass('animated bounceOutDown');
         }, 700);
+    }
+
+    showModal(e) {
+        this.setState({
+            modal: 'show'
+        });
+    }
+    hideModal(e) {
+        this.setState({
+            modal: 'hide'
+        });
     }
 }
 

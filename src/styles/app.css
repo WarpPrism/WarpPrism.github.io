@@ -45,6 +45,10 @@ body
 {
     float: left;
 }
+.dn
+{
+    display: none;
+}
 .flex
 {
     display: -webkit-flex;
@@ -61,13 +65,7 @@ body
     background:     -ms-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
     background:      -o-linear-gradient(0deg, rgba(255,255,255,.25) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
 }
-.blur
-{
-            filter: blur(2px);
-    -webkit-filter: blur(2px);
-       -moz-filter: blur(2px);
-         -o-filter: blur(2px);
-}
+
 .blur2
 {
     background:         linear-gradient(90deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
@@ -75,4 +73,18 @@ body
     background:    -moz-linear-gradient(0deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
     background:     -ms-linear-gradient(0deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
     background:      -o-linear-gradient(0deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.65) 33%, rgba(255,255,255,.55) 66%, rgba(255,255,255,.35) 100%);
+}
+.light-blur
+{
+            filter: blur(2px);
+    -webkit-filter: blur(2px);
+       -moz-filter: blur(2px);
+         -o-filter: blur(2px);
+}
+.heavy-blur
+{
+            filter: blur(100px);
+    -webkit-filter: blur(100px);
+       -moz-filter: blur(100px);
+         -o-filter: blur(100px);
 }

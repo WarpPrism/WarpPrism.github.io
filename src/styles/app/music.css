@@ -41,6 +41,28 @@
     background: url('../../images/music/playlist.png') no-repeat;
     background-size: 100% 100%;
 }
+.music-app .playlist-title-num
+{
+    font-size: 12px;
+    line-height: 16px;
+
+    position: absolute;
+    z-index: 300;
+    top: -5px;
+    left: -10px;
+
+    display: block;
+
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+
+    letter-spacing: 0;
+
+    color: #fff;
+    border-radius: 50%;
+    background: #d998ff;
+}
 .music-app .slide-part
 {
     position: absolute;
@@ -227,7 +249,7 @@ canvas.dynamic-wave
     margin: auto;
     padding: 10px;
 
-    background: #eee;
+    background: rgba(255,255,255,.85);
 }
 .music-app .playlist-title
 {
@@ -235,7 +257,11 @@ canvas.dynamic-wave
     font-weight: 200;
     line-height: 18px;
 
-    width: 110px;
+    position: relative;
+
+    overflow: visible;
+
+    width: 120px;
     margin-top: -10px;
     margin-bottom: 10px;
     margin-left: -10px;
@@ -280,4 +306,13 @@ canvas.dynamic-wave
 
     background: url('../../images/music/close.png') no-repeat;
     background-size: 100% 100%;
+}
+.music-app .playlist .netease-cr
+{
+    font-size: 14px;
+    font-style: italic;
+
+    margin: 10px 0 5px;
+
+    text-align: center;
 }

@@ -89,7 +89,7 @@ class Iphone extends React.Component {
         } else if (theme == 'light') {
             this.setState({
                 theme: 'light'
-            });           
+            });
         }
     }
     // iphone home button 交互事件
