@@ -23,7 +23,7 @@ class Iphone extends React.Component {
 
         var parser = new UAParser();
         var os = parser.getOS();
-        if (os == 'Android' || os == 'IOS') {
+        if (os.name == 'Android' || os.name == 'IOS') {
             vm.setState({
                 iphoneTop: -120,
                 iphoneLeft: -50
