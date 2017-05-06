@@ -65,10 +65,26 @@
 
     background: #fff;
 }
+.blog-issue .issue-loader
+{
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+}
+.blog-issue .issue-loader .ant-spin-dot
+{
+    margin-bottom: 20px;
+}
+
 
 .article-list
 {
     width: 100%;
+    min-height: 570px;
     padding: 10px;
 
     list-style: none;
@@ -101,7 +117,7 @@
     height: 100%;
     padding: 0 10px;
 
-    text-decoration: none;
+    text-decoration: none !important;
 
     color: #000;
 }

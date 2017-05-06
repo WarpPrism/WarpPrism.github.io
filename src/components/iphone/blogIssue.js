@@ -4,6 +4,8 @@ import StateBar from 'components/iphone/stateBar.js';
 import SearchBar from 'components/iphone/searchBar.js';
 require('styles/blogIssue.css');
 
+import {Spin} from 'antd';
+
 class BlogIssue extends React.Component {
     constructor(props) {
         super(props);
@@ -40,9 +42,11 @@ class BlogIssue extends React.Component {
                     <div className='search-btn' onClick={this.toggleSearchBar}></div>
                     <div className='app-title'>文章列表</div>
                 </div>
+                
                 <div className='slide-part'>
-                    <Loader loading={this.state.loading}/>
-                    <SearchBar handler={this.searchIssues}/>                    
+                    {/*<Loader loading={this.state.loading}/>*/}
+                    <SearchBar handler={this.searchIssues}/>    
+                    <Spin className='issue-loader flex' spinning={this.state.loading} tip='Loading...' size='large'></Spin>                                        
                     <ul className='article-list'>
                         {
                             this.state.issues.map((item, index) => {

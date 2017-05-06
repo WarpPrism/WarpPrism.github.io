@@ -1,15 +1,13 @@
 .iphone
 {
     position: relative;
-    top: -50px;
-    left: 100px;
 
     width: 423px;
     height: 871px;
     margin: 0;
     padding: 15px;
 
-    transform: scale(.75);
+    transform: scale(.7);
 
     border: solid 5px #d9dbdc;
     border-radius: 50px;
@@ -21,6 +19,12 @@
     position: relative;
 
     padding: 5px 110px 40px;
+
+    /*background: #f0f;*/
+}
+.iphone-top:hover
+{
+    cursor: move;
 }
 .iphone-top .speaker
 {

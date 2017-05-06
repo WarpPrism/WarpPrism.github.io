@@ -15,12 +15,13 @@ class ProjectPage extends React.Component {
                 img: 'images/projects/camera.png',
                 desc: 'A simple online image processor based on AngularJS and Tencent AlloyImage which can help user finish some simple image-processing tasks.',
                 github_url: 'https://github.com/WarpPrism/WebImageProcessor',
-                demo_url: ''
+                demo_url: 'https://warpprism.github.io/WebImageProcessor/ImageProcessor/'
             },{
                 name: 'Stereo Matching (视差匹配)',
                 img: 'images/projects/stereo.jpg',
                 desc: 'DIP course project using pure javascript realize the 3 different matching algorithms.',
-                github_url: 'https://github.com/WarpPrism/WebImageProcessor'
+                github_url: 'https://github.com/WarpPrism/WebImageProcessor',
+                demo_url: 'https://warpprism.github.io/WebImageProcessor/StereoMatching/'
             },{
                 name: 'Datastory New Home',
                 img: 'images/projects/data.png',
@@ -36,7 +37,8 @@ class ProjectPage extends React.Component {
                 name: 'Quorido (步步为营)',
                 img: 'images/projects/quoridor.png',
                 desc: '由同学实体棋类游戏产生的灵感，利用面向对象思想构建的canvas棋类小游戏，缺点是不能联机游戏 👻',
-                github_url: 'https://github.com/WarpPrism/Quoridor'
+                github_url: 'https://github.com/WarpPrism/Quoridor',
+                demo_url: 'https://warpprism.github.io/Quoridor/'
             }]
         }
     }

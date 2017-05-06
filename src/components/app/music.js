@@ -1,7 +1,9 @@
 // Cloud Music api https://api.imjad.cn/
 import React from 'react';
 import StateBar from 'components/iphone/stateBar.js';
-import Modal from 'components/iphone/modal.js';
+import MyModal from 'components/iphone/modal.js';
+import {Input} from 'antd';
+const Search = Input.Search;
 
 require('styles/app/music.css');
 
@@ -17,7 +19,8 @@ class Music extends React.Component {
             playList: [],//播放列表
             playId: -1,//当前播放的歌曲的index
             totalNum: 0,//播放列表歌曲数,
-            modal: 'hide'//modal状态
+            modal: 'hide',//modal状态
+            searchList: []
         };
         this.timer = null;
         this.coverTimer = null;
@@ -32,16 +35,15 @@ class Music extends React.Component {
         this.setState({
             play:false
         });
-        clearInterval(this.timer);
-        clearInterval(this.coverTimer);
-        clearInterval(this.waveTimer);
+        this.pauseMusic();
     }
     render() {
         return (
             <div className='music-app'>
-                <Modal title='提示' msg='该音乐为付费音乐，自动为您播放下一首' option1= '' option2='确定' state={this.state.modal} hideModal={this.hideModal.bind(this)}/>
+                <MyModal title='提示' msg='该音乐为付费音乐，自动为您播放下一首' option1= '' option2='确定' state={this.state.modal} hideModal={this.hideModal.bind(this)}/>
                 <StateBar theme='dark'/>
                 <div className='music-top-bar'>
+                    <div className='search-btn' onClick={this.showSearchList.bind(this)}></div>
                     <header>Music</header>
                     <div className='playlist-btn' onClick={this.showPlayList.bind(this)}>
                         <span className='playlist-title-num'>
@@ -90,6 +92,27 @@ class Music extends React.Component {
                         <div className='netease-cr'>Powered By &copy; Netease Music</div>
                     </div>
                 </div>
+                {/*搜索菜单*/}
+                <div className='searchlist-wrap' onClick={this.hideSearchList.bind(this)}>
+                    <div ref='searchlist' className='searchlist'>
+                        <header>搜索</header>
+                        <Search className='search-input' placeholder="输入您想搜索的歌曲信息" size='large' onSearch={value => this.startSearch(value)}/>
+                        <div className='triangle'></div>
+                        <ul>
+                            <li className='searchlist-item'>搜索结果 {this.state.searchList.length} 项</li>
+                            {
+                                this.state.searchList.map((item, index) => {
+                                    return (
+                                        <li className='searchlist-item' key={index} onClick={this.playMusicById.bind(this, item)}>
+                                            {item.name} <span className='fr' style={{fontStyle:'italic'}}>{item.singer}</span>
+                                        </li>
+                                    );
+                                })
+                            }
+                        </ul>
+                    </div>
+                </div>
+                
             </div>
         );
     }
@@ -348,6 +371,108 @@ class Music extends React.Component {
         this.setState({
             modal: 'hide'
         });
+    }
+    // 搜索音乐相关函数
+    showSearchList() {
+        var vm = this;
+        $('.searchlist-wrap').css('display', 'block');
+        $('.searchlist').css('display', 'block');
+        $('.searchlist').addClass('animated fadeInLeft');
+        $('.slide-part').addClass('heavy-blur');
+        $('.music-top-bar').addClass('heavy-blur');
+        $('.state-bar').addClass('heavy-blur');
+    }
+    hideSearchList(e) {
+        if (e != undefined) {
+            var target = e.target;
+            if (target == $('.searchlist-wrap')[0]) {
+                $('.searchlist').addClass('animated fadeOutRight');
+                setTimeout(() => {
+                    $('.searchlist-wrap').css('display', 'none');
+                    $('.searchlist').css('display', 'none');
+                    $('.searchlist').removeClass('fadeInLeft');
+                    $('.searchlist').removeClass('fadeOutRight');
+                    $('.slide-part').removeClass('heavy-blur');
+                    $('.music-top-bar').removeClass('heavy-blur');
+                    $('.state-bar').removeClass('heavy-blur');
+                },700)
+            }
+        }
+    }
+    // 根据input输入值搜索结果
+    startSearch(value) {
+        var vm = this;
+        if (value == '') {
+            vm.setState({
+                searchList: []
+            })
+        }
+        if (value != '') {
+            $.get('https://api.imjad.cn/cloudmusic/?type=search&s=' + value, function(result) {
+                console.log(result);
+                if (result.code == 200) {
+                    if (result.result.songCount == 0) {
+                        vm.setState({
+                            searchList: []
+                        });
+                        return;
+                    }
+                    var songs = result.result.songs;
+                    var sr = [];
+                    for (let i = 0; i < songs.length; i++) {
+                        var item = songs[i];
+                        if (item.fee) {
+                            // 付费音乐
+                            continue;
+                        }
+                        var song = {};
+                        song.name = item.name;
+                        song.picUrl = item.al.picUrl
+                        if (item.ar.length > 0) {
+                            song.singer = item.ar[0].name;
+                        } else {
+                            song.singer = '佚名';
+                        }
+                        song.id = item.id;
+                        sr.push(song);
+                        vm.setState({
+                            searchList: sr
+                        })
+                    }
+                }
+            })
+        }
+    }
+    // 根据item。id播放音乐
+    playMusicById(item) {
+        var vm = this;
+        if (item && item.id) {
+            $.get(`https://api.imjad.cn/cloudmusic/?type=song&id=${item.id}`, (result) => {
+                if (result.code == 200) {
+                    if (result.data && result.data.length > 0) {
+                        // 切换音乐
+                        var musicUrl = result.data[0].url;
+                        if (musicUrl == null) {
+                            // 付费音乐
+                            return;
+                        } else {
+                            vm.pauseMusic();
+                            vm.refs.audio.src = musicUrl;
+                            vm.setState({
+                                musicName: item.name,
+                                singer: item.singer
+                            });
+                            // 切换歌曲封面
+                            $('.music-pic').css('background-image', `url("${item.picUrl}")`);
+                            setTimeout(() => {
+                                vm.playMusic();
+                                $('.searchlist-wrap').click();
+                            }, 0);
+                        }
+                    }
+                }
+            });
+        }
     }
 }
 
