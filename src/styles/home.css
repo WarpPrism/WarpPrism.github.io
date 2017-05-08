@@ -42,4 +42,6 @@
     top: 250px;
 
     width: 100%;
+
+    word-break: break-all;
 }

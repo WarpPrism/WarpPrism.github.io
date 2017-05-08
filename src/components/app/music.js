@@ -197,14 +197,18 @@ class Music extends React.Component {
     // 音乐播放中
     playing() {
         var vm = this;
-        vm.spinTheCover();
-        vm.startTheWave();
-        var duration = vm.state.duration || vm.refs.audio.duration;
-
+        if (ua.os.name != 'Android') {
+            vm.spinTheCover();
+            vm.startTheWave();
+        }
         vm.timer = setInterval(function() {
+            var duration = vm.state.duration
             var curTime = vm.refs.audio.currentTime;
+            if (Math.abs(curTime - duration) <= 0.1) {
+                vm.pauseMusic();
+            }
             var percent = (curTime / duration).toFixed(3);
-            $('.bar2').css('right', (1 - percent)*100 + '%');
+            $('.bar2').css('right', (1-percent)*267 + 'px');
             vm.setState({
                 curTime: curTime
             });
@@ -239,6 +243,11 @@ class Music extends React.Component {
                 ctx.stroke();
             }
             ctx.closePath();
+        }
+        if (ua.os.name == 'Android') {
+            drawSinCurve(ctx, 30, 0.1, 0, '#ff899d');
+            drawSinCurve(ctx, 20, 0.1, 0.7, '#d998ff');
+            return;
         }
         var a=30, w=0.1, o=0, color;
         vm.waveTimer = setInterval(() => {
@@ -288,6 +297,7 @@ class Music extends React.Component {
                         } else {
                             vm.pauseMusic();
                             vm.refs.audio.src = musicUrl;
+                            vm.refs.audio.load();                            
                             vm.setState({
                                 musicName: nextMusic.name,
                                 singer: nextMusic.artist,
@@ -323,6 +333,7 @@ class Music extends React.Component {
                         } else {
                             vm.pauseMusic();
                             vm.refs.audio.src = musicUrl;
+                            vm.refs.audio.load();                            
                             vm.setState({
                                 musicName: nextMusic.name,
                                 singer: nextMusic.artist,
@@ -378,6 +389,10 @@ class Music extends React.Component {
         $('.searchlist-wrap').css('display', 'block');
         $('.searchlist').css('display', 'block');
         $('.searchlist').addClass('animated fadeInLeft');
+        if (ua.os.name=='Android') {
+            $('.searchlist-wrap').css('background', '#eee');
+            return;
+        }
         $('.slide-part').addClass('heavy-blur');
         $('.music-top-bar').addClass('heavy-blur');
         $('.state-bar').addClass('heavy-blur');
@@ -392,6 +407,9 @@ class Music extends React.Component {
                     $('.searchlist').css('display', 'none');
                     $('.searchlist').removeClass('fadeInLeft');
                     $('.searchlist').removeClass('fadeOutRight');
+                    if (ua.os.name=='Android') {
+                        return;
+                    }        
                     $('.slide-part').removeClass('heavy-blur');
                     $('.music-top-bar').removeClass('heavy-blur');
                     $('.state-bar').removeClass('heavy-blur');
@@ -409,7 +427,6 @@ class Music extends React.Component {
         }
         if (value != '') {
             $.get('https://api.imjad.cn/cloudmusic/?type=search&s=' + value, function(result) {
-                console.log(result);
                 if (result.code == 200) {
                     if (result.result.songCount == 0) {
                         vm.setState({
@@ -423,7 +440,7 @@ class Music extends React.Component {
                         var item = songs[i];
                         if (item.fee) {
                             // 付费音乐
-                            continue;
+                            // continue;
                         }
                         var song = {};
                         song.name = item.name;
@@ -454,10 +471,13 @@ class Music extends React.Component {
                         var musicUrl = result.data[0].url;
                         if (musicUrl == null) {
                             // 付费音乐
+                            vm.showModal();
+                            vm.playNext();
                             return;
                         } else {
                             vm.pauseMusic();
                             vm.refs.audio.src = musicUrl;
+                            vm.refs.audio.load();
                             vm.setState({
                                 musicName: item.name,
                                 singer: item.singer

@@ -26,7 +26,7 @@ require('styles/app.css');
 require('styles/common/animate.css');
 
 // Render the router into the dom
-
+// React-Router
 render((
     <Router history={hashHistory}>
         <Route path='/' component={Iphone}>

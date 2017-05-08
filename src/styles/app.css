@@ -40,6 +40,13 @@ a
 {
     text-decoration: none !important;
 }
+#app
+{
+    overflow: hidden;
+
+    width: 100%;
+    min-height: 700px;
+}
 /*.clearfix:before,
 .clearfix:after
 {

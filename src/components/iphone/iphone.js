@@ -21,14 +21,24 @@ class Iphone extends React.Component {
             vm.$drag = false;
         });
 
+        // 解析UA
         var parser = new UAParser();
-        var os = parser.getOS();
-        if (os.name == 'Android' || os.name == 'IOS') {
+        window.ua = parser.getResult();
+        // 移动端适配
+        if (ua.os.name == 'Android' || ua.os.name == 'IOS') {
             vm.setState({
-                iphoneTop: -120,
-                iphoneLeft: -50
+                theme: 'light'
             })
+            $('body').css('background', '#333');
+            $('#app').css({
+                'height': '700px'
+            });
         }
+        vm.setState({
+            //居中
+            iphoneLeft: window.screen.availWidth / 2 - (216)
+        });
+        
     }
     render() {
         return (

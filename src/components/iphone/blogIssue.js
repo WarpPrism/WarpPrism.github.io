@@ -1,5 +1,4 @@
 import React from 'react'
-import Loader from 'components/common/Loader.js';
 import StateBar from 'components/iphone/stateBar.js';
 import SearchBar from 'components/iphone/searchBar.js';
 require('styles/blogIssue.css');
