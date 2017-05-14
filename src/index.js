@@ -16,6 +16,7 @@ import MsgBoard from 'components/iphone/msgBoard.js';
 /* App */
 import WeatherApp from 'components/app/weather.js';
 import MusicApp from 'components/app/music.js';
+import CalendarApp from 'components/app/calendar.js';
 
 // ant design style
 // 已使用babel-plugin-import
@@ -38,6 +39,7 @@ render((
             <Route path='/iphone_about' component={AboutPage}/>
             <Route path='/iphone_msg_board' component={MsgBoard}/>
             <Route path='/iphone_music' component={MusicApp}/>
+            <Route path='/iphone_calendar' component={CalendarApp}/>
             <Route path='/iphone_weather' component={WeatherApp}/>
         </Route>
     </Router>

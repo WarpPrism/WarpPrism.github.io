@@ -10,6 +10,7 @@
 .clock-time
 {
     font-size: 70px;
+    font-weight: 200;
 }
 .clock-time .second-flash
 {

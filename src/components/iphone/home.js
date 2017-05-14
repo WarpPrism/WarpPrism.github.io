@@ -5,6 +5,7 @@ import MsgWidget from 'components/iphone/msgWidget.js';
 import FixedApps from 'components/iphone/fixedApps.js';
 import MoreAppPage from 'components/iphone/moreAppPage.js';
 import Modal from 'components/iphone/modal.js';
+// import { Tooltip } from 'antd';
 require('styles/home.css');
 
 class IphoneHome extends React.Component {
@@ -31,6 +32,10 @@ class IphoneHome extends React.Component {
         this.current_view = 1;
         this.slideDir = '';
     }
+    // componentDidMount() {
+    //     var wallpaper_id = Math.floor(Math.random() * 3);
+    //     $('.iphone-home').css('background-image', `url('../images/lockScreen${wallpaper_id}.jpg')`);
+    // }
     render() {
         return (
             <div className='iphone-home'>
@@ -47,6 +52,9 @@ class IphoneHome extends React.Component {
                         <MoreAppPage />
                     </div>
                 </div>
+                {/*<Tooltip title='页面切换' placement='top' arrowPointAtCenter>*/}
+                    <div className='app-page-switch' onClick={this.slideAppPage.bind(this)}></div>        
+                {/*</Tooltip>*/}
                 <FixedApps />
             </div>    
         );
@@ -113,6 +121,17 @@ class IphoneHome extends React.Component {
                 this.refs.slidePart.style.left = '0';
                 this.current_view = 1;
             }
+        }
+    }
+    // 移动端切换app页面
+    slideAppPage(e) {
+        // console.log(this.refs.slidePart.style.left);
+        if (this.refs.slidePart.style.left == '0px') {
+            this.refs.slidePart.style.left = '-100%';
+            this.current_view = 2;
+        } else {
+            this.refs.slidePart.style.left = '0px';
+            this.current_view = 1;            
         }
     }
 }

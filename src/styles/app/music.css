@@ -91,6 +91,8 @@
     bottom: 280px;
     left: 50%;
 
+    display: block;
+
     width: 280px;
     height: 280px;
     margin-left: -140px;
@@ -100,6 +102,42 @@
     background-position: 50% 50%;
     background-size: cover;
     box-shadow: 2px 2px 30px 0 #aaa;
+}
+.music-app .music-lyric
+{
+    line-height: 30px;
+
+    position: absolute;
+    bottom: 260px;
+    left: 50%;
+
+    display: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    width: 300px;
+    height: 300px;
+    margin-left: -150px;
+
+    text-align: center;
+
+    color: #777;
+}
+.music-app .music-lyric .active-lyric
+{
+    color: #ff899d;
+}
+.music-app .lyric-ctrl
+{
+    position: absolute;
+    top: 26px;
+    left: 30px;
+
+    width: 30px;
+    height: 30px;
+
+    background: url('../../images/music/lyric.png') no-repeat;
+    background-size: cover;
 }
 .music-app .music-info
 {
@@ -370,30 +408,32 @@ canvas.dynamic-wave
 }
 .music-app .searchlist .search-input
 {
-    font-size: 15px;
+    font-size: 16px;
 
     margin: 0;
 
     color: #333;
 }
-.music-app .searchlist ul
+.music-app .searchlist .searchlist-ol
 {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
     max-height: 300px;
     margin: -1px auto 0;
 
     border-radius: 5px;
-    background: rgba(255,255,255,1);
+    background: #fff;
 }
 .music-app .searchlist .searchlist-item
 {
-    padding: 5px 15px;
+    /*padding: 5px 15px;*/
+    font-size: 16px;
 }
-.music-app .searchlist .searchlist-item:hover
+/*.music-app .searchlist .searchlist-item:hover
 {
     background: #ddd;
-}
+}*/
 .music-app .searchlist .triangle
 {
     width: 14px;

@@ -17,23 +17,23 @@ class MoreAppPage extends React.Component {
                         </div>
                         <div className='app-name'>音乐</div>
                     </div>
+                    <div className='app' onClick={this.openCalendarApp.bind(this)}>
+                        <div className='app-icon'>
+                            <img src='images/iosicons/calendar.png' alt='icon'/>
+                        </div>
+                        <div className='app-name'>日历</div>
+                    </div>
                     <div className='app'>
                         <div className='app-icon'>
                             <img src='images/iosicons/calculator.png' alt='icon'/>
                         </div>
-                        <div className='app-name'>相机</div>
+                        <div className='app-name'>计算器</div>
                     </div>
                     <div className='app'>
                         <div className='app-icon'>
-                            <img src='images/iosicons/notes.png' alt='icon'/>
+                            <img src='images/iosicons/maps.png' alt='icon'/>
                         </div>
-                        <div className='app-name'>相机</div>
-                    </div>
-                    <div className='app'>
-                        <div className='app-icon'>
-                            <img src='images/iosicons/weather.png' alt='icon'/>
-                        </div>
-                        <div className='app-name'>相机</div>
+                        <div className='app-name'>地图</div>
                     </div>
                 </div>
                 <div className='app-page-row'>
@@ -45,21 +45,21 @@ class MoreAppPage extends React.Component {
                     </div>
                     <div className='app'>
                         <div className='app-icon'>
+                            <img src='images/iosicons/news.png' alt='icon'/>
+                        </div>
+                        <div className='app-name'>新闻</div>
+                    </div>
+                    <div className='app'>
+                        <div className='app-icon'>
                             <img src='images/iosicons/camera.png' alt='icon'/>
                         </div>
                         <div className='app-name'>相机</div>
                     </div>
                     <div className='app'>
                         <div className='app-icon'>
-                            <img src='images/iosicons/calculator.png' alt='icon'/>
+                            <img src='images/iosicons/friends.png' alt='icon'/>
                         </div>
-                        <div className='app-name'>相机</div>
-                    </div>
-                    <div className='app'>
-                        <div className='app-icon'>
-                            <img src='images/iosicons/notes.png' alt='icon'/>
-                        </div>
-                        <div className='app-name'>相机</div>
+                        <div className='app-name'>链接</div>
                     </div>
                 </div>
             </div>
@@ -67,6 +67,9 @@ class MoreAppPage extends React.Component {
     }
     openMusicApp(e) {
         window.location.hash = '#iphone_music';
+    }
+    openCalendarApp(e) {
+        window.location.hash = '#iphone_calendar';
     }
     openWeatherApp(e) {
         // 打开天气应用
