@@ -21,10 +21,10 @@ class Music extends React.Component {
             playId: -1,//当前播放的歌曲的index
             totalNum: 0,//播放列表歌曲数,
             modal: 'hide',//modal状态
-            searchList: [],
-            lyrics: [],//歌词
-            curLyricIndex: 0,
-            lyricScroll: 0
+            searchList: [],//搜索结果
+            lyrics: [{lyric:'还没有歌词哦~'}],//歌词
+            curLyricIndex: 0,//当前歌词位置
+            lyricScroll: 0//歌词滚动控制
         };
         this.timer = null;
         this.coverTimer = null;
@@ -35,10 +35,6 @@ class Music extends React.Component {
         this.getInitMusicInfo();
     }
     componentWillUnmount() {
-        this.refs.audio.pause();
-        this.setState({
-            play:false
-        });
         this.pauseMusic();
         //注销事件监听
         this.refs.audio.oncanplay = null;
@@ -106,7 +102,7 @@ class Music extends React.Component {
                                 }.bind(this))
                             }
                         </ol>
-                        <div className='netease-cr'>Powered By &copy; Netease Music</div>
+                        <div className='netease-cr'>Powered By &copy; Netease Cloud Music</div>
                     </div>
                 </div>
                 {/*搜索菜单*/}
@@ -234,16 +230,22 @@ class Music extends React.Component {
             vm.spinTheCover();
             vm.startTheWave();
         }
-        $('.music-lyric')[0].scrollTop = vm.state.lyricScroll;
         vm.timer = setInterval(function() {
             var duration = vm.state.duration
             var curTime = vm.refs.audio.currentTime;
+            $('.music-lyric')[0].scrollTop = vm.state.lyricScroll;
+            // 当前音乐播放停止
             if (Math.abs(curTime - duration) <= 0.1) {
                 vm.pauseMusic();
+                $('.music-lyric')[0].scrollTop = 0;
+                vm.setState({
+                    lyricScroll: 0
+                });
+                vm.playNext();
             }
             var percent = (curTime / duration).toFixed(3);
             $('.bar2').css('right', (1-percent)*267 + 'px');
-            //歌词计算
+            //歌词计算//
             var minDeltaTime = 9999;
             var activeIndex = 0;
             vm.state.lyrics.forEach(function(item, index) {
@@ -253,7 +255,7 @@ class Music extends React.Component {
                     activeIndex = index;
                 }
             })
-            if (activeIndex > 6 && activeIndex != vm.state.curLyricIndex) {
+            if (activeIndex >= 5 && activeIndex != vm.state.curLyricIndex) {
                 //滚动歌词
                 // console.log($('.music-lyric')[0].scrollTop);
                 $('.music-lyric')[0].scrollTop += 30;
@@ -261,7 +263,7 @@ class Music extends React.Component {
                     lyricScroll: vm.state.lyricScroll + 30
                 });
             }
-            //歌词计算
+            //歌词计算//
             vm.setState({
                 curLyricIndex: activeIndex,
                 curTime: curTime
@@ -410,6 +412,7 @@ class Music extends React.Component {
         var vm = this;
         $('.playlist-wrap').css('display', 'block');
         $('.playlist').css('display', 'block');
+        $('.playlist')[0].scrollTop = 0;        
         $(vm.refs.playlist).addClass('animated bounceInUp');
     }
     hidePlayList(e) {

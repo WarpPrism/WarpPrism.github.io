@@ -1,5 +1,5 @@
 // http://codepen.io/WarpPrism/pen/grKqvV
-// From My Codepen
+//（传统DOM方法构建日历应用）From My Codepen
 import React from 'react';
 import StateBar from 'components/iphone/stateBar.js';
 
