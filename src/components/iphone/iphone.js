@@ -1,5 +1,6 @@
+// iphone样式，也是所有路由组件的父组件
 import React from 'react';
-require('styles/iphone.css');
+import 'styles/iphone.css';
 
 class Iphone extends React.Component {
     constructor(props) {

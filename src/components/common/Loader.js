@@ -1,4 +1,4 @@
-// loader组件
+// loader组件，移动端存在显示问题
 import React from 'react';
 require('styles/common/loader.css');
  

@@ -3,7 +3,7 @@
 import React from 'react';
 import StateBar from 'components/iphone/stateBar.js';
 
-require('styles/app/calendar.css');
+import 'styles/app/calendar.css';
 
 
 class Calendar extends React.Component {

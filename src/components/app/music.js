@@ -5,8 +5,7 @@ import MyModal from 'components/iphone/modal.js';
 import {Input,Menu } from 'antd';
 const Search = Input.Search;
 
-
-require('styles/app/music.css');
+import 'styles/app/music.css';
 
 class Music extends React.Component {
     constructor(props) {
