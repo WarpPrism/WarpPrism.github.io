@@ -37,7 +37,7 @@ class Iphone extends React.Component {
         }
         vm.setState({
             //居中
-            iphoneLeft: window.screen.availWidth / 2 - (216)
+            iphoneLeft: window.screen.availWidth / 2 - (211.5)
         });
         
     }

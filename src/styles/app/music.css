@@ -348,11 +348,14 @@ canvas.dynamic-wave
 .music-app .playlist-item:hover
 {
     color: #ff799d;
-    color: #00a1ea;
+    /*color: #00a1ea;*/
+    /*color: #333;*/
+    /*background: linear-gradient(90deg,rgba(0,161,234,.3),rgba(0,161,234,.2), rgba(0,161,234,.5),rgba(0,161,234,.2));*/
+    /*background: linear-gradient(90deg,rgba(217,152,255,.3),rgba(217,152,255,.2), rgba(217,152,255,.5),rgba(217,152,255,.2));*/
     /*border-right: solid 5px #ff799d;*/
     /*background: #b72712;*/
-    /*border-left: solid 5px #ff799d;*/
-    box-shadow: 2px 2px 50px 2px #00a1ea;
+    border-left: solid 5px #ff799d;
+    /*box-shadow: 2px 2px 50px 2px #00a1ea;*/
 }
 .music-app .close-playlist
 {
