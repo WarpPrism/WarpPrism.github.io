@@ -2,7 +2,7 @@
 import React from 'react';
 import StateBar from 'components/iphone/stateBar.js';
 import MyModal from 'components/iphone/modal.js';
-import {Input,Menu } from 'antd';
+import {Input, Menu} from 'antd';
 const Search = Input.Search;
 
 import 'styles/app/music.css';
@@ -19,7 +19,7 @@ class Music extends React.Component {
             playList: [],//播放列表
             playId: -1,//当前播放的歌曲的index
             totalNum: 0,//播放列表歌曲数,
-            modal: 'hide',//modal状态
+            modal: 'hide',//modal状态 hide show
             searchList: [],//搜索结果
             lyrics: [{lyric:'还没有歌词哦~'}],//歌词
             curLyricIndex: 0,//当前歌词位置
@@ -31,12 +31,12 @@ class Music extends React.Component {
         this.waveTimer = null;
     }
     componentDidMount() {
-        this.getInitMusicInfo();
+        this.initApp();
     }
     componentWillUnmount() {
         this.pauseMusic();
-        //注销事件监听
-        this.refs.audio.oncanplay = null;
+        //注销事件监听 ...
+        this.refs.audio.src = null;
     }
     render() {
         return (
@@ -54,7 +54,7 @@ class Music extends React.Component {
                 </div>
                 <div className='slide-part'>
                     <div className='music-pic' onClick={this.toggleMusicLyric.bind(this)}></div>
-                    <div className='music-lyric' onClick={this.toggleMusicLyric.bind(this)}>
+                    <div className='music-lyric' onClick={this.toggleMusicLyric.bind(this)} ref='lyricDOM'>
                         {
                             this.state.lyrics.map(function(item, index) {
                                 return (
@@ -63,7 +63,6 @@ class Music extends React.Component {
                             }.bind(this))
                         }
                     </div>
-
                     <canvas ref='wave' className='dynamic-wave'></canvas>
                     <div className='music-info'>
                         <div className='music-name'>{this.state.musicName}</div>
@@ -83,7 +82,9 @@ class Music extends React.Component {
                         <div className='play-next' onClick={this.playNext.bind(this)}></div>
                     </div>
                 </div>
-                <audio id='audio' ref='audio'></audio>
+                <audio id='audio' ref='audio'>
+                    Your browser does not support the <code>audio</code> element.
+                </audio>
                 <div className='playlist-wrap' onClick={this.hidePlayList.bind(this)}>
                     <div ref='playlist' className='playlist'>
                         <div className='playlist-title'>
@@ -125,13 +126,13 @@ class Music extends React.Component {
                         <Menu className='searchlist-ol'>
                             <Menu.Item>
                                 <a href='javascript:;' className='searchlist-item'>搜索结果 {this.state.searchList.length} 项</a>
-                            </Menu.Item>                         
+                            </Menu.Item>
                             {
                             this.state.searchList.map((item, index) => {
                                 return (
                                     <Menu.Item key={index}>
                                         <a href='javascript:;' className='searchlist-item' onClick={this.playMusicById.bind(this, item)}>
-                                            {item.name} <span className='fr' style={{fontStyle:'italic'}}>{item.singer}</span>                                            
+                                            {item.name} <span className='fr' style={{fontStyle:'italic'}}>{item.singer}</span>
                                         </a>
                                     </Menu.Item>
                                 );
@@ -140,9 +141,72 @@ class Music extends React.Component {
                         </Menu>
                     </div>
                 </div>
-                
+
             </div>
         );
+    }
+    //播放器初始化
+    initApp() {
+        var vm = this;
+        // 增加url query对象
+        let query = {};
+        if (window.location.hash.indexOf('?') > -1) {
+            let keyvalue = (window.location.hash.split('?')[1]).split('&');
+            keyvalue.forEach((pair, index) => {
+                let key = pair.split('=')[0];
+                let value = pair.split('=')[1];
+                query[key] = value;
+            })
+        }
+        vm.refs.audio.addEventListener('durationchange', function() {
+            var duration = vm.refs.audio.duration;
+            vm.setState({
+                duration: duration
+            });
+        });
+        vm.refs.audio.addEventListener('ended', function() {
+            console.info('当前音乐播放停止');
+            var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
+            vm.pauseMusic();
+            lyricDOM.scrollTop = 0;
+            vm.setState({
+                lyricScroll: 0
+            });
+        })
+        vm.getPlayList();
+        // 页面激活状态变更
+        var hiddenProperty = 'hidden' in document ? 'hidden' :
+            'webkitHidden' in document ? 'webkitHidden' :
+            'mozHidden' in document ? 'mozHidden' : null;
+        var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+        document.addEventListener(visibilityChangeEvent, function() {
+            if (!document[hiddenProperty]) {
+                // console.log('active');
+                if (ua.os.name != 'Android' && vm.state.play) {
+                    vm.startTheWave();
+                    vm.spinTheCover();
+                }
+            } else {
+                // console.log('non-active');
+                clearInterval(vm.waveTimer);
+                clearInterval(vm.coverTimer);
+            }
+        })
+        if (query.songId) {
+            var songitem = {
+                id: query.songId,
+                singer: ''
+            };
+            vm.playMusicById(songitem);
+        }
+        // 播放本地资源的音乐
+        else if (vm.state.playId == -1) {
+            vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
+            vm.setState({
+                musicName: 'Cannon Flying In the Sky',
+                singer: '全智贤'
+            });
+        }
     }
     switchPlayState() {
         if (this.state.play == false) {
@@ -151,15 +215,16 @@ class Music extends React.Component {
             this.pauseMusic();
         }
     }
+    // 播放
     playMusic() {
         this.refs.audio.play();
-
         $('.play-pause').css('background-image', 'url("../../images/music/pause.png")');
+        this.playing();
         this.setState({
             play: true
         });
-        this.playing();
     }
+    // 暂停
     pauseMusic() {
         this.refs.audio.pause();
         $('.play-pause').css('background-image', 'url("../../images/music/play.png")');
@@ -169,27 +234,7 @@ class Music extends React.Component {
         clearInterval(this.timer);
         clearInterval(this.coverTimer);
         clearInterval(this.waveTimer);
-    }
-    //播放器初始信息
-    getInitMusicInfo() {
-        var vm = this;
-        // 播放本地资源的音乐
-        if (vm.state.playId == -1) {
-            vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
-            vm.setState({
-                musicName: 'Cannon Flying In the Sky',
-                singer: '全智贤'
-            });
-        }
-
-        vm.refs.audio.oncanplay = function() {
-            var duration = vm.refs.audio.duration;
-            vm.setState({
-                duration: duration
-            });
-        }
-        vm.getPlayList();
-
+        this.timer = this.coverTimer = this.waveTimer = null;
     }
     // 获取播放列表
     getPlayList(id) {
@@ -200,7 +245,7 @@ class Music extends React.Component {
             listId = id;
         }
         $.get(`https://api.imjad.cn/cloudmusic/?type=playlist&id=${listId}`).then((result) => {
-            if (result.code == 200) {           
+            if (result.code == 200) {
                 var playList = [];
                 for (var i = 0; i < result.playlist.tracks.length; i++) {
                     var track = result.playlist.tracks[i];
@@ -209,7 +254,11 @@ class Music extends React.Component {
                     song.id = track.id;
                     song.picUrl = track.al.picUrl;
                     if (track.ar.length > 0) {
-                        song.artist = track.ar[0].name;
+                        song.artist = '';
+                        track.ar.forEach((artist, index) => {
+                            artist.name = artist.name?artist.name:'';
+                            song.artist += artist.name + ' ';
+                        });
                     } else {
                         song.artist = '佚名';
                     }
@@ -225,6 +274,7 @@ class Music extends React.Component {
     // 音乐播放中
     playing() {
         var vm = this;
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];        
         if (ua.os.name != 'Android') {
             vm.spinTheCover();
             vm.startTheWave();
@@ -232,19 +282,10 @@ class Music extends React.Component {
         vm.timer = setInterval(function() {
             var duration = vm.state.duration
             var curTime = vm.refs.audio.currentTime;
-            $('.music-lyric')[0].scrollTop = vm.state.lyricScroll;
-            // 当前音乐播放停止
-            if (Math.abs(curTime - duration) <= 0.1) {
-                vm.pauseMusic();
-                $('.music-lyric')[0].scrollTop = 0;
-                vm.setState({
-                    lyricScroll: 0
-                });
-                vm.playNext();
-            }
-            var percent = (curTime / duration).toFixed(3);
+            lyricDOM.scrollTop = vm.state.lyricScroll;
+            var percent = (curTime / duration).toFixed(2);
             $('.bar2').css('right', (1-percent)*267 + 'px');
-            //歌词计算//
+            //歌词计算Start， 算法需要优化//
             var minDeltaTime = 9999;
             var activeIndex = 0;
             vm.state.lyrics.forEach(function(item, index) {
@@ -254,20 +295,23 @@ class Music extends React.Component {
                     activeIndex = index;
                 }
             })
-            if (activeIndex >= 5 && activeIndex != vm.state.curLyricIndex) {
-                //滚动歌词
-                // console.log($('.music-lyric')[0].scrollTop);
-                $('.music-lyric')[0].scrollTop += 30;
-                vm.setState({
-                    lyricScroll: vm.state.lyricScroll + 30
-                });
+            //滚动歌词，居中显示当前歌词
+            var activeLyricDOM = $('.active-lyric')[0];
+            if (activeLyricDOM) {
+                lyricDOM.scrollTop = (activeLyricDOM.offsetTop - 120)<=0?0:(activeLyricDOM.offsetTop - 120);
             }
-            //歌词计算//
+            //歌词计算End//
             vm.setState({
+                lyricScroll: lyricDOM.scrollTop,                
                 curLyricIndex: activeIndex,
                 curTime: curTime
+            }, function() {
+                //滚动歌词，居中显示当前歌词
+                var activeLyricDOM = $('.active-lyric')[0];     
+                if (activeLyricDOM) { 
+                    lyricDOM.scrollTop = (activeLyricDOM.offsetTop - 120)<=0?0:(activeLyricDOM.offsetTop - 120);
+                }
             });
-
         }, 500);
     }
     // 封面旋转
@@ -281,7 +325,7 @@ class Music extends React.Component {
     // 音乐动感波浪
     startTheWave() {
         var vm = this;
-        var canvas = this.refs.wave;
+        var canvas = vm.refs.wave;
         var ctx = canvas.getContext('2d');
         canvas.width = 371;
         canvas.height = 80;
@@ -298,11 +342,6 @@ class Music extends React.Component {
                 ctx.stroke();
             }
             ctx.closePath();
-        }
-        if (ua.os.name == 'Android') {
-            drawSinCurve(ctx, 30, 0.1, 0, '#ff899d');
-            drawSinCurve(ctx, 20, 0.1, 0.7, '#d998ff');
-            return;
         }
         var a=30, w=0.1, o=0, color;
         vm.waveTimer = setInterval(() => {
@@ -352,7 +391,7 @@ class Music extends React.Component {
                             vm.getMusicLyric(nextMusic);
                             vm.pauseMusic();
                             vm.refs.audio.src = musicUrl;
-                            vm.refs.audio.load();                            
+                            vm.refs.audio.load();
                             vm.setState({
                                 musicName: nextMusic.name,
                                 singer: nextMusic.artist,
@@ -362,7 +401,7 @@ class Music extends React.Component {
                             $('.music-pic').css('background-image', `url("${nextMusic.picUrl}")`);
                             setTimeout(() => {
                                 vm.playMusic();
-                            }, 0);
+                            }, 300);
                         }
                     }
                 }
@@ -386,10 +425,10 @@ class Music extends React.Component {
                             // 付费音乐
                             vm.playNext(nextId - 1);
                         } else {
-                            vm.getMusicLyric(nextMusic);                            
+                            vm.getMusicLyric(nextMusic);
                             vm.pauseMusic();
                             vm.refs.audio.src = musicUrl;
-                            vm.refs.audio.load();                            
+                            vm.refs.audio.load();
                             vm.setState({
                                 musicName: nextMusic.name,
                                 singer: nextMusic.artist,
@@ -399,7 +438,7 @@ class Music extends React.Component {
                             $('.music-pic').css('background-image', `url("${nextMusic.picUrl}")`);
                             setTimeout(() => {
                                 vm.playMusic();
-                            }, 0);
+                            }, 300);
                         }
                     }
                 }
@@ -411,7 +450,7 @@ class Music extends React.Component {
         var vm = this;
         $('.playlist-wrap').css('display', 'block');
         $('.playlist').css('display', 'block');
-        $('.playlist')[0].scrollTop = 0;        
+        $('.playlist')[0].scrollTop = 0;
         $(vm.refs.playlist).addClass('animated bounceInUp');
     }
     hidePlayList(e) {
@@ -466,7 +505,7 @@ class Music extends React.Component {
                     $('.searchlist').removeClass('fadeOutRight');
                     if (ua.os.name=='Android' || ua.browser.name=='IE') {
                         return;
-                    }        
+                    }
                     $('.slide-part').removeClass('heavy-blur');
                     $('.music-top-bar').removeClass('heavy-blur');
                     $('.state-bar').removeClass('heavy-blur');
@@ -520,38 +559,71 @@ class Music extends React.Component {
     // 根据item.id播放音乐
     playMusicById(item) {
         var vm = this;
+        vm.setState({
+            lyricScroll: 0
+        });
         if (item && item.id) {
-            $.get(`https://api.imjad.cn/cloudmusic/?type=song&id=${item.id}`, (result) => {
-                if (result.code == 200) {
-                    if (result.data && result.data.length > 0) {
-                        // 切换音乐
-                        var musicUrl = result.data[0].url;
-                        if (musicUrl == null) {
-                            // 付费音乐
-                            vm.showModal();
-                            vm.playNext();
-                            return;
-                        } else {
-                            vm.pauseMusic();
-                            vm.refs.audio.src = musicUrl;
-                            vm.refs.audio.load();
-                            vm.setState({
-                                musicName: item.name,
-                                singer: item.singer
+            console.log('songId', item.id);
+            var getDetail = new Promise((resolve, reject) => {
+                $.get(`https://api.imjad.cn/cloudmusic/?type=detail&id=${item.id}`, (result) => {
+                    if (result.code == 200) {
+                        console.log(result);
+                        if (result.songs.length > 0) {
+                            var song = result.songs[0];
+                            item.name = song.name;
+                            item.picUrl = song.al.picUrl;
+                            item.singer = '';
+                            song.ar.forEach((artist, index) => {
+                                artist.name = artist.name?artist.name:'';
+                                item.singer += artist.name + ' ';
                             });
-                            // 切换歌曲封面
-                            $('.music-pic').css('background-image', `url("${item.picUrl}")`);
-                            setTimeout(() => {
-                                vm.playMusic();
-                                $('.searchlist-wrap').click();
-                            }, 0);
+                            resolve();
+                        } else {
+                            vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
+                            vm.setState({
+                                musicName: 'Cannon Flying In the Sky',
+                                singer: '全智贤'
+                            });
+                            reject();
                         }
                     }
-                }
+                })
             });
-            vm.getMusicLyric(item);
+            function getMusicUrl() {
+                $.get(`https://api.imjad.cn/cloudmusic/?type=song&id=${item.id}`, (result) => {
+                    if (result.code == 200) {
+                        if (result.data && result.data.length > 0) {
+                            // 切换音乐
+                            var musicUrl = result.data[0].url;
+                            if (musicUrl == null) {
+                                // 付费音乐
+                                vm.showModal();
+                                vm.playNext();
+                                return;
+                            } else {
+                                vm.pauseMusic();
+                                vm.refs.audio.src = musicUrl;
+                                vm.refs.audio.load();
+                                vm.setState({
+                                    musicName: item.name,
+                                    singer: item.singer
+                                });
+                                // 切换歌曲封面
+                                $('.music-pic').css('background-image', `url("${item.picUrl}")`);
+                                setTimeout(() => {
+                                    vm.playMusic();
+                                    $('.searchlist-wrap').click();
+                                }, 0);
+                            }
+                        }
+                    }
+                });
+                vm.getMusicLyric(item);
+            }
+            getDetail.then(getMusicUrl, function(){});            
         }
     }
+    // 获取歌词
     getMusicLyric(item) {
         var vm = this;
         vm.state.lyricScroll = 0;
@@ -572,7 +644,7 @@ class Music extends React.Component {
                                 var lyricObj = {
                                     lyricTime: 0,
                                     lyric: ''
-                                };                                
+                                };
                                 var lyricTime = 0;
                                 if ($1) {
                                     lyricTime += ($1.substring(1,3)) * 60;
@@ -584,7 +656,7 @@ class Music extends React.Component {
                                     lyricObj.lyric = $2;
                                 }
                                 lyricsParsed.push(lyricObj);
-                                
+
                             });
                         });
                         var lyricEnd = {
@@ -615,13 +687,13 @@ class Music extends React.Component {
         if (cover.css('display') == 'block') {
             if (vm.coverTimer) {
                 clearInterval(vm.coverTimer);
-                vm.coverTimer = null;         
+                vm.coverTimer = null;
             }
             cover.hide();
             lyric.show();
         } else if (cover.css('display') == 'none') {
             if (vm.state.play && vm.coverTimer == null && ua.os.name != 'Android') {
-                vm.spinTheCover();        
+                vm.spinTheCover();
             }
             cover.show();
             lyric.hide();
