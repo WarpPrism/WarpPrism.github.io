@@ -361,11 +361,12 @@ class Music extends React.Component {
     }
     playNext(id) {
         var vm = this;
+        vm.state.lyricScroll = 0;
+        lyricDOM.scrollTop = 0;
         vm.setState({
             lyricScroll: 0,
             curLyricIndex: 0
         });
-        vm.refs.lyricDOM.scrollTop = 0;        
         var nextId = vm.state.playId + 1;
         if (nextId >= vm.state.totalNum) {
             nextId = 0;
@@ -410,11 +411,12 @@ class Music extends React.Component {
     }
     playPre() {
         var vm = this;
+        vm.state.lyricScroll = 0;
+        lyricDOM.scrollTop = 0;
         vm.setState({
             lyricScroll: 0,
             curLyricIndex: 0
         });
-        vm.refs.lyricDOM.scrollTop = 0;        
         var nextId = vm.state.playId - 1;
         if (nextId < 0) {
             nextId = vm.state.totalNum - 1;
@@ -564,7 +566,8 @@ class Music extends React.Component {
     // 根据item.id播放音乐
     playMusicById(item) {
         var vm = this;
-        vm.refs.lyricDOM.scrollTop = 0;        
+        vm.state.lyricScroll = 0;
+        lyricDOM.scrollTop = 0;
         vm.setState({
             lyricScroll: 0,
             curLyricIndex: 0
@@ -618,8 +621,8 @@ class Music extends React.Component {
                                 $('.music-pic').css('background-image', `url("${item.picUrl}")`);
                                 setTimeout(() => {
                                     vm.playMusic();
-                                    $('#close-search').click();                           
-                                }, 300);                        
+                                    $('#close-search').click();
+                                }, 300);
                             }
                         }
                     }
@@ -633,8 +636,10 @@ class Music extends React.Component {
     getMusicLyric(item) {
         var vm = this;
         vm.state.lyricScroll = 0;
+        lyricDOM.scrollTop = 0;
         vm.setState({
-            lyricScroll: 0
+            lyricScroll: 0,
+            curLyricIndex: 0
         });
         // 歌词获取
         $.get(`https://api.imjad.cn/cloudmusic/?type=lyric&id=${item.id}`, (result) => {
