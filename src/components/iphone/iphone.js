@@ -26,7 +26,7 @@ class Iphone extends React.Component {
         var parser = new UAParser();
         window.ua = parser.getResult();
         // 移动端适配
-        if (ua.os.name == 'Android' || ua.os.name == 'IOS') {
+        if (ua.os.name == 'Android' || ua.os.name == 'iOS') {
             vm.setState({
                 theme: 'light'
             })

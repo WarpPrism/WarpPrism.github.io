@@ -31,6 +31,7 @@ class Music extends React.Component {
         this.waveTimer = null;
     }
     componentDidMount() {
+        //初始化
         this.initApp();
     }
     componentWillUnmount() {
@@ -45,6 +46,7 @@ class Music extends React.Component {
                 <StateBar theme='dark'/>
                 <div className='music-top-bar'>
                     <div className='search-btn' onClick={this.showSearchList.bind(this)}></div>
+                    <a href="https://music.163.com" target="_blank" className='netease-icon'></a>
                     <header>Music</header>
                     <div className='playlist-btn' onClick={this.showPlayList.bind(this)}>
                         <span className='playlist-title-num'>
@@ -63,7 +65,9 @@ class Music extends React.Component {
                             }.bind(this))
                         }
                     </div>
-                    <canvas ref='wave' className='dynamic-wave'></canvas>
+                    <canvas ref='wave' className='dynamic-wave'>
+                        Your Browser Doesn't Support <pre>canvas</pre> Element.
+                    </canvas>
                     <div className='music-info'>
                         <div className='music-name'>{this.state.musicName}</div>
                         <div className='singer'>{this.state.singer}</div>
@@ -108,24 +112,13 @@ class Music extends React.Component {
                 {/*搜索菜单*/}
                 <div className='searchlist-wrap' onClick={this.hideSearchList.bind(this)}>
                     <div ref='searchlist' className='searchlist'>
+                        <span id='close-search' className='close-playlist' onClick={this.hideSearchList.bind(this)}/>
                         <header>搜索</header>
                         <Search className='search-input' placeholder="输入您想搜索的歌曲信息" size='large' onSearch={value => this.startSearch(value)}/>
                         <div className='triangle'></div>
-                        {/*<ol className='searchlist-ol'>
-                            <li className='searchlist-item'>搜索结果 {this.state.searchList.length} 项</li>
-                            {
-                                this.state.searchList.map((item, index) => {
-                                    return (
-                                        <li className='searchlist-item' key={index} onClick={this.playMusicById.bind(this, item)}>
-                                            {item.name} <span className='fr' style={{fontStyle:'italic'}}>{item.singer}</span>
-                                        </li>
-                                    );
-                                })
-                            }
-                        </ol>*/}
                         <Menu className='searchlist-ol'>
                             <Menu.Item>
-                                <a href='javascript:;' className='searchlist-item'>搜索结果 {this.state.searchList.length} 项</a>
+                                <a href='javascript:;' className='searchlist-item'>搜索结果共 {this.state.searchList.length} 项</a>
                             </Menu.Item>
                             {
                             this.state.searchList.map((item, index) => {
@@ -165,7 +158,7 @@ class Music extends React.Component {
             });
         });
         vm.refs.audio.addEventListener('ended', function() {
-            console.info('当前音乐播放停止');
+            console.info('当前音乐播放停止: ' + vm.state.musicName);
             var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
             vm.pauseMusic();
             lyricDOM.scrollTop = 0;
@@ -182,7 +175,7 @@ class Music extends React.Component {
         document.addEventListener(visibilityChangeEvent, function() {
             if (!document[hiddenProperty]) {
                 // console.log('active');
-                if (ua.os.name != 'Android' && vm.state.play) {
+                if (ua.os.name != 'Android' && vm.state.play==true) {
                     vm.startTheWave();
                     vm.spinTheCover();
                 }
@@ -274,7 +267,7 @@ class Music extends React.Component {
     // 音乐播放中
     playing() {
         var vm = this;
-        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];        
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
         if (ua.os.name != 'Android') {
             vm.spinTheCover();
             vm.startTheWave();
@@ -285,16 +278,17 @@ class Music extends React.Component {
             lyricDOM.scrollTop = vm.state.lyricScroll;
             var percent = (curTime / duration).toFixed(2);
             $('.bar2').css('right', (1-percent)*267 + 'px');
-            //歌词计算Start， 算法需要优化//
+            //歌词计算Start， 算法优化//
             var minDeltaTime = 9999;
-            var activeIndex = 0;
-            vm.state.lyrics.forEach(function(item, index) {
-                var delta = Math.abs(curTime - item.lyricTime);
+            var activeIndex = vm.state.curLyricIndex || 0;
+            for (let i = activeIndex + 1; i < vm.state.lyrics.length; i++) {
+                let item = vm.state.lyrics[i];
+                let delta = Math.abs(curTime - item.lyricTime);
                 if (delta <= minDeltaTime && curTime >= item.lyricTime) {
                     minDeltaTime = delta;
-                    activeIndex = index;
+                    activeIndex = i;
                 }
-            })
+            }
             //滚动歌词，居中显示当前歌词
             var activeLyricDOM = $('.active-lyric')[0];
             if (activeLyricDOM) {
@@ -302,13 +296,13 @@ class Music extends React.Component {
             }
             //歌词计算End//
             vm.setState({
-                lyricScroll: lyricDOM.scrollTop,                
+                lyricScroll: lyricDOM.scrollTop,
                 curLyricIndex: activeIndex,
                 curTime: curTime
             }, function() {
                 //滚动歌词，居中显示当前歌词
-                var activeLyricDOM = $('.active-lyric')[0];     
-                if (activeLyricDOM) { 
+                var activeLyricDOM = $('.active-lyric')[0];
+                if (activeLyricDOM) {
                     lyricDOM.scrollTop = (activeLyricDOM.offsetTop - 120)<=0?0:(activeLyricDOM.offsetTop - 120);
                 }
             });
@@ -316,6 +310,7 @@ class Music extends React.Component {
     }
     // 封面旋转
     spinTheCover() {
+        // console.log('spin the cover');
         var vm = this;
         vm.coverTimer = setInterval(() => {
             vm.coverDeg = (vm.coverDeg + 0.1) % 360;
@@ -496,7 +491,7 @@ class Music extends React.Component {
     hideSearchList(e) {
         if (e != undefined) {
             var target = e.target;
-            if (target == $('.searchlist-wrap')[0]) {
+            if (target == $('.searchlist-wrap')[0] || target.id=='close-search') {
                 $('.searchlist').addClass('animated fadeOutRight');
                 setTimeout(() => {
                     $('.searchlist-wrap').css('display', 'none');
@@ -560,14 +555,14 @@ class Music extends React.Component {
     playMusicById(item) {
         var vm = this;
         vm.setState({
-            lyricScroll: 0
+            lyricScroll: 0,
+            curLyricIndex: 0
         });
         if (item && item.id) {
             console.log('songId', item.id);
             var getDetail = new Promise((resolve, reject) => {
                 $.get(`https://api.imjad.cn/cloudmusic/?type=detail&id=${item.id}`, (result) => {
                     if (result.code == 200) {
-                        console.log(result);
                         if (result.songs.length > 0) {
                             var song = result.songs[0];
                             item.name = song.name;
@@ -603,7 +598,7 @@ class Music extends React.Component {
                             } else {
                                 vm.pauseMusic();
                                 vm.refs.audio.src = musicUrl;
-                                vm.refs.audio.load();
+                                // vm.refs.audio.load();
                                 vm.setState({
                                     musicName: item.name,
                                     singer: item.singer
@@ -612,15 +607,15 @@ class Music extends React.Component {
                                 $('.music-pic').css('background-image', `url("${item.picUrl}")`);
                                 setTimeout(() => {
                                     vm.playMusic();
-                                    $('.searchlist-wrap').click();
-                                }, 0);
+                                    $('#close-search').click();                           
+                                }, 300);                        
                             }
                         }
                     }
                 });
                 vm.getMusicLyric(item);
             }
-            getDetail.then(getMusicUrl, function(){});            
+            getDetail.then(getMusicUrl, function(){});
         }
     }
     // 获取歌词
@@ -631,53 +626,52 @@ class Music extends React.Component {
             lyricScroll: 0
         });
         // 歌词获取
-            $.get(`https://api.imjad.cn/cloudmusic/?type=lyric&id=${item.id}`, (result) => {
-                if (result.code == 200) {
-                    if (result.lrc && result.lrc.hasOwnProperty('lyric')) {
-                        var lyrics = result.lrc.lyric;
-                        var lines = lyrics.split('\n');
-                        var lyricsParsed = [];
-                        // console.log(lines);
-                        lines.forEach(function(item, index) {
-                            //正则匹配计算歌词时间和歌词
-                            item.replace(/(\[.*])(.*)/g, function(match, $1, $2) {
-                                var lyricObj = {
-                                    lyricTime: 0,
-                                    lyric: ''
-                                };
-                                var lyricTime = 0;
-                                if ($1) {
-                                    lyricTime += ($1.substring(1,3)) * 60;
-                                    lyricTime += parseInt($1.substring(4,6));
-                                    lyricTime += parseFloat('0.' + $1.substring(7).replace(']', ''));
-                                }
-                                lyricObj.lyricTime = lyricTime;
-                                if ($2) {
-                                    lyricObj.lyric = $2;
-                                }
-                                lyricsParsed.push(lyricObj);
-
-                            });
-                        });
-                        var lyricEnd = {
-                            lyricTime: 99999,
-                            lyric: '--- END ---'
-                        };
-                        lyricsParsed.push(lyricEnd);
-                        vm.setState({
-                            lyrics: lyricsParsed
-                        });
-                    } else {
-                        // 纯音乐，没有歌词
-                        vm.setState({
-                            lyrics: [{
+        $.get(`https://api.imjad.cn/cloudmusic/?type=lyric&id=${item.id}`, (result) => {
+            if (result.code == 200) {
+                if (result.lrc && result.lrc.hasOwnProperty('lyric')) {
+                    var lyrics = result.lrc.lyric;
+                    var lines = lyrics.split('\n');
+                    var lyricsParsed = [];
+                    // console.log(lines);
+                    lines.forEach(function(item, index) {
+                        //正则匹配计算歌词时间和歌词
+                        item.replace(/(\[.*])(.*)/g, function(match, $1, $2) {
+                            var lyricObj = {
                                 lyricTime: 0,
-                                lyric: '还没有歌词哦~'
-                            }]
+                                lyric: ''
+                            };
+                            var lyricTime = 0;
+                            if ($1) {
+                                lyricTime += ($1.substring(1,3)) * 60;
+                                lyricTime += parseInt($1.substring(4,6));
+                                lyricTime += parseFloat('0.' + $1.substring(7).replace(']', ''));
+                            }
+                            lyricObj.lyricTime = lyricTime;
+                            if ($2) {
+                                lyricObj.lyric = $2;
+                            }
+                            lyricsParsed.push(lyricObj);
                         });
-                    }
+                    });
+                    var lyricEnd = {
+                        lyricTime: 99999,
+                        lyric: '--- END ---'
+                    };
+                    lyricsParsed.push(lyricEnd);
+                    vm.setState({
+                        lyrics: lyricsParsed
+                    });
+                } else {
+                    // 纯音乐，没有歌词
+                    vm.setState({
+                        lyrics: [{
+                            lyricTime: 0,
+                            lyric: '还没有歌词哦~'
+                        }]
+                    });
                 }
-            });
+            }
+        });
     }
     //控制歌词显示
     toggleMusicLyric() {

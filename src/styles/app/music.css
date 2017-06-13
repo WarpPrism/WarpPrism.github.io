@@ -27,9 +27,21 @@
 
     color: #000;
 }
-.music-app .music-top-bar header
+.music-app .music-top-bar .netease-icon
 {
-    /*background: #fee;*/
+    position: absolute;
+    top: 50%;
+    left: 110px;
+
+    display: block;
+
+    width: 25px;
+    height: 25px;
+
+    transform: translateY(-50%);
+
+    background: url('../../images/music/netease.png') no-repeat;
+    background-size: cover;
 }
 .music-app .music-top-bar .search-btn
 {
@@ -119,9 +131,9 @@
     overflow-x: hidden;
     overflow-y: hidden;
 
-    width: 300px;
+    width: 320px;
     height: 300px;
-    margin-left: -150px;
+    margin-left: -160px;
     padding: 5px;
 
     text-align: center;
@@ -134,7 +146,8 @@
 {
     font-size: 18px;
 
-    transition: all .5s linear;
+    -webkit-transition: font-size .5s linear;
+            transition: font-size .5s linear;
 
     color: #ff899d;
 }
@@ -414,6 +427,7 @@ canvas.dynamic-wave
 
     width: 85%;
     height: auto;
+    min-height: 500px;
     margin: 0 auto;
     padding: 10px;
 }
