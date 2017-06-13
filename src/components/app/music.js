@@ -362,6 +362,7 @@ class Music extends React.Component {
     playNext(id) {
         var vm = this;
         vm.state.lyricScroll = 0;
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
         lyricDOM.scrollTop = 0;
         vm.setState({
             lyricScroll: 0,
@@ -411,6 +412,7 @@ class Music extends React.Component {
     }
     playPre() {
         var vm = this;
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];        
         vm.state.lyricScroll = 0;
         lyricDOM.scrollTop = 0;
         vm.setState({
@@ -566,6 +568,7 @@ class Music extends React.Component {
     // 根据item.id播放音乐
     playMusicById(item) {
         var vm = this;
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];        
         vm.state.lyricScroll = 0;
         lyricDOM.scrollTop = 0;
         vm.setState({
@@ -635,6 +638,7 @@ class Music extends React.Component {
     // 获取歌词
     getMusicLyric(item) {
         var vm = this;
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];        
         vm.state.lyricScroll = 0;
         lyricDOM.scrollTop = 0;
         vm.setState({
