@@ -65,9 +65,11 @@ class Music extends React.Component {
                             }.bind(this))
                         }
                     </div>
-                    <canvas ref='wave' className='dynamic-wave'>
-                        Your Browser Doesn't Support <pre>canvas</pre> Element.
-                    </canvas>
+                    <div className='canvas-container'>
+                        <canvas ref='wave' className='dynamic-wave'>
+                            Your Browser Doesn't Support <pre>canvas</pre> Element.
+                        </canvas>
+                    </div>
                     <div className='music-info'>
                         <div className='music-name'>{this.state.musicName}</div>
                         <div className='singer'>{this.state.singer}</div>
@@ -86,7 +88,7 @@ class Music extends React.Component {
                         <div className='play-next' onClick={this.playNext.bind(this)}></div>
                     </div>
                 </div>
-                <audio id='audio' ref='audio'>
+                <audio id='audio' ref='audio' crossOrigin="anonymous">
                     Your browser does not support the <code>audio</code> element.
                 </audio>
                 <div className='playlist-wrap' onClick={this.hidePlayList.bind(this)}>
@@ -174,10 +176,13 @@ class Music extends React.Component {
         var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
         document.addEventListener(visibilityChangeEvent, function() {
             if (!document[hiddenProperty]) {
-                // console.log('active');
-                if (ua.os.name != 'Android' && vm.state.play==true) {
-                    vm.startTheWave();
+                if (ua.os.name != 'Android' && vm.state.play == true) {
+                    // vm.startTheWave();
+                    vm.startMusicVisualEffect();
                     vm.spinTheCover();
+                }
+                if (ua.os.name == 'Andriod' && vm.state.play == true) {
+                    vm.startMusicVisualEffect();
                 }
             } else {
                 // console.log('non-active');
@@ -195,6 +200,7 @@ class Music extends React.Component {
         // 播放本地资源的音乐
         else if (vm.state.playId == -1) {
             vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
+            // vm.refs.audio.src = 'others/music.mp3';
             vm.setState({
                 musicName: 'Cannon Flying In the Sky',
                 singer: '全智贤'
@@ -270,7 +276,11 @@ class Music extends React.Component {
         var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
         if (ua.os.name != 'Android') {
             vm.spinTheCover();
-            vm.startTheWave();
+            vm.startMusicVisualEffect();
+            // vm.startTheWave();
+        }
+        if (ua.os.name == 'Andriod') {
+            vm.startMusicVisualEffect();
         }
         vm.timer = setInterval(function() {
             var duration = vm.state.duration
@@ -350,6 +360,64 @@ class Music extends React.Component {
             drawSinCurve(ctx, a, w, o+10, color);
         }, 125);
     }
+    /**
+     * @desc {音乐可视化效果}
+     *
+     * @memberof Music
+     */
+    startMusicVisualEffect() {
+        let vm = this;
+        let canvas = vm.refs.wave;
+        const CW = 371, CH = 85;
+        canvas.width = CW;
+        canvas.height = CH;
+        let ctx = canvas.getContext('2d');
+        let line = ctx.createLinearGradient(0,0,0,CH);
+        line.addColorStop(0, 'red');
+        line.addColorStop(0.5, '#ff799d');        
+        line.addColorStop(1, '#d998ff');
+        ctx.fillStyle = line;
+        if (!vm.actx) {
+            vm.actx = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
+        }
+        let actx = vm.actx;
+        // let gainNode = actx[actx.createGain?'createGain':'createGainNode']();
+        // gainNode.connect(actx.destination);
+        let analyser = actx.createAnalyser();
+        var barNum = 128;
+        analyser.fftSize = 2 * barNum;
+        let audio = vm.refs.audio;
+        audio = vm.refs.audio;
+        // console.log(audio.src);
+        if (!vm.audioSrc || vm.audioSrc === null) {
+            vm.audioSrc = actx.createMediaElementSource(audio);
+        }
+        vm.audioSrc.connect(analyser);
+        analyser.connect(actx.destination);
+
+        function visualization() {
+            var arr = new Uint8Array(analyser.frequencyBinCount);
+
+            requestAnimationFrame = window.requestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.mozRequestAnimationFrame;
+            function v() {
+                analyser.getByteFrequencyData(arr);
+                drawBars(arr);
+                requestAnimationFrame(v);
+            }
+            requestAnimationFrame(v);
+        }
+        function drawBars(arr) {
+            ctx.clearRect(0, 0, CW, CH);
+            let w = CW / (barNum) + 5;
+            for (let i = 0; i <  barNum; i++) {
+                let h = arr[i] / (300) * CH;
+                ctx.fillRect(i*w, CH - h, w*0.77, h);
+            }
+        }
+        visualization();
+    }
     // 播放时间格式化
     formatTime(t) {
         t = parseInt(t);
@@ -412,7 +480,7 @@ class Music extends React.Component {
     }
     playPre() {
         var vm = this;
-        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];        
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
         vm.state.lyricScroll = 0;
         lyricDOM.scrollTop = 0;
         vm.setState({
@@ -568,7 +636,7 @@ class Music extends React.Component {
     // 根据item.id播放音乐
     playMusicById(item) {
         var vm = this;
-        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];        
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
         vm.state.lyricScroll = 0;
         lyricDOM.scrollTop = 0;
         vm.setState({
@@ -638,7 +706,7 @@ class Music extends React.Component {
     // 获取歌词
     getMusicLyric(item) {
         var vm = this;
-        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];        
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
         vm.state.lyricScroll = 0;
         lyricDOM.scrollTop = 0;
         vm.setState({
