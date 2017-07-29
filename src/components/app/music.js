@@ -181,7 +181,7 @@ class Music extends React.Component {
                     vm.startMusicVisualEffect();
                     vm.spinTheCover();
                 }
-                if (ua.os.name == 'Andriod' && vm.state.play == true) {
+                if (ua.os.name == 'Android' && vm.state.play == true) {
                     vm.startMusicVisualEffect();
                 }
             } else {
@@ -279,7 +279,7 @@ class Music extends React.Component {
             vm.startMusicVisualEffect();
             // vm.startTheWave();
         }
-        if (ua.os.name == 'Andriod') {
+        if (ua.os.name == 'Android') {
             vm.startMusicVisualEffect();
         }
         vm.timer = setInterval(function() {
