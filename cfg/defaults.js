@@ -62,6 +62,7 @@ function getDefaultModules() {
 module.exports = {
   srcPath: srcPath,
   publicPath: buildPublicPath,
+  // publicPath: devPublicPath,
   port: dfltPort,
   getDefaultModules: getDefaultModules
 };

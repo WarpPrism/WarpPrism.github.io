@@ -23,11 +23,11 @@ class Music extends React.Component {
             searchList: [],//搜索结果
             lyrics: [{lyric:'还没有歌词哦~'}],//歌词
             curLyricIndex: 0,//当前歌词位置
-            lyricScroll: 0//歌词滚动控制
+            lyricScroll: 0,//歌词滚动控制
+            coverDeg: 0
         };
-        this.timer = null;
+        this.musicTimer = null;
         this.coverTimer = null;
-        this.coverDeg = 0;
         this.waveTimer = null;
     }
     componentDidMount() {
@@ -55,7 +55,7 @@ class Music extends React.Component {
                     </div>
                 </div>
                 <div className='slide-part'>
-                    <div className='music-pic' onClick={this.toggleMusicLyric.bind(this)}></div>
+                    <div className='music-pic' onClick={this.toggleMusicLyric.bind(this)} ref='cover'></div>
                     <div className='music-lyric' onClick={this.toggleMusicLyric.bind(this)} ref='lyricDOM'>
                         {
                             this.state.lyrics.map(function(item, index) {
@@ -65,11 +65,9 @@ class Music extends React.Component {
                             }.bind(this))
                         }
                     </div>
-                    <div className='canvas-container'>
-                        <canvas ref='wave' className='dynamic-wave'>
-                            Your Browser Doesn't Support <pre>canvas</pre> Element.
-                        </canvas>
-                    </div>
+                    <canvas ref='wave' className='dynamic-wave'>
+                        Your Browser Doesn't Support <pre>canvas</pre> Element.
+                    </canvas>
                     <div className='music-info'>
                         <div className='music-name'>{this.state.musicName}</div>
                         <div className='singer'>{this.state.singer}</div>
@@ -84,13 +82,17 @@ class Music extends React.Component {
                     <div className='music-controls flex'>
                         <div className='lyric-ctrl' onClick={this.toggleMusicLyric.bind(this)}></div>
                         <div className='play-pre' onClick={this.playPre.bind(this)}></div>
-                        <div className='play-pause' onClick={this.switchPlayState.bind(this)}></div>
+                        <div className='play-pause play-btn' onClick={this.switchPlayState.bind(this)} style={{display: this.state.play?'none':'block'}}></div>
+                        <div className='play-pause pause-btn' onClick={this.switchPlayState.bind(this)} style={{display: this.state.play?'block':'none'}}></div>
                         <div className='play-next' onClick={this.playNext.bind(this)}></div>
                     </div>
                 </div>
-                <audio id='audio' ref='audio' crossOrigin="anonymous">
+                {/* ********************************************************************* */}
+                <audio id='audio' ref='audio' crossOrigin="annoymous">
+                    <source ref='audio-source' type='audio/mpeg'/>
                     Your browser does not support the <code>audio</code> element.
                 </audio>
+                {/* ********************************************************************* */}                
                 <div className='playlist-wrap' onClick={this.hidePlayList.bind(this)}>
                     <div ref='playlist' className='playlist'>
                         <div className='playlist-title'>
@@ -217,7 +219,6 @@ class Music extends React.Component {
     // 播放
     playMusic() {
         this.refs.audio.play();
-        $('.play-pause').css('background-image', 'url("../../images/music/pause.png")');
         this.playing();
         this.setState({
             play: true
@@ -226,14 +227,13 @@ class Music extends React.Component {
     // 暂停
     pauseMusic() {
         this.refs.audio.pause();
-        $('.play-pause').css('background-image', 'url("../../images/music/play.png")');
         this.setState({
             play: false
         });
-        clearInterval(this.timer);
+        clearInterval(this.musicTimer);
         clearInterval(this.coverTimer);
         clearInterval(this.waveTimer);
-        this.timer = this.coverTimer = this.waveTimer = null;
+        this.musicTimer = this.coverTimer = this.waveTimer = null;
     }
     // 获取播放列表
     getPlayList(id) {
@@ -282,13 +282,13 @@ class Music extends React.Component {
         if (ua.os.name == 'Android') {
             vm.startMusicVisualEffect();
         }
-        vm.timer = setInterval(function() {
+        vm.musicTimer = setInterval(function() {
             var duration = vm.state.duration
             var curTime = vm.refs.audio.currentTime;
             lyricDOM.scrollTop = vm.state.lyricScroll;
             var percent = (curTime / duration).toFixed(2);
             $('.bar2').css('right', (1-percent)*267 + 'px');
-            //歌词计算Start， 算法优化//
+            //歌词计算Start， 算法优化----------------------------------------//
             var minDeltaTime = 9999;
             var activeIndex = vm.state.curLyricIndex || 0;
             for (let i = activeIndex + 1; i < vm.state.lyrics.length; i++) {
@@ -300,11 +300,11 @@ class Music extends React.Component {
                 }
             }
             //滚动歌词，居中显示当前歌词
-            var activeLyricDOM = $('.active-lyric')[0];
-            if (activeLyricDOM) {
-                lyricDOM.scrollTop = (activeLyricDOM.offsetTop - 120)<=0?0:(activeLyricDOM.offsetTop - 120);
-            }
-            //歌词计算End//
+            // var activeLyricDOM = $('.active-lyric')[0];
+            // if (activeLyricDOM) {
+            //     lyricDOM.scrollTop = (activeLyricDOM.offsetTop - 120)<=0?0:(activeLyricDOM.offsetTop - 120);
+            // }
+            //歌词计算End--------------------------------------------------//
             vm.setState({
                 lyricScroll: lyricDOM.scrollTop,
                 curLyricIndex: activeIndex,
@@ -316,18 +316,22 @@ class Music extends React.Component {
                     lyricDOM.scrollTop = (activeLyricDOM.offsetTop - 120)<=0?0:(activeLyricDOM.offsetTop - 120);
                 }
             });
-        }, 500);
+        }, 300);
     }
-    // 封面旋转
+    // 音乐封面旋转
     spinTheCover() {
         // console.log('spin the cover');
         var vm = this;
+        let musicCover = $(vm.refs.cover) || $('.music-pic')[0];
         vm.coverTimer = setInterval(() => {
-            vm.coverDeg = (vm.coverDeg + 0.1) % 360;
-            $('.music-pic').css('transform', `rotate(${vm.coverDeg}deg)`)
+            vm.state.coverDeg = (vm.state.coverDeg + 0.1) % 360;
+            musicCover.css('transform', `rotate(${vm.state.coverDeg}deg)`);
+            // vm.setState({
+            //     coverDeg: vm.state.coverDeg
+            // })
         }, 20);
     }
-    // 音乐动感波浪
+    // 音乐动感波浪，正弦曲线可视化效果，没有进行音频分析
     startTheWave() {
         var vm = this;
         var canvas = vm.refs.wave;
@@ -361,22 +365,22 @@ class Music extends React.Component {
         }, 125);
     }
     /**
-     * @desc {音乐可视化效果}
+     * @desc {音乐可视化效果，进行了音频分析}
      *
      * @memberof Music
      */
     startMusicVisualEffect() {
         let vm = this;
         let canvas = vm.refs.wave;
-        const CW = 371, CH = 85;
+        const CW = 371, CH = 120;
         canvas.width = CW;
         canvas.height = CH;
         let ctx = canvas.getContext('2d');
-        let line = ctx.createLinearGradient(0,0,0,CH);
-        line.addColorStop(0, 'red');
-        line.addColorStop(0.5, '#ff799d');        
-        line.addColorStop(1, '#d998ff');
-        ctx.fillStyle = line;
+        let lineGradient = ctx.createLinearGradient(0,0,0,CH);
+        lineGradient.addColorStop(0, 'red');
+        lineGradient.addColorStop(0.5, '#ff799d');       
+        lineGradient.addColorStop(0.9, '#d998ff');
+        lineGradient.addColorStop(1, '#fff');
         if (!vm.actx) {
             vm.actx = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
         }
@@ -388,12 +392,13 @@ class Music extends React.Component {
         analyser.fftSize = 2 * barNum;
         let audio = vm.refs.audio;
         audio = vm.refs.audio;
-        // console.log(audio.src);
         if (!vm.audioSrc || vm.audioSrc === null) {
             vm.audioSrc = actx.createMediaElementSource(audio);
         }
         vm.audioSrc.connect(analyser);
         analyser.connect(actx.destination);
+        // 短线Y坐标位置
+        var dashYPositions = [];
 
         function visualization() {
             var arr = new Uint8Array(analyser.frequencyBinCount);
@@ -408,12 +413,26 @@ class Music extends React.Component {
             }
             requestAnimationFrame(v);
         }
+        // 绘制柱状音乐可视化效果
         function drawBars(arr) {
             ctx.clearRect(0, 0, CW, CH);
-            let w = CW / (barNum) + 5;
-            for (let i = 0; i <  barNum; i++) {
-                let h = arr[i] / (300) * CH;
-                ctx.fillRect(i*w, CH - h, w*0.77, h);
+            let w = CW / (barNum) + 3;
+            for (let i = 0; i < barNum; i++) {
+                let value = arr[i];
+                let h = value / (300) * CH;
+                if (dashYPositions.length < barNum) {
+                    dashYPositions.push(h);
+                }
+                ctx.fillStyle = 'purple';                
+                if (h < dashYPositions[i]) {
+                    ctx.fillRect(i*w, CH-(--(dashYPositions[i]))-7, w*0.7, 2);
+                } else {
+                    ctx.fillRect(i*w, CH-h-7, w*0.7, 2); 
+                    dashYPositions[i] = h;
+                }
+                ctx.fillStyle = lineGradient;
+                ctx.fillRect(i*w, CH-h, w*0.7, h);
+                
             }
         }
         visualization();
@@ -429,9 +448,8 @@ class Music extends React.Component {
     }
     playNext(id) {
         var vm = this;
-        vm.state.lyricScroll = 0;
         var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
-        lyricDOM.scrollTop = 0;
+        lyricDOM.scrollTop = 0;       
         vm.setState({
             lyricScroll: 0,
             curLyricIndex: 0
@@ -481,8 +499,7 @@ class Music extends React.Component {
     playPre() {
         var vm = this;
         var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
-        vm.state.lyricScroll = 0;
-        lyricDOM.scrollTop = 0;
+        lyricDOM.scrollTop = 0;        
         vm.setState({
             lyricScroll: 0,
             curLyricIndex: 0
@@ -530,6 +547,7 @@ class Music extends React.Component {
         $('.playlist')[0].scrollTop = 0;
         $(vm.refs.playlist).addClass('animated bounceInUp');
     }
+    // 隐藏播放列表
     hidePlayList(e) {
         var vm = this;
         if (e != undefined) {
@@ -545,12 +563,13 @@ class Music extends React.Component {
             $(vm.refs.playlist).removeClass('animated bounceOutDown');
         }, 700);
     }
-
+    // 弹窗
     showModal(e) {
         this.setState({
             modal: 'show'
         });
     }
+    // 隐藏弹窗
     hideModal(e) {
         this.setState({
             modal: 'hide'
@@ -637,7 +656,6 @@ class Music extends React.Component {
     playMusicById(item) {
         var vm = this;
         var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
-        vm.state.lyricScroll = 0;
         lyricDOM.scrollTop = 0;
         vm.setState({
             lyricScroll: 0,
@@ -703,7 +721,7 @@ class Music extends React.Component {
             getDetail.then(getMusicUrl, function(){});
         }
     }
-    // 获取歌词
+    // 获取歌词，填充歌词信息
     getMusicLyric(item) {
         var vm = this;
         var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];

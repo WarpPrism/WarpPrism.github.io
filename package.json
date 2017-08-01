@@ -1,4 +1,5 @@
 {
+  "name": "react-iphone",
   "private": true,
   "version": "0.0.1",
   "description": "React iPhone",
@@ -11,7 +12,7 @@
     "start": "node server.js --env=dev --host 0.0.0.0"
   },
   "repository": "",
-  "keywords": [],
+  "keywords": ["blog","react"],
   "author": "zhoujihao",
   "devDependencies": {
     "autoprefixer": "^7.1.1",

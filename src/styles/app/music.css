@@ -112,6 +112,7 @@
     width: 280px;
     height: 280px;
     margin-left: -140px;
+    z-index: 100;
 
     border-radius: 50%;
     background: url('../../images/music/msg.png') no-repeat;
@@ -126,6 +127,8 @@
     position: absolute;
     bottom: 260px;
     left: 50%;
+    z-index: 100;
+    
 
     display: none;
     overflow-x: hidden;
@@ -181,6 +184,10 @@
     padding: 5px;
 
     text-align: center;
+    /* text-overflow: ellipsis; */
+    white-space: nowrap;
+    height: 35px;
+    overflow: scroll;
 }
 .music-app .music-info .singer
 {
@@ -267,6 +274,11 @@
     background: url('../../images/music/play.png') no-repeat;
     background-size: 100% 100%;
 }
+.music-app .music-controls .pause-btn {
+    background: url('../../images/music/pause.png') no-repeat; 
+    display: none;
+    background-size: cover;
+}
 .music-app .music-controls .play-next
 {
     width: 40px;
@@ -292,9 +304,10 @@ canvas.dynamic-wave
     display: block;
 
     width: 100%;
-    height: 80px;
+    height: 120px;
     margin: 0;
     padding: 0 50px;
+    z-index: 0;
     /* box-shadow: 0 1px 100px 10px #d998ff; */
 
     /*border: solid 1px #000;*/
