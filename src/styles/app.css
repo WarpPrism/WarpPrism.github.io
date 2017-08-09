@@ -35,7 +35,7 @@ body
     background-size: cover;
 
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: inherit | grayscale
+    -moz-osx-font-smoothing: grayscale;
 }
 a
 {
