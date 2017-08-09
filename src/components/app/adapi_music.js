@@ -2,7 +2,6 @@
 import React from 'react';
 import StateBar from 'components/iphone/stateBar.js';
 import MyModal from 'components/iphone/modal.js';
-import URL from '../../service/url.js';
 import {Input, Menu} from 'antd';
 const Search = Input.Search;
 
@@ -27,8 +26,6 @@ class Music extends React.Component {
             lyricScroll: 0,//歌词滚动控制
             coverDeg: 0
         };
-        this.effect = true;
-        this.musicSrc = '';
         this.musicTimer = null;
         this.coverTimer = null;
         this.waveTimer = null;
@@ -91,12 +88,10 @@ class Music extends React.Component {
                     </div>
                 </div>
                 {/* ********************************************************************* */}
-                {/* <audio id='audio' ref="audio" crossOrigin="annoymous">
-                    Your browser does not support the <code>audio</code> element.
-                </audio>  */}
                 <audio id='audio' ref="audio">
+                    <source ref='audio-source' type='audio/mpeg'/>
                     Your browser does not support the <code>audio</code> element.
-                </audio> 
+                </audio>
                 {/* ********************************************************************* */}                
                 <div className='playlist-wrap' onClick={this.hidePlayList.bind(this)}>
                     <div ref='playlist' className='playlist'>
@@ -185,7 +180,11 @@ class Music extends React.Component {
             if (!document[hiddenProperty]) {
                 if (ua.os.name != 'Android' && vm.state.play == true) {
                     // vm.startTheWave();
+                    vm.startMusicVisualEffect();
                     vm.spinTheCover();
+                }
+                if (ua.os.name == 'Android' && vm.state.play == true) {
+                    vm.startMusicVisualEffect();
                 }
             } else {
                 // console.log('non-active');
@@ -202,8 +201,7 @@ class Music extends React.Component {
         }
         // 播放本地资源的音乐
         else if (vm.state.playId == -1) {
-            // vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
-            vm.refs.audio.src = 'http://m10.music.126.net/20170809115541/9ab590fa27c43205876fc30d41fc20b2/ymusic/5920/7f73/4c5c/4b826a4fca466f98775ac92d17321f3a.mp3';
+            vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
             // vm.refs.audio.src = 'others/music.mp3';
             vm.setState({
                 musicName: 'Cannon Flying In the Sky',
@@ -245,7 +243,7 @@ class Music extends React.Component {
         if (id) {
             listId = id;
         }
-        $.get(URL.music163.getPlayListById + '?id=' + listId).then((result) => {
+        $.get(`https://api.imjad.cn/cloudmusic/?type=playlist&id=${listId}`).then((result) => {
             if (result.code == 200) {
                 var playList = [];
                 for (var i = 0; i < result.playlist.tracks.length; i++) {
@@ -278,11 +276,11 @@ class Music extends React.Component {
         var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
         if (ua.os.name != 'Android') {
             vm.spinTheCover();
-            // vm.effect && vm.startMusicVisualEffect();
+            vm.startMusicVisualEffect();
             // vm.startTheWave();
         }
-        if (ua.browser.name == '[Mobile] Safari') {
-            vm.effect && vm.startMusicVisualEffect();
+        if (ua.os.name == 'Android') {
+            vm.startMusicVisualEffect();
         }
         vm.musicTimer = setInterval(function() {
             var duration = vm.state.duration
@@ -333,6 +331,121 @@ class Music extends React.Component {
             // })
         }, 20);
     }
+    // 音乐动感波浪，正弦曲线可视化效果，没有进行音频分析
+    startTheWave() {
+        var vm = this;
+        var canvas = vm.refs.wave;
+        var ctx = canvas.getContext('2d');
+        canvas.width = 371;
+        canvas.height = 80;
+
+        function drawSinCurve(ctx, A=30, w=0.1, o=0, color) {
+            // 绘制正弦曲线
+            ctx.beginPath();
+            if (color) {
+                ctx.strokeStyle = color;
+            }
+            for (var x = 5; x < 365; x+=3) {
+                ctx.moveTo(x-1, A*Math.sin(w*(x-1) + o)+40);
+                ctx.lineTo(x, A*Math.sin(w*x + o)+40);
+                ctx.stroke();
+            }
+            ctx.closePath();
+        }
+        var a=30, w=0.1, o=0, color;
+        vm.waveTimer = setInterval(() => {
+            ctx.clearRect(0, 0, 371, 80);
+            o -= 0.2;
+            a = parseInt(30 * Math.random());
+            color = '#ff899d';
+            drawSinCurve(ctx, a, w, o, color);
+            a = parseInt(30 * Math.random());
+            color = '#d998ff';
+            drawSinCurve(ctx, a, w, o+10, color);
+        }, 125);
+    }
+    /**
+     * @desc {音乐可视化效果，进行了音频分析}
+     *
+     * @memberof Music
+     */
+    startMusicVisualEffect() {
+        let vm = this;
+        let canvas = vm.refs.wave;
+        const CW = 371, CH = 120;
+        canvas.width = CW;
+        canvas.height = CH;
+        let ctx = canvas.getContext('2d');
+        let lineGradient = ctx.createLinearGradient(0,0,0,CH);
+        lineGradient.addColorStop(0, 'red');
+        lineGradient.addColorStop(0.5, '#ff799d');       
+        lineGradient.addColorStop(0.9, '#d998ff');
+        lineGradient.addColorStop(1, '#fff');
+        if (!vm.actx) {
+            vm.actx = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
+        }
+        let actx = vm.actx;
+        // let gainNode = actx[actx.createGain?'createGain':'createGainNode']();
+        // gainNode.connect(actx.destination);
+        let analyser = actx.createAnalyser();
+        var barNum = 128;
+        analyser.fftSize = 2 * barNum;
+        let audio = vm.refs.audio;
+        audio = vm.refs.audio;
+        if (!vm.audioSrc || vm.audioSrc === null) {
+            vm.audioSrc = actx.createMediaElementSource(audio);
+        }
+        vm.audioSrc.connect(analyser);
+        analyser.connect(actx.destination);
+        // 短线Y坐标位置
+        var dashYPositions = [];
+
+        function visualization() {
+            var arr = new Uint8Array(analyser.frequencyBinCount);
+
+            requestAnimationFrame = window.requestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.mozRequestAnimationFrame;
+            function v() {
+                analyser.getByteFrequencyData(arr);
+                drawBars(arr);
+                requestAnimationFrame(v);
+            }
+            requestAnimationFrame(v);
+        }
+        // 绘制柱状音乐可视化效果
+        function drawBars(arr) {
+            ctx.clearRect(0, 0, CW, CH);
+            let w = CW / (barNum) + 3;
+            for (let i = 0; i < barNum; i++) {
+                let value = arr[i];
+                let h = value / (300) * CH;
+                if (dashYPositions.length < barNum) {
+                    dashYPositions.push(h);
+                }
+                ctx.fillStyle = 'purple';                
+                if (h < dashYPositions[i]) {
+                    ctx.fillRect(i*w, CH-(--(dashYPositions[i]))-7, w*0.7, 2);
+                } else {
+                    ctx.fillRect(i*w, CH-h-7, w*0.7, 2); 
+                    dashYPositions[i] = h;
+                }
+                ctx.fillStyle = lineGradient;
+                ctx.fillRect(i*w, CH-h, w*0.7, h);
+                
+            }
+        }
+        visualization();
+    }
+    // 播放时间格式化
+    formatTime(t) {
+        t = parseInt(t);
+        var m = parseInt(t / 60);
+        m = (m < 10)?('0' + m):m;
+        var s = t % 60;
+        s = (s < 10)?('0' + s):s;
+        return '' + m + ':' + s;
+    }
     playNext(id) {
         var vm = this;
         var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
@@ -353,7 +466,7 @@ class Music extends React.Component {
         }
         var nextMusic = vm.state.playList[nextId];
         if (nextMusic) {
-            $.get(URL.music163.getMusicById + '?id=' + nextMusic.id, (result) => {
+            $.get(`https://api.imjad.cn/cloudmusic/?type=song&id=${nextMusic.id}`, (result) => {
                 if (result.code == 200) {
                     if (result.data && result.data.length > 0) {
                         // 切换音乐
@@ -366,7 +479,6 @@ class Music extends React.Component {
                             vm.getMusicLyric(nextMusic);
                             vm.pauseMusic();
                             vm.refs.audio.src = musicUrl;
-                            vm.musicSrc = musicUrl;
                             vm.refs.audio.load();
                             vm.setState({
                                 musicName: nextMusic.name,
@@ -398,7 +510,7 @@ class Music extends React.Component {
         }
         var nextMusic = vm.state.playList[nextId];
         if (nextMusic) {
-            $.get(URL.music163.getMusicById + '?id=' + nextMusic.id, (result) => {
+            $.get(`https://api.imjad.cn/cloudmusic/?type=song&id=${nextMusic.id}`, (result) => {
                 if (result.code == 200) {
                     if (result.data && result.data.length > 0) {
                         // 切换音乐
@@ -410,7 +522,6 @@ class Music extends React.Component {
                             vm.getMusicLyric(nextMusic);
                             vm.pauseMusic();
                             vm.refs.audio.src = musicUrl;
-                            vm.musicSrc = musicUrl;
                             vm.refs.audio.load();
                             vm.setState({
                                 musicName: nextMusic.name,
@@ -427,178 +538,6 @@ class Music extends React.Component {
                 }
             });
         }
-    }
-    
-    // 根据input输入值搜索结果
-    startSearch(value) {
-        var vm = this;
-        if (value == '') {
-            vm.setState({
-                searchList: []
-            })
-        }
-        if (value != '') {
-            $.get(URL.music163.searchSongs + '&keywords=' + value, function(result) {
-                if (result.code == 200) {
-                    if (result.result.songCount == 0) {
-                        vm.setState({
-                            searchList: []
-                        });
-                        return;
-                    }
-                    var songs = result.result.songs;
-                    var sr = [];
-                    for (let i = 0; i < songs.length; i++) {
-                        var item = songs[i];
-                        if (item.fee) {
-                            // 付费音乐
-                            // continue;
-                        }
-                        var song = {};
-                        song.name = item.name;
-                        song.picUrl = item.album.picUrl;
-                        if (item.artists.length > 0) {
-                            song.singer = item.artists[0].name;
-                        } else {
-                            song.singer = '佚名';
-                        }
-                        song.id = item.id;
-                        sr.push(song);
-                        vm.setState({
-                            searchList: sr
-                        })
-                    }
-                }
-            })
-        }
-    }
-    // 根据item.id播放音乐
-    playMusicById(item) {
-        var vm = this;
-        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
-        lyricDOM.scrollTop = 0;
-        vm.setState({
-            lyricScroll: 0,
-            curLyricIndex: 0
-        });
-        if (item && item.id) {
-            console.log('songId', item.id);
-            var getDetail = new Promise((resolve, reject) => {
-                $.get(URL.music163.getMusciDetail + '?ids='+ item.id, (result) => {
-                    if (result.code == 200) {
-                        if (result.songs.length > 0) {
-                            var song = result.songs[0];
-                            item.name = song.name;
-                            item.picUrl = song.al.picUrl;
-                            item.singer = '';
-                            song.ar.forEach((artist, index) => {
-                                artist.name = artist.name?artist.name:'';
-                                item.singer += artist.name + ' ';
-                            });
-                            resolve();
-                        } else {
-                            vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
-                            vm.setState({
-                                musicName: 'Cannon Flying In the Sky',
-                                singer: '全智贤'
-                            });
-                            reject();
-                        }
-                    }
-                })
-            });
-            function getMusicUrl() {
-                $.get(URL.music163.getMusicById + '?id='+ item.id, (result) => {
-                    if (result.code == 200) {
-                        if (result.data && result.data.length > 0) {
-                            // 切换音乐
-                            var musicUrl = result.data[0].url;
-                            if (musicUrl == null) {
-                                // 付费音乐
-                                vm.showModal();
-                                vm.playNext();
-                                return;
-                            } else {
-                                vm.pauseMusic();
-                                vm.refs.audio.src = musicUrl;
-                                vm.musicSrc = musicUrl;
-                                // vm.refs.audio.load();
-                                vm.setState({
-                                    musicName: item.name,
-                                    singer: item.singer
-                                });
-                                // 切换歌曲封面
-                                $('.music-pic').css('background-image', `url("${item.picUrl}")`);
-                                setTimeout(() => {
-                                    vm.playMusic();
-                                    $('#close-search').click();
-                                }, 300);
-                            }
-                        }
-                    }
-                });
-                vm.getMusicLyric(item);
-            }
-            getDetail.then(getMusicUrl, function(){});
-        }
-    }
-    // 获取歌词，填充歌词信息
-    getMusicLyric(item) {
-        var vm = this;
-        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
-        vm.state.lyricScroll = 0;
-        lyricDOM.scrollTop = 0;
-        vm.setState({
-            lyricScroll: 0,
-            curLyricIndex: 0
-        });
-        // 歌词获取
-        $.get(URL.music163.getLyric + '?id=' + item.id, (result) => {
-            if (result.code == 200) {
-                if (result.lrc && result.lrc.hasOwnProperty('lyric')) {
-                    var lyrics = result.lrc.lyric;
-                    var lines = lyrics.split('\n');
-                    var lyricsParsed = [];
-                    // console.log(lines);
-                    lines.forEach(function(item, index) {
-                        //正则匹配计算歌词时间和歌词
-                        item.replace(/(\[.*])(.*)/g, function(match, $1, $2) {
-                            var lyricObj = {
-                                lyricTime: 0,
-                                lyric: ''
-                            };
-                            var lyricTime = 0;
-                            if ($1) {
-                                lyricTime += ($1.substring(1,3)) * 60;
-                                lyricTime += parseInt($1.substring(4,6));
-                                lyricTime += parseFloat('0.' + $1.substring(7).replace(']', ''));
-                            }
-                            lyricObj.lyricTime = lyricTime;
-                            if ($2) {
-                                lyricObj.lyric = $2;
-                            }
-                            lyricsParsed.push(lyricObj);
-                        });
-                    });
-                    var lyricEnd = {
-                        lyricTime: 99999,
-                        lyric: '--- END ---'
-                    };
-                    lyricsParsed.push(lyricEnd);
-                    vm.setState({
-                        lyrics: lyricsParsed
-                    });
-                } else {
-                    // 纯音乐，没有歌词
-                    vm.setState({
-                        lyrics: [{
-                            lyricTime: 0,
-                            lyric: '还没有歌词哦~'
-                        }]
-                    });
-                }
-            }
-        });
     }
     // 弹出播放列表
     showPlayList() {
@@ -670,6 +609,176 @@ class Music extends React.Component {
             }
         }
     }
+    // 根据input输入值搜索结果
+    startSearch(value) {
+        var vm = this;
+        if (value == '') {
+            vm.setState({
+                searchList: []
+            })
+        }
+        if (value != '') {
+            $.get('https://api.imjad.cn/cloudmusic/?type=search&s=' + value, function(result) {
+                if (result.code == 200) {
+                    if (result.result.songCount == 0) {
+                        vm.setState({
+                            searchList: []
+                        });
+                        return;
+                    }
+                    var songs = result.result.songs;
+                    var sr = [];
+                    for (let i = 0; i < songs.length; i++) {
+                        var item = songs[i];
+                        if (item.fee) {
+                            // 付费音乐
+                            // continue;
+                        }
+                        var song = {};
+                        song.name = item.name;
+                        song.picUrl = item.al.picUrl
+                        if (item.ar.length > 0) {
+                            song.singer = item.ar[0].name;
+                        } else {
+                            song.singer = '佚名';
+                        }
+                        song.id = item.id;
+                        sr.push(song);
+                        vm.setState({
+                            searchList: sr
+                        })
+                    }
+                }
+            })
+        }
+    }
+    // 根据item.id播放音乐
+    playMusicById(item) {
+        var vm = this;
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
+        lyricDOM.scrollTop = 0;
+        vm.setState({
+            lyricScroll: 0,
+            curLyricIndex: 0
+        });
+        if (item && item.id) {
+            console.log('songId', item.id);
+            var getDetail = new Promise((resolve, reject) => {
+                $.get(`https://api.imjad.cn/cloudmusic/?type=detail&id=${item.id}`, (result) => {
+                    if (result.code == 200) {
+                        if (result.songs.length > 0) {
+                            var song = result.songs[0];
+                            item.name = song.name;
+                            item.picUrl = song.al.picUrl;
+                            item.singer = '';
+                            song.ar.forEach((artist, index) => {
+                                artist.name = artist.name?artist.name:'';
+                                item.singer += artist.name + ' ';
+                            });
+                            resolve();
+                        } else {
+                            vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
+                            vm.setState({
+                                musicName: 'Cannon Flying In the Sky',
+                                singer: '全智贤'
+                            });
+                            reject();
+                        }
+                    }
+                })
+            });
+            function getMusicUrl() {
+                $.get(`https://api.imjad.cn/cloudmusic/?type=song&id=${item.id}`, (result) => {
+                    if (result.code == 200) {
+                        if (result.data && result.data.length > 0) {
+                            // 切换音乐
+                            var musicUrl = result.data[0].url;
+                            if (musicUrl == null) {
+                                // 付费音乐
+                                vm.showModal();
+                                vm.playNext();
+                                return;
+                            } else {
+                                vm.pauseMusic();
+                                vm.refs.audio.src = musicUrl;
+                                // vm.refs.audio.load();
+                                vm.setState({
+                                    musicName: item.name,
+                                    singer: item.singer
+                                });
+                                // 切换歌曲封面
+                                $('.music-pic').css('background-image', `url("${item.picUrl}")`);
+                                setTimeout(() => {
+                                    vm.playMusic();
+                                    $('#close-search').click();
+                                }, 300);
+                            }
+                        }
+                    }
+                });
+                vm.getMusicLyric(item);
+            }
+            getDetail.then(getMusicUrl, function(){});
+        }
+    }
+    // 获取歌词，填充歌词信息
+    getMusicLyric(item) {
+        var vm = this;
+        var lyricDOM = vm.refs.lyricDOM || $('.music-lyric')[0];
+        vm.state.lyricScroll = 0;
+        lyricDOM.scrollTop = 0;
+        vm.setState({
+            lyricScroll: 0,
+            curLyricIndex: 0
+        });
+        // 歌词获取
+        $.get(`https://api.imjad.cn/cloudmusic/?type=lyric&id=${item.id}`, (result) => {
+            if (result.code == 200) {
+                if (result.lrc && result.lrc.hasOwnProperty('lyric')) {
+                    var lyrics = result.lrc.lyric;
+                    var lines = lyrics.split('\n');
+                    var lyricsParsed = [];
+                    // console.log(lines);
+                    lines.forEach(function(item, index) {
+                        //正则匹配计算歌词时间和歌词
+                        item.replace(/(\[.*])(.*)/g, function(match, $1, $2) {
+                            var lyricObj = {
+                                lyricTime: 0,
+                                lyric: ''
+                            };
+                            var lyricTime = 0;
+                            if ($1) {
+                                lyricTime += ($1.substring(1,3)) * 60;
+                                lyricTime += parseInt($1.substring(4,6));
+                                lyricTime += parseFloat('0.' + $1.substring(7).replace(']', ''));
+                            }
+                            lyricObj.lyricTime = lyricTime;
+                            if ($2) {
+                                lyricObj.lyric = $2;
+                            }
+                            lyricsParsed.push(lyricObj);
+                        });
+                    });
+                    var lyricEnd = {
+                        lyricTime: 99999,
+                        lyric: '--- END ---'
+                    };
+                    lyricsParsed.push(lyricEnd);
+                    vm.setState({
+                        lyrics: lyricsParsed
+                    });
+                } else {
+                    // 纯音乐，没有歌词
+                    vm.setState({
+                        lyrics: [{
+                            lyricTime: 0,
+                            lyric: '还没有歌词哦~'
+                        }]
+                    });
+                }
+            }
+        });
+    }
     //控制歌词显示
     toggleMusicLyric() {
         var vm = this;
@@ -689,125 +798,6 @@ class Music extends React.Component {
             cover.show();
             lyric.hide();
         }
-    }
-    // 音乐动感波浪，正弦曲线可视化效果，没有进行音频分析
-    startTheWave() {
-        var vm = this;
-        var canvas = vm.refs.wave;
-        var ctx = canvas.getContext('2d');
-        const CW = 371;
-        const CH = 80;
-        canvas.width = CW;
-        canvas.height = CH;
-
-        function drawSinCurve(ctx, A=30, w=0.1, o=0, color) {
-            // 绘制正弦曲线
-            ctx.beginPath();
-            if (color) {
-                ctx.strokeStyle = color;
-            }
-            for (var x = 5; x < 365; x+=2) {
-                ctx.moveTo(x-1, A*Math.sin(w*(x-1) + o)+40);
-                ctx.lineTo(x, A*Math.sin(w*x + o)+40);
-                ctx.stroke();
-            }
-            ctx.closePath();
-        }
-        var a=30, w=0.1, o=0, color;
-        vm.waveTimer = setInterval(() => {
-            ctx.clearRect(0, 0, CW, CH);
-            o -= Math.random();
-            a = parseInt(30 * Math.random());
-            color = '#ff899d';
-            drawSinCurve(ctx, a, w, o, color);
-            a = parseInt(30 * Math.random());
-            color = '#d998ff';
-            drawSinCurve(ctx, a, w, o+10, color);
-        }, 125);
-    }
-    /**
-     * @desc {音乐可视化效果，进行了音频分析}
-     *
-     * @memberof Music
-     */
-    startMusicVisualEffect() {
-        let vm = this;
-        let canvas = vm.refs.wave;
-        const CW = 371, CH = 120;
-        canvas.className = 'dynamic-bar';
-        canvas.width = CW;
-        canvas.height = CH;
-        let ctx = canvas.getContext('2d');
-        let lineGradient = ctx.createLinearGradient(0,0,0,CH);
-        lineGradient.addColorStop(0, 'red');
-        lineGradient.addColorStop(0.5, '#ff799d');       
-        lineGradient.addColorStop(0.9, '#d998ff');
-        lineGradient.addColorStop(1, '#fff');
-        if (!vm.actx) {
-            vm.actx = new (window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
-        }
-        let actx = vm.actx;
-        // let gainNode = actx[actx.createGain?'createGain':'createGainNode']();
-        // gainNode.connect(actx.destination);
-        let analyser = actx.createAnalyser();
-        var barNum = 128;
-        analyser.fftSize = 2 * barNum;
-        var audio = vm.refs.audio;
-        if (!vm.audioSrc || vm.audioSrc === null) {
-            vm.audioSrc = actx.createMediaElementSource(audio);
-        }
-        vm.audioSrc.connect(analyser);
-        analyser.connect(actx.destination);
-
-        // audio.src = vm.musicSrc;
-        // audio.crossOrigin = 'anonymous';
-        // 短线Y坐标位置
-        var dashYPositions = [];
-
-        function visualization() {
-            var arr = new Uint8Array(analyser.frequencyBinCount);
-            requestAnimationFrame = window.requestAnimationFrame ||
-                                        window.webkitRequestAnimationFrame ||
-                                        window.mozRequestAnimationFrame;
-            function v() {
-                analyser.getByteFrequencyData(arr);
-                drawBars(arr);
-                requestAnimationFrame(v);
-            }
-            requestAnimationFrame(v);
-        }
-        // 绘制柱状音乐可视化效果
-        function drawBars(arr) {
-            ctx.clearRect(0, 0, CW, CH);
-            let w = CW / (barNum) + 3;
-            for (let i = 0; i < barNum; i++) {
-                let value = arr[i];
-                let h = value / (300) * CH;
-                if (dashYPositions.length < barNum) {
-                    dashYPositions.push(h);
-                }
-                ctx.fillStyle = 'purple';                
-                if (h < dashYPositions[i]) {
-                    ctx.fillRect(i*w, CH-(--(dashYPositions[i]))-7, w*0.7, 2);
-                } else {
-                    ctx.fillRect(i*w, CH-h-7, w*0.7, 2); 
-                    dashYPositions[i] = h;
-                }
-                ctx.fillStyle = lineGradient;
-                ctx.fillRect(i*w, CH-h, w*0.7, h);
-                
-            }
-        }
-        visualization();
-    }
-    // 播放时间格式化
-    formatTime(t) {
-        t = parseInt(t);
-        var m = parseInt(t / 60);
-        m = (m < 10)?('0' + m):m;
-        var s = t % 60;
-        s = (s < 10)?('0' + s):s;
-        return '' + m + ':' + s;
     }
 }
 

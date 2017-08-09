@@ -14,6 +14,16 @@
     background: #f8f8f8;
     box-shadow: inset 0 0 3px 0 rgba(0,0,0,.2), 0 0 0 1px #999, 0 0 30px 0 rgba(0,0,0,.7);
 }
+@media screen and (min-width: 1360px) and (max-width:1440px) {
+    .iphone {
+        transform: scale(.75);
+    }
+}
+@media screen and (min-width: 1441px) and (max-width:1920px) {
+    .iphone {
+        transform: scale(.8);
+    }
+}
 .iphone-top
 {
     position: relative;

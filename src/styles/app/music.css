@@ -296,7 +296,7 @@
     width: 100%;
     height: 80px;
 } */
-canvas.dynamic-wave
+canvas.dynamic-bar
 {
     position: absolute;
     bottom: 180px; 
@@ -308,9 +308,19 @@ canvas.dynamic-wave
     margin: 0;
     padding: 0 50px;
     z-index: 0;
-    /* box-shadow: 0 1px 100px 10px #d998ff; */
+}
+canvas.dynamic-wave
+{
+    position: absolute;
+    bottom: 180px; 
 
-    /*border: solid 1px #000;*/
+    display: block;
+
+    width: 100%;
+    height: 80px;
+    margin: 0;
+    z-index: 0;
+    display: none;
 }
 
 .music-app #audio
@@ -321,7 +331,7 @@ canvas.dynamic-wave
 .music-app .playlist-wrap
 {
     position: absolute;
-    z-index: 1000;
+    z-index: 300;
     top: 0;
     left: 0;
 
@@ -338,6 +348,7 @@ canvas.dynamic-wave
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 400;
 
     display: none;
     overflow: auto;
