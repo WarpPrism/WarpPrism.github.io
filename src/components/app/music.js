@@ -280,7 +280,7 @@ class Music extends React.Component {
             // vm.effect && vm.startMusicVisualEffect();
             // vm.startTheWave();
         }
-        if (ua.browser.name == '[Mobile] Safari') {
+        if (ua.browser.name.indexOf('Safari') > -1) {
             vm.effect && vm.startMusicVisualEffect();
         }
         vm.musicTimer = setInterval(function() {
@@ -318,19 +318,6 @@ class Music extends React.Component {
                 }
             });
         }, 300);
-    }
-    // 音乐封面旋转
-    spinTheCover() {
-        // console.log('spin the cover');
-        var vm = this;
-        let musicCover = $(vm.refs.cover) || $('.music-pic')[0];
-        vm.coverTimer = setInterval(() => {
-            vm.state.coverDeg = (vm.state.coverDeg + 0.1) % 360;
-            musicCover.css('transform', `rotate(${vm.state.coverDeg}deg)`);
-            // vm.setState({
-            //     coverDeg: vm.state.coverDeg
-            // })
-        }, 20);
     }
     playNext(id) {
         var vm = this;
@@ -688,6 +675,19 @@ class Music extends React.Component {
             cover.show();
             lyric.hide();
         }
+    }
+    // 音乐封面旋转
+    spinTheCover() {
+        // console.log('spin the cover');
+        var vm = this;
+        let musicCover = $(vm.refs.cover) || $('.music-pic')[0];
+        vm.coverTimer = setInterval(() => {
+            vm.state.coverDeg = (vm.state.coverDeg + 0.1) % 360;
+            musicCover.css('transform', `rotate(${vm.state.coverDeg}deg)`);
+            // vm.setState({
+            //     coverDeg: vm.state.coverDeg
+            // })
+        }, 20);
     }
     // 音乐动感波浪，正弦曲线可视化效果，没有进行音频分析
     startTheWave() {
