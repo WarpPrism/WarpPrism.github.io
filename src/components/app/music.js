@@ -202,8 +202,7 @@ class Music extends React.Component {
         }
         // 播放本地资源的音乐
         else if (vm.state.playId == -1) {
-            // vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
-            vm.refs.audio.src = 'http://m10.music.126.net/20170809115541/9ab590fa27c43205876fc30d41fc20b2/ymusic/5920/7f73/4c5c/4b826a4fca466f98775ac92d17321f3a.mp3';
+            vm.refs.audio.src = 'https://github.com/WarpPrism/WarpPrism.github.io/blob/master/src/others/music.mp3?raw=true';
             // vm.refs.audio.src = 'others/music.mp3';
             vm.setState({
                 musicName: 'Cannon Flying In the Sky',
