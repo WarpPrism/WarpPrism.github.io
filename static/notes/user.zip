@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta content="IE=EmulateIE8" http-equiv="X-UA-Compatible" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>创新娱乐彩</title>
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link type="text/css" rel="stylesheet" href="/skin/main/bl_stand.css" />
+<script type="text/javascript" src="/skin/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/skin/main/onload.js?v=ky1.0"></script>
+<script type="text/javascript" src="/skin/main/reglogin.js?v1.0.7"></script>        <link type="text/css" rel="stylesheet" href="/skin/main/login2.css" />
+    </head>
+    <body class="login_body">
+        <div class="login_frame">
+        	<!--添加最爱 -->
+        	<div class="add_icon">
+            <!--<span class="add_text" prop="login_addFav">添加收藏</span>
+            <span class="add_star_on" style="display:none;">您已收藏</span>-->
+            <span class="add_star"></span>
+            <span class="add_star_on" style="display:none;"></span>
+            </div>
+            
+            <div class="login_content">
+                <div id="page0" style="display:">
+                    <div class="login_logo"></div>
+                    <h1><span prop="login_logo">创新娱乐彩</span></h1>
+                    <h2>TAKE A CHANCE , LIVE LIFE !</h2>
+                    <div class="login_tab">
+                        <div class="tab_btn">
+                            <div class="tab_bg2"></div>
+                             <form action="/index.php/user/logined" method="post" onajax="userBeforeLogin" enter="true" call="userLogin" target="ajax">
+                            <div class="element">
+        					<label class="login_msg" prop="login_text_username">帐号</label>
+                            <input type="text" id="username" name="username" class="user_text loginwj" value="" />
+                            </div>     
+ 							<div class="element">
+                            <label class="login_msg" prop="login_text_password">登录密码</label>                 
+							<input type="password" id="password" name="password" class="pwd_text loginwj" value="" />
+                            </div>
+							<span class="orange_btn" id="loginBTN" prop="login_login" onclick="$(this).closest('form').submit()">登入</span>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+           
+    </div>
+    <!--end login_content-->
+    <div class="copyright">
+        <a href="#" id="downloadChrome"><span class="chrome"></span></a>
+        <a href="#" id="downloadFireFox"><span class="firefox"></span></a>
+        <a href="#" id="downloadIE"><span class="ie"></span></a>
+        <div class="cpMessage">
+            &copy;2012-2017 创新娱乐彩 All Rights Reserved.
+        </div>
+    </div>
+    <!--end copyright-->
+</div>
+<!--footer -->
+<script>
+$(function(){
+	$(".loginwj").live("click",function(){
+		var val=$(this).val();
+		$(this).siblings(".login_msg").text('');
+	})
+})
+</script>
+</body>
+</html>
